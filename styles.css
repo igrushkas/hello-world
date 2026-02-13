@@ -3135,7 +3135,7 @@ body.finances-mode.light-mode .praise-banner {
     padding: 8px 12px;
     background: rgba(243, 156, 18, 0.08);
     border-radius: var(--radius-sm);
-    border-left: 3px solid var(--accent-orange);
+    border: 2px solid rgba(243, 156, 18, 0.35);
 }
 
 .outcome-actions-list {

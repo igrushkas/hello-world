@@ -967,14 +967,6 @@
             comboStat = '<span class="pwr-stat pwr-stat-combo">&#128293; x' + comboCount + ' combo</span>';
         }
 
-        // XP stat as inline pill
-        var level = data ? getLevel(data.totalMomentum) : null;
-        var xpStat = '';
-        if (level) {
-            var xpText = level.next ? (level.current.emoji + ' ' + (level.next.xp - data.totalMomentum) + ' XP to ' + level.next.title) : (level.current.emoji + ' MAX LEVEL');
-            xpStat = '<span class="pwr-stat pwr-stat-xp">' + xpText + '</span>';
-        }
-
         // Build Power Score bar HTML (stats only, no POWER header or mini chart)
         var pwrBarHtml = '<div class="pwr-bar pwr-bar-full">' +
             '<div class="pwr-stats-row">' +
@@ -983,7 +975,6 @@
                 '<span class="pwr-stat pwr-stat-streak">&#128293; ' + current.streakDays + 'd streak</span>' +
                 comboStat +
                 comparison +
-                xpStat +
             '</div>' +
         '</div>';
 
@@ -2059,15 +2050,15 @@
             // Update titles
             if (mode === 'business') {
                 document.getElementById('focusTitle').textContent = 'Business Focus';
-                document.getElementById('wheelTitle').innerHTML = 'Business Wheel <span class="wheel-period">Rolling 7 Days</span>';
+                document.getElementById('wheelTitle').innerHTML = 'Business Wheel <span class="wheel-period">Rolling 7 Days</span> <button class="btn-cat-guide" id="btnCatGuide" title="Category Guide">&#8505;</button>';
                 document.getElementById('outcomesTitle').textContent = 'Business Outcomes';
             } else if (mode === 'health') {
                 document.getElementById('focusTitle').textContent = 'Health Focus';
-                document.getElementById('wheelTitle').innerHTML = 'Health Wheel <span class="wheel-period">Rolling 7 Days</span>';
+                document.getElementById('wheelTitle').innerHTML = 'Health Wheel <span class="wheel-period">Rolling 7 Days</span> <button class="btn-cat-guide" id="btnCatGuide" title="Category Guide">&#8505;</button>';
                 document.getElementById('outcomesTitle').textContent = 'Health Goals';
             } else if (mode === 'finances') {
                 document.getElementById('focusTitle').textContent = 'Finances Focus';
-                document.getElementById('wheelTitle').innerHTML = 'Finances Wheel <span class="wheel-period">Rolling 7 Days</span>';
+                document.getElementById('wheelTitle').innerHTML = 'Finances Wheel <span class="wheel-period">Rolling 7 Days</span> <button class="btn-cat-guide" id="btnCatGuide" title="Category Guide">&#8505;</button>';
                 document.getElementById('outcomesTitle').textContent = 'Financial Goals';
             } else {
                 document.getElementById('focusTitle').textContent = "Today's Power Focus";
@@ -4388,6 +4379,29 @@
         if (savedMode && savedMode !== currentMode) {
             switchMode(savedMode);
         }
+
+        // Add default starter outcome for brand new users (no outcomes yet)
+        try {
+            if (data && data.outcomes && data.outcomes.length === 0 && (!data.log || data.log.length === 0)) {
+                data.outcomes.push({
+                    id: uid(),
+                    result: 'Clean Room - Clean Mind',
+                    purpose: 'A clean space helps me focus, reduces stress, and sets the tone for a productive day',
+                    actions: [
+                        { id: uid(), text: 'Clean Desk', done: false, timeEstimate: 15, leverage: 80, categories: ['fun_environment'] },
+                        { id: uid(), text: 'Dust Desk & Computer', done: false, timeEstimate: 10, leverage: 60, categories: ['fun_environment'] },
+                        { id: uid(), text: 'Watch How To Use My Habit Magic', done: false, timeEstimate: 10, leverage: 90, categories: ['personal_growth'] }
+                    ],
+                    category: 'fun_environment',
+                    deadline: null,
+                    commitment: 8,
+                    completed: false,
+                    createdDate: new Date().toDateString()
+                });
+                saveData();
+            }
+        } catch(e) { console.error('default outcome error:', e); }
+
         try { renderCategoryFilters(); } catch(e) { console.error('category filter error:', e); }
         try { restoreCombo(); } catch(e) { console.error('combo restore error:', e); }
         try { render(); } catch(e) { console.error('render error:', e); }
@@ -4425,13 +4439,12 @@
             try { renderMotivationQuote(); } catch(e) { console.error('quote refresh error:', e); }
         });
 
-        // Category Guide
-        var catGuideBtn = document.getElementById('btnCatGuide');
-        if (catGuideBtn) {
-            catGuideBtn.addEventListener('click', function() {
-                try { showCategoryGuide(); } catch(e) { console.error('cat guide error:', e); }
-            });
-        }
+        // Category Guide — use event delegation since button is recreated on mode switch
+        document.addEventListener('click', function(e) {
+            if (e.target && (e.target.id === 'btnCatGuide' || e.target.closest('#btnCatGuide'))) {
+                try { showCategoryGuide(); } catch(e2) { console.error('cat guide error:', e2); }
+            }
+        });
 
         // New Outcome (pill button in header)
         document.getElementById('btnNewOutcome').addEventListener('click', function() {
