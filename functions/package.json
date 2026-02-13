@@ -1,0 +1,12 @@
+{
+  "name": "habit-magic-functions",
+  "description": "Lemon Squeezy webhook handler for Habit Magic",
+  "engines": {
+    "node": "20"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^12.0.0",
+    "firebase-functions": "^6.0.0"
+  }
+}
