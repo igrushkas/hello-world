@@ -850,6 +850,7 @@ body.light-mode .landing-footer {
 .user-menu {
     display: flex;
     align-items: center;
+    position: relative;
 }
 
 .user-avatar {
@@ -858,6 +859,26 @@ body.light-mode .landing-footer {
     border-radius: 50%;
     border: 2px solid var(--accent-primary);
     cursor: pointer;
+}
+
+.avatar-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 8px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow);
+    min-width: 140px;
+    z-index: 1000;
+}
+
+.avatar-dropdown .dropdown-item {
+    width: 100%;
+    padding: 10px 16px;
+    text-align: left;
+    font-size: 0.9rem;
 }
 
 .btn-logout {
@@ -1312,11 +1333,13 @@ body.light-mode .beta-badge {
 .btn-help-topbar {
     width: 32px;
     height: 32px;
-    font-size: 0.9rem;
-    opacity: 0.6;
+    font-size: 1rem;
+    color: #e67e22;
+    opacity: 1;
 }
 
 .btn-help-topbar:hover {
+    color: #f39c12;
     opacity: 1;
 }
 
@@ -1471,19 +1494,29 @@ body.light-mode .beta-badge {
 }
 
 .modal-close {
-    position: absolute;
-    top: 16px;
-    right: 16px;
-    background: none;
+    position: sticky;
+    top: 0;
+    float: right;
+    background: var(--bg-card);
     border: none;
     color: var(--text-secondary);
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     cursor: pointer;
     transition: var(--transition);
+    z-index: 10;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin-top: -8px;
+    margin-right: -8px;
 }
 
 .modal-close:hover {
     color: var(--text-primary);
+    background: var(--bg-input);
 }
 
 .modal h2 {

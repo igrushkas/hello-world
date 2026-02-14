@@ -216,6 +216,9 @@
                 <button class="btn-icon btn-help-topbar" id="btnHelpTopbar" title="How to Use">&#10068;</button>
                 <div class="user-menu" id="userMenu" style="display:none">
                     <img class="user-avatar" id="userAvatar" src="" alt="">
+                    <div class="avatar-dropdown hidden" id="avatarDropdown">
+                        <button class="dropdown-item" id="btnAvatarLogout">&#9211; Sign Out</button>
+                    </div>
                 </div>
                 <button class="btn-icon btn-menu-toggle" id="btnMenuToggle" title="Menu">&#9776;</button>
                 <div class="top-actions-dropdown hidden" id="topActionsDropdown">
@@ -251,6 +254,7 @@
         <!-- Movement Modal -->
         <div id="movementOverlay" class="modal-overlay hidden">
             <div class="modal movement-modal">
+                <button class="modal-close" onclick="document.getElementById('movementOverlay').classList.add('hidden')">&times;</button>
                 <h2 id="movementTitle">&#128170; Movement Break!</h2>
                 <p class="subtitle" id="movementSubtitle">Great job completing that action! Try these exercises:</p>
                 <div class="movement-exercises" id="movementExercises">
@@ -266,6 +270,7 @@
         <!-- Task Check-In Modal (Every 10 minutes) -->
         <div id="taskCheckInOverlay" class="modal-overlay hidden">
             <div class="modal check-in-modal">
+                <button class="modal-close" onclick="document.getElementById('taskCheckInOverlay').classList.add('hidden')">&times;</button>
                 <div class="check-in-icon">&#128336;</div>
                 <h2>Quick Check-In</h2>
                 <p class="check-in-time">You've been working for <strong id="checkInElapsedTime">10 minutes</strong></p>
@@ -303,6 +308,7 @@
         <!-- Extended Break Modal (10 min after 4-5 tasks) -->
         <div id="extendedBreakOverlay" class="modal-overlay hidden">
             <div class="modal extended-break-modal">
+                <button class="modal-close" onclick="document.getElementById('extendedBreakOverlay').classList.add('hidden')">&times;</button>
                 <h2>&#127774; Extended Recovery Break!</h2>
                 <p class="subtitle">You've completed multiple tasks in a row! Take a proper 10-minute break to recharge.</p>
                 <div class="extended-break-content">
@@ -763,7 +769,7 @@
 
                 <!-- Wheel of Life / Business Wheel -->
                 <div class="wheel-of-life-card">
-                    <h3 id="wheelTitle">Wheel of Life <span class="wheel-period">Rolling 7 Days</span> <button class="btn-cat-guide" id="btnCatGuide" title="Category Guide">&#8505;</button></h3>
+                    <h3 id="wheelTitle">Wheel of Life <span class="wheel-period">Last 7 Days</span> <button class="btn-cat-guide" id="btnCatGuide" title="Category Guide">&#8505;</button></h3>
                     <div class="wheel-chart-container">
                         <svg id="wheelChart" viewBox="0 0 400 400" class="wheel-svg"></svg>
                     </div>
@@ -852,6 +858,7 @@
     <!-- Level Up Overlay -->
     <div class="level-up-overlay hidden" id="levelUpOverlay">
         <div class="level-up-card">
+            <button class="modal-close" onclick="document.getElementById('levelUpOverlay').classList.add('hidden')" style="position:absolute;top:8px;right:8px;">&times;</button>
             <div class="level-up-emoji" id="levelUpEmoji">&#127793;</div>
             <div class="level-up-label">LEVEL UP!</div>
             <div class="level-up-title" id="levelUpTitle">Starter</div>
@@ -862,6 +869,7 @@
     <!-- Badge Unlock Overlay -->
     <div class="badge-unlock-overlay hidden" id="badgeUnlockOverlay">
         <div class="badge-unlock-card">
+            <button class="modal-close" onclick="document.getElementById('badgeUnlockOverlay').classList.add('hidden')" style="position:absolute;top:8px;right:8px;">&times;</button>
             <div class="badge-unlock-emoji" id="badgeUnlockEmoji">&#127942;</div>
             <div class="badge-unlock-label">BADGE UNLOCKED!</div>
             <div class="badge-unlock-name" id="badgeUnlockName"></div>

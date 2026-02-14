@@ -2050,19 +2050,19 @@
             // Update titles
             if (mode === 'business') {
                 document.getElementById('focusTitle').textContent = 'Business Focus';
-                document.getElementById('wheelTitle').innerHTML = 'Business Wheel <span class="wheel-period">Rolling 7 Days</span> <button class="btn-cat-guide" id="btnCatGuide" title="Category Guide">&#8505;</button>';
+                document.getElementById('wheelTitle').innerHTML = 'Business Wheel <span class="wheel-period">Last 7 Days</span> <button class="btn-cat-guide" id="btnCatGuide" title="Category Guide">&#8505;</button>';
                 document.getElementById('outcomesTitle').textContent = 'Business Outcomes';
             } else if (mode === 'health') {
                 document.getElementById('focusTitle').textContent = 'Health Focus';
-                document.getElementById('wheelTitle').innerHTML = 'Health Wheel <span class="wheel-period">Rolling 7 Days</span> <button class="btn-cat-guide" id="btnCatGuide" title="Category Guide">&#8505;</button>';
+                document.getElementById('wheelTitle').innerHTML = 'Health Wheel <span class="wheel-period">Last 7 Days</span> <button class="btn-cat-guide" id="btnCatGuide" title="Category Guide">&#8505;</button>';
                 document.getElementById('outcomesTitle').textContent = 'Health Goals';
             } else if (mode === 'finances') {
                 document.getElementById('focusTitle').textContent = 'Finances Focus';
-                document.getElementById('wheelTitle').innerHTML = 'Finances Wheel <span class="wheel-period">Rolling 7 Days</span> <button class="btn-cat-guide" id="btnCatGuide" title="Category Guide">&#8505;</button>';
+                document.getElementById('wheelTitle').innerHTML = 'Finances Wheel <span class="wheel-period">Last 7 Days</span> <button class="btn-cat-guide" id="btnCatGuide" title="Category Guide">&#8505;</button>';
                 document.getElementById('outcomesTitle').textContent = 'Financial Goals';
             } else {
                 document.getElementById('focusTitle').textContent = "Today's Power Focus";
-                document.getElementById('wheelTitle').innerHTML = 'Wheel of Life <span class="wheel-period">Rolling 7 Days</span>';
+                document.getElementById('wheelTitle').innerHTML = 'Wheel of Life <span class="wheel-period">Last 7 Days</span>';
                 document.getElementById('outcomesTitle').textContent = 'Your Outcomes';
             }
 
@@ -4380,9 +4380,11 @@
             switchMode(savedMode);
         }
 
-        // Add default starter outcome for brand new users (no outcomes yet)
+        // Add default starter outcomes for brand new users (no outcomes yet)
         try {
             if (data && data.outcomes && data.outcomes.length === 0 && (!data.log || data.log.length === 0)) {
+                var today = new Date().toDateString();
+                // Personal mode starter
                 data.outcomes.push({
                     id: uid(),
                     result: 'Clean Room - Clean Mind',
@@ -4393,10 +4395,46 @@
                         { id: uid(), text: 'Watch How To Use My Habit Magic', done: false, timeEstimate: 10, leverage: 90, categories: ['personal_growth'] }
                     ],
                     category: 'fun_environment',
-                    deadline: null,
-                    commitment: 8,
-                    completed: false,
-                    createdDate: new Date().toDateString()
+                    deadline: null, commitment: 8, completed: false, createdDate: today
+                });
+                // Business mode starter
+                data.outcomes.push({
+                    id: uid(),
+                    result: 'Launch My First Business Task',
+                    purpose: 'Taking the first step builds momentum and proves to myself I can make progress every day',
+                    actions: [
+                        { id: uid(), text: 'Write down my top 3 business priorities', done: false, timeEstimate: 10, leverage: 90, categories: ['leadership_vision'] },
+                        { id: uid(), text: 'Organize my workspace for focus', done: false, timeEstimate: 15, leverage: 70, categories: ['operations_systems'] },
+                        { id: uid(), text: 'Set one measurable goal for this week', done: false, timeEstimate: 10, leverage: 85, categories: ['leadership_vision'] }
+                    ],
+                    category: 'leadership_vision',
+                    deadline: null, commitment: 8, completed: false, createdDate: today
+                });
+                // Health mode starter
+                data.outcomes.push({
+                    id: uid(),
+                    result: 'Start My Health Journey Today',
+                    purpose: 'My body is the foundation of everything — when I feel good physically, everything else improves',
+                    actions: [
+                        { id: uid(), text: 'Drink a full glass of water right now', done: false, timeEstimate: 5, leverage: 80, categories: ['nutrition_fuel'] },
+                        { id: uid(), text: 'Take a 10-minute walk outside', done: false, timeEstimate: 10, leverage: 85, categories: ['exercise_movement'] },
+                        { id: uid(), text: 'Write down what I ate today', done: false, timeEstimate: 5, leverage: 70, categories: ['nutrition_fuel'] }
+                    ],
+                    category: 'nutrition_fuel',
+                    deadline: null, commitment: 8, completed: false, createdDate: today
+                });
+                // Finances mode starter
+                data.outcomes.push({
+                    id: uid(),
+                    result: 'Take Control of My Finances',
+                    purpose: 'Financial clarity removes anxiety and empowers me to build the life I want',
+                    actions: [
+                        { id: uid(), text: 'List all monthly subscriptions', done: false, timeEstimate: 15, leverage: 85, categories: ['budget'] },
+                        { id: uid(), text: 'Check my bank balance right now', done: false, timeEstimate: 5, leverage: 80, categories: ['budget'] },
+                        { id: uid(), text: 'Set one savings goal for this month', done: false, timeEstimate: 10, leverage: 90, categories: ['investments'] }
+                    ],
+                    category: 'budget',
+                    deadline: null, commitment: 8, completed: false, createdDate: today
                 });
                 saveData();
             }
@@ -5369,12 +5407,21 @@
                 e.stopPropagation();
                 menuDropdown.classList.toggle('hidden');
             });
-            // Avatar also opens the dropdown
-            if (userAvatar) {
+            // Avatar opens its own small dropdown (Sign Out only)
+            var avatarDropdown = document.getElementById('avatarDropdown');
+            if (userAvatar && avatarDropdown) {
                 userAvatar.addEventListener('click', function(e) {
                     e.stopPropagation();
-                    menuDropdown.classList.toggle('hidden');
+                    menuDropdown.classList.add('hidden');
+                    avatarDropdown.classList.toggle('hidden');
                 });
+                var btnAvatarLogout = document.getElementById('btnAvatarLogout');
+                if (btnAvatarLogout) {
+                    btnAvatarLogout.addEventListener('click', function() {
+                        avatarDropdown.classList.add('hidden');
+                        logout();
+                    });
+                }
             }
             // Close dropdown when clicking a menu item
             menuDropdown.querySelectorAll('.dropdown-item').forEach(function(item) {
@@ -5382,10 +5429,14 @@
                     menuDropdown.classList.add('hidden');
                 });
             });
-            // Close dropdown when clicking outside
+            // Close dropdowns when clicking outside
             document.addEventListener('click', function(e) {
-                if (!menuToggle.contains(e.target) && !menuDropdown.contains(e.target) && !(userAvatar && userAvatar.contains(e.target))) {
+                if (!menuToggle.contains(e.target) && !menuDropdown.contains(e.target)) {
                     menuDropdown.classList.add('hidden');
+                }
+                var avDd = document.getElementById('avatarDropdown');
+                if (avDd && userAvatar && !userAvatar.contains(e.target) && !avDd.contains(e.target)) {
+                    avDd.classList.add('hidden');
                 }
             });
         }
