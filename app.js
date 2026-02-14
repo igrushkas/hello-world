@@ -3364,7 +3364,7 @@
 
         if (next) {
             textEl.textContent = next.text;
-            var metaParts = ['From: ' + next.outcome];
+            var metaParts = ['Outcome: ' + next.outcome];
             if (next.estMinutes) metaParts.push('~' + next.estMinutes + ' min est.');
             if (next.leverageScore !== undefined) metaParts.push('Leverage: ' + next.leverageScore + '%');
             metaEl.textContent = metaParts.join(' | ');

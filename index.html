@@ -1444,6 +1444,21 @@
         }
     });
 
+    // iOS Safari — no beforeinstallprompt, show manual instructions
+    var isIOS = /iP(hone|ad|od)/.test(navigator.userAgent) && !window.navigator.standalone;
+    if (isIOS && !localStorage.getItem('pwa_install_dismissed')) {
+        document.addEventListener('DOMContentLoaded', function() {
+            var banner = document.getElementById('pwaInstallBanner');
+            var installBtn = document.getElementById('pwaInstallBtn');
+            var textEl = document.querySelector('.pwa-install-text');
+            if (banner && textEl) {
+                textEl.innerHTML = '&#10024; Tap <strong>Share</strong> &#9112; then <strong>Add to Home Screen</strong>';
+                if (installBtn) installBtn.style.display = 'none';
+                banner.classList.remove('hidden');
+            }
+        });
+    }
+
     document.addEventListener('DOMContentLoaded', function() {
         var installBtn = document.getElementById('pwaInstallBtn');
         var dismissBtn = document.getElementById('pwaDismissBtn');
