@@ -5119,6 +5119,23 @@
         // Auto-Break Big Tasks Nudge
         try { initBigTaskNudge(); } catch(e) { console.error('big task nudge init error:', e); }
 
+        // Collapse/Expand Outcomes Section
+        safeBind('btnCollapseOutcomes', 'click', function() {
+            var section = document.getElementById('outcomesSection');
+            if (!section) return;
+            var isCollapsed = section.classList.toggle('collapsed');
+            this.textContent = isCollapsed ? '\u25B6' : '\u25BC';
+            this.title = isCollapsed ? 'Show outcomes' : 'Hide outcomes';
+            localStorage.setItem('lwp_outcomes_collapsed', isCollapsed ? '1' : '0');
+        });
+        // Restore collapsed state on load
+        if (localStorage.getItem('lwp_outcomes_collapsed') === '1') {
+            var outSec = document.getElementById('outcomesSection');
+            var outBtn = document.getElementById('btnCollapseOutcomes');
+            if (outSec) outSec.classList.add('collapsed');
+            if (outBtn) { outBtn.textContent = '\u25B6'; outBtn.title = 'Show outcomes'; }
+        }
+
         // Export/Download Action Log
         safeBind('btnExportLog', 'click', function() {
             try { exportActionLog(); } catch(e) { console.error('export error:', e); }
