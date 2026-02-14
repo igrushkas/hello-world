@@ -6773,3 +6773,319 @@ body.focus-mode .btn-focus-mode {
     border-color: var(--accent-orange);
     background: rgba(243, 156, 18, 0.1);
 }
+
+/* ==========================================
+   DAILY FEEDBACK FORM (Quick Checkbox)
+   ========================================== */
+.daily-feedback-modal {
+    max-width: 440px;
+}
+
+.df-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.df-question {
+    padding: 6px 0;
+}
+
+.df-question-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+}
+
+.df-check-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    cursor: pointer;
+}
+
+.df-checkbox {
+    width: 20px;
+    height: 20px;
+    accent-color: var(--accent-green);
+}
+
+.df-checkbox-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.df-chip {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 10px;
+    border-radius: 20px;
+    background: rgba(108, 92, 231, 0.08);
+    border: 1px solid rgba(108, 92, 231, 0.15);
+    cursor: pointer;
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    transition: var(--transition);
+}
+
+.df-chip input[type="checkbox"] {
+    display: none;
+}
+
+.df-chip:has(input:checked),
+.df-chip.checked {
+    background: rgba(108, 92, 231, 0.2);
+    border-color: var(--accent-primary);
+    color: var(--text-primary);
+}
+
+.df-chip-issue:has(input:checked),
+.df-chip-issue.checked {
+    background: rgba(255, 107, 107, 0.15);
+    border-color: var(--accent-red);
+}
+
+.df-chip-ok:has(input:checked),
+.df-chip-ok.checked {
+    background: rgba(0, 210, 160, 0.15);
+    border-color: var(--accent-green);
+}
+
+.df-emoji-scale {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+}
+
+.emoji-rating-btn {
+    font-size: 1.8rem;
+    background: none;
+    border: 2px solid transparent;
+    border-radius: 50%;
+    padding: 4px 8px;
+    cursor: pointer;
+    transition: var(--transition);
+    opacity: 0.5;
+}
+
+.emoji-rating-btn:hover,
+.emoji-rating-btn.selected {
+    opacity: 1;
+    border-color: var(--accent-primary);
+    background: rgba(108, 92, 231, 0.1);
+    transform: scale(1.15);
+}
+
+/* ==========================================
+   FOUNDER COMPARISON (Landing Page)
+   ========================================== */
+.founder-comparison {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 24px 0;
+    text-align: left;
+}
+
+.founder-col {
+    padding: 16px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.founder-col h3 {
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+    color: var(--text-primary);
+}
+
+.founder-col-yes {
+    background: rgba(108, 92, 231, 0.06);
+    border-color: rgba(108, 92, 231, 0.15);
+}
+
+.founder-col-no {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.founder-perks-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+}
+
+.founder-perks-muted {
+    color: var(--text-muted);
+}
+
+.founder-commitment {
+    margin-top: 24px;
+    padding: 20px;
+    background: rgba(255, 211, 42, 0.04);
+    border: 1px solid rgba(255, 211, 42, 0.12);
+    border-radius: 12px;
+    text-align: left;
+}
+
+.founder-commitment h3 {
+    font-size: 1rem;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.founder-commitment-desc {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.commitment-items {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.commitment-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+}
+
+.commitment-icon {
+    font-size: 1.3rem;
+    flex-shrink: 0;
+}
+
+.commitment-item strong {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text-primary);
+}
+
+.commitment-item span {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+/* Spots full states */
+.spots-full-badge {
+    display: inline-block;
+    background: rgba(255, 107, 107, 0.12);
+    color: var(--accent-red, #ff6b6b);
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.spots-full-sub {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 8px;
+}
+
+.spots-full-large {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--accent-red, #ff6b6b);
+}
+
+/* ==========================================
+   FAQ SECTION (Landing Page)
+   ========================================== */
+.landing-faq {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 60px 24px;
+    text-align: left;
+}
+
+.landing-faq h2 {
+    font-size: 1.4rem;
+    color: var(--text-primary);
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.faq-item {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    padding: 16px;
+}
+
+.faq-q {
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+}
+
+.faq-a {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+/* Trial/Nudge/Revoked modals */
+.trial-welcome-modal,
+.nudge-modal,
+.revoked-modal {
+    max-width: 440px;
+}
+
+/* Light mode overrides for new sections */
+body.light-mode .founder-col-yes {
+    background: rgba(108, 92, 231, 0.04);
+}
+body.light-mode .founder-col-no {
+    background: rgba(0, 0, 0, 0.02);
+}
+body.light-mode .faq-item {
+    background: rgba(0, 0, 0, 0.02);
+    border-color: rgba(0, 0, 0, 0.08);
+}
+body.light-mode .df-chip {
+    background: rgba(108, 92, 231, 0.06);
+}
+body.light-mode .spots-full-badge {
+    background: rgba(255, 107, 107, 0.08);
+}
+body.light-mode .founder-commitment {
+    background: rgba(255, 211, 42, 0.03);
+}
+
+/* Mobile responsive for new sections */
+@media (max-width: 600px) {
+    .founder-comparison {
+        grid-template-columns: 1fr;
+    }
+    .df-emoji-scale {
+        gap: 4px;
+    }
+    .emoji-rating-btn {
+        font-size: 1.5rem;
+    }
+    .daily-feedback-modal {
+        max-width: 95vw;
+    }
+}

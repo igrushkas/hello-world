@@ -1470,6 +1470,20 @@
             var remaining = Math.max(0, FOUNDING_MEMBER_LIMIT - foundingMemberCount);
             var spotEls = document.querySelectorAll('.founding-spots-count');
             spotEls.forEach(function(el) { el.textContent = remaining; });
+
+            // Update display when spots are full
+            if (remaining === 0) {
+                var heroSpots = document.querySelector('.hero-spots');
+                if (heroSpots) {
+                    heroSpots.innerHTML = '<span class="spots-full-badge">All 100 Founding Member spots are filled!</span>' +
+                        '<span class="spots-full-sub">Sign up for a free 2-week trial \u2014 if a spot opens, we\u2019ll email you.</span>';
+                }
+                var earlySpots = document.querySelector('.early-adopter-spots');
+                if (earlySpots) {
+                    earlySpots.innerHTML = '<div class="spots-full-large">All 100 Spots Filled</div>' +
+                        '<div class="spots-label-large">Join the waitlist for a free 2-week trial</div>';
+                }
+            }
         });
     }
 
@@ -2467,27 +2481,110 @@
     //  FOUNDING MEMBER FEEDBACK SYSTEM
     // ==========================================
     function checkFeedbackTrigger() {
-        // Only for logged-in users
+        // Only for logged-in founding members
         if (!currentUser || isOfflineMode) return;
+        if (!isFoundingMember) return;
 
         var today = new Date().toDateString();
-        var feedbackKey = 'lwp_feedback_' + today;
+        var feedbackKey = 'lwp_daily_fb_' + today;
         if (localStorage.getItem(feedbackKey)) return; // Already shown/submitted today
 
         // Only trigger after at least 3 actions today
         var todayActions = (data.log || []).filter(function(e) { return e.date === today; }).length;
         if (todayActions < 3) return;
 
-        // Random chance (30%) to not annoy user every day
-        if (Math.random() > 0.3) {
-            localStorage.setItem(feedbackKey, 'skipped');
-            return;
+        // Guaranteed once per day for founding members (no random skip)
+        setTimeout(function() {
+            showDailyFeedbackModal();
+        }, 2000);
+    }
+
+    function showDailyFeedbackModal() {
+        var today = new Date().toDateString();
+        localStorage.setItem('lwp_daily_fb_' + today, 'shown');
+
+        var overlay = document.getElementById('dailyFeedbackOverlay');
+        if (!overlay) return;
+
+        // Reset form
+        overlay.querySelectorAll('input[type="checkbox"]').forEach(function(cb) { cb.checked = false; });
+        overlay.querySelectorAll('.df-chip').forEach(function(chip) { chip.classList.remove('checked'); });
+        overlay.querySelectorAll('.emoji-rating-btn').forEach(function(btn) { btn.classList.remove('selected'); });
+        var quickThought = document.getElementById('dfQuickThought');
+        if (quickThought) quickThought.value = '';
+
+        overlay.classList.remove('hidden');
+    }
+
+    function submitDailyFeedback() {
+        var completedTop = document.getElementById('dfCompletedTop');
+        var completedTopValue = completedTop ? completedTop.checked : false;
+
+        var helpfulFeatures = [];
+        document.querySelectorAll('.df-feature-cb:checked').forEach(function(cb) {
+            helpfulFeatures.push(cb.value);
+        });
+
+        var issuesFound = [];
+        document.querySelectorAll('.df-issue-cb:checked').forEach(function(cb) {
+            issuesFound.push(cb.value);
+        });
+
+        var motivationLevel = 3;
+        var selectedEmoji = document.querySelector('.emoji-rating-btn.selected');
+        if (selectedEmoji) motivationLevel = parseInt(selectedEmoji.dataset.value);
+
+        var quickThought = (document.getElementById('dfQuickThought') || {}).value || '';
+
+        var feedbackData = {
+            uid: currentUser.uid,
+            email: currentUser.email || '',
+            date: new Date().toISOString(),
+            dateString: new Date().toDateString(),
+            completedTopAction: completedTopValue,
+            helpfulFeatures: helpfulFeatures,
+            issuesFound: issuesFound,
+            motivationLevel: motivationLevel,
+            quickThought: quickThought,
+            streak: data.streak || 0,
+            totalActions: data.log ? data.log.length : 0,
+            mode: currentMode
+        };
+
+        if (firebaseReady) {
+            try {
+                db.collection('daily_feedback').add(feedbackData);
+                db.collection('feedback_notifications').add({
+                    type: 'daily_feedback',
+                    userName: currentUser.displayName || currentUser.email,
+                    date: new Date().toISOString(),
+                    summary: {
+                        completedTop: completedTopValue,
+                        motivation: motivationLevel,
+                        issues: issuesFound,
+                        features: helpfulFeatures,
+                        thought: quickThought
+                    },
+                    ownerEmail: 'ereana.swan@gmail.com'
+                });
+                db.collection('users').doc(currentUser.uid).set({
+                    lastFeedbackDate: new Date().toISOString(),
+                    feedbackStreak: firebase.firestore.FieldValue.increment(1),
+                    lastActiveDate: new Date().toISOString()
+                }, { merge: true });
+            } catch(e) { console.error('Daily feedback error:', e); }
         }
 
-        // Show feedback with delay to not interrupt workflow
-        setTimeout(function() {
-            showFeedbackModal();
-        }, 3000);
+        localStorage.setItem('lwp_daily_fb_' + new Date().toDateString(), 'submitted');
+        document.getElementById('dailyFeedbackOverlay').classList.add('hidden');
+
+        var toast = document.getElementById('challengeToast');
+        var toastText = document.getElementById('challengeToastText');
+        if (toast && toastText) {
+            toastText.textContent = '\u2705 Feedback logged! You\u2019re helping build something amazing.';
+            toast.classList.remove('hidden');
+            setTimeout(function() { toast.classList.add('hidden'); }, 4000);
+        }
     }
 
     function showFeedbackModal() {
@@ -4654,6 +4751,14 @@
         saveData();
         render();
 
+        // Update last active date for engagement tracking
+        if (firebaseReady && currentUser && isFoundingMember) {
+            db.collection('users').doc(currentUser.uid).set({
+                lastActiveDate: new Date().toISOString(),
+                foundingMemberStatus: 'active'
+            }, { merge: true });
+        }
+
         // Show praise (mix in NCI authority nudges ~20% of the time)
         if (Math.random() < 0.2) {
             var nudge = NCI_AUTHORITY_NUDGES[Math.floor(Math.random() * NCI_AUTHORITY_NUDGES.length)];
@@ -5500,6 +5605,23 @@
         }
         safeBind('btnSubmitFeedback', 'click', function() {
             try { submitFeedback(); } catch(e) { console.error('feedback submit error:', e); }
+        });
+
+        // Daily feedback submit + emoji rating buttons
+        safeBind('btnSubmitDailyFeedback', 'click', function() {
+            try { submitDailyFeedback(); } catch(e) { console.error('daily feedback error:', e); }
+        });
+        document.querySelectorAll('.emoji-rating-btn').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.emoji-rating-btn').forEach(function(b) { b.classList.remove('selected'); });
+                btn.classList.add('selected');
+            });
+        });
+        // Chip checkbox toggle visual
+        document.querySelectorAll('.df-chip').forEach(function(chip) {
+            chip.addEventListener('click', function() {
+                chip.classList.toggle('checked', chip.querySelector('input').checked);
+            });
         });
 
         // Auto-show Power Priming Spark up to 3 times a day (every ~3 hours, before 6 PM only)
@@ -6936,6 +7058,11 @@
         // Founding member system
         registerFoundingMember(user.uid);
 
+        // Check engagement after founding member status loads
+        setTimeout(function() {
+            checkFoundingMemberEngagement();
+        }, 3000);
+
         // Referral system
         saveReferralCode(user.uid);
         trackReferral();
@@ -6974,7 +7101,9 @@
     // ── Founding Member System ───────────────────────────────────
     var foundingMemberCount = 0;
     var isFoundingMember = false;
+    var isTrialUser = false;
     var FOUNDING_MEMBER_LIMIT = 100;
+    var TRIAL_DURATION_DAYS = 14;
 
     function loadFoundingMemberCount(callback) {
         if (!firebaseReady) { if (callback) callback(); return; }
@@ -6991,19 +7120,45 @@
     }
 
     function registerFoundingMember(uid) {
-        if (!firebaseReady || foundingMemberCount >= FOUNDING_MEMBER_LIMIT) return;
+        if (!firebaseReady) return;
         db.collection('users').doc(uid).get().then(function(doc) {
-            if (doc.exists && doc.data().foundingMember) {
+            var userData = doc.exists ? doc.data() : {};
+
+            // Already a founding member
+            if (userData.foundingMember) {
+                // Check if revoked
+                if (userData.foundingMemberStatus === 'revoked') {
+                    isFoundingMember = false;
+                    isTrialUser = true;
+                    showFoundingMemberRevokedNotice();
+                    return;
+                }
                 isFoundingMember = true;
                 updateFoundingMemberUI();
                 return;
             }
+
+            // Already a trial user
+            if (userData.trialUser) {
+                isTrialUser = true;
+                checkTrialExpiry(userData);
+                return;
+            }
+
+            // Check if spots available
+            if (foundingMemberCount >= FOUNDING_MEMBER_LIMIT) {
+                registerTrialUser(uid);
+                return;
+            }
+
             // Register as founding member
             db.collection('users').doc(uid).set({
                 foundingMember: true,
-                foundingMemberDate: new Date().toISOString()
+                foundingMemberDate: new Date().toISOString(),
+                foundingMemberStatus: 'active',
+                lastActiveDate: new Date().toISOString(),
+                feedbackStreak: 0
             }, { merge: true });
-            // Increment counter atomically
             db.collection('meta').doc('founding_members').set({
                 count: firebase.firestore.FieldValue.increment(1)
             }, { merge: true });
@@ -7011,6 +7166,133 @@
             foundingMemberCount++;
             updateFoundingMemberUI();
         }).catch(function(e) { console.error('Founding member error:', e); });
+    }
+
+    function registerTrialUser(uid) {
+        var trialEnd = new Date();
+        trialEnd.setDate(trialEnd.getDate() + TRIAL_DURATION_DAYS);
+
+        db.collection('users').doc(uid).set({
+            trialUser: true,
+            trialStartDate: new Date().toISOString(),
+            trialEndDate: trialEnd.toISOString(),
+            foundingMember: false
+        }, { merge: true });
+
+        // Add to waitlist
+        var email = currentUser ? currentUser.email : '';
+        if (email) {
+            var safeKey = email.replace(/[.#$/\[\]]/g, '_');
+            db.collection('waitlist').doc(safeKey).set({
+                email: email,
+                displayName: currentUser.displayName || '',
+                uid: uid,
+                joinDate: new Date().toISOString(),
+                notified: false,
+                convertedToFounder: false
+            }, { merge: true });
+        }
+
+        isTrialUser = true;
+        showTrialWelcomeModal();
+    }
+
+    function checkTrialExpiry(userData) {
+        if (!userData.trialEndDate) return;
+        var endDate = new Date(userData.trialEndDate);
+        var now = new Date();
+        var daysLeft = Math.ceil((endDate - now) / (1000 * 60 * 60 * 24));
+
+        if (daysLeft <= 0) {
+            showTrialExpiredModal();
+        } else if (daysLeft <= 3) {
+            showTrialExpiringWarning(daysLeft);
+        }
+    }
+
+    function showTrialWelcomeModal() {
+        var overlay = document.getElementById('trialWelcomeOverlay');
+        if (overlay) {
+            var emailEl = document.getElementById('trialUserEmail');
+            if (emailEl && currentUser) emailEl.textContent = currentUser.email;
+            overlay.classList.remove('hidden');
+        }
+    }
+
+    function showTrialExpiredModal() {
+        var overlay = document.getElementById('trialExpiredOverlay');
+        if (overlay) overlay.classList.remove('hidden');
+    }
+
+    function showTrialExpiringWarning(daysLeft) {
+        var toast = document.getElementById('challengeToast');
+        var toastText = document.getElementById('challengeToastText');
+        if (toast && toastText) {
+            toastText.textContent = '\u23F3 Your free trial ends in ' + daysLeft + ' day' + (daysLeft !== 1 ? 's' : '') + '. A founding spot may open up!';
+            toast.classList.remove('hidden');
+            setTimeout(function() { toast.classList.add('hidden'); }, 7000);
+        }
+    }
+
+    // ── Founding Member Engagement Tracking ──────────────────────
+    function checkFoundingMemberEngagement() {
+        if (!firebaseReady || !currentUser || !isFoundingMember) return;
+
+        db.collection('users').doc(currentUser.uid).get().then(function(doc) {
+            if (!doc.exists || !doc.data().foundingMember) return;
+            var userData = doc.data();
+            var lastActive = userData.lastActiveDate ? new Date(userData.lastActiveDate) : new Date();
+            var now = new Date();
+            var daysSinceActive = Math.floor((now - lastActive) / (1000 * 60 * 60 * 24));
+
+            if (daysSinceActive >= 14) {
+                revokeFoundingMemberStatus(currentUser.uid);
+            } else if (daysSinceActive >= 7 && userData.foundingMemberStatus !== 'warned') {
+                showInactivityNudge(daysSinceActive);
+                db.collection('users').doc(currentUser.uid).set({
+                    foundingMemberStatus: 'warned'
+                }, { merge: true });
+            }
+        }).catch(function(e) { console.error('Engagement check error:', e); });
+    }
+
+    function revokeFoundingMemberStatus(uid) {
+        isFoundingMember = false;
+        db.collection('users').doc(uid).set({
+            foundingMember: false,
+            foundingMemberStatus: 'revoked',
+            foundingMemberRevokedDate: new Date().toISOString()
+        }, { merge: true });
+
+        // Decrement founding member count to open spot
+        db.collection('meta').doc('founding_members').set({
+            count: firebase.firestore.FieldValue.increment(-1)
+        }, { merge: true });
+        foundingMemberCount = Math.max(0, foundingMemberCount - 1);
+
+        // Notify owner that a spot opened
+        db.collection('feedback_notifications').add({
+            type: 'spot_opened',
+            revokedUserUid: uid,
+            revokedUserEmail: currentUser ? currentUser.email : '',
+            date: new Date().toISOString(),
+            ownerEmail: 'ereana.swan@gmail.com'
+        }).catch(function(e) { console.error('Notification error:', e); });
+
+        showFoundingMemberRevokedNotice();
+    }
+
+    function showInactivityNudge(days) {
+        var overlay = document.getElementById('nudgeOverlay');
+        if (!overlay) return;
+        var daysEl = document.getElementById('nudgeDaysCount');
+        if (daysEl) daysEl.textContent = days;
+        overlay.classList.remove('hidden');
+    }
+
+    function showFoundingMemberRevokedNotice() {
+        var overlay = document.getElementById('revokedOverlay');
+        if (overlay) overlay.classList.remove('hidden');
     }
 
     function updateFoundingMemberUI() {

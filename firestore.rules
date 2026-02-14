@@ -16,5 +16,29 @@ service cloud.firestore {
       allow read: if true;
       allow write: if request.auth != null;
     }
+    // Feedback collection — any authenticated user can add
+    match /feedback/{feedbackId} {
+      allow create: if request.auth != null;
+      allow read: if request.auth != null && resource.data.uid == request.auth.uid;
+    }
+    // Waitlist collection — authenticated users can create/read their own entry
+    match /waitlist/{docId} {
+      allow create: if request.auth != null;
+      allow read: if request.auth != null;
+    }
+    // Daily feedback (quick checkbox form)
+    match /daily_feedback/{docId} {
+      allow create: if request.auth != null;
+      allow read: if request.auth != null && resource.data.uid == request.auth.uid;
+    }
+    // Feedback notifications for owner
+    match /feedback_notifications/{docId} {
+      allow create: if request.auth != null;
+    }
+    // Testimonials — public read, authenticated create
+    match /testimonials/{docId} {
+      allow create: if request.auth != null;
+      allow read: if true;
+    }
   }
 }
