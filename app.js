@@ -2664,6 +2664,27 @@
         btn.title = isLight ? 'Switch to Dark Mode' : 'Switch to Light Mode';
     }
 
+    // Helper: update outcomes title text without destroying the collapse button
+    function setOutcomesTitle(text) {
+        var el = document.getElementById('outcomesTitle');
+        if (!el) return;
+        var btn = el.querySelector('#btnCollapseOutcomes');
+        var isCollapsed = document.getElementById('outcomesSection') && document.getElementById('outcomesSection').classList.contains('collapsed');
+        el.innerHTML = text + ' <button class="btn-collapse-section" id="btnCollapseOutcomes" title="' + (isCollapsed ? 'Show outcomes' : 'Hide/Show outcomes') + '">' + (isCollapsed ? '\u25B6' : '\u25BC') + '</button>';
+        // Re-bind click since we recreated the button
+        var newBtn = document.getElementById('btnCollapseOutcomes');
+        if (newBtn) {
+            newBtn.addEventListener('click', function() {
+                var section = document.getElementById('outcomesSection');
+                if (!section) return;
+                var collapsed = section.classList.toggle('collapsed');
+                this.textContent = collapsed ? '\u25B6' : '\u25BC';
+                this.title = collapsed ? 'Show outcomes' : 'Hide outcomes';
+                localStorage.setItem('lwp_outcomes_collapsed', collapsed ? '1' : '0');
+            });
+        }
+    }
+
     function switchMode(mode) {
         try {
             currentMode = mode;
@@ -2686,19 +2707,19 @@
             if (mode === 'business') {
                 document.getElementById('focusTitle').textContent = 'Business Focus';
                 document.getElementById('wheelTitle').innerHTML = 'Business Wheel <span class="wheel-period">Last 7 Days</span> <button class="btn-cat-guide" id="btnCatGuide" title="Category Guide">&#8505;</button>';
-                document.getElementById('outcomesTitle').textContent = 'Business Outcomes';
+                setOutcomesTitle('Business Outcomes');
             } else if (mode === 'health') {
                 document.getElementById('focusTitle').textContent = 'Health Focus';
                 document.getElementById('wheelTitle').innerHTML = 'Health Wheel <span class="wheel-period">Last 7 Days</span> <button class="btn-cat-guide" id="btnCatGuide" title="Category Guide">&#8505;</button>';
-                document.getElementById('outcomesTitle').textContent = 'Health Goals';
+                setOutcomesTitle('Health Goals');
             } else if (mode === 'finances') {
                 document.getElementById('focusTitle').textContent = 'Finances Focus';
                 document.getElementById('wheelTitle').innerHTML = 'Finances Wheel <span class="wheel-period">Last 7 Days</span> <button class="btn-cat-guide" id="btnCatGuide" title="Category Guide">&#8505;</button>';
-                document.getElementById('outcomesTitle').textContent = 'Financial Goals';
+                setOutcomesTitle('Financial Goals');
             } else {
                 document.getElementById('focusTitle').textContent = "Today's Power Focus";
                 document.getElementById('wheelTitle').innerHTML = 'Wheel of Life <span class="wheel-period">Last 7 Days</span>';
-                document.getElementById('outcomesTitle').textContent = 'Your Outcomes';
+                setOutcomesTitle('Your Outcomes');
             }
 
             // Update category filters
