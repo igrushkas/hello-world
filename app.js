@@ -2124,13 +2124,121 @@
         { emoji: '\u{1F389}', msg: 'Your buddy just completed a task too! You\'re in sync.' }
     ];
 
-    // Ambient sound URLs (free creative commons)
-    var AMBIENT_SOUNDS = {
-        none: null,
-        rain: 'https://cdn.pixabay.com/audio/2022/10/30/audio_f6e8e4e3f1.mp3',
-        coffee: 'https://cdn.pixabay.com/audio/2024/11/04/audio_59a6e8d8b2.mp3',
-        lofi: 'https://cdn.pixabay.com/audio/2023/07/19/audio_e552aba554.mp3'
-    };
+    // Web Audio API ambient sound generators (no external URLs needed)
+    var ambientAudioCtx = null;
+    var ambientNodes = [];
+
+    function createRainSound(ctx) {
+        // Brown noise filtered to sound like rain
+        var bufferSize = 2 * ctx.sampleRate;
+        var buffer = ctx.createBuffer(2, bufferSize, ctx.sampleRate);
+        for (var ch = 0; ch < 2; ch++) {
+            var data = buffer.getChannelData(ch);
+            var lastOut = 0;
+            for (var i = 0; i < bufferSize; i++) {
+                var white = Math.random() * 2 - 1;
+                data[i] = (lastOut + (0.02 * white)) / 1.02;
+                lastOut = data[i];
+                data[i] *= 3.5;
+            }
+        }
+        var source = ctx.createBufferSource();
+        source.buffer = buffer;
+        source.loop = true;
+        // Bandpass to make it sound like rain
+        var bandpass = ctx.createBiquadFilter();
+        bandpass.type = 'bandpass';
+        bandpass.frequency.value = 800;
+        bandpass.Q.value = 0.5;
+        // Highpass to remove rumble
+        var highpass = ctx.createBiquadFilter();
+        highpass.type = 'highpass';
+        highpass.frequency.value = 200;
+        var gain = ctx.createGain();
+        gain.gain.value = 0.25;
+        source.connect(bandpass);
+        bandpass.connect(highpass);
+        highpass.connect(gain);
+        gain.connect(ctx.destination);
+        source.start();
+        return { source: source, nodes: [bandpass, highpass, gain] };
+    }
+
+    function createCoffeeShopSound(ctx) {
+        // Pink noise + subtle low murmur = cafe ambience
+        var bufferSize = 2 * ctx.sampleRate;
+        var buffer = ctx.createBuffer(2, bufferSize, ctx.sampleRate);
+        for (var ch = 0; ch < 2; ch++) {
+            var data = buffer.getChannelData(ch);
+            var b0 = 0, b1 = 0, b2 = 0, b3 = 0, b4 = 0, b5 = 0, b6 = 0;
+            for (var i = 0; i < bufferSize; i++) {
+                var white = Math.random() * 2 - 1;
+                b0 = 0.99886 * b0 + white * 0.0555179;
+                b1 = 0.99332 * b1 + white * 0.0750759;
+                b2 = 0.96900 * b2 + white * 0.1538520;
+                b3 = 0.86650 * b3 + white * 0.3104856;
+                b4 = 0.55000 * b4 + white * 0.5329522;
+                b5 = -0.7616 * b5 - white * 0.0168980;
+                data[i] = b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362;
+                data[i] *= 0.11;
+                b6 = white * 0.115926;
+            }
+        }
+        var source = ctx.createBufferSource();
+        source.buffer = buffer;
+        source.loop = true;
+        // Lowpass to soften and make it cozy
+        var lowpass = ctx.createBiquadFilter();
+        lowpass.type = 'lowpass';
+        lowpass.frequency.value = 2000;
+        lowpass.Q.value = 0.3;
+        var gain = ctx.createGain();
+        gain.gain.value = 0.3;
+        source.connect(lowpass);
+        lowpass.connect(gain);
+        gain.connect(ctx.destination);
+        source.start();
+        return { source: source, nodes: [lowpass, gain] };
+    }
+
+    function createLofiSound(ctx) {
+        // Warm brown noise with gentle low-frequency oscillation
+        var bufferSize = 2 * ctx.sampleRate;
+        var buffer = ctx.createBuffer(2, bufferSize, ctx.sampleRate);
+        for (var ch = 0; ch < 2; ch++) {
+            var data = buffer.getChannelData(ch);
+            var lastOut = 0;
+            for (var i = 0; i < bufferSize; i++) {
+                var white = Math.random() * 2 - 1;
+                data[i] = (lastOut + (0.02 * white)) / 1.02;
+                lastOut = data[i];
+                data[i] *= 3.5;
+            }
+        }
+        var source = ctx.createBufferSource();
+        source.buffer = buffer;
+        source.loop = true;
+        // Warm lowpass
+        var lowpass = ctx.createBiquadFilter();
+        lowpass.type = 'lowpass';
+        lowpass.frequency.value = 500;
+        lowpass.Q.value = 1;
+        // Gentle LFO for breathing feel
+        var lfoGain = ctx.createGain();
+        lfoGain.gain.value = 0.25;
+        var lfo = ctx.createOscillator();
+        lfo.type = 'sine';
+        lfo.frequency.value = 0.1; // Very slow wobble
+        var lfoDepth = ctx.createGain();
+        lfoDepth.gain.value = 0.05;
+        lfo.connect(lfoDepth);
+        lfoDepth.connect(lfoGain.gain);
+        lfo.start();
+        source.connect(lowpass);
+        lowpass.connect(lfoGain);
+        lfoGain.connect(ctx.destination);
+        return { source: source, lfo: lfo, nodes: [lowpass, lfoGain, lfoDepth] };
+    }
 
     function startBodyDouble() {
         bodyDoubleSeconds = 25 * 60;
@@ -2175,18 +2283,38 @@
 
     function playAmbientSound(key) {
         stopAmbientSound();
-        if (key === 'none' || !AMBIENT_SOUNDS[key]) return;
+        if (key === 'none') return;
         try {
-            currentAmbientSound = new Audio(AMBIENT_SOUNDS[key]);
-            currentAmbientSound.loop = true;
-            currentAmbientSound.volume = 0.3;
-            currentAmbientSound.play().catch(function() {});
+            ambientAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            var result;
+            if (key === 'rain') {
+                result = createRainSound(ambientAudioCtx);
+            } else if (key === 'coffee') {
+                result = createCoffeeShopSound(ambientAudioCtx);
+            } else if (key === 'lofi') {
+                result = createLofiSound(ambientAudioCtx);
+            }
+            if (result) {
+                ambientNodes.push(result.source);
+                if (result.lfo) ambientNodes.push(result.lfo);
+                if (result.nodes) result.nodes.forEach(function(n) { ambientNodes.push(n); });
+            }
         } catch(e) {
             console.warn('Could not play ambient sound:', e);
         }
     }
 
     function stopAmbientSound() {
+        ambientNodes.forEach(function(node) {
+            try { node.disconnect(); } catch(e) {}
+            try { if (node.stop) node.stop(); } catch(e) {}
+        });
+        ambientNodes = [];
+        if (ambientAudioCtx) {
+            try { ambientAudioCtx.close(); } catch(e) {}
+            ambientAudioCtx = null;
+        }
+        // Also stop old Audio-based sound if any
         if (currentAmbientSound) {
             try { currentAmbientSound.pause(); currentAmbientSound.currentTime = 0; } catch(e) {}
             currentAmbientSound = null;
@@ -3298,7 +3426,7 @@
                         '<button class="outcome-btn btn-delete-outcome" data-outcome-id="' + outcome.id + '" title="Delete outcome">&#128465;</button>' +
                     '</div>' +
                 '</div>' +
-                '<div class="outcome-purpose">' + escapeHtml(outcome.purpose) + '</div>' +
+                '<div class="outcome-purpose"><span class="purpose-label-tag">Why this matters:</span> ' + escapeHtml(outcome.purpose) + '</div>' +
                 '<ul class="outcome-actions-list">' + actionsHtml + '</ul>' +
                 completedSection +
                 '<div class="outcome-footer">' +

@@ -3173,6 +3173,13 @@ body.finances-mode.light-mode .praise-banner {
     border: 2px solid rgba(243, 156, 18, 0.35);
 }
 
+.purpose-label-tag {
+    font-style: normal;
+    font-weight: 600;
+    color: var(--accent-orange);
+    opacity: 0.85;
+}
+
 .outcome-actions-list {
     list-style: none;
     margin-bottom: 16px;
@@ -3974,7 +3981,7 @@ body.finances-mode.light-mode .praise-banner {
     border: 2px solid var(--border);
     border-radius: 10px;
     background: transparent;
-    color: var(--text-secondary);
+    color: var(--text-primary);
     font-size: 0.95rem;
     font-weight: 600;
     cursor: pointer;
