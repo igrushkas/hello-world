@@ -4260,6 +4260,38 @@ body.business-mode .focus-badge {
     border: 1px solid rgba(243, 156, 18, 0.3);
 }
 
+/* Back Burner Collapsible Toggle */
+.bb-toggle-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px;
+    margin: 8px 0 4px;
+    background: var(--bg-card);
+    border: 1px dashed var(--accent-orange);
+    border-radius: 10px;
+    color: var(--accent-orange);
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.2s;
+}
+
+.bb-toggle-header:active {
+    background: rgba(243, 156, 18, 0.1);
+}
+
+.bb-toggle-arrow {
+    font-size: 0.7rem;
+    transition: transform 0.2s;
+}
+
+.bb-toggle-count {
+    font-weight: 400;
+    opacity: 0.7;
+}
+
 /* ==========================================
    RESPONSIVE
    ========================================== */

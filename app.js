@@ -3435,7 +3435,30 @@
             var bBB = b.backBurner ? 1 : 0;
             return aBB - bBB;
         });
+
+        // Insert collapsible back-burner toggle
+        var bbCount = filtered.filter(function(o) { return o.backBurner; }).length;
+        var bbToggleInserted = false;
+        var bbCollapsed = localStorage.getItem('bb_collapsed') === '1';
+
         filtered.forEach(function(outcome) {
+            // Insert back-burner toggle header before first back-burner outcome
+            if (outcome.backBurner && !bbToggleInserted && bbCount > 0) {
+                bbToggleInserted = true;
+                var toggle = document.createElement('div');
+                toggle.className = 'bb-toggle-header' + (bbCollapsed ? ' collapsed' : '');
+                toggle.innerHTML = '<span class="bb-toggle-arrow">' + (bbCollapsed ? '&#9654;' : '&#9660;') + '</span> &#9208; Back Burner <span class="bb-toggle-count">(' + bbCount + ')</span>';
+                toggle.addEventListener('click', function() {
+                    var isNowCollapsed = !toggle.classList.contains('collapsed');
+                    toggle.classList.toggle('collapsed');
+                    toggle.querySelector('.bb-toggle-arrow').innerHTML = isNowCollapsed ? '&#9654;' : '&#9660;';
+                    localStorage.setItem('bb_collapsed', isNowCollapsed ? '1' : '0');
+                    grid.querySelectorAll('.outcome-card.back-burner').forEach(function(card) {
+                        card.style.display = isNowCollapsed ? 'none' : '';
+                    });
+                });
+                grid.appendChild(toggle);
+            }
             var card = document.createElement('div');
             card.className = 'outcome-card' + (outcome.completed ? ' completed' : '') + (outcome.backBurner ? ' back-burner' : '');
             card.dataset.category = outcome.category;
@@ -3557,6 +3580,9 @@
                     deadlineStr +
                     archiveBtn +
                 '</div>';
+            if (outcome.backBurner && bbCollapsed) {
+                card.style.display = 'none';
+            }
             grid.appendChild(card);
         });
 
