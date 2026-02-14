@@ -1187,7 +1187,77 @@
         { text: "Don't wish it were easier. Wish you were better.", author: "Jim Rohn" },
         { text: "The secret of getting ahead is getting started.", author: "Mark Twain" },
         { text: "Believe you can and you're halfway there.", author: "Theodore Roosevelt" },
-        { text: "Action is the foundational key to all success.", author: "Pablo Picasso" }
+        { text: "Action is the foundational key to all success.", author: "Pablo Picasso" },
+        // ADHD-Specific Quotes — Doctors, Researchers & ADHD Advocates
+        { text: "ADHD is not about knowing what to do, but about doing what you know.", author: "Dr. Russell Barkley" },
+        { text: "People with ADHD are the inventors, the explorers, the ones who see what others miss.", author: "Dr. Edward Hallowell" },
+        { text: "Your brain is not broken. It's a Ferrari engine with bicycle brakes.", author: "Dr. Edward Hallowell" },
+        { text: "ADHD is not a deficit of attention. It's a challenge of regulating attention.", author: "Dr. Russell Barkley" },
+        { text: "The secret to getting ahead is getting started. The secret to getting started is breaking your overwhelming task into small manageable tasks.", author: "Mark Twain" },
+        { text: "You don't have to see the whole staircase, just take the first step.", author: "Martin Luther King Jr." },
+        { text: "Progress, not perfection, is what we should be asking of ourselves.", author: "Julia Cameron" },
+        { text: "The best time to plant a tree was 20 years ago. The second best time is now.", author: "Chinese Proverb" },
+        { text: "You are not your diagnosis. You are not your struggles. You are the person who keeps showing up despite them.", author: "ADHD Community" },
+        { text: "Having ADHD means your brain works differently, not deficiently.", author: "Dr. Ned Hallowell" },
+        { text: "Imperfect action beats perfect inaction every single time.", author: "Harry Truman" },
+        { text: "If you judge a fish by its ability to climb a tree, it will live its whole life believing it is stupid.", author: "Albert Einstein" },
+        { text: "Your value doesn't decrease based on someone's inability to see your worth.", author: "ADHD Affirmation" },
+        { text: "Start where you are. Use what you have. Do what you can.", author: "Arthur Ashe" },
+        { text: "Every expert was once a beginner who refused to give up.", author: "Helen Hayes" },
+        { text: "The ADHD brain is a powerful machine. The challenge is learning to drive it.", author: "Dr. Ari Tuckman" },
+        { text: "You have survived 100% of your worst days. That's a pretty good track record.", author: "ADHD Affirmation" },
+        { text: "Rest is not the opposite of productivity. It's the foundation of it.", author: "Alex Soojung-Kim Pang" },
+        { text: "A small step in the right direction is better than a big step in the wrong direction.", author: "ADHD Wisdom" },
+        { text: "Your brain craves novelty. That's not a bug — that's your superpower for creativity.", author: "Dr. Hallowell" },
+        { text: "Motivation follows action. Don't wait to feel ready — just start.", author: "Dr. Russell Barkley" },
+        { text: "You're not lazy. You're not stupid. You're not broken. Your brain just has a different operating system.", author: "Jessica McCabe" },
+        { text: "The only person you should try to be better than is the person you were yesterday.", author: "ADHD Coaching" },
+        { text: "Messy progress is still progress.", author: "ADHD Affirmation" },
+        { text: "Your struggles are not a sign of weakness. They're proof that you keep fighting.", author: "ADHD Community" },
+        { text: "Comparison is the thief of joy, especially when you're comparing a neurodivergent brain to a neurotypical standard.", author: "ADHD Wisdom" },
+        { text: "Done is better than perfect. Shipped is better than polished. Started is better than planned.", author: "ADHD Coaching" },
+        { text: "The ADHD mind is like a web browser with 100 tabs open. Close a few. Bookmark the rest.", author: "ADHD Community" },
+        { text: "You don't need more willpower. You need better systems that work with your brain.", author: "Dr. Russell Barkley" },
+        { text: "Some of the most brilliant minds in history had ADHD. You're in good company.", author: "Dr. Hallowell" },
+        { text: "Consistency doesn't mean doing it perfectly every day. It means never quitting.", author: "ADHD Affirmation" },
+        { text: "Your to-do list is not your worth. You matter even on zero-productivity days.", author: "ADHD Coaching" },
+        { text: "The only impossible journey is the one you never begin — and you've already begun.", author: "ADHD Affirmation" },
+        { text: "Dopamine isn't your enemy. Learn what gives your brain healthy hits and use that knowledge.", author: "Dr. Ari Tuckman" },
+        { text: "Executive function challenges don't define your intelligence or your character.", author: "Dr. Thomas Brown" },
+        { text: "If plan A doesn't work, the alphabet has 25 more letters. ADHD brains are great at plan B through Z.", author: "ADHD Wisdom" },
+        { text: "Hyperfocus is proof that you CAN concentrate. The challenge is choosing when.", author: "ADHD Community" },
+        { text: "Be patient with yourself. Self-growth is tender; it's holy ground.", author: "Stephen Covey" },
+        { text: "Fall seven times, stand up eight. That's the ADHD way.", author: "Japanese Proverb" },
+        { text: "The way you speak to yourself matters more than any productivity hack.", author: "ADHD Coaching" },
+        { text: "Your energy is currency. Spend it on things that matter to you.", author: "ADHD Wisdom" },
+        { text: "Forgive yourself for the days you couldn't show up. Celebrate the days you did.", author: "ADHD Affirmation" },
+        { text: "ADHD gives you a unique lens on the world. That perspective has value.", author: "Dr. Hallowell" },
+        { text: "The goal isn't to eliminate struggle. It's to build a life that supports how your brain actually works.", author: "ADHD Coaching" },
+        { text: "What looks like procrastination is often your brain struggling with prioritization. Be kind to yourself.", author: "Dr. Russell Barkley" },
+        { text: "Burnout is not a badge of honor. Rest is not a reward — it's a requirement.", author: "ADHD Wisdom" },
+        { text: "Small wins build big momentum. Celebrate every single one.", author: "ADHD Coaching" },
+        { text: "You are allowed to be both a masterpiece and a work in progress simultaneously.", author: "Sophia Bush" },
+        { text: "The ADHD brain doesn't lack ambition. It just needs better scaffolding.", author: "Dr. Russell Barkley" },
+        { text: "Your best is going to look different on different days. That's not failure — that's being human.", author: "ADHD Affirmation" },
+        { text: "Time blindness isn't a moral failing. It's a neurological difference. Plan around it.", author: "Dr. Ari Tuckman" },
+        { text: "You are more than the sum of your missed deadlines and forgotten appointments.", author: "ADHD Community" },
+        { text: "The only bad workout is the one that didn't happen. The only bad task is the one you never started.", author: "ADHD Coaching" },
+        { text: "Your brain is wired for exploration, creativity, and big-picture thinking. Lean into that.", author: "Dr. Hallowell" },
+        { text: "Today's small effort compounds into tomorrow's big results.", author: "James Clear" },
+        { text: "You don't need to feel motivated to start. You just need to start to feel motivated.", author: "ADHD Wisdom" },
+        { text: "ADHD is hardest on the people who have it. Give yourself the grace you'd give a friend.", author: "ADHD Coaching" },
+        { text: "Every time you choose to try again, you're building resilience most people will never know.", author: "ADHD Affirmation" },
+        { text: "The struggle you're in today is developing the strength you need for tomorrow.", author: "Robert Tew" },
+        { text: "You can't pour from an empty cup. Taking care of yourself isn't selfish — it's strategic.", author: "ADHD Wisdom" },
+        { text: "Rejection sensitivity isn't weakness. It means you feel deeply. That's also your greatest strength.", author: "ADHD Community" },
+        { text: "You've been criticizing yourself for years and it hasn't worked. Try approving of yourself and see what happens.", author: "Louise Hay" },
+        { text: "Your potential is not defined by your executive function. It's defined by your heart.", author: "ADHD Affirmation" },
+        { text: "The dishes can wait. The email can wait. But your mental health can't. Take the break.", author: "ADHD Coaching" },
+        { text: "Structure isn't a cage. For the ADHD brain, it's a launchpad.", author: "Dr. Hallowell" },
+        { text: "A bad hour doesn't make a bad day. A bad day doesn't make a bad life. Keep going.", author: "ADHD Affirmation" },
+        { text: "The fact that you're trying, right now, in this moment — that already makes you exceptional.", author: "ADHD Coaching" },
+        { text: "Neurodivergent brains built the pyramids, painted the Sistine Chapel, and put humans on the moon.", author: "ADHD History" },
+        { text: "You are not behind. You are on your own path, at your own pace, and that is perfectly okay.", author: "ADHD Affirmation" }
     ];
 
     // ==========================================
@@ -5844,117 +5914,571 @@
             document.getElementById('movementOverlay').classList.add('hidden');
         });
 
-        // STUCK? Quick Reset
+        // ==========================================
+        //  STUCK? QUICK RESET — Dynamic Activity System
+        // ==========================================
+        var stuckBreathInterval = null;
+        var stuckActiveIntervals = [];
+        var stuckShownHistory = [];
+
+        // All available reset activities
+        var STUCK_ACTIVITIES = [
+            {
+                id: 'breathe478',
+                icon: '\uD83E\uDEC1',
+                label: 'Breathe 4-7-8',
+                desc: 'Calming breath pattern (1 min)',
+                run: function(content) {
+                    content.innerHTML = '<h3>4-7-8 Breathing</h3>' +
+                        '<p style="color:var(--text-secondary);margin-bottom:12px">Follow the circle. In through nose, hold, out through mouth.</p>' +
+                        '<div class="stuck-breathe-circle" id="breatheCircle">Breathe In</div>' +
+                        '<p id="breatheCount" style="color:var(--text-muted);font-size:0.85rem;margin-top:8px">Round 1 of 3</p>';
+                    var circle = document.getElementById('breatheCircle');
+                    var countEl = document.getElementById('breatheCount');
+                    var round = 0;
+                    var maxRounds = 3;
+                    function doRound() {
+                        if (round >= maxRounds) {
+                            circle.textContent = '\u2728 Done!';
+                            circle.className = 'stuck-breathe-circle';
+                            countEl.textContent = 'Great job! Feel that calm?';
+                            return;
+                        }
+                        round++;
+                        countEl.textContent = 'Round ' + round + ' of ' + maxRounds;
+                        circle.textContent = 'Breathe In';
+                        circle.className = 'stuck-breathe-circle inhale';
+                        stuckBreathInterval = setTimeout(function() {
+                            circle.textContent = 'Hold...';
+                            circle.className = 'stuck-breathe-circle';
+                        }, 4000);
+                        stuckActiveIntervals.push(setTimeout(function() {
+                            circle.textContent = 'Breathe Out';
+                            circle.className = 'stuck-breathe-circle exhale';
+                        }, 11000));
+                        stuckActiveIntervals.push(setTimeout(function() {
+                            doRound();
+                        }, 19000));
+                    }
+                    doRound();
+                }
+            },
+            {
+                id: 'dance',
+                icon: '\uD83D\uDC83',
+                label: 'Dance Break',
+                desc: '30 seconds of silly dancing with disco music',
+                run: function(content) {
+                    content.innerHTML = '<h3>30-Second Dance Break! \uD83E\uDE69</h3>' +
+                        '<p style="color:var(--text-secondary);margin-bottom:12px">Get up and move! Be as silly as possible!</p>' +
+                        '<div class="stuck-dance-area" id="danceEmoji">\uD83D\uDC83</div>' +
+                        '<p id="danceTimer" style="font-size:1.5rem;font-weight:700;color:var(--accent-primary)">30</p>' +
+                        '<audio id="danceAudio" loop><source src="audio/dance-break.mp3" type="audio/mpeg"></audio>';
+                    var danceAudioEl = document.getElementById('danceAudio');
+                    if (danceAudioEl) { try { danceAudioEl.play(); } catch(e) {} }
+                    var emojis = ['\uD83D\uDC83', '\uD83D\uDD7A', '\uD83E\uDD38', '\uD83C\uDFB5', '\uD83E\uDE69', '\uD83C\uDFB6', '\uD83D\uDC83'];
+                    var danceEl = document.getElementById('danceEmoji');
+                    var timerEl = document.getElementById('danceTimer');
+                    var sec = 30; var idx = 0;
+                    var danceInt = setInterval(function() {
+                        sec--; timerEl.textContent = sec;
+                        idx = (idx + 1) % emojis.length;
+                        danceEl.textContent = emojis[idx];
+                        if (sec <= 0) {
+                            clearInterval(danceInt);
+                            danceEl.textContent = '\uD83C\uDF89';
+                            danceEl.style.animation = 'none';
+                            timerEl.textContent = 'Amazing!';
+                            var da = document.getElementById('danceAudio');
+                            if (da) { da.pause(); da.currentTime = 0; }
+                        }
+                    }, 1000);
+                    stuckActiveIntervals.push(danceInt);
+                }
+            },
+            {
+                id: 'laugh',
+                icon: '\uD83E\uDD23',
+                label: 'Laugh It Out',
+                desc: 'Contagious kids laughing',
+                run: function(content) {
+                    content.innerHTML = '<h3>Laugh It Out! \uD83E\uDD23</h3>' +
+                        '<p style="color:var(--text-secondary);margin-bottom:8px">Kids laughing is scientifically contagious. Try not to smile!</p>' +
+                        '<div class="stuck-laugh-area">' +
+                        '<div style="font-size:3rem;margin-bottom:12px">\uD83D\uDE02</div>' +
+                        '<audio id="laughAudio" controls loop><source src="audio/kids-laughing.mp3" type="audio/mpeg">Your browser does not support audio.</audio>' +
+                        '</div>';
+                    var laughEl = document.getElementById('laughAudio');
+                    if (laughEl) { try { laughEl.play(); } catch(e) {} }
+                }
+            },
+            {
+                id: 'boxBreathing',
+                icon: '\u2B1C',
+                label: 'Box Breathing',
+                desc: '4-4-4-4 calm your nervous system',
+                run: function(content) {
+                    content.innerHTML = '<h3>Box Breathing \u2B1C</h3>' +
+                        '<p style="color:var(--text-secondary);margin-bottom:12px">Equal breaths. In 4, hold 4, out 4, hold 4.</p>' +
+                        '<div class="stuck-breathe-circle" id="boxCircle">Breathe In</div>' +
+                        '<p id="boxCount" style="color:var(--text-muted);font-size:0.85rem;margin-top:8px">Round 1 of 4</p>';
+                    var circle = document.getElementById('boxCircle');
+                    var countEl = document.getElementById('boxCount');
+                    var round = 0;
+                    var maxRounds = 4;
+                    function doBoxRound() {
+                        if (round >= maxRounds) {
+                            circle.textContent = '\u2728 Done!';
+                            circle.className = 'stuck-breathe-circle';
+                            countEl.textContent = 'Nervous system reset complete!';
+                            return;
+                        }
+                        round++;
+                        countEl.textContent = 'Round ' + round + ' of ' + maxRounds;
+                        circle.textContent = 'Breathe In';
+                        circle.className = 'stuck-breathe-circle inhale';
+                        stuckActiveIntervals.push(setTimeout(function() {
+                            circle.textContent = 'Hold...';
+                            circle.className = 'stuck-breathe-circle';
+                        }, 4000));
+                        stuckActiveIntervals.push(setTimeout(function() {
+                            circle.textContent = 'Breathe Out';
+                            circle.className = 'stuck-breathe-circle exhale';
+                        }, 8000));
+                        stuckActiveIntervals.push(setTimeout(function() {
+                            circle.textContent = 'Hold...';
+                            circle.className = 'stuck-breathe-circle';
+                        }, 12000));
+                        stuckActiveIntervals.push(setTimeout(function() {
+                            doBoxRound();
+                        }, 16000));
+                    }
+                    doBoxRound();
+                }
+            },
+            {
+                id: 'physiologicalSigh',
+                icon: '\uD83D\uDCA8',
+                label: 'Physiological Sigh',
+                desc: 'Fastest stress reset \u2014 1 breath (Stanford)',
+                run: function(content) {
+                    content.innerHTML = '<h3>Physiological Sigh \uD83D\uDCA8</h3>' +
+                        '<p style="color:var(--text-secondary);margin-bottom:12px">Dr. Huberman\'s fastest calm-down: double inhale + long exhale.</p>' +
+                        '<div class="stuck-breathe-circle" id="sighCircle" style="background:linear-gradient(135deg,#00b8d4,#0097a7)">Ready?</div>' +
+                        '<p id="sighStep" style="font-size:1rem;font-weight:600;color:var(--accent-primary);margin-top:12px">Tap to start</p>';
+                    var circle = document.getElementById('sighCircle');
+                    var stepEl = document.getElementById('sighStep');
+                    var rep = 0;
+                    var maxReps = 5;
+                    function doSigh() {
+                        if (rep >= maxReps) {
+                            circle.textContent = '\u2728 Done!';
+                            circle.className = 'stuck-breathe-circle';
+                            stepEl.textContent = 'Cortisol cleared. You\'re reset!';
+                            return;
+                        }
+                        rep++;
+                        stepEl.textContent = 'Sigh ' + rep + ' of ' + maxReps;
+                        circle.textContent = 'Inhale\u2026';
+                        circle.className = 'stuck-breathe-circle inhale';
+                        stuckActiveIntervals.push(setTimeout(function() {
+                            circle.textContent = '+ Sip!';
+                        }, 2000));
+                        stuckActiveIntervals.push(setTimeout(function() {
+                            circle.textContent = 'Exhale\u2026\u2026';
+                            circle.className = 'stuck-breathe-circle exhale';
+                        }, 3500));
+                        stuckActiveIntervals.push(setTimeout(function() {
+                            doSigh();
+                        }, 8000));
+                    }
+                    doSigh();
+                }
+            },
+            {
+                id: 'grounding54321',
+                icon: '\uD83D\uDD90\uFE0F',
+                label: '5-4-3-2-1 Grounding',
+                desc: 'Engage all 5 senses to reset',
+                run: function(content) {
+                    var steps = [
+                        { num: 5, sense: 'SEE', prompt: 'Look around. Name 5 things you can see right now.', emoji: '\uD83D\uDC41\uFE0F' },
+                        { num: 4, sense: 'HEAR', prompt: 'Pause and listen. Name 4 things you can hear.', emoji: '\uD83D\uDC42' },
+                        { num: 3, sense: 'TOUCH', prompt: 'Name 3 things you can physically feel right now.', emoji: '\u270B' },
+                        { num: 2, sense: 'SMELL', prompt: 'Name 2 things you can smell (or go smell something).', emoji: '\uD83D\uDC43' },
+                        { num: 1, sense: 'TASTE', prompt: 'Name 1 thing you can taste (or take a sip of water).', emoji: '\uD83D\uDC45' }
+                    ];
+                    var stepIdx = 0;
+                    function renderStep() {
+                        var s = steps[stepIdx];
+                        content.innerHTML = '<h3>5-4-3-2-1 Grounding \uD83D\uDD90\uFE0F</h3>' +
+                            '<div style="font-size:3rem;margin:16px 0">' + s.emoji + '</div>' +
+                            '<p style="font-size:1.3rem;font-weight:700;color:var(--accent-primary)">' + s.num + ' things you can ' + s.sense + '</p>' +
+                            '<p style="color:var(--text-secondary);margin:8px 0 20px">' + s.prompt + '</p>' +
+                            '<p style="color:var(--text-muted);font-size:0.85rem">Step ' + (stepIdx + 1) + ' of 5</p>' +
+                            (stepIdx < 4 ? '<button class="btn-primary" id="groundingNext" style="margin-top:12px">Next \u2192</button>' :
+                            '<p style="font-size:1.2rem;font-weight:700;color:var(--accent-green);margin-top:12px">\u2728 You\'re grounded. You\'re here. You\'re okay.</p>');
+                        var nextBtn = document.getElementById('groundingNext');
+                        if (nextBtn) nextBtn.addEventListener('click', function() { stepIdx++; renderStep(); });
+                    }
+                    renderStep();
+                }
+            },
+            {
+                id: 'coldSplash',
+                icon: '\uD83E\uDDCA',
+                label: 'Cold Reset',
+                desc: 'Splash cold water — vagus nerve hack',
+                run: function(content) {
+                    content.innerHTML = '<h3>Cold Reset \uD83E\uDDCA</h3>' +
+                        '<p style="color:var(--text-secondary);margin-bottom:16px">This activates the mammalian diving reflex \u2014 instant calm.</p>' +
+                        '<div style="font-size:4rem;margin:16px 0">\uD83E\uDDCA</div>' +
+                        '<div style="background:rgba(0,184,212,0.1);border-radius:12px;padding:16px;text-align:left;margin-bottom:12px">' +
+                        '<p style="font-weight:700;margin-bottom:8px">Do one of these NOW:</p>' +
+                        '<p>\uD83D\uDCA7 Splash cold water on your face (best)</p>' +
+                        '<p>\uD83E\uDDCA Hold an ice cube in your hands for 30 sec</p>' +
+                        '<p>\uD83D\uDEB0 Run cold water on your wrists for 20 sec</p>' +
+                        '<p>\uD83E\uDDFB Press a cold wet towel on your neck</p>' +
+                        '</div>' +
+                        '<p id="coldTimer" style="font-size:1.5rem;font-weight:700;color:var(--accent-primary)">30</p>' +
+                        '<p style="color:var(--text-muted);font-size:0.85rem">Timer counting down\u2026</p>';
+                    var timerEl = document.getElementById('coldTimer');
+                    var sec = 30;
+                    var coldInt = setInterval(function() {
+                        sec--; timerEl.textContent = sec;
+                        if (sec <= 0) { clearInterval(coldInt); timerEl.textContent = '\u2728 Feel that reset?'; }
+                    }, 1000);
+                    stuckActiveIntervals.push(coldInt);
+                }
+            },
+            {
+                id: 'bodyShake',
+                icon: '\uD83E\uDEBB',
+                label: 'Shake It Off',
+                desc: 'Discharge stress like animals do',
+                run: function(content) {
+                    content.innerHTML = '<h3>Shake It Off! \uD83E\uDEBB</h3>' +
+                        '<p style="color:var(--text-secondary);margin-bottom:12px">Animals shake after danger to release stress hormones. Your turn!</p>' +
+                        '<div class="stuck-dance-area" id="shakeEmoji" style="animation:danceWiggle 0.15s infinite alternate">\uD83E\uDEBB</div>' +
+                        '<p id="shakeTimer" style="font-size:1.5rem;font-weight:700;color:var(--accent-primary)">45</p>' +
+                        '<div style="background:rgba(108,92,231,0.08);border-radius:12px;padding:12px;margin-top:12px;text-align:left;font-size:0.9rem">' +
+                        '<p>\uD83D\uDC4B Shake your hands vigorously</p>' +
+                        '<p>\uD83E\uDDB6 Bounce on your feet</p>' +
+                        '<p>\uD83D\uDCAA Shake your arms and shoulders</p>' +
+                        '<p>\uD83C\uDFB5 Let your whole body wiggle!</p>' +
+                        '</div>';
+                    var timerEl = document.getElementById('shakeTimer');
+                    var emojis = ['\uD83E\uDEBB', '\uD83D\uDCAA', '\uD83E\uDD38', '\uD83C\uDFB5', '\uD83D\uDC4B', '\uD83E\uDEBB'];
+                    var shakeEl = document.getElementById('shakeEmoji');
+                    var sec = 45; var idx = 0;
+                    var shakeInt = setInterval(function() {
+                        sec--; timerEl.textContent = sec;
+                        idx = (idx + 1) % emojis.length;
+                        shakeEl.textContent = emojis[idx];
+                        if (sec <= 0) {
+                            clearInterval(shakeInt);
+                            shakeEl.textContent = '\uD83C\uDF89';
+                            shakeEl.style.animation = 'none';
+                            timerEl.textContent = 'Stress discharged!';
+                        }
+                    }, 1000);
+                    stuckActiveIntervals.push(shakeInt);
+                }
+            },
+            {
+                id: 'butterflyHug',
+                icon: '\uD83E\uDD8B',
+                label: 'Butterfly Hug',
+                desc: 'Bilateral tapping for instant calm',
+                run: function(content) {
+                    content.innerHTML = '<h3>Butterfly Hug \uD83E\uDD8B</h3>' +
+                        '<p style="color:var(--text-secondary);margin-bottom:12px">Cross your arms, hands on shoulders. Alternate tapping left-right.</p>' +
+                        '<div id="butterflyEmoji" style="font-size:4rem;margin:16px 0;transition:transform 0.3s">\uD83E\uDD8B</div>' +
+                        '<p id="butterflyGuide" style="font-size:1.1rem;font-weight:600;color:var(--accent-primary)">Tap LEFT</p>' +
+                        '<p id="butterflyTimer" style="color:var(--text-muted);font-size:0.85rem;margin-top:8px">60 seconds</p>';
+                    var emoji = document.getElementById('butterflyEmoji');
+                    var guide = document.getElementById('butterflyGuide');
+                    var timerEl = document.getElementById('butterflyTimer');
+                    var sec = 60; var isLeft = true;
+                    var bfInt = setInterval(function() {
+                        sec--;
+                        isLeft = !isLeft;
+                        emoji.style.transform = isLeft ? 'rotate(-15deg)' : 'rotate(15deg)';
+                        guide.textContent = isLeft ? 'Tap LEFT' : 'Tap RIGHT';
+                        timerEl.textContent = sec + ' seconds';
+                        if (sec <= 0) {
+                            clearInterval(bfInt);
+                            emoji.style.transform = 'none';
+                            guide.textContent = '\u2728 Both hemispheres balanced!';
+                            timerEl.textContent = 'You did great!';
+                        }
+                    }, 1000);
+                    stuckActiveIntervals.push(bfInt);
+                }
+            },
+            {
+                id: 'brainDump',
+                icon: '\uD83E\uDDE0',
+                label: 'Brain Dump',
+                desc: 'Empty your head onto paper (2 min)',
+                run: function(content) {
+                    content.innerHTML = '<h3>Brain Dump \uD83E\uDDE0</h3>' +
+                        '<p style="color:var(--text-secondary);margin-bottom:12px">Write EVERYTHING in your head. Don\'t filter. Just dump it out.</p>' +
+                        '<textarea id="brainDumpArea" class="input-field textarea" style="width:100%;min-height:120px;font-size:1rem;margin-bottom:12px" placeholder="Type everything here\u2026 every worry, thought, task, idea. Don\'t stop writing for 2 minutes."></textarea>' +
+                        '<p id="dumpTimer" style="font-size:1.3rem;font-weight:700;color:var(--accent-primary)">2:00</p>' +
+                        '<p style="color:var(--text-muted);font-size:0.85rem">Keep writing until the timer ends!</p>';
+                    var timerEl = document.getElementById('dumpTimer');
+                    var area = document.getElementById('brainDumpArea');
+                    if (area) area.focus();
+                    var sec = 120;
+                    var dumpInt = setInterval(function() {
+                        sec--;
+                        var m = Math.floor(sec / 60);
+                        var s = sec % 60;
+                        timerEl.textContent = m + ':' + (s < 10 ? '0' : '') + s;
+                        if (sec <= 0) {
+                            clearInterval(dumpInt);
+                            timerEl.textContent = '\u2728 Feel lighter?';
+                        }
+                    }, 1000);
+                    stuckActiveIntervals.push(dumpInt);
+                }
+            },
+            {
+                id: 'selfCompassion',
+                icon: '\uD83D\uDC9A',
+                label: 'Self-Compassion',
+                desc: 'Break the shame spiral (Dr. Neff)',
+                run: function(content) {
+                    var steps = [
+                        { title: 'Step 1: Acknowledge', emoji: '\uD83E\uDD32', text: 'Say to yourself: "This is a moment of struggle. This is hard right now."', sub: 'Don\'t minimize it. Don\'t dramatize it. Just notice.' },
+                        { title: 'Step 2: You\'re Not Alone', emoji: '\uD83E\uDD1D', text: 'Say: "Other people with ADHD feel this exact same way. This is part of the human experience."', sub: 'You are not broken. Your brain just works differently.' },
+                        { title: 'Step 3: Be Kind', emoji: '\uD83D\uDC9A', text: 'Say: "May I be kind to myself right now. I\'m doing my best with the brain I have."', sub: 'Place your hand on your heart. Mean it.' }
+                    ];
+                    var stepIdx = 0;
+                    function renderCompassionStep() {
+                        var s = steps[stepIdx];
+                        content.innerHTML = '<h3>Self-Compassion Pause \uD83D\uDC9A</h3>' +
+                            '<div style="font-size:3rem;margin:12px 0">' + s.emoji + '</div>' +
+                            '<p style="font-size:1.1rem;font-weight:700;color:var(--accent-primary);margin-bottom:8px">' + s.title + '</p>' +
+                            '<p style="font-size:1rem;margin-bottom:8px;color:var(--text-primary)">' + s.text + '</p>' +
+                            '<p style="color:var(--text-muted);font-size:0.85rem;font-style:italic;margin-bottom:16px">' + s.sub + '</p>' +
+                            (stepIdx < 2 ? '<button class="btn-primary" id="compassionNext">Next \u2192</button>' :
+                            '<p style="font-size:1.1rem;font-weight:700;color:var(--accent-green);margin-top:12px">\u2728 You are enough. You always have been.</p>');
+                        var nextBtn = document.getElementById('compassionNext');
+                        if (nextBtn) nextBtn.addEventListener('click', function() { stepIdx++; renderCompassionStep(); });
+                    }
+                    renderCompassionStep();
+                }
+            },
+            {
+                id: 'microChunk',
+                icon: '\uD83E\uDDE9',
+                label: 'Micro-Chunk It',
+                desc: 'Break your task into tiny bites',
+                run: function(content) {
+                    content.innerHTML = '<h3>Micro-Chunk It \uD83E\uDDE9</h3>' +
+                        '<p style="color:var(--text-secondary);margin-bottom:12px">Your task feels huge? Let\'s make it absurdly tiny. What are you trying to do?</p>' +
+                        '<input type="text" id="chunkTask" class="input-field" style="width:100%;margin-bottom:12px" placeholder="e.g., Write my essay">' +
+                        '<div id="chunkSteps" style="text-align:left;margin-top:8px"></div>' +
+                        '<button class="btn-primary" id="chunkGenerate" style="margin-top:12px">\uD83E\uDDE0 Break It Down</button>';
+                    document.getElementById('chunkGenerate').addEventListener('click', function() {
+                        var task = document.getElementById('chunkTask').value || 'your task';
+                        var micro = [
+                            '\u2705 Step 1: Open the app/file/document for "' + task + '"',
+                            '\u2705 Step 2: Read/look at it for just 30 seconds',
+                            '\u2705 Step 3: Do the SMALLEST first action (one line, one word, one click)',
+                            '\u2705 Step 4: Do one more tiny thing',
+                            '\u2705 Step 5: You\'re already in flow!'
+                        ];
+                        document.getElementById('chunkSteps').innerHTML = micro.map(function(s) {
+                            return '<p style="padding:6px 0;border-bottom:1px solid var(--border)">' + s + '</p>';
+                        }).join('');
+                        document.getElementById('chunkGenerate').textContent = '\uD83C\uDF89 Now do Step 1!';
+                    });
+                }
+            },
+            {
+                id: 'gratitude',
+                icon: '\uD83D\uDE4F',
+                label: 'Gratitude Boost',
+                desc: 'Shift your brain chemistry in 60 sec',
+                run: function(content) {
+                    content.innerHTML = '<h3>Gratitude Boost \uD83D\uDE4F</h3>' +
+                        '<p style="color:var(--text-secondary);margin-bottom:12px">Gratitude activates your reward pathways. Write 3 things \u2014 big or small.</p>' +
+                        '<div style="text-align:left">' +
+                        '<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><span style="font-size:1.3rem">\u2728</span><input type="text" class="input-field" style="flex:1" id="grat1" placeholder="I\'m grateful for\u2026"></div>' +
+                        '<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><span style="font-size:1.3rem">\uD83D\uDC9B</span><input type="text" class="input-field" style="flex:1" id="grat2" placeholder="I appreciate\u2026"></div>' +
+                        '<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><span style="font-size:1.3rem">\uD83C\uDF1F</span><input type="text" class="input-field" style="flex:1" id="grat3" placeholder="Something good today\u2026"></div>' +
+                        '</div>' +
+                        '<p id="gratResult" style="color:var(--accent-green);font-weight:700;margin-top:12px;display:none">\u2728 Dopamine + serotonin activated! Your brain thanks you.</p>';
+                    var inputs = [document.getElementById('grat1'), document.getElementById('grat2'), document.getElementById('grat3')];
+                    inputs.forEach(function(inp) {
+                        if (inp) inp.addEventListener('input', function() {
+                            var filled = inputs.filter(function(i) { return i && i.value.trim(); }).length;
+                            if (filled >= 3) document.getElementById('gratResult').style.display = '';
+                        });
+                    });
+                    if (inputs[0]) inputs[0].focus();
+                }
+            },
+            {
+                id: 'positiveTalk',
+                icon: '\uD83D\uDCAC',
+                label: 'Reframe It',
+                desc: 'Replace negative self-talk (CBT)',
+                run: function(content) {
+                    var reframes = [
+                        { neg: '"I\'m so lazy"', pos: '"My brain needs more dopamine to start. That\'s neuroscience, not laziness."' },
+                        { neg: '"I always fail"', pos: '"I struggle with follow-through, AND I keep trying. That takes courage."' },
+                        { neg: '"Everyone else can do this easily"', pos: '"I\'m comparing my behind-the-scenes to their highlight reel."' },
+                        { neg: '"What\'s wrong with me?"', pos: '"My brain is wired differently. Different \u2260 defective."' },
+                        { neg: '"I\'ll never get this done"', pos: '"I can do the next small piece. That\'s all I need to focus on."' },
+                        { neg: '"I should be further along"', pos: '"I\'m exactly where I am, and I\'m still moving forward."' }
+                    ];
+                    var r = reframes[Math.floor(Math.random() * reframes.length)];
+                    content.innerHTML = '<h3>Reframe It \uD83D\uDCAC</h3>' +
+                        '<p style="color:var(--text-secondary);margin-bottom:16px">Your thoughts aren\'t facts. Let\'s rewrite that script.</p>' +
+                        '<div style="background:rgba(231,76,60,0.08);border-radius:12px;padding:16px;margin-bottom:12px">' +
+                        '<p style="color:#e74c3c;font-size:0.8rem;font-weight:700;margin-bottom:4px">THE OLD STORY</p>' +
+                        '<p style="font-size:1.1rem;font-style:italic">' + r.neg + '</p>' +
+                        '</div>' +
+                        '<div style="font-size:1.5rem;margin:8px 0">\u2B07\uFE0F</div>' +
+                        '<div style="background:rgba(0,210,160,0.08);border-radius:12px;padding:16px">' +
+                        '<p style="color:var(--accent-green);font-size:0.8rem;font-weight:700;margin-bottom:4px">THE TRUTH</p>' +
+                        '<p style="font-size:1.1rem;font-weight:600">' + r.pos + '</p>' +
+                        '</div>' +
+                        '<p style="color:var(--text-muted);font-size:0.85rem;margin-top:16px;font-style:italic">Say the new version out loud 3 times. Your brain needs to hear it.</p>';
+                }
+            },
+            {
+                id: 'nameItTameIt',
+                icon: '\uD83C\uDFF7\uFE0F',
+                label: 'Name It to Tame It',
+                desc: 'Label your emotion to calm it down',
+                run: function(content) {
+                    var emotions = [
+                        { emoji: '\uD83D\uDE24', name: 'Frustrated', tip: 'Frustration means you care. Take one step back from the problem.' },
+                        { emoji: '\uD83D\uDE30', name: 'Anxious', tip: 'Anxiety lives in the future. Come back to right now with a deep breath.' },
+                        { emoji: '\uD83D\uDE29', name: 'Overwhelmed', tip: 'Too many things at once. Pick ONE. The rest can wait.' },
+                        { emoji: '\uD83D\uDE14', name: 'Ashamed', tip: 'Shame says "I am bad." Truth: you have a brain difference, not a character flaw.' },
+                        { emoji: '\uD83D\uDE34', name: 'Drained', tip: 'Your battery is low. Rest IS productive. Even 5 minutes helps.' },
+                        { emoji: '\uD83D\uDE10', name: 'Numb / Blank', tip: 'Your brain shut down to protect you. Be gentle. Start with something sensory.' },
+                        { emoji: '\uD83D\uDE20', name: 'Angry', tip: 'Anger is a signal something matters to you. What boundary was crossed?' },
+                        { emoji: '\uD83D\uDE1E', name: 'Disappointed', tip: 'You had expectations. It\'s okay to grieve them. Then adjust and keep going.' }
+                    ];
+                    var btns = emotions.map(function(e, i) {
+                        return '<button class="stuck-option" data-emo="' + i + '" style="padding:10px 14px">' +
+                            '<span style="font-size:1.5rem">' + e.emoji + '</span>' +
+                            '<span><span class="stuck-label" style="font-size:0.9rem">' + e.name + '</span></span></button>';
+                    }).join('');
+                    content.innerHTML = '<h3>Name It to Tame It \uD83C\uDFF7\uFE0F</h3>' +
+                        '<p style="color:var(--text-secondary);margin-bottom:12px">Naming your emotion activates your prefrontal cortex and calms the amygdala.</p>' +
+                        '<p style="font-weight:600;margin-bottom:8px">What are you feeling right now?</p>' +
+                        '<div class="stuck-options" style="gap:8px">' + btns + '</div>';
+                    content.querySelectorAll('[data-emo]').forEach(function(btn) {
+                        btn.addEventListener('click', function() {
+                            var e = emotions[parseInt(this.getAttribute('data-emo'))];
+                            content.innerHTML = '<div style="font-size:3rem;margin:12px 0">' + e.emoji + '</div>' +
+                                '<h3>"I\'m feeling ' + e.name + '"</h3>' +
+                                '<div style="background:rgba(0,210,160,0.08);border-radius:12px;padding:16px;margin:16px 0">' +
+                                '<p style="font-size:1rem">' + e.tip + '</p></div>' +
+                                '<p style="color:var(--text-muted);font-size:0.85rem;font-style:italic">\u2728 You named it. Your prefrontal cortex just came back online.</p>';
+                        });
+                    });
+                }
+            },
+            {
+                id: 'sensoryReset',
+                icon: '\uD83C\uDF3F',
+                label: 'Sensory Reset',
+                desc: 'Change your environment in 30 seconds',
+                run: function(content) {
+                    var tips = [
+                        '\uD83E\uDE9F Open a window \u2014 fresh air changes everything',
+                        '\uD83D\uDCA1 Change your lighting \u2014 brighter or dimmer',
+                        '\uD83C\uDFB5 Put on a completely different kind of music',
+                        '\uD83E\uDDCA Run cold water on your wrists for 15 seconds',
+                        '\uD83C\uDF4B Smell something strong \u2014 peppermint, coffee, citrus',
+                        '\uD83E\uDDF9 Clear 3 things off your desk right now',
+                        '\uD83D\uDC5F Take off your shoes and feel the floor',
+                        '\uD83D\uDCA7 Drink a full glass of cold water'
+                    ];
+                    // Shuffle and pick 4
+                    var shuffled = tips.sort(function() { return 0.5 - Math.random(); }).slice(0, 4);
+                    content.innerHTML = '<h3>Sensory Reset \uD83C\uDF3F</h3>' +
+                        '<p style="color:var(--text-secondary);margin-bottom:12px">Your ADHD brain craves novelty. Change your senses to change your state.</p>' +
+                        '<div style="text-align:left;margin-bottom:16px">' +
+                        shuffled.map(function(t) {
+                            return '<p style="padding:8px 0;border-bottom:1px solid var(--border);font-size:0.95rem">' + t + '</p>';
+                        }).join('') +
+                        '</div>' +
+                        '<p style="font-weight:700;color:var(--accent-primary)">Do at least ONE right now \u2014 then come back!</p>';
+                }
+            }
+        ];
+
+        // Pick 3 random activities that haven't been shown recently
+        function pickStuckActivities() {
+            var available = STUCK_ACTIVITIES.filter(function(a) {
+                return stuckShownHistory.indexOf(a.id) === -1;
+            });
+            // If we've shown too many, reset history (keep last 3 to avoid immediate repeat)
+            if (available.length < 3) {
+                stuckShownHistory = stuckShownHistory.slice(-3);
+                available = STUCK_ACTIVITIES.filter(function(a) {
+                    return stuckShownHistory.indexOf(a.id) === -1;
+                });
+            }
+            // Shuffle and pick 3
+            var shuffled = available.sort(function() { return 0.5 - Math.random(); });
+            var picked = shuffled.slice(0, 3);
+            picked.forEach(function(a) { stuckShownHistory.push(a.id); });
+            return picked;
+        }
+
+        // Render 3 random option buttons into the container
+        function renderStuckOptions() {
+            var container = document.getElementById('stuckOptionsContainer');
+            if (!container) return;
+            var picked = pickStuckActivities();
+            container.innerHTML = picked.map(function(a) {
+                return '<button class="stuck-option" data-stuck-id="' + a.id + '">' +
+                    '<span class="stuck-icon">' + a.icon + '</span>' +
+                    '<span><span class="stuck-label">' + a.label + '</span>' +
+                    '<span class="stuck-desc">' + a.desc + '</span></span></button>';
+            }).join('');
+            // Bind click handlers
+            container.querySelectorAll('.stuck-option').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    var id = this.getAttribute('data-stuck-id');
+                    var act = STUCK_ACTIVITIES.filter(function(a) { return a.id === id; })[0];
+                    if (!act) return;
+                    container.style.display = 'none';
+                    var activity = document.getElementById('stuckActivity');
+                    activity.classList.remove('hidden');
+                    var content = document.getElementById('stuckActivityContent');
+                    act.run(content);
+                });
+            });
+        }
+
         safeBind('btnStuck', 'click', function() {
             document.getElementById('stuckOverlay').classList.remove('hidden');
-            var opts = document.querySelector('.stuck-options');
+            var container = document.getElementById('stuckOptionsContainer');
+            if (container) container.style.display = '';
             var activity = document.getElementById('stuckActivity');
-            if (opts) opts.style.display = '';
             if (activity) activity.classList.add('hidden');
-        });
-
-        var stuckBreathInterval = null;
-
-        safeBind('stuckBreathe', 'click', function() {
-            document.querySelector('.stuck-options').style.display = 'none';
-            var activity = document.getElementById('stuckActivity');
-            activity.classList.remove('hidden');
-            var content = document.getElementById('stuckActivityContent');
-            content.innerHTML = '<h3>4-7-8 Breathing</h3>' +
-                '<p style="color:var(--text-secondary);margin-bottom:12px">Follow the circle. In through nose, hold, out through mouth.</p>' +
-                '<div class="stuck-breathe-circle" id="breatheCircle">Breathe In</div>' +
-                '<p id="breatheCount" style="color:var(--text-muted);font-size:0.85rem;margin-top:8px">Round 1 of 3</p>';
-            var circle = document.getElementById('breatheCircle');
-            var countEl = document.getElementById('breatheCount');
-            var round = 0;
-            var maxRounds = 3;
-            function doRound() {
-                if (round >= maxRounds) {
-                    circle.textContent = '✨ Done!';
-                    circle.className = 'stuck-breathe-circle';
-                    countEl.textContent = 'Great job! Feel that calm?';
-                    return;
-                }
-                round++;
-                countEl.textContent = 'Round ' + round + ' of ' + maxRounds;
-                circle.textContent = 'Breathe In';
-                circle.className = 'stuck-breathe-circle inhale';
-                setTimeout(function() {
-                    circle.textContent = 'Hold...';
-                    circle.className = 'stuck-breathe-circle';
-                }, 4000);
-                setTimeout(function() {
-                    circle.textContent = 'Breathe Out';
-                    circle.className = 'stuck-breathe-circle exhale';
-                }, 11000);
-                setTimeout(function() {
-                    doRound();
-                }, 19000);
-            }
-            if (stuckBreathInterval) clearTimeout(stuckBreathInterval);
-            doRound();
-        });
-
-        safeBind('stuckDance', 'click', function() {
-            document.querySelector('.stuck-options').style.display = 'none';
-            var activity = document.getElementById('stuckActivity');
-            activity.classList.remove('hidden');
-            var content = document.getElementById('stuckActivityContent');
-            content.innerHTML = '<h3>30-Second Dance Break! 🪩</h3>' +
-                '<p style="color:var(--text-secondary);margin-bottom:12px">Get up and move! Be as silly as possible!</p>' +
-                '<div class="stuck-dance-area" id="danceEmoji">💃</div>' +
-                '<p id="danceTimer" style="font-size:1.5rem;font-weight:700;color:var(--accent-primary)">30</p>' +
-                '<audio id="danceAudio" loop>' +
-                '<source src="audio/dance-break.mp3" type="audio/mpeg">' +
-                '</audio>';
-            // Start disco music
-            var danceAudioEl = document.getElementById('danceAudio');
-            if (danceAudioEl) { try { danceAudioEl.play(); } catch(e) {} }
-            var emojis = ['💃', '🕺', '🤸', '🎵', '🪩', '🎶', '💃'];
-            var danceEl = document.getElementById('danceEmoji');
-            var timerEl = document.getElementById('danceTimer');
-            var sec = 30;
-            var idx = 0;
-            var danceInt = setInterval(function() {
-                sec--;
-                timerEl.textContent = sec;
-                idx = (idx + 1) % emojis.length;
-                danceEl.textContent = emojis[idx];
-                if (sec <= 0) {
-                    clearInterval(danceInt);
-                    danceEl.textContent = '🎉';
-                    danceEl.style.animation = 'none';
-                    timerEl.textContent = 'Amazing!';
-                    // Stop disco music when timer ends
-                    var da = document.getElementById('danceAudio');
-                    if (da) { da.pause(); da.currentTime = 0; }
-                }
-            }, 1000);
-        });
-
-        safeBind('stuckLaugh', 'click', function() {
-            document.querySelector('.stuck-options').style.display = 'none';
-            var activity = document.getElementById('stuckActivity');
-            activity.classList.remove('hidden');
-            var content = document.getElementById('stuckActivityContent');
-            content.innerHTML = '<h3>Laugh It Out! 🤣</h3>' +
-                '<p style="color:var(--text-secondary);margin-bottom:8px">Kids laughing is scientifically contagious. Try not to smile!</p>' +
-                '<div class="stuck-laugh-area">' +
-                '<div style="font-size:3rem;margin-bottom:12px">😂</div>' +
-                '<audio id="laughAudio" controls loop>' +
-                '<source src="audio/kids-laughing.mp3" type="audio/mpeg">' +
-                'Your browser does not support audio.' +
-                '</audio>' +
-                '</div>';
-            // Start playback programmatically (no autoplay attribute)
-            var laughEl = document.getElementById('laughAudio');
-            if (laughEl) { try { laughEl.play(); } catch(e) {} }
+            renderStuckOptions();
         });
 
         function closeStuckModal() {
             document.getElementById('stuckOverlay').classList.add('hidden');
             if (stuckBreathInterval) { clearTimeout(stuckBreathInterval); stuckBreathInterval = null; }
-            // Stop and destroy any playing audio completely (laugh + dance)
+            // Clear all active timers/intervals
+            stuckActiveIntervals.forEach(function(id) { clearTimeout(id); clearInterval(id); });
+            stuckActiveIntervals = [];
+            // Stop and destroy any playing audio completely
             ['laughAudio', 'danceAudio'].forEach(function(audioId) {
                 var audio = document.getElementById(audioId);
                 if (audio) {

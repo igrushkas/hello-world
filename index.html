@@ -20,7 +20,7 @@
     <meta name="twitter:description" content="Track habits, crush goals, earn XP & badges. Gamified productivity with streaks, combos, and dopamine-fueled progress.">
 
     <title>Habit Magic - Goal Tracker</title>
-    <link rel="stylesheet" href="styles.min.css?v=20260214i">
+    <link rel="stylesheet" href="styles.min.css?v=20260214j">
 
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
@@ -1279,22 +1279,8 @@
             <div style="text-align:center;font-size:3rem;margin-bottom:12px">&#129300;</div>
             <h2 style="text-align:center">Feeling Stuck?</h2>
             <p style="text-align:center;color:var(--text-secondary);margin-bottom:20px">Your brain needs a quick reset. Pick one — it only takes 60 seconds!</p>
-            <div class="stuck-options">
-                <button class="stuck-option" id="stuckBreathe" data-stuck="breathe">
-                    <span class="stuck-icon">&#128692;</span>
-                    <span class="stuck-label">Breathe</span>
-                    <span class="stuck-desc">4-7-8 breathing exercise</span>
-                </button>
-                <button class="stuck-option" id="stuckDance" data-stuck="dance">
-                    <span class="stuck-icon">&#128131;</span>
-                    <span class="stuck-label">Dance Break</span>
-                    <span class="stuck-desc">30 seconds of silly dancing</span>
-                </button>
-                <button class="stuck-option" id="stuckLaugh" data-stuck="laugh">
-                    <span class="stuck-icon">&#129315;</span>
-                    <span class="stuck-label">Laugh It Out</span>
-                    <span class="stuck-desc">Contagious kids laughing</span>
-                </button>
+            <div class="stuck-options" id="stuckOptionsContainer">
+                <!-- 3 random activities rendered by JS each time -->
             </div>
             <div class="stuck-activity hidden" id="stuckActivity">
                 <div class="stuck-activity-content" id="stuckActivityContent"></div>
@@ -1377,6 +1363,6 @@
     </div>
 
     <script src="firebase-config.js"></script>
-    <script src="app.min.js?v=20260214i"></script>
+    <script src="app.min.js?v=20260214j"></script>
 </body>
 </html>
