@@ -20,7 +20,7 @@
     <meta name="twitter:description" content="Track habits, crush goals, earn XP & badges. Gamified productivity with streaks, combos, and dopamine-fueled progress.">
 
     <title>Habit Magic - Goal Tracker</title>
-    <link rel="stylesheet" href="styles.min.css?v=20260214b">
+    <link rel="stylesheet" href="styles.min.css?v=20260214c">
 
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
@@ -710,6 +710,7 @@
                     <div class="next-action-card" id="nextActionCard">
                         <div class="next-action-top-row">
                             <div class="next-action-label">JUST THIS ONE THING</div>
+                            <button class="btn-focus-mode" id="btnFocusMode" title="Focus Mode — hide everything else">&#x26F6;</button>
                             <div class="next-action-outcome-progress" id="nextActionOutcomeProgress"></div>
                         </div>
                         <div class="next-action-text" id="nextActionText">No actions yet. Create an outcome to get started!</div>
@@ -787,7 +788,7 @@
             <section class="outcomes-section" id="outcomesSection">
                 <div class="section-header">
                     <h2 id="outcomesTitle">Your Outcomes <button class="btn-collapse-section" id="btnCollapseOutcomes" title="Hide/Show outcomes">&#9660;</button></h2>
-                    <button class="btn-new-outcome-pill" id="btnNewOutcome">+ Create Outcome</button>
+                    <button class="btn-new-outcome-pill" id="btnNewOutcome">+ Create New</button>
                     <div class="filter-tabs" id="outcomesFilterTabs">
                         <button class="tab active" data-filter="all">All</button>
                         <button class="tab" data-filter="fun_environment"><span class="btn-line">Fun</span><span class="btn-line">Environment</span></button>
@@ -805,7 +806,9 @@
             </section>
 
             <!-- Accountability & Momentum Section -->
-            <section class="momentum-section">
+            <section class="momentum-section collapsible-section" id="momentumSection">
+                <h2 class="collapsible-header" data-section="momentumSection">&#128200; Stats &amp; Momentum <button class="btn-collapse-section" data-collapse="momentumSection" title="Hide/Show momentum">&#9660;</button></h2>
+                <div class="collapsible-content" id="momentumSectionContent">
                 <div class="momentum-grid">
                     <div class="momentum-card">
                         <h3>&#128170; Momentum Score</h3>
@@ -828,24 +831,29 @@
                         <p class="score-subtitle">Consecutive days</p>
                     </div>
                 </div>
+                </div>
             </section>
 
             <!-- Badges / Trophies Section -->
-            <section class="badges-section">
-                <h2>&#127942; Trophies &amp; Badges</h2>
+            <section class="badges-section collapsible-section" id="badgesSection">
+                <h2 class="collapsible-header" data-section="badgesSection">&#127942; Trophies &amp; Badges <button class="btn-collapse-section" data-collapse="badgesSection" title="Hide/Show badges">&#9660;</button></h2>
+                <div class="collapsible-content" id="badgesSectionContent">
                 <p class="badges-subtitle"><span style="color:#00d2a0">DAILY</span> badges reset each day &bull; <span style="color:#3498db">WEEKLY</span> badges reset Monday &bull; Earn again for XP!</p>
                 <div class="badges-grid" id="badgesGrid">
                     <!-- Rendered by JS -->
                 </div>
+                </div>
             </section>
 
             <!-- Weekly Action Log -->
-            <section class="action-log-section">
-                <h2>7 Days Action Log <button class="btn-export-log" id="btnExportLog" title="Download action log as CSV">&#128190;</button></h2>
+            <section class="action-log-section collapsible-section" id="actionLogSection">
+                <h2 class="collapsible-header" data-section="actionLogSection">7 Days Action Log <button class="btn-export-log" id="btnExportLog" title="Download action log as CSV">&#128190;</button> <button class="btn-collapse-section" data-collapse="actionLogSection" title="Hide/Show action log">&#9660;</button></h2>
+                <div class="collapsible-content" id="actionLogSectionContent">
                 <!-- Power Score bar (2nd instance) -->
                 <div id="weeklyPowerContainer2"></div>
                 <div class="action-log" id="actionLog">
                     <p class="empty-state">Your completed actions will appear here. Start by creating an outcome above!</p>
+                </div>
                 </div>
             </section>
         </main>
@@ -1337,6 +1345,6 @@
     </div>
 
     <script src="firebase-config.js"></script>
-    <script src="app.min.js?v=20260214b"></script>
+    <script src="app.min.js?v=20260214c"></script>
 </body>
 </html>

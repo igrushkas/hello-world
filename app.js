@@ -5285,6 +5285,45 @@
             if (outBtn) { outBtn.textContent = '\u25B6'; outBtn.title = 'Show outcomes'; }
         }
 
+        // Generic collapsible sections (Momentum, Badges, Action Log)
+        document.querySelectorAll('.btn-collapse-section[data-collapse]').forEach(function(btn) {
+            var sectionId = btn.dataset.collapse;
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                var section = document.getElementById(sectionId);
+                if (!section) return;
+                var isCollapsed = section.classList.toggle('collapsed');
+                this.textContent = isCollapsed ? '\u25B6' : '\u25BC';
+                this.title = isCollapsed ? 'Show' : 'Hide';
+                localStorage.setItem('lwp_' + sectionId + '_collapsed', isCollapsed ? '1' : '0');
+            });
+            // Restore collapsed state
+            if (localStorage.getItem('lwp_' + sectionId + '_collapsed') === '1') {
+                var section = document.getElementById(sectionId);
+                if (section) section.classList.add('collapsed');
+                btn.textContent = '\u25B6';
+                btn.title = 'Show';
+            }
+        });
+
+        // Focus Mode — maximize Just This One Thing
+        safeBind('btnFocusMode', 'click', function() {
+            var isFocused = document.body.classList.toggle('focus-mode');
+            this.textContent = isFocused ? '\u2716' : '\u26F6';
+            this.title = isFocused ? 'Exit Focus Mode' : 'Focus Mode — hide everything else';
+        });
+
+        // Create New button — auto-expand outcomes when collapsed
+        safeBind('btnNewOutcome', 'click', function() {
+            var section = document.getElementById('outcomesSection');
+            if (section && section.classList.contains('collapsed')) {
+                section.classList.remove('collapsed');
+                var colBtn = document.getElementById('btnCollapseOutcomes');
+                if (colBtn) { colBtn.textContent = '\u25BC'; colBtn.title = 'Hide outcomes'; }
+                localStorage.setItem('lwp_outcomes_collapsed', '0');
+            }
+        });
+
         // Export/Download Action Log
         safeBind('btnExportLog', 'click', function() {
             try { exportActionLog(); } catch(e) { console.error('export error:', e); }

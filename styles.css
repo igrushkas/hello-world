@@ -1930,9 +1930,19 @@ body.health-mode .focus-title-category {
     background: linear-gradient(135deg, #1a1040, #0f1a30);
     border: 1px solid var(--accent-primary);
     border-radius: var(--radius);
-    padding: 20px;
+    padding: 16px;
     box-shadow: var(--shadow-glow);
-    margin-bottom: 12px;
+    margin-bottom: 8px;
+}
+
+/* Compact buttons inside the action card */
+.next-action-buttons .btn-primary,
+.next-action-buttons .btn-secondary,
+.next-action-buttons .btn-timer-start,
+.next-action-buttons .btn-pick-for-me,
+.next-action-buttons .btn-body-double {
+    padding: 8px 14px;
+    font-size: 0.85rem;
 }
 
 .next-action-top-row {
@@ -1981,20 +1991,21 @@ body.health-mode .focus-title-category {
 }
 
 .next-action-text {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     font-weight: 600;
-    margin-bottom: 8px;
+    margin-bottom: 4px;
 }
 
 .next-action-meta {
     color: var(--text-secondary);
-    font-size: 0.9rem;
-    margin-bottom: 16px;
+    font-size: 0.85rem;
+    margin-bottom: 10px;
 }
 
 .next-action-buttons {
     display: flex;
-    gap: 12px;
+    gap: 8px;
+    flex-wrap: wrap;
 }
 
 .pomodoro-display {
@@ -6145,12 +6156,89 @@ body.business-mode .btn-focus-action:hover {
 
 .outcomes-section.collapsed .outcomes-grid,
 .outcomes-section.collapsed .filter-tabs,
-.outcomes-section.collapsed .btn-add-outcome,
-.outcomes-section.collapsed .btn-new-outcome-pill {
+.outcomes-section.collapsed .btn-add-outcome {
     display: none;
 }
 
 .outcomes-section.collapsed .section-header {
     margin-bottom: 0;
     padding-bottom: 0;
+}
+
+/* Make Create New button smaller */
+.btn-new-outcome-pill {
+    font-size: 0.8rem !important;
+    padding: 6px 14px !important;
+}
+
+/* Generic collapsible sections (Momentum, Badges, Action Log) */
+.collapsible-section .collapsible-header {
+    cursor: default;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.collapsible-section.collapsed .collapsible-content {
+    display: none;
+}
+
+.collapsible-section.collapsed .badges-subtitle {
+    display: none;
+}
+
+/* ==========================================
+   FOCUS MODE — maximize Just This One Thing
+   ========================================== */
+.btn-focus-mode {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 4px 8px;
+    border-radius: var(--radius-sm);
+    transition: var(--transition);
+    margin-left: auto;
+}
+
+.btn-focus-mode:hover {
+    color: var(--accent-primary);
+    border-color: var(--accent-primary);
+    background: rgba(108, 92, 231, 0.1);
+}
+
+body.focus-mode .mode-toggle-container,
+body.focus-mode .focus-section .section-header,
+body.focus-mode .focus-section .daily-progress,
+body.focus-mode .focus-section .combo-display,
+body.focus-mode .focus-section .stats-bar,
+body.focus-mode .focus-section .focus-cat-filters,
+body.focus-mode .sidebar,
+body.focus-mode .motivation-section,
+body.focus-mode .outcomes-section,
+body.focus-mode .momentum-section,
+body.focus-mode .badges-section,
+body.focus-mode .action-log-section {
+    display: none !important;
+}
+
+body.focus-mode .next-action-card {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 40px;
+    font-size: 1.1rem;
+    border: 2px solid var(--accent-primary);
+    box-shadow: 0 0 30px rgba(108, 92, 231, 0.2);
+}
+
+body.focus-mode .next-action-text {
+    font-size: 1.8rem;
+    margin-bottom: 16px;
+}
+
+body.focus-mode .btn-focus-mode {
+    color: var(--accent-orange);
+    border-color: var(--accent-orange);
+    background: rgba(243, 156, 18, 0.1);
 }
