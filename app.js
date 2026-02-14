@@ -2307,6 +2307,7 @@
         source.connect(lowpass);
         lowpass.connect(lfoGain);
         lfoGain.connect(ctx.destination);
+        source.start();
         return { source: source, lfo: lfo, nodes: [lowpass, lfoGain, lfoDepth] };
     }
 
@@ -2354,13 +2355,26 @@
     function playAmbientSound(key) {
         stopAmbientSound();
         if (key === 'none') return;
+        // Audio-file based sounds
+        if (key === 'fireplace' || key === 'coffee') {
+            try {
+                var fileMap = { fireplace: 'audio/fireplace.m4a', coffee: 'audio/coffee-shop.m4a' };
+                var audio = new Audio(fileMap[key]);
+                audio.loop = true;
+                audio.volume = 0.4;
+                currentAmbientSound = audio;
+                audio.play().catch(function(e) { console.warn('Ambient audio play failed:', e); });
+            } catch(e) {
+                console.warn('Could not play ambient sound:', e);
+            }
+            return;
+        }
+        // Web Audio API generated sounds
         try {
             ambientAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
             var result;
             if (key === 'rain') {
                 result = createRainSound(ambientAudioCtx);
-            } else if (key === 'coffee') {
-                result = createCoffeeShopSound(ambientAudioCtx);
             } else if (key === 'lofi') {
                 result = createLofiSound(ambientAudioCtx);
             }
@@ -4700,8 +4714,8 @@
         lastCheckInTime = Date.now();
         updateTaskTimerDisplay();
         document.getElementById('taskTimerDisplay').classList.remove('hidden');
-        document.getElementById('btnStartTaskTimer').style.display = 'none';
-        document.getElementById('btnStopTaskTimer').style.display = '';
+        var _bst1 = document.getElementById('btnStartTaskTimer'); if (_bst1) _bst1.style.display = 'none';
+        var _bstp1 = document.getElementById('btnStopTaskTimer'); if (_bstp1) _bstp1.style.display = '';
 
         taskTimerInterval = setInterval(function() {
             taskTimerSeconds++;
@@ -4737,8 +4751,8 @@
 
         updateTaskTimerDisplay();
         document.getElementById('taskTimerDisplay').classList.remove('hidden');
-        document.getElementById('btnStartTaskTimer').style.display = 'none';
-        document.getElementById('btnStopTaskTimer').style.display = '';
+        var _bst2 = document.getElementById('btnStartTaskTimer'); if (_bst2) _bst2.style.display = 'none';
+        var _bstp2 = document.getElementById('btnStopTaskTimer'); if (_bstp2) _bstp2.style.display = '';
 
         // Start counting up
         taskTimerInterval = setInterval(function() {
@@ -4787,8 +4801,8 @@
 
         taskTimerActive = false;
         document.getElementById('taskTimerDisplay').classList.add('hidden');
-        document.getElementById('btnStartTaskTimer').style.display = '';
-        document.getElementById('btnStopTaskTimer').style.display = 'none';
+        var _bst3 = document.getElementById('btnStartTaskTimer'); if (_bst3) _bst3.style.display = '';
+        var _bstp = document.getElementById('btnStopTaskTimer'); if (_bstp) _bstp.style.display = 'none';
         currentTimerTask = { outcomeId: null, actionId: null };
     }
 

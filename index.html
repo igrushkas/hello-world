@@ -20,7 +20,7 @@
     <meta name="twitter:description" content="Track habits, crush goals, earn XP & badges. Gamified productivity with streaks, combos, and dopamine-fueled progress.">
 
     <title>Habit Magic - Goal Tracker</title>
-    <link rel="stylesheet" href="styles.min.css?v=20260214n">
+    <link rel="stylesheet" href="styles.min.css?v=20260214o">
 
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
@@ -718,7 +718,6 @@
                         <div class="next-action-buttons">
                             <button class="btn-primary" id="btnCompleteNext" style="display:none">&#10003; Done!</button>
                             <button class="btn-hyperfocus" id="btnStartPomodoro" style="display:none" title="15-minute hyperfocus sprint">&#9201; Focus</button>
-                            <button class="btn-timer-start" id="btnStartTaskTimer" style="display:none" title="Track time spent on this task">&#9201; Timer</button>
                             <button class="btn-pick-for-me" id="btnPickForMe" title="Pick a random task for you">&#127919; Pick</button>
                             <button class="btn-body-double" id="btnBodyDoubleStart" title="Focus with a virtual study buddy">&#128101; Buddy</button>
                             <button class="btn-stuck" id="btnStuck" title="Reset your nervous system">&#128260; Reset</button>
@@ -1346,9 +1345,9 @@
             <p class="subtitle" style="text-align:center">You're not alone. Your virtual study buddy is here.</p>
             <div class="body-double-timer" id="bodyDoubleTimerDisplay" style="text-align:center;font-size:3rem;font-weight:700;margin:20px 0;font-family:monospace">25:00</div>
             <div class="body-double-sounds" style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:16px">
-                <button class="bd-sound-btn active" data-sound="none">&#128263; Silent</button>
+                <button class="bd-sound-btn" data-sound="fireplace">&#128293; Fireplace</button>
                 <button class="bd-sound-btn" data-sound="rain">&#127783; Rain</button>
-                <button class="bd-sound-btn" data-sound="coffee">&#9749; Coffee Shop</button>
+                <button class="bd-sound-btn active" data-sound="coffee">&#9749; Coffee Shop</button>
                 <button class="bd-sound-btn" data-sound="lofi">&#127925; Lo-fi</button>
             </div>
             <div class="body-double-buddy" style="text-align:center;padding:16px;background:rgba(108,92,231,0.08);border-radius:12px;margin-bottom:16px">
@@ -1363,6 +1362,6 @@
     </div>
 
     <script src="firebase-config.js"></script>
-    <script src="app.min.js?v=20260214n"></script>
+    <script src="app.min.js?v=20260214o"></script>
 </body>
 </html>
