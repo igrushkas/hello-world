@@ -1943,10 +1943,11 @@ body.health-mode .focus-title-category {
 .next-action-buttons .btn-body-double,
 .next-action-buttons .btn-hyperfocus,
 .next-action-buttons .btn-stuck {
-    padding: 8px 14px;
-    font-size: 0.85rem;
+    padding: 6px 10px;
+    font-size: 0.8rem;
     border-radius: 20px;
     font-weight: 600;
+    white-space: nowrap;
 }
 
 .next-action-top-row {
@@ -2008,8 +2009,9 @@ body.health-mode .focus-title-category {
 
 .next-action-buttons {
     display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
+    gap: 6px;
+    flex-wrap: nowrap;
+    align-items: center;
 }
 
 .pomodoro-display {
@@ -4466,7 +4468,8 @@ body.business-mode .focus-badge {
 
 @media (max-width: 600px) {
     .next-action-buttons {
-        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: center;
     }
 
     .daily-progress {
