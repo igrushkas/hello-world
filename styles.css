@@ -539,9 +539,12 @@ body {
 }
 
 .feature-placeholder {
-    font-size: 0.9rem;
+    font-size: 3rem;
     color: var(--text-muted);
-    opacity: 0.6;
+    opacity: 0.8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .feature-tag {
@@ -563,6 +566,43 @@ body {
     font-size: 0.95rem;
     color: var(--text-secondary);
     line-height: 1.7;
+}
+
+/* Feature Summary Grid */
+.feature-summary {
+    text-align: center;
+    padding: 48px 24px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.feature-summary h2 {
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    margin-bottom: 28px;
+}
+
+.feature-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 28px;
+}
+
+.feature-summary-item {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    padding: 10px 8px;
+    border-radius: 10px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-light);
+    white-space: nowrap;
+}
+
+.feature-summary-cta {
+    font-size: 1.1rem;
+    color: var(--accent-primary);
+    font-weight: 600;
 }
 
 /* Early Adopter Section */
@@ -738,6 +778,14 @@ body.light-mode .landing-footer {
     .landing-nav-actions .beta-badge { display: none; }
     .landing-hero { padding: 50px 16px 40px; }
     .spots-counter-large { font-size: 2.2rem; }
+    .feature-summary-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
+    .feature-summary-item {
+        font-size: 0.72rem;
+        padding: 8px 6px;
+    }
 }
 
 /* Legacy login-card (kept for compatibility) */
