@@ -5833,6 +5833,31 @@
     }
 
     // ==========================================
+    //  SAVE USER PROFILE (email, name, photo)
+    // ==========================================
+    function saveUserProfile(user) {
+        if (!firebaseReady || !user) return;
+        try {
+            var profileData = {
+                email: user.email || '',
+                displayName: user.displayName || '',
+                photoURL: user.photoURL || '',
+                lastLogin: new Date().toISOString()
+            };
+            // Only set createdAt on first login (don't overwrite)
+            db.collection('users').doc(user.uid).get().then(function(doc) {
+                if (!doc.exists || !doc.data().createdAt) {
+                    profileData.createdAt = new Date().toISOString();
+                }
+                db.collection('users').doc(user.uid).set(profileData, { merge: true });
+            }).catch(function(e) {
+                // Fallback: just merge without checking createdAt
+                db.collection('users').doc(user.uid).set(profileData, { merge: true });
+            });
+        } catch(e) { console.error('Save user profile error:', e); }
+    }
+
+    // ==========================================
     //  LAUNCH (Auth-aware)
     // ==========================================
     function onAuthReady(user) {
@@ -5842,6 +5867,9 @@
         activeStorageKey = getStorageKey(user.uid);
         updateUserUI(user);
         showApp();
+
+        // Save user profile (email, name, photo) to Firestore for contact/emailing
+        saveUserProfile(user);
 
         // Load tier from Firestore
         loadUserTier(user.uid);
