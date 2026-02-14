@@ -5883,3 +5883,237 @@ body.business-mode .btn-focus-action:hover {
     from { opacity: 0; }
     to { opacity: 1; }
 }
+
+/* ==========================================
+   STREAK FREEZE INDICATOR
+   ========================================== */
+.streak-freeze-count {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    font-size: 0.7rem;
+    color: #74b9ff;
+    background: rgba(116, 185, 255, 0.1);
+    padding: 1px 5px;
+    border-radius: 8px;
+    margin-left: 4px;
+    font-weight: 600;
+}
+
+/* ==========================================
+   WELCOME BACK / COMPASSIONATE RE-ENTRY
+   ========================================== */
+.welcome-back-modal {
+    max-width: 420px;
+    text-align: center;
+    animation: modalSlideUp 0.4s ease;
+}
+
+@keyframes modalSlideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================
+   BAD DAY MODE
+   ========================================== */
+.bad-day-modal {
+    max-width: 420px;
+    animation: modalSlideUp 0.4s ease;
+}
+
+.bad-day-tasks {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 16px 0;
+}
+
+.bad-day-task {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 16px;
+    background: var(--bg-input);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    transition: var(--transition);
+}
+
+.bad-day-task.completed {
+    background: rgba(0, 210, 160, 0.08);
+    border-color: rgba(0, 210, 160, 0.3);
+    opacity: 0.8;
+}
+
+.bad-day-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.bad-day-task span:nth-child(2) {
+    flex: 1;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+}
+
+.btn-bad-day-done {
+    background: rgba(0, 210, 160, 0.15);
+    border: 1px solid rgba(0, 210, 160, 0.3);
+    color: var(--accent-green);
+    padding: 6px 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.82rem;
+    white-space: nowrap;
+    transition: var(--transition);
+}
+
+.btn-bad-day-done:hover {
+    background: rgba(0, 210, 160, 0.25);
+}
+
+.btn-bad-day-done:disabled {
+    cursor: default;
+    opacity: 0.7;
+}
+
+/* ==========================================
+   BODY DOUBLE TIMER
+   ========================================== */
+.body-double-modal {
+    max-width: 440px;
+    animation: modalSlideUp 0.4s ease;
+}
+
+.btn-body-double {
+    background: rgba(108, 92, 231, 0.12);
+    border: 1px solid rgba(108, 92, 231, 0.3);
+    color: var(--accent-primary);
+    padding: 8px 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.82rem;
+    transition: var(--transition);
+}
+
+.btn-body-double:hover {
+    background: rgba(108, 92, 231, 0.22);
+    border-color: var(--accent-primary);
+}
+
+.bd-sound-btn {
+    background: var(--bg-input);
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    padding: 8px 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.82rem;
+    transition: var(--transition);
+}
+
+.bd-sound-btn:hover {
+    border-color: var(--accent-primary);
+    color: var(--text-primary);
+}
+
+.bd-sound-btn.active {
+    background: rgba(108, 92, 231, 0.15);
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
+    font-weight: 600;
+}
+
+/* ==========================================
+   AUTO-BREAK BIG TASKS NUDGE
+   ========================================== */
+.big-task-nudge {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 10px 14px;
+    margin-top: 8px;
+    background: rgba(243, 156, 18, 0.1);
+    border: 1px solid rgba(243, 156, 18, 0.3);
+    border-radius: var(--radius-sm);
+    font-size: 0.82rem;
+    color: var(--text-primary);
+    animation: fadeIn 0.3s ease;
+    position: relative;
+}
+
+.nudge-icon {
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.nudge-text {
+    flex: 1;
+    line-height: 1.4;
+}
+
+.nudge-dismiss {
+    position: absolute;
+    top: 4px;
+    right: 8px;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 1.1rem;
+    padding: 2px 4px;
+}
+
+.nudge-dismiss:hover {
+    color: var(--text-primary);
+}
+
+/* ==========================================
+   EXPORT/DOWNLOAD LOG BUTTON
+   ========================================== */
+.btn-export-log {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    vertical-align: middle;
+    padding: 2px 6px;
+    border-radius: 6px;
+    color: var(--text-secondary);
+    transition: var(--transition);
+}
+
+.btn-export-log:hover {
+    background: rgba(108, 92, 231, 0.12);
+    color: var(--accent-primary);
+}
+
+/* ==========================================
+   FOUNDING MEMBER FEEDBACK
+   ========================================== */
+.feedback-modal {
+    max-width: 480px;
+    animation: modalSlideUp 0.4s ease;
+}
+
+.feedback-form {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.feedback-form .form-group {
+    margin-bottom: 8px;
+}
+
+.feedback-form textarea {
+    min-height: 50px;
+    resize: vertical;
+}
+
+.feedback-testimonial {
+    animation: fadeIn 0.3s ease;
+}

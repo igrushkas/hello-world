@@ -20,7 +20,7 @@
     <meta name="twitter:description" content="Track habits, crush goals, earn XP & badges. Gamified productivity with streaks, combos, and dopamine-fueled progress.">
 
     <title>Habit Magic - Goal Tracker</title>
-    <link rel="stylesheet" href="styles.min.css?v=20260213">
+    <link rel="stylesheet" href="styles.min.css?v=20260214">
 
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
@@ -719,6 +719,7 @@
                             <button class="btn-secondary" id="btnStartPomodoro" style="display:none" title="Lock into hyperfocus mode for 15 minutes">&#9201; Hyperfocus Sprint (15min)</button>
                             <button class="btn-timer-start" id="btnStartTaskTimer" style="display:none">&#9201; Start Timer</button>
                             <button class="btn-pick-for-me" id="btnPickForMe">&#127919; Pick for me</button>
+                            <button class="btn-body-double" id="btnBodyDoubleStart" title="Focus with a virtual study buddy">&#128101; Body Double</button>
                             <button class="btn-primary btn-create-outcome-next" id="btnCreateOutcomeNext" style="display:none">+ Create New Outcome</button>
                         </div>
                         <div class="pomodoro-display hidden" id="pomodoroDisplay">
@@ -840,7 +841,7 @@
 
             <!-- Weekly Action Log -->
             <section class="action-log-section">
-                <h2>7 Days Action Log</h2>
+                <h2>7 Days Action Log <button class="btn-export-log" id="btnExportLog" title="Download action log as CSV">&#128190;</button></h2>
                 <!-- Power Score bar (2nd instance) -->
                 <div id="weeklyPowerContainer2"></div>
                 <div class="action-log" id="actionLog">
@@ -1219,7 +1220,123 @@
         </div>
     </div>
 
+    <!-- Compassionate Re-Entry Modal -->
+    <div id="welcomeBackOverlay" class="modal-overlay hidden">
+        <div class="modal welcome-back-modal">
+            <button class="modal-close" onclick="document.getElementById('welcomeBackOverlay').classList.add('hidden')">&times;</button>
+            <div style="text-align:center;font-size:3rem;margin-bottom:12px">&#127793;</div>
+            <h2 id="welcomeBackTitle" style="text-align:center">Welcome Back!</h2>
+            <p id="welcomeBackMsg" class="subtitle" style="text-align:center">No judgment. You're here now, and that's what matters.</p>
+            <div id="welcomeBackStreakInfo" style="text-align:center;margin:16px 0;padding:12px;border-radius:12px;background:rgba(108,92,231,0.1)"></div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:16px">
+                <button class="btn-primary" id="btnWelcomeBackStart" onclick="document.getElementById('welcomeBackOverlay').classList.add('hidden')">Let's Go! &#128170;</button>
+                <button class="btn-secondary" id="btnBadDayMode">Having a Rough Day? &#128156;</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bad Day Mode Modal -->
+    <div id="badDayOverlay" class="modal-overlay hidden">
+        <div class="modal bad-day-modal">
+            <button class="modal-close" onclick="document.getElementById('badDayOverlay').classList.add('hidden')">&times;</button>
+            <div style="text-align:center;font-size:3rem;margin-bottom:12px">&#128156;</div>
+            <h2 style="text-align:center">Gentle Mode</h2>
+            <p class="subtitle" style="text-align:center">It's okay. Just do one tiny thing. That's enough to keep your streak alive.</p>
+            <div class="bad-day-tasks" id="badDayTasks">
+                <div class="bad-day-task" data-task="water">
+                    <span class="bad-day-icon">&#128167;</span>
+                    <span>Drink a glass of water</span>
+                    <button class="btn-bad-day-done" onclick="completeBadDayTask(this)">Done &#10003;</button>
+                </div>
+                <div class="bad-day-task" data-task="stretch">
+                    <span class="bad-day-icon">&#129495;</span>
+                    <span>Stand up and stretch for 1 minute</span>
+                    <button class="btn-bad-day-done" onclick="completeBadDayTask(this)">Done &#10003;</button>
+                </div>
+                <div class="bad-day-task" data-task="gratitude">
+                    <span class="bad-day-icon">&#128153;</span>
+                    <span>Write 1 thing you're grateful for</span>
+                    <button class="btn-bad-day-done" onclick="completeBadDayTask(this)">Done &#10003;</button>
+                </div>
+            </div>
+            <p class="bad-day-footer" id="badDayFooter" style="text-align:center;color:var(--text-secondary);font-size:0.85rem;margin-top:16px">Complete any one to keep your streak alive &#128150;</p>
+        </div>
+    </div>
+
+    <!-- Founding Member Feedback Modal -->
+    <div id="feedbackOverlay" class="modal-overlay hidden">
+        <div class="modal feedback-modal">
+            <button class="modal-close" onclick="document.getElementById('feedbackOverlay').classList.add('hidden')">&times;</button>
+            <div style="text-align:center;font-size:2.5rem;margin-bottom:8px">&#128172;</div>
+            <h2 style="text-align:center" id="feedbackTitle">Daily Feedback</h2>
+            <p class="subtitle" style="text-align:center">As a Founding Member, your feedback shapes this app. Takes 30 seconds.</p>
+            <div class="feedback-form">
+                <div class="form-group">
+                    <label class="form-label">&#9989; What worked well today?</label>
+                    <textarea class="input-field textarea" id="feedbackWorked" placeholder="What feature helped you most today?" rows="2"></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">&#10060; What didn't work or felt confusing?</label>
+                    <textarea class="input-field textarea" id="feedbackBroken" placeholder="Any bugs, frustrations, or confusing parts?" rows="2"></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">&#128161; What new feature would you love?</label>
+                    <textarea class="input-field textarea" id="feedbackWish" placeholder="If you could add one thing to this app..." rows="2"></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">&#127775; How happy are you with the app? (1-10)</label>
+                    <div style="display:flex;align-items:center;gap:10px">
+                        <input type="range" id="feedbackRating" min="1" max="10" value="7" style="flex:1">
+                        <span id="feedbackRatingValue" style="font-weight:700;font-size:1.2rem">7</span>
+                    </div>
+                </div>
+                <!-- Testimonial section (only shown when rating >= 8) -->
+                <div class="feedback-testimonial hidden" id="feedbackTestimonialSection">
+                    <div style="text-align:center;padding:12px;background:rgba(0,210,160,0.08);border-radius:12px;margin-bottom:12px">
+                        <span style="font-size:1.5rem">&#128525;</span>
+                        <p style="margin:4px 0 0;font-weight:600;color:var(--accent-green)">You love the app! Would you leave a quick testimonial?</p>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Your testimonial (will be shown on our landing page)</label>
+                        <textarea class="input-field textarea" id="feedbackTestimonial" placeholder="What would you tell a friend about Habit Magic?" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Display name (first name or nickname)</label>
+                        <input type="text" class="input-field" id="feedbackDisplayName" placeholder="e.g., Sarah M.">
+                    </div>
+                </div>
+                <button class="btn-primary btn-large" id="btnSubmitFeedback">Submit Feedback &#128640;</button>
+                <button class="btn-secondary" style="width:100%;margin-top:8px;text-align:center" onclick="document.getElementById('feedbackOverlay').classList.add('hidden')">Maybe Later</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Body Double Timer Modal -->
+    <div id="bodyDoubleOverlay" class="modal-overlay hidden">
+        <div class="modal body-double-modal">
+            <button class="modal-close" id="closeBodyDouble" onclick="stopBodyDouble()">&times;</button>
+            <div style="text-align:center;font-size:2.5rem;margin-bottom:8px">&#128101;</div>
+            <h2 style="text-align:center">Body Double Session</h2>
+            <p class="subtitle" style="text-align:center">You're not alone. Your virtual study buddy is here.</p>
+            <div class="body-double-timer" id="bodyDoubleTimerDisplay" style="text-align:center;font-size:3rem;font-weight:700;margin:20px 0;font-family:monospace">25:00</div>
+            <div class="body-double-sounds" style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:16px">
+                <button class="bd-sound-btn active" data-sound="none">&#128263; Silent</button>
+                <button class="bd-sound-btn" data-sound="rain">&#127783; Rain</button>
+                <button class="bd-sound-btn" data-sound="coffee">&#9749; Coffee Shop</button>
+                <button class="bd-sound-btn" data-sound="lofi">&#127925; Lo-fi</button>
+            </div>
+            <div class="body-double-buddy" style="text-align:center;padding:16px;background:rgba(108,92,231,0.08);border-radius:12px;margin-bottom:16px">
+                <div style="font-size:2rem" id="bdBuddyEmoji">&#129489;&#8205;&#128187;</div>
+                <div style="font-size:0.85rem;color:var(--text-secondary)" id="bdBuddyStatus">Your buddy is working quietly beside you...</div>
+            </div>
+            <div style="display:flex;gap:8px;justify-content:center">
+                <button class="btn-primary" id="btnStartBodyDouble">Start Session &#128640;</button>
+                <button class="btn-secondary hidden" id="btnStopBodyDouble" onclick="stopBodyDouble()">End Session</button>
+            </div>
+        </div>
+    </div>
+
     <script src="firebase-config.js"></script>
-    <script src="app.min.js?v=20260213"></script>
+    <script src="app.min.js?v=20260214"></script>
 </body>
 </html>

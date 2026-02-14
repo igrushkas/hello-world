@@ -1882,21 +1882,653 @@
     }
 
     // ==========================================
-    //  STREAK MANAGEMENT
+    //  STREAK MANAGEMENT + STREAK FREEZE
     // ==========================================
+
+    // Ensure streak freeze data exists
+    function ensureStreakFreezeData() {
+        if (typeof data.streakFreezes === 'undefined') data.streakFreezes = 1; // Start with 1 free freeze
+        if (!data.freezeLog) data.freezeLog = [];
+        if (typeof data.badDayCompleted === 'undefined') data.badDayCompleted = null;
+    }
+
     function updateStreak() {
         var today = new Date().toDateString();
         if (data.lastActiveDate === today) return;
+        ensureStreakFreezeData();
         var yesterday = new Date();
         yesterday.setDate(yesterday.getDate() - 1);
         if (data.lastActiveDate === yesterday.toDateString()) {
             data.streak++;
+            // Award a streak freeze every 7-day streak milestone
+            if (data.streak > 0 && data.streak % 7 === 0) {
+                data.streakFreezes = (data.streakFreezes || 0) + 1;
+                try { showStreakFreezeEarned(); } catch(e) {}
+            }
         } else if (data.lastActiveDate !== today) {
-            data.streak = 1;
+            // Missed days — try to use streak freeze
+            var daysMissed = getDaysBetween(data.lastActiveDate, today);
+            if (daysMissed <= 2 && data.streakFreezes > 0) {
+                // Use a streak freeze to save the streak
+                data.streakFreezes--;
+                data.freezeLog.push({ date: today, daysMissed: daysMissed, streakSaved: data.streak });
+                data.streak++; // Continue as if no break
+                try { showStreakFreezedUsed(daysMissed); } catch(e) {}
+            } else {
+                data.streak = 1; // Reset streak
+            }
         }
         data.lastActiveDate = today;
         if (data.streak > data.bestStreak) data.bestStreak = data.streak;
         saveData();
+    }
+
+    function getDaysBetween(dateStr1, dateStr2) {
+        if (!dateStr1) return 999;
+        var d1 = new Date(dateStr1);
+        var d2 = new Date(dateStr2);
+        var diffMs = Math.abs(d2 - d1);
+        return Math.floor(diffMs / (1000 * 60 * 60 * 24));
+    }
+
+    function showStreakFreezeEarned() {
+        var toast = document.getElementById('challengeToast');
+        var toastText = document.getElementById('challengeToastText');
+        if (toast && toastText) {
+            toastText.textContent = '\u{1F9CA} Streak Freeze earned! You now have ' + data.streakFreezes + ' freeze(s).';
+            toast.classList.remove('hidden');
+            setTimeout(function() { toast.classList.add('hidden'); }, 4000);
+        }
+    }
+
+    function showStreakFreezedUsed(daysMissed) {
+        var toast = document.getElementById('challengeToast');
+        var toastText = document.getElementById('challengeToastText');
+        if (toast && toastText) {
+            toastText.textContent = '\u{1F9CA} Streak Freeze used! Your ' + data.streak + '-day streak was saved. (' + data.streakFreezes + ' freezes left)';
+            toast.classList.remove('hidden');
+            setTimeout(function() { toast.classList.add('hidden'); }, 5000);
+        }
+    }
+
+    // ==========================================
+    //  COMPASSIONATE RE-ENTRY
+    // ==========================================
+    function checkCompassionateReEntry() {
+        if (!data || !data.lastActiveDate) return;
+        var today = new Date().toDateString();
+        if (data.lastActiveDate === today) return; // Active today already
+
+        var daysMissed = getDaysBetween(data.lastActiveDate, today);
+        if (daysMissed < 2) return; // Only 1 day gap — normal
+
+        // Check if we already showed this today
+        var reentryKey = 'lwp_reentry_shown_' + today;
+        if (localStorage.getItem(reentryKey)) return;
+        localStorage.setItem(reentryKey, '1');
+
+        var overlay = document.getElementById('welcomeBackOverlay');
+        var titleEl = document.getElementById('welcomeBackTitle');
+        var msgEl = document.getElementById('welcomeBackMsg');
+        var streakInfoEl = document.getElementById('welcomeBackStreakInfo');
+        if (!overlay || !titleEl || !msgEl) return;
+
+        // Set message based on days away
+        if (daysMissed <= 3) {
+            titleEl.textContent = 'Welcome Back! \u{1F331}';
+            msgEl.textContent = 'You were away for ' + daysMissed + ' days. No judgment \u2014 you\'re here now, and that\'s what matters.';
+        } else if (daysMissed <= 7) {
+            titleEl.textContent = 'Hey, You\'re Back! \u{1F33B}';
+            msgEl.textContent = 'It\'s been ' + daysMissed + ' days. Life happens. The fact that you opened this app shows real strength.';
+        } else if (daysMissed <= 30) {
+            titleEl.textContent = 'Look Who\'s Here! \u{1F31F}';
+            msgEl.textContent = daysMissed + ' days away? That takes courage to come back. Most people don\'t. You just did.';
+        } else {
+            titleEl.textContent = 'Welcome Home! \u{1F3E0}';
+            msgEl.textContent = 'It\'s been a while, but fresh starts are powerful. Every expert was once a beginner again.';
+        }
+
+        // Streak info
+        ensureStreakFreezeData();
+        var streakHtml = '';
+        if (data.streak > 0 && data.streakFreezes > 0 && daysMissed <= 2) {
+            streakHtml = '<div style="font-size:1.2rem;font-weight:600">\u{1F9CA} Your streak was saved by a Streak Freeze!</div>';
+            streakHtml += '<div style="margin-top:4px">Current streak: <strong>' + data.streak + ' days</strong> \u{1F525}</div>';
+            streakHtml += '<div style="font-size:0.85rem;margin-top:4px">Freezes remaining: ' + data.streakFreezes + '</div>';
+        } else if (data.streak > 0) {
+            streakHtml = '<div style="font-size:0.9rem">Your previous streak: <strong>' + data.streak + ' days</strong></div>';
+            streakHtml += '<div style="margin-top:4px;font-weight:600;color:var(--accent-green)">Let\'s start a new one today! \u{1F4AA}</div>';
+        } else {
+            streakHtml = '<div style="font-weight:600;color:var(--accent-green)">Today is Day 1. Let\'s go! \u{1F680}</div>';
+        }
+        if (data.streakFreezes > 0) {
+            streakHtml += '<div style="font-size:0.8rem;margin-top:8px;opacity:0.7">\u{1F9CA} You have ' + data.streakFreezes + ' Streak Freeze(s) to protect future streaks</div>';
+        }
+        if (streakInfoEl) streakInfoEl.innerHTML = streakHtml;
+
+        overlay.classList.remove('hidden');
+    }
+
+    // ==========================================
+    //  BAD DAY MODE
+    // ==========================================
+    var badDayTasksCompleted = 0;
+
+    // Make completeBadDayTask globally accessible (called from onclick in HTML)
+    window.completeBadDayTask = function(btnEl) {
+        var taskEl = btnEl.closest('.bad-day-task');
+        if (!taskEl || taskEl.classList.contains('completed')) return;
+
+        taskEl.classList.add('completed');
+        btnEl.textContent = '\u{2705} Done!';
+        btnEl.disabled = true;
+        badDayTasksCompleted++;
+
+        // Award minimal XP
+        data.totalMomentum = (data.totalMomentum || 0) + 10;
+
+        // Update footer
+        var footer = document.getElementById('badDayFooter');
+        if (footer) {
+            if (badDayTasksCompleted === 1) {
+                footer.textContent = 'Your streak is alive! Keep going or call it a win \u{1F496}';
+            } else if (badDayTasksCompleted === 2) {
+                footer.textContent = 'Two done! You\'re doing amazing on a tough day \u{1F31F}';
+            }
+        }
+
+        // Mark today as active (preserves streak) after first task
+        if (badDayTasksCompleted === 1) {
+            data.badDayCompleted = new Date().toDateString();
+            updateStreak();
+        }
+
+        // All 3 done — celebration and close
+        if (badDayTasksCompleted >= 3) {
+            data.totalMomentum += 20; // Bonus for finishing all 3
+            saveData();
+
+            // Log bad day tasks
+            var today = new Date();
+            data.log.push({
+                text: 'Bad Day Mode: Self-care tasks completed',
+                outcome: 'Self Care',
+                category: getActiveCategories()[0].id,
+                time: today.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }),
+                date: today.toDateString(),
+                points: 50
+            });
+            saveData();
+
+            if (footer) {
+                footer.innerHTML = '<span style="font-size:1.5rem">\u{1F389}</span> All 3 done! You showed up on a hard day. That\'s the real win.';
+            }
+
+            // Close after short delay with celebration
+            setTimeout(function() {
+                document.getElementById('badDayOverlay').classList.add('hidden');
+                showPraise();
+                playCompletionAudio();
+                render();
+                // Reset bad day tasks for next time
+                resetBadDayTasks();
+            }, 2500);
+        } else {
+            saveData();
+        }
+    };
+
+    function resetBadDayTasks() {
+        badDayTasksCompleted = 0;
+        var tasks = document.querySelectorAll('.bad-day-task');
+        tasks.forEach(function(t) {
+            t.classList.remove('completed');
+            var btn = t.querySelector('.btn-bad-day-done');
+            if (btn) { btn.textContent = 'Done \u{2713}'; btn.disabled = false; }
+        });
+        var footer = document.getElementById('badDayFooter');
+        if (footer) footer.textContent = 'Complete any one to keep your streak alive \u{1F496}';
+    }
+
+    // Make stopBodyDouble globally accessible (called from onclick in HTML)
+    window.stopBodyDouble = function() {
+        if (bodyDoubleInterval) { clearInterval(bodyDoubleInterval); bodyDoubleInterval = null; }
+        if (bodyDoubleBuddyInterval) { clearInterval(bodyDoubleBuddyInterval); bodyDoubleBuddyInterval = null; }
+        stopAmbientSound();
+        var overlay = document.getElementById('bodyDoubleOverlay');
+        if (overlay) overlay.classList.add('hidden');
+        var startBtn = document.getElementById('btnStartBodyDouble');
+        var stopBtn = document.getElementById('btnStopBodyDouble');
+        if (startBtn) startBtn.classList.remove('hidden');
+        if (stopBtn) stopBtn.classList.add('hidden');
+        var timerDisplay = document.getElementById('bodyDoubleTimerDisplay');
+        if (timerDisplay) timerDisplay.textContent = '25:00';
+    };
+
+    // ==========================================
+    //  BODY DOUBLE TIMER
+    // ==========================================
+    var bodyDoubleInterval = null;
+    var bodyDoubleBuddyInterval = null;
+    var bodyDoubleSeconds = 25 * 60;
+    var currentAmbientSound = null;
+
+    var BUDDY_MESSAGES = [
+        { emoji: '\u{1F9D1}\u200D\u{1F4BB}', msg: 'Your buddy is working quietly beside you...' },
+        { emoji: '\u{1F4AA}', msg: 'You\'re both crushing it! Keep going.' },
+        { emoji: '\u{2615}', msg: 'Focus is a superpower. You have it right now.' },
+        { emoji: '\u{1F4DA}', msg: 'Deep work mode activated. Your buddy is impressed.' },
+        { emoji: '\u{1F680}', msg: 'Almost there! Your buddy is cheering you on.' },
+        { emoji: '\u{1F31F}', msg: 'You showed up today. That\'s already a win.' },
+        { emoji: '\u{1F9D8}', msg: 'Breathe. Focus. You\'ve got this.' },
+        { emoji: '\u{1F389}', msg: 'Your buddy just completed a task too! You\'re in sync.' }
+    ];
+
+    // Ambient sound URLs (free creative commons)
+    var AMBIENT_SOUNDS = {
+        none: null,
+        rain: 'https://cdn.pixabay.com/audio/2022/10/30/audio_f6e8e4e3f1.mp3',
+        coffee: 'https://cdn.pixabay.com/audio/2024/11/04/audio_59a6e8d8b2.mp3',
+        lofi: 'https://cdn.pixabay.com/audio/2023/07/19/audio_e552aba554.mp3'
+    };
+
+    function startBodyDouble() {
+        bodyDoubleSeconds = 25 * 60;
+        var timerDisplay = document.getElementById('bodyDoubleTimerDisplay');
+        var startBtn = document.getElementById('btnStartBodyDouble');
+        var stopBtn = document.getElementById('btnStopBodyDouble');
+        if (startBtn) startBtn.classList.add('hidden');
+        if (stopBtn) stopBtn.classList.remove('hidden');
+
+        // Start timer
+        bodyDoubleInterval = setInterval(function() {
+            bodyDoubleSeconds--;
+            if (bodyDoubleSeconds <= 0) {
+                clearInterval(bodyDoubleInterval);
+                bodyDoubleInterval = null;
+                if (timerDisplay) timerDisplay.textContent = '00:00';
+                bodyDoubleSessionComplete();
+                return;
+            }
+            var m = Math.floor(bodyDoubleSeconds / 60);
+            var s = bodyDoubleSeconds % 60;
+            if (timerDisplay) timerDisplay.textContent = (m < 10 ? '0' + m : m) + ':' + (s < 10 ? '0' + s : s);
+        }, 1000);
+
+        // Buddy message rotation every 5 minutes
+        updateBuddyMessage();
+        bodyDoubleBuddyInterval = setInterval(updateBuddyMessage, 5 * 60 * 1000);
+
+        // Start ambient sound based on selected button
+        var activeBtn = document.querySelector('.bd-sound-btn.active');
+        var soundKey = activeBtn ? activeBtn.dataset.sound : 'none';
+        playAmbientSound(soundKey);
+    }
+
+    function updateBuddyMessage() {
+        var msg = BUDDY_MESSAGES[Math.floor(Math.random() * BUDDY_MESSAGES.length)];
+        var emojiEl = document.getElementById('bdBuddyEmoji');
+        var statusEl = document.getElementById('bdBuddyStatus');
+        if (emojiEl) emojiEl.textContent = msg.emoji;
+        if (statusEl) statusEl.textContent = msg.msg;
+    }
+
+    function playAmbientSound(key) {
+        stopAmbientSound();
+        if (key === 'none' || !AMBIENT_SOUNDS[key]) return;
+        try {
+            currentAmbientSound = new Audio(AMBIENT_SOUNDS[key]);
+            currentAmbientSound.loop = true;
+            currentAmbientSound.volume = 0.3;
+            currentAmbientSound.play().catch(function() {});
+        } catch(e) {
+            console.warn('Could not play ambient sound:', e);
+        }
+    }
+
+    function stopAmbientSound() {
+        if (currentAmbientSound) {
+            try { currentAmbientSound.pause(); currentAmbientSound.currentTime = 0; } catch(e) {}
+            currentAmbientSound = null;
+        }
+    }
+
+    function bodyDoubleSessionComplete() {
+        if (bodyDoubleBuddyInterval) { clearInterval(bodyDoubleBuddyInterval); bodyDoubleBuddyInterval = null; }
+        stopAmbientSound();
+
+        var emojiEl = document.getElementById('bdBuddyEmoji');
+        var statusEl = document.getElementById('bdBuddyStatus');
+        if (emojiEl) emojiEl.textContent = '\u{1F389}';
+        if (statusEl) statusEl.textContent = 'Session complete! You both crushed it!';
+
+        // Award bonus XP for completing a full body double session
+        data.totalMomentum = (data.totalMomentum || 0) + 25;
+        saveData();
+
+        playCompletionAudio();
+
+        // Auto-close after 3 seconds
+        setTimeout(function() {
+            window.stopBodyDouble();
+            render();
+        }, 3000);
+    }
+
+    // ==========================================
+    //  FOUNDING MEMBER FEEDBACK SYSTEM
+    // ==========================================
+    function checkFeedbackTrigger() {
+        // Only for logged-in users
+        if (!currentUser || isOfflineMode) return;
+
+        var today = new Date().toDateString();
+        var feedbackKey = 'lwp_feedback_' + today;
+        if (localStorage.getItem(feedbackKey)) return; // Already shown/submitted today
+
+        // Only trigger after at least 3 actions today
+        var todayActions = (data.log || []).filter(function(e) { return e.date === today; }).length;
+        if (todayActions < 3) return;
+
+        // Random chance (30%) to not annoy user every day
+        if (Math.random() > 0.3) {
+            localStorage.setItem(feedbackKey, 'skipped');
+            return;
+        }
+
+        // Show feedback with delay to not interrupt workflow
+        setTimeout(function() {
+            showFeedbackModal();
+        }, 3000);
+    }
+
+    function showFeedbackModal() {
+        var today = new Date().toDateString();
+        var feedbackKey = 'lwp_feedback_' + today;
+        localStorage.setItem(feedbackKey, 'shown');
+
+        var overlay = document.getElementById('feedbackOverlay');
+        if (!overlay) return;
+
+        // Reset form
+        var worked = document.getElementById('feedbackWorked');
+        var broken = document.getElementById('feedbackBroken');
+        var wish = document.getElementById('feedbackWish');
+        var rating = document.getElementById('feedbackRating');
+        var ratingValue = document.getElementById('feedbackRatingValue');
+        var testimonialSection = document.getElementById('feedbackTestimonialSection');
+
+        if (worked) worked.value = '';
+        if (broken) broken.value = '';
+        if (wish) wish.value = '';
+        if (rating) rating.value = '7';
+        if (ratingValue) ratingValue.textContent = '7';
+        if (testimonialSection) testimonialSection.classList.add('hidden');
+
+        // Dynamic title based on how long they've been using
+        var daysSinceStart = data.log && data.log.length > 0 ? getDaysBetween(data.log[0].date, today) : 0;
+        var titleEl = document.getElementById('feedbackTitle');
+        if (titleEl) {
+            if (daysSinceStart <= 3) titleEl.textContent = 'First Impressions \u{1F31F}';
+            else if (daysSinceStart <= 7) titleEl.textContent = 'Week 1 Check-In \u{1F4AC}';
+            else if (daysSinceStart <= 14) titleEl.textContent = 'How\'s It Going? \u{1F914}';
+            else titleEl.textContent = 'Daily Feedback \u{1F4AC}';
+        }
+
+        overlay.classList.remove('hidden');
+    }
+
+    function submitFeedback() {
+        var worked = (document.getElementById('feedbackWorked') || {}).value || '';
+        var broken = (document.getElementById('feedbackBroken') || {}).value || '';
+        var wish = (document.getElementById('feedbackWish') || {}).value || '';
+        var rating = parseInt((document.getElementById('feedbackRating') || {}).value) || 7;
+        var testimonial = (document.getElementById('feedbackTestimonial') || {}).value || '';
+        var displayName = (document.getElementById('feedbackDisplayName') || {}).value || '';
+
+        // Must have at least one field filled
+        if (!worked && !broken && !wish) {
+            alert('Please fill in at least one feedback field!');
+            return;
+        }
+
+        var feedbackData = {
+            uid: currentUser ? currentUser.uid : 'anonymous',
+            email: currentUser ? currentUser.email : '',
+            date: new Date().toISOString(),
+            worked: worked,
+            broken: broken,
+            wish: wish,
+            rating: rating,
+            streak: data.streak || 0,
+            totalActions: data.log ? data.log.length : 0,
+            mode: currentMode
+        };
+
+        // Add testimonial if provided
+        if (testimonial && rating >= 8) {
+            feedbackData.testimonial = testimonial;
+            feedbackData.displayName = displayName || 'Anonymous';
+        }
+
+        // Save to Firestore
+        if (firebaseReady) {
+            try {
+                db.collection('feedback').add(feedbackData).then(function() {
+                    console.log('Feedback saved to Firestore');
+                }).catch(function(e) {
+                    console.error('Feedback save error:', e);
+                });
+
+                // Save testimonial separately for easy access
+                if (feedbackData.testimonial) {
+                    db.collection('testimonials').add({
+                        text: feedbackData.testimonial,
+                        displayName: feedbackData.displayName,
+                        rating: rating,
+                        date: new Date().toISOString(),
+                        uid: currentUser.uid
+                    }).catch(function(e) { console.error('Testimonial save error:', e); });
+                }
+            } catch(e) { console.error('Feedback Firestore error:', e); }
+        }
+
+        // Also save locally
+        if (!data.feedbackHistory) data.feedbackHistory = [];
+        data.feedbackHistory.push(feedbackData);
+        saveData();
+
+        // Mark as submitted today
+        localStorage.setItem('lwp_feedback_' + new Date().toDateString(), 'submitted');
+
+        // Close and show thank you
+        document.getElementById('feedbackOverlay').classList.add('hidden');
+        var toast = document.getElementById('challengeToast');
+        var toastText = document.getElementById('challengeToastText');
+        if (toast && toastText) {
+            toastText.textContent = '\u{2764}\u{FE0F} Thank you for your feedback! You\'re helping shape Habit Magic.';
+            toast.classList.remove('hidden');
+            setTimeout(function() { toast.classList.add('hidden'); }, 5000);
+        }
+    }
+
+    // ==========================================
+    //  OFFLINE-TO-ACCOUNT DATA MIGRATION
+    // ==========================================
+    function checkOfflineDataMigration(uid) {
+        var offlineRaw = localStorage.getItem(OFFLINE_STORAGE_KEY);
+        if (!offlineRaw) return;
+        var offlineData;
+        try { offlineData = JSON.parse(offlineRaw); } catch(e) { return; }
+        if (!offlineData || !offlineData.outcomes || offlineData.outcomes.length === 0) return;
+
+        // Check if already migrated
+        var migrationKey = 'lwp_offline_migrated_' + uid;
+        if (localStorage.getItem(migrationKey)) return;
+
+        // Count what we'd migrate
+        var outcomeCount = offlineData.outcomes.length;
+        var actionCount = 0;
+        offlineData.outcomes.forEach(function(o) { actionCount += (o.actions ? o.actions.length : 0); });
+        var logCount = offlineData.log ? offlineData.log.length : 0;
+
+        // Show migration prompt
+        var msg = 'Found ' + outcomeCount + ' outcome(s) and ' + logCount + ' log entries from offline/demo mode. Merge into your account?';
+        if (confirm('\u{1F4E6} ' + msg)) {
+            // Merge outcomes (skip duplicates by result name)
+            var existingNames = {};
+            data.outcomes.forEach(function(o) { existingNames[o.result.toLowerCase()] = true; });
+            offlineData.outcomes.forEach(function(o) {
+                if (!existingNames[o.result.toLowerCase()]) {
+                    data.outcomes.push(o);
+                }
+            });
+
+            // Merge log entries (add all, no dedup)
+            if (offlineData.log) {
+                offlineData.log.forEach(function(entry) {
+                    data.log.push(entry);
+                });
+            }
+
+            // Merge momentum
+            data.totalMomentum = (data.totalMomentum || 0) + (offlineData.totalMomentum || 0);
+
+            // Merge streak if offline had a better one
+            if ((offlineData.bestStreak || 0) > (data.bestStreak || 0)) {
+                data.bestStreak = offlineData.bestStreak;
+            }
+
+            // Merge badges
+            if (offlineData.badges && offlineData.badges.length > 0) {
+                var existingBadges = {};
+                (data.badges || []).forEach(function(b) { existingBadges[b.id || b] = true; });
+                offlineData.badges.forEach(function(b) {
+                    if (!existingBadges[b.id || b]) data.badges.push(b);
+                });
+            }
+
+            saveData();
+            localStorage.setItem(migrationKey, '1');
+
+            // Show success toast
+            var toast = document.getElementById('challengeToast');
+            var toastText = document.getElementById('challengeToastText');
+            if (toast && toastText) {
+                toastText.textContent = '\u{2705} Offline data merged! ' + outcomeCount + ' outcomes imported.';
+                toast.classList.remove('hidden');
+                setTimeout(function() { toast.classList.add('hidden'); }, 5000);
+            }
+
+            render();
+        } else {
+            // User declined — mark so we don't ask again
+            localStorage.setItem(migrationKey, 'declined');
+        }
+    }
+
+    // ==========================================
+    //  DOWNLOAD/EXPORT ACTION LOG
+    // ==========================================
+    function exportActionLog() {
+        if (!data || !data.log || data.log.length === 0) {
+            alert('No actions to export yet!');
+            return;
+        }
+        // Get last 30 days of log entries
+        var thirtyDaysAgo = new Date();
+        thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+        var entries = data.log.filter(function(e) {
+            var d = new Date(e.date);
+            return d >= thirtyDaysAgo;
+        });
+        if (entries.length === 0) entries = data.log; // fallback: all entries
+
+        // Build CSV
+        var csv = 'Date,Time,Action,Outcome,Category,Points,Minutes\n';
+        entries.forEach(function(e) {
+            var row = [
+                '"' + (e.date || '') + '"',
+                '"' + (e.time || '') + '"',
+                '"' + (e.text || '').replace(/"/g, '""') + '"',
+                '"' + (e.outcome || '').replace(/"/g, '""') + '"',
+                '"' + (e.category || '') + '"',
+                e.points || 0,
+                e.actualMinutes || ''
+            ];
+            csv += row.join(',') + '\n';
+        });
+
+        var blob = new Blob([csv], { type: 'text/csv' });
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = 'habit-magic-log-' + new Date().toISOString().split('T')[0] + '.csv';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    }
+
+    // ==========================================
+    //  AUTO-BREAK BIG TASKS NUDGE
+    // ==========================================
+    var BIG_TASK_KEYWORDS = ['build', 'create', 'organize', 'plan', 'redesign', 'overhaul', 'launch',
+        'implement', 'develop', 'set up', 'setup', 'restructure', 'revamp', 'redo', 'fix everything',
+        'clean the whole', 'entire', 'complete', 'finish all', 'do all'];
+
+    function checkBigTaskNudge(inputEl) {
+        var text = (inputEl.value || '').trim().toLowerCase();
+        if (!text || text.length < 15) return; // Too short to be a big task
+
+        // Remove any existing nudge
+        var existingNudge = inputEl.parentElement.querySelector('.big-task-nudge');
+        if (existingNudge) existingNudge.remove();
+
+        var isBig = text.length > 40 || BIG_TASK_KEYWORDS.some(function(kw) { return text.includes(kw); });
+        if (!isBig) return;
+
+        var nudge = document.createElement('div');
+        nudge.className = 'big-task-nudge';
+        nudge.innerHTML = '<span class="nudge-icon">\u{1F9E0}</span> ' +
+            '<span class="nudge-text">This sounds like a big one! Break it into 2\u20133 smaller bites? ' +
+            'Your brain will thank you. <strong>Tasks under 20 min each work best.</strong></span>' +
+            '<button class="nudge-dismiss" onclick="this.parentElement.remove()">\u00D7</button>';
+        inputEl.parentElement.appendChild(nudge);
+
+        // Auto-dismiss after 15 seconds
+        setTimeout(function() {
+            if (nudge.parentElement) nudge.remove();
+        }, 15000);
+    }
+
+    // Attach big task detection to action input fields via event delegation
+    function initBigTaskNudge() {
+        document.addEventListener('blur', function(e) {
+            if (e.target && e.target.matches('#actionsList input[type="text"], #addActionText, #editActionText')) {
+                try { checkBigTaskNudge(e.target); } catch(err) { console.warn('big task nudge error:', err); }
+            }
+        }, true); // use capture phase for blur
+    }
+
+    // ==========================================
+    //  STREAK FREEZE INDICATOR
+    // ==========================================
+    function renderStreakFreezeIndicator() {
+        ensureStreakFreezeData();
+        var streakBar = document.querySelector('.streak-bar');
+        if (!streakBar) return;
+        // Remove existing freeze indicator
+        var existing = streakBar.querySelector('.streak-freeze-count');
+        if (existing) existing.remove();
+        // Add freeze count if > 0
+        if (data.streakFreezes > 0) {
+            var freezeEl = document.createElement('span');
+            freezeEl.className = 'streak-freeze-count';
+            freezeEl.title = data.streakFreezes + ' Streak Freeze(s) available';
+            freezeEl.textContent = '\u{1F9CA}' + data.streakFreezes;
+            streakBar.appendChild(freezeEl);
+        }
     }
 
     // ==========================================
@@ -1960,6 +2592,7 @@
         try { renderDailyChallenges(); } catch(e) {}
         try { renderBadgesGrid(); } catch(e) {}
         try { renderWeeklyPowerScore(); } catch(e) {}
+        try { renderStreakFreezeIndicator(); } catch(e) {}
         document.getElementById('streakCount').textContent = data.streak;
         document.getElementById('todayDate').textContent = new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
     }
@@ -3756,6 +4389,7 @@
 
         // Check review/feedback triggers
         try { checkReviewTrigger(); } catch(e) {}
+        try { checkFeedbackTrigger(); } catch(e) {}
 
         // Track session task count for extended break
         data.sessionTaskCount++;
@@ -4476,6 +5110,40 @@
         try { renderMotivationQuote(); } catch(e) { console.error('quote error:', e); }
         try { initOutcomeDragDrop(); } catch(e) { console.error('outcome dnd error:', e); }
 
+        // Compassionate Re-Entry — check if user has been away
+        try { checkCompassionateReEntry(); } catch(e) { console.error('reentry check error:', e); }
+
+        // Render streak freeze count in streak bar
+        try { renderStreakFreezeIndicator(); } catch(e) { console.error('streak freeze render error:', e); }
+
+        // Auto-Break Big Tasks Nudge
+        try { initBigTaskNudge(); } catch(e) { console.error('big task nudge init error:', e); }
+
+        // Export/Download Action Log
+        safeBind('btnExportLog', 'click', function() {
+            try { exportActionLog(); } catch(e) { console.error('export error:', e); }
+        });
+
+        // Feedback System — rating slider shows/hides testimonial section
+        var feedbackRating = document.getElementById('feedbackRating');
+        var feedbackRatingValue = document.getElementById('feedbackRatingValue');
+        if (feedbackRating && feedbackRatingValue) {
+            feedbackRating.addEventListener('input', function() {
+                feedbackRatingValue.textContent = this.value;
+                var testimonialSection = document.getElementById('feedbackTestimonialSection');
+                if (testimonialSection) {
+                    if (parseInt(this.value) >= 8) {
+                        testimonialSection.classList.remove('hidden');
+                    } else {
+                        testimonialSection.classList.add('hidden');
+                    }
+                }
+            });
+        }
+        safeBind('btnSubmitFeedback', 'click', function() {
+            try { submitFeedback(); } catch(e) { console.error('feedback submit error:', e); }
+        });
+
         // Auto-show Power Priming Spark up to 3 times a day (every ~3 hours, before 6 PM only)
         try {
             var now = Date.now();
@@ -5190,6 +5858,9 @@
                 saveToFirestore();
             }
 
+            // Check for offline/demo data migration
+            try { checkOfflineDataMigration(user.uid); } catch(e) { console.error('offline migration error:', e); }
+
             init();
             listenToFirestore();
             updateUpgradeButtonVisibility();
@@ -5517,6 +6188,33 @@
                 document.getElementById('helpOverlay').classList.remove('hidden');
             });
         }
+
+        // Bad Day Mode button (from Welcome Back overlay)
+        safeBind('btnBadDayMode', 'click', function() {
+            document.getElementById('welcomeBackOverlay').classList.add('hidden');
+            resetBadDayTasks();
+            document.getElementById('badDayOverlay').classList.remove('hidden');
+        });
+
+        // Body Double button
+        safeBind('btnBodyDoubleStart', 'click', function() {
+            document.getElementById('bodyDoubleOverlay').classList.remove('hidden');
+        });
+        safeBind('btnStartBodyDouble', 'click', function() {
+            startBodyDouble();
+        });
+
+        // Body Double sound selection buttons
+        document.querySelectorAll('.bd-sound-btn').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.bd-sound-btn').forEach(function(b) { b.classList.remove('active'); });
+                this.classList.add('active');
+                // If session is running, switch sound live
+                if (bodyDoubleInterval) {
+                    playAmbientSound(this.dataset.sound);
+                }
+            });
+        });
 
         // Theme toggle (light/dark)
         initTheme();
