@@ -3180,7 +3180,7 @@ body.finances-mode.light-mode .praise-banner {
 }
 
 .outcome-card.completed {
-    opacity: 0.6;
+    opacity: 0.85;
     border-color: var(--accent-green);
 }
 
@@ -3304,7 +3304,7 @@ body.finances-mode.light-mode .praise-banner {
 }
 
 .completed-actions-group li {
-    opacity: 0.6;
+    opacity: 0.85;
 }
 
 /* Drag and drop styles */
@@ -3358,7 +3358,7 @@ body.finances-mode.light-mode .praise-banner {
 
 .action-text.done {
     text-decoration: line-through;
-    color: var(--text-muted);
+    color: var(--text-secondary);
 }
 
 /* Category count badge on actions */
@@ -4572,21 +4572,27 @@ body.business-mode .focus-badge {
         font-size: 1rem;
     }
 
+    /* Mobile: hide locked badges — show only unlocked to fill row neatly */
+    .badge-item.locked {
+        display: none;
+    }
+
     /* Mobile: show only first word in Today's Power Focus categories */
     .focus-cat-btn .btn-line:last-child {
         display: none;
     }
 
-    /* Mobile: keep power stats on one line — hide "to beat last wk" */
-    .pwr-stat-chase,
-    .pwr-stat-beat {
+    /* Mobile: show only "X actions" + "to beat last wk" on one line */
+    .pwr-stat-cats,
+    .pwr-stat-streak,
+    .pwr-stat-combo {
         display: none;
     }
 }
 
 @media (max-width: 480px) {
     .momentum-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
     }
 
     .logo-text {
