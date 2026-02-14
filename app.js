@@ -178,12 +178,13 @@
         return name;
     }
 
-    function getTodayFocusLabel() {
+    function getTodayFocusLabel(useHtml) {
         var focusCats = getTodayFocusCategories();
         var allCats = getActiveCategories();
+        var fn = useHtml ? catDisplayNameHtml : catDisplayName;
         var label = focusCats.map(function(id) {
             var cat = allCats.find(function(c) { return c.id === id; });
-            return cat ? catDisplayName(cat.name) : id;
+            return cat ? fn(cat.name) : id;
         }).join(', ');
         if (isFreeDay()) {
             return label;
@@ -208,12 +209,13 @@
         return resolveFocusCategories(raw);
     }
 
-    function getTomorrowFocusLabel() {
+    function getTomorrowFocusLabel(useHtml) {
         var focusCats = getTomorrowFocusCategories();
         var allCats = CATEGORIES.concat(BUSINESS_CATEGORIES).concat(HEALTH_CATEGORIES).concat(FINANCES_CATEGORIES);
+        var fn = useHtml ? catDisplayNameHtml : catDisplayName;
         return focusCats.map(function(id) {
             var cat = allCats.find(function(c) { return c.id === id; });
-            return cat ? catDisplayName(cat.name) : id;
+            return cat ? fn(cat.name) : id;
         }).join(', ');
     }
 
@@ -2846,9 +2848,9 @@
     function renderFocusBadge() {
         var badge = document.getElementById('focusBadge');
         if (!badge) return;
-        var label = getTodayFocusLabel();
+        var label = getTodayFocusLabel(true);
         if (label) {
-            badge.textContent = label;
+            badge.innerHTML = label;
             badge.style.display = '';
         } else {
             badge.style.display = 'none';
@@ -3179,7 +3181,7 @@
         if (pickedTask) {
             taskEl.textContent = pickedTask.text;
             var cat = CATEGORIES.concat(BUSINESS_CATEGORIES).concat(HEALTH_CATEGORIES).concat(FINANCES_CATEGORIES).find(function(c) { return c.id === pickedTask.category; });
-            var catName = cat ? catDisplayName(cat.name) : pickedTask.category;
+            var catName = cat ? catDisplayNameHtml(cat.name) : pickedTask.category;
             var estStr = pickedTask.estMinutes ? pickedTask.estMinutes + ' min' : 'No estimate';
 
             // Check values alignment
@@ -3263,7 +3265,7 @@
             var emoji = c.emoji ? c.emoji + ' ' : '';
             return '<label class="cat-checkbox-label" style="--cat-color:' + c.color + '">' +
                 '<input type="checkbox" class="cat-checkbox" value="' + c.id + '"' + checked + '>' +
-                '<span class="cat-checkbox-text">' + emoji + catDisplayName(c.name) + '</span>' +
+                '<span class="cat-checkbox-text">' + emoji + catDisplayNameHtml(c.name) + '</span>' +
                 '</label>';
         }).join('');
     }
@@ -3443,7 +3445,7 @@
             var cat = activeCats.find(function(c) { return c.id === outcome.category; });
             if (!cat) cat = CATEGORIES.concat(BUSINESS_CATEGORIES).concat(HEALTH_CATEGORIES).concat(FINANCES_CATEGORIES).find(function(c) { return c.id === outcome.category; });
             var catColor = cat ? cat.color : '#6c5ce7';
-            var catName = cat ? catDisplayName(cat.name) : outcome.category;
+            var catName = cat ? catDisplayNameHtml(cat.name) : outcome.category;
             card.style.borderLeftColor = catColor;
             card.style.background = 'linear-gradient(135deg, ' + catColor + '08, ' + catColor + '04, transparent)';
             var sortedActions = getSortedActions(outcome.actions, outcome);
@@ -3748,9 +3750,9 @@
         var filterLabel = '(all outcomes)';
         if (currentFilter !== 'all') {
             var filterCat = getActiveCategories().find(function(c) { return c.id === currentFilter; });
-            if (filterCat) filterLabel = '(' + catDisplayName(filterCat.name) + ')';
+            if (filterCat) filterLabel = '(' + catDisplayNameHtml(filterCat.name) + ')';
         }
-        document.getElementById('dailyProgressText').textContent = done + ' of ' + total + ' actions completed today ' + filterLabel;
+        document.getElementById('dailyProgressText').innerHTML = done + ' of ' + total + ' actions completed today ' + filterLabel;
     }
 
     // ==========================================
@@ -3887,7 +3889,7 @@
         legend.innerHTML = scores.map(function(s) {
             return '<div class="wheel-legend-item">' +
                 '<span class="wheel-legend-dot" style="background:' + s.color + '"></span>' +
-                '<span>' + catDisplayName(s.name) + '</span>' +
+                '<span>' + catDisplayNameHtml(s.name) + '</span>' +
                 '<span class="wheel-legend-value">' + s.score + '</span>' +
                 '</div>';
         }).join('');
@@ -4110,7 +4112,7 @@
             var trendColor = s.rawPoints > 3 ? '#00d2a0' : s.rawPoints > 1 ? '#f39c12' : '#e74c3c';
             return '<div class="business-legend-item">' +
                 '<span class="business-legend-emoji">' + s.emoji + '</span>' +
-                '<span class="business-legend-name">' + catDisplayName(s.name) + '</span>' +
+                '<span class="business-legend-name">' + catDisplayNameHtml(s.name) + '</span>' +
                 '<span class="business-legend-bar"><span class="business-legend-bar-fill" style="width:' + (s.score * 10) + '%;background:' + s.color + '"></span></span>' +
                 '<span class="business-legend-score">' + s.score + '/10</span>' +
                 '<span class="business-legend-trend" style="color:' + trendColor + '">' + trend + '</span>' +
@@ -5140,13 +5142,13 @@
 
     function populateEveningSeed() {
         var tomorrowCats = getTomorrowFocusCategories();
-        var tomorrowLabel = getTomorrowFocusLabel();
+        var tomorrowLabel = getTomorrowFocusLabel(true);
         var dayName = getTomorrowDayName();
         var allCats = CATEGORIES.concat(BUSINESS_CATEGORIES).concat(HEALTH_CATEGORIES).concat(FINANCES_CATEGORIES);
 
         // Set title and hint
         document.getElementById('seedTomorrowTitle').innerHTML = '&#127775; Tomorrow\'s Focus: ' + tomorrowLabel + ' (' + dayName + ')';
-        document.getElementById('seedTomorrowHint').textContent = 'Here\'s what\'s lined up for ' + tomorrowLabel + ' tomorrow:';
+        document.getElementById('seedTomorrowHint').innerHTML = 'Here\'s what\'s lined up for ' + tomorrowLabel + ' tomorrow:';
 
         // Find outcomes and pending actions for tomorrow's category
         var preview = document.getElementById('seedTomorrowPreview');
