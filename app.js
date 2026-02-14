@@ -5984,16 +5984,33 @@
                 desc: 'Full song dance party — Brain Like A Pinball!',
                 run: function(content) {
                     content.innerHTML = '<h3>\uD83C\uDFB5 Brain Like A Pinball \uD83E\uDE69</h3>' +
-                        '<p style="color:var(--text-secondary);margin-bottom:12px">Dance for the whole song! Be as silly as possible!</p>' +
                         '<div class="stuck-dance-area" id="danceEmoji">\uD83D\uDC83</div>' +
+                        '<div id="dancePrompt" class="dance-prompt dance-prompt-flash">MOVE!</div>' +
                         '<p id="danceTimer" style="font-size:1.5rem;font-weight:700;color:var(--accent-primary)">2:53</p>' +
                         '<audio id="danceAudio"><source src="audio/brain-like-a-pinball.mp3" type="audio/mpeg"></audio>';
                     var danceAudioEl = document.getElementById('danceAudio');
                     if (danceAudioEl) { try { danceAudioEl.play(); } catch(e) {} }
-                    var emojis = ['\uD83D\uDC83', '\uD83D\uDD7A', '\uD83E\uDD38', '\uD83C\uDFB5', '\uD83E\uDE69', '\uD83C\uDFB6', '\uD83D\uDC83'];
+                    var emojis = ['\uD83D\uDC83', '\uD83D\uDD7A', '\uD83E\uDD38', '\uD83E\uDE69'];
+                    var prompts = [
+                        { text: 'MOVE!', color: '#ff6b6b' },
+                        { text: 'DANCE!', color: '#ffd93d' },
+                        { text: 'JUMP!', color: '#6bcb77' },
+                        { text: 'SMILE!', color: '#4d96ff' }
+                    ];
                     var danceEl = document.getElementById('danceEmoji');
+                    var promptEl = document.getElementById('dancePrompt');
                     var timerEl = document.getElementById('danceTimer');
-                    var sec = 173; var idx = 0;
+                    var sec = 173; var idx = 0; var promptIdx = 0;
+                    promptEl.style.color = prompts[0].color;
+                    var promptInt = setInterval(function() {
+                        promptIdx = (promptIdx + 1) % prompts.length;
+                        promptEl.textContent = prompts[promptIdx].text;
+                        promptEl.style.color = prompts[promptIdx].color;
+                        promptEl.classList.remove('dance-prompt-flash');
+                        void promptEl.offsetWidth;
+                        promptEl.classList.add('dance-prompt-flash');
+                    }, 3000);
+                    stuckActiveIntervals.push(promptInt);
                     var danceInt = setInterval(function() {
                         sec--;
                         var m = Math.floor(sec / 60);
@@ -6003,9 +6020,13 @@
                         danceEl.textContent = emojis[idx];
                         if (sec <= 0) {
                             clearInterval(danceInt);
+                            clearInterval(promptInt);
                             danceEl.textContent = '\uD83C\uDF89';
                             danceEl.style.animation = 'none';
-                            timerEl.textContent = 'Amazing! You danced the whole song!';
+                            promptEl.textContent = 'AMAZING!';
+                            promptEl.style.color = '#ffd93d';
+                            promptEl.classList.remove('dance-prompt-flash');
+                            timerEl.textContent = 'You danced the whole song!';
                             var da = document.getElementById('danceAudio');
                             if (da) { da.pause(); da.currentTime = 0; }
                         }
