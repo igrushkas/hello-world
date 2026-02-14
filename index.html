@@ -721,6 +721,7 @@
                             <button class="btn-focus-buddy" id="btnBodyDoubleStart" title="Focus with ambient sounds &amp; a virtual buddy">&#128101; Focus Buddy</button>
                             <button class="btn-stuck" id="btnStuck" title="Reset your nervous system">&#128260; Reset</button>
                             <button class="btn-dance-break" id="btnDanceBreak" title="Dance to Brain Like A Pinball!">&#128131; Dance</button>
+                            <button class="btn-thank-yourself" id="btnThankYourself" title="Thank yourself for what you did today">&#128155; Thanks</button>
                             <button class="btn-primary btn-create-outcome-next" id="btnCreateOutcomeNext" style="display:none">+ New Outcome</button>
                         </div>
                         <div class="pomodoro-display hidden" id="pomodoroDisplay">
@@ -1358,6 +1359,33 @@
                 <button class="btn-primary" id="btnStartBodyDouble">Start Session &#128640;</button>
                 <button class="btn-secondary hidden" id="btnStopBodyDouble" onclick="stopBodyDouble()">End Session</button>
             </div>
+        </div>
+    </div>
+
+    <!-- Thank Yourself Modal -->
+    <div id="thankYourselfOverlay" class="modal-overlay hidden">
+        <div class="modal thank-yourself-modal">
+            <button class="modal-close" id="closeThankYourself">&times;</button>
+            <div style="text-align:center;font-size:2.5rem;margin-bottom:4px">&#128155;</div>
+            <h2 style="text-align:center">Thank Yourself</h2>
+            <p style="text-align:center;color:var(--text-secondary);margin-bottom:4px;font-size:0.95rem">We do a lot but no one ever thanks us.<br>So let's thank ourselves — your future self will be grateful.</p>
+            <p style="text-align:center;color:var(--text-muted);margin-bottom:16px;font-size:0.85rem;font-style:italic">What did you do today or yesterday that deserves a thank you?</p>
+            <div class="thank-yourself-form">
+                <div class="thank-input-row">
+                    <span class="thank-number">1</span>
+                    <input type="text" class="input-field thank-input" id="thankInput1" placeholder="I showed up even when I didn't feel like it...">
+                </div>
+                <div class="thank-input-row">
+                    <span class="thank-number">2</span>
+                    <input type="text" class="input-field thank-input" id="thankInput2" placeholder="I took care of something I'd been avoiding...">
+                </div>
+                <div class="thank-input-row">
+                    <span class="thank-number">3</span>
+                    <input type="text" class="input-field thank-input" id="thankInput3" placeholder="I was kind to myself when things got hard...">
+                </div>
+            </div>
+            <button class="btn-primary btn-large" id="btnSubmitThanks" style="width:100%;margin-top:16px">Thank You, Me &#128155;</button>
+            <div id="thankYourselfResult" class="thank-result hidden"></div>
         </div>
     </div>
 

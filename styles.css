@@ -1942,6 +1942,7 @@ body.health-mode .focus-title-category {
 .next-action-buttons .btn-pick-for-me,
 .next-action-buttons .btn-focus-buddy,
 .next-action-buttons .btn-dance-break,
+.next-action-buttons .btn-thank-yourself,
 .next-action-buttons .btn-stuck {
     padding: 6px 10px;
     font-size: 0.8rem;
@@ -6075,6 +6076,85 @@ body.business-mode .btn-focus-action:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(233, 30, 99, 0.35);
     background: linear-gradient(135deg, #f06292, #e91e63);
+}
+
+/* Thank Yourself Button — warm golden yellow */
+.btn-thank-yourself {
+    background: linear-gradient(135deg, #f9a825, #f57f17);
+    color: #fff;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 0.85rem;
+    transition: var(--transition);
+}
+.btn-thank-yourself:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(249, 168, 37, 0.4);
+    background: linear-gradient(135deg, #fbc02d, #f9a825);
+}
+
+/* Thank Yourself Modal */
+.thank-yourself-modal {
+    max-width: 460px;
+}
+.thank-yourself-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.thank-input-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.thank-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #f9a825, #f57f17);
+    color: #fff;
+    font-weight: 800;
+    font-size: 0.85rem;
+}
+.thank-input {
+    flex: 1;
+}
+.thank-result {
+    text-align: center;
+    padding: 20px;
+    margin-top: 16px;
+    background: rgba(249, 168, 37, 0.08);
+    border-radius: 16px;
+    animation: thankFadeIn 0.6s ease-out;
+}
+.thank-result h3 {
+    font-size: 1.3rem;
+    margin-bottom: 8px;
+}
+.thank-result p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+.thank-result .thank-item {
+    padding: 8px 12px;
+    margin: 6px 0;
+    background: rgba(249, 168, 37, 0.1);
+    border-radius: 10px;
+    border-left: 3px solid #f9a825;
+    text-align: left;
+    font-weight: 500;
+}
+@keyframes thankFadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 /* STUCK? Modal */

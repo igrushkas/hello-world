@@ -6531,6 +6531,94 @@
             if (danceAct && content) danceAct.run(content);
         });
 
+        // Thank Yourself button & modal
+        safeBind('btnThankYourself', 'click', function() {
+            var overlay = document.getElementById('thankYourselfOverlay');
+            if (overlay) {
+                overlay.classList.remove('hidden');
+                // Reset form
+                var i1 = document.getElementById('thankInput1');
+                var i2 = document.getElementById('thankInput2');
+                var i3 = document.getElementById('thankInput3');
+                if (i1) { i1.value = ''; }
+                if (i2) { i2.value = ''; }
+                if (i3) { i3.value = ''; }
+                var result = document.getElementById('thankYourselfResult');
+                if (result) { result.classList.add('hidden'); result.innerHTML = ''; }
+                var btn = document.getElementById('btnSubmitThanks');
+                if (btn) { btn.style.display = ''; }
+                // Focus first input
+                setTimeout(function() { if (i1) i1.focus(); }, 200);
+            }
+        });
+
+        safeBind('closeThankYourself', 'click', function() {
+            var overlay = document.getElementById('thankYourselfOverlay');
+            if (overlay) overlay.classList.add('hidden');
+        });
+
+        safeBind('btnSubmitThanks', 'click', function() {
+            var i1 = document.getElementById('thankInput1');
+            var i2 = document.getElementById('thankInput2');
+            var i3 = document.getElementById('thankInput3');
+            var t1 = i1 ? i1.value.trim() : '';
+            var t2 = i2 ? i2.value.trim() : '';
+            var t3 = i3 ? i3.value.trim() : '';
+
+            // Need at least one entry
+            if (!t1 && !t2 && !t3) {
+                if (i1) { i1.style.borderColor = '#f44336'; setTimeout(function() { i1.style.borderColor = ''; }, 2000); }
+                return;
+            }
+
+            var items = [];
+            if (t1) items.push(t1);
+            if (t2) items.push(t2);
+            if (t3) items.push(t3);
+
+            var affirmations = [
+                'You showed up. That matters more than you think.',
+                'Your future self is already grateful.',
+                'You did that. Nobody can take it away.',
+                'Small steps still move you forward.',
+                'You deserve to hear this: well done.',
+                'The fact that you\'re here means you care. That\'s huge.'
+            ];
+            var affirmation = affirmations[Math.floor(Math.random() * affirmations.length)];
+
+            var resultEl = document.getElementById('thankYourselfResult');
+            if (resultEl) {
+                var html = '<h3>\uD83D\uDC9B Thank You, You!</h3>';
+                items.forEach(function(item) {
+                    html += '<div class="thank-item">\u201C' + item + '\u201D</div>';
+                });
+                html += '<p style="margin-top:12px;font-style:italic;color:var(--accent-primary)">' + affirmation + '</p>';
+                resultEl.innerHTML = html;
+                resultEl.classList.remove('hidden');
+            }
+
+            // Hide the submit button and inputs
+            var btn = document.getElementById('btnSubmitThanks');
+            if (btn) btn.style.display = 'none';
+
+            // Award XP for self-care
+            if (typeof addXP === 'function') {
+                addXP(15, 'Self-gratitude');
+            }
+
+            // Save to action log as a self-care entry
+            if (typeof data !== 'undefined' && data.actionLog) {
+                data.actionLog.push({
+                    action: 'Thanked myself: ' + items.join(', '),
+                    outcome: 'Self-Care',
+                    category: 'personal_growth',
+                    date: new Date().toISOString(),
+                    xp: 15
+                });
+                saveData();
+            }
+        });
+
         function closeStuckModal() {
             document.getElementById('stuckOverlay').classList.add('hidden');
             if (stuckBreathInterval) { clearTimeout(stuckBreathInterval); stuckBreathInterval = null; }
