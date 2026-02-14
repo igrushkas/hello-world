@@ -2929,7 +2929,7 @@
                 document.getElementById('wheelTitle').innerHTML = 'Finances Wheel <span class="wheel-period">Last 7 Days</span> <button class="btn-cat-guide" id="btnCatGuide" title="Category Guide">&#8505;</button>';
                 setOutcomesTitle('\uD83C\uDFAF Financial Goals');
             } else {
-                document.getElementById('focusTitle').textContent = "Today's Power Focus";
+                document.getElementById('focusTitle').textContent = "TODAY'S POWER FOCUS";
                 document.getElementById('wheelTitle').innerHTML = 'Wheel of Life <span class="wheel-period">Last 7 Days</span>';
                 setOutcomesTitle('\uD83C\uDFAF Your Outcomes');
             }
