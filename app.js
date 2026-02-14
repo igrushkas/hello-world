@@ -5900,10 +5900,16 @@
             var activity = document.getElementById('stuckActivity');
             activity.classList.remove('hidden');
             var content = document.getElementById('stuckActivityContent');
-            content.innerHTML = '<h3>30-Second Dance Break!</h3>' +
+            content.innerHTML = '<h3>30-Second Dance Break! 🪩</h3>' +
                 '<p style="color:var(--text-secondary);margin-bottom:12px">Get up and move! Be as silly as possible!</p>' +
                 '<div class="stuck-dance-area" id="danceEmoji">💃</div>' +
-                '<p id="danceTimer" style="font-size:1.5rem;font-weight:700;color:var(--accent-primary)">30</p>';
+                '<p id="danceTimer" style="font-size:1.5rem;font-weight:700;color:var(--accent-primary)">30</p>' +
+                '<audio id="danceAudio" loop>' +
+                '<source src="audio/dance-break.mp3" type="audio/mpeg">' +
+                '</audio>';
+            // Start disco music
+            var danceAudioEl = document.getElementById('danceAudio');
+            if (danceAudioEl) { try { danceAudioEl.play(); } catch(e) {} }
             var emojis = ['💃', '🕺', '🤸', '🎵', '🪩', '🎶', '💃'];
             var danceEl = document.getElementById('danceEmoji');
             var timerEl = document.getElementById('danceTimer');
@@ -5919,6 +5925,9 @@
                     danceEl.textContent = '🎉';
                     danceEl.style.animation = 'none';
                     timerEl.textContent = 'Amazing!';
+                    // Stop disco music when timer ends
+                    var da = document.getElementById('danceAudio');
+                    if (da) { da.pause(); da.currentTime = 0; }
                 }
             }, 1000);
         });
@@ -5945,16 +5954,18 @@
         function closeStuckModal() {
             document.getElementById('stuckOverlay').classList.add('hidden');
             if (stuckBreathInterval) { clearTimeout(stuckBreathInterval); stuckBreathInterval = null; }
-            // Stop and destroy any playing audio completely
-            var audio = document.getElementById('laughAudio');
-            if (audio) {
-                audio.pause();
-                audio.currentTime = 0;
-                audio.src = '';
-                audio.removeAttribute('src');
-                audio.load();
-                if (audio.parentNode) audio.parentNode.removeChild(audio);
-            }
+            // Stop and destroy any playing audio completely (laugh + dance)
+            ['laughAudio', 'danceAudio'].forEach(function(audioId) {
+                var audio = document.getElementById(audioId);
+                if (audio) {
+                    audio.pause();
+                    audio.currentTime = 0;
+                    audio.src = '';
+                    audio.removeAttribute('src');
+                    audio.load();
+                    if (audio.parentNode) audio.parentNode.removeChild(audio);
+                }
+            });
             // Clear activity content to prevent any residual playback
             var actContent = document.getElementById('stuckActivityContent');
             if (actContent) actContent.innerHTML = '';
