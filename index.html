@@ -20,6 +20,17 @@
     <meta name="twitter:description" content="Track habits, crush goals, earn XP & badges. Gamified productivity with streaks, combos, and dopamine-fueled progress.">
 
     <title>Habit Magic - Goal Tracker</title>
+
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#6c5ce7">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Habit Magic">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
+
     <link rel="stylesheet" href="styles.min.css?v=20260214r">
 
     <!-- Firebase SDK -->
@@ -1390,7 +1401,76 @@
         </div>
     </div>
 
+    <!-- PWA Install Banner -->
+    <div id="pwaInstallBanner" class="pwa-install-banner hidden">
+        <span class="pwa-install-text">&#10024; Add Habit Magic to your home screen</span>
+        <button class="btn-primary pwa-install-btn" id="pwaInstallBtn">Install</button>
+        <button class="pwa-dismiss-btn" id="pwaDismissBtn">&times;</button>
+    </div>
+
     <script src="firebase-config.js"></script>
     <script src="app.min.js?v=20260214r"></script>
+
+    <!-- Service Worker Registration -->
+    <script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+            navigator.serviceWorker.register('/sw.js').then(function(reg) {
+                console.log('[PWA] Service worker registered, scope:', reg.scope);
+                // Check for updates
+                reg.addEventListener('updatefound', function() {
+                    var newWorker = reg.installing;
+                    newWorker.addEventListener('statechange', function() {
+                        if (newWorker.state === 'activated') {
+                            console.log('[PWA] New version available — refresh for updates');
+                        }
+                    });
+                });
+            }).catch(function(err) {
+                console.warn('[PWA] Service worker registration failed:', err);
+            });
+        });
+    }
+
+    // PWA Install Prompt
+    var deferredPrompt = null;
+    window.addEventListener('beforeinstallprompt', function(e) {
+        e.preventDefault();
+        deferredPrompt = e;
+        // Show install banner if user hasn't dismissed it
+        if (!localStorage.getItem('pwa_install_dismissed')) {
+            var banner = document.getElementById('pwaInstallBanner');
+            if (banner) banner.classList.remove('hidden');
+        }
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var installBtn = document.getElementById('pwaInstallBtn');
+        var dismissBtn = document.getElementById('pwaDismissBtn');
+        var banner = document.getElementById('pwaInstallBanner');
+
+        if (installBtn) {
+            installBtn.addEventListener('click', function() {
+                if (deferredPrompt) {
+                    deferredPrompt.prompt();
+                    deferredPrompt.userChoice.then(function(choice) {
+                        if (choice.outcome === 'accepted') {
+                            console.log('[PWA] App installed!');
+                        }
+                        deferredPrompt = null;
+                        if (banner) banner.classList.add('hidden');
+                    });
+                }
+            });
+        }
+
+        if (dismissBtn) {
+            dismissBtn.addEventListener('click', function() {
+                if (banner) banner.classList.add('hidden');
+                localStorage.setItem('pwa_install_dismissed', '1');
+            });
+        }
+    });
+    </script>
 </body>
 </html>

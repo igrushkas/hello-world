@@ -2,6 +2,59 @@
    LIFE WITH PURPOSE - Goal Tracker Styles
    ========================================== */
 
+/* PWA Install Banner */
+.pwa-install-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(135deg, #1a1040, #6c5ce7);
+    color: #fff;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 10000;
+    box-shadow: 0 -4px 20px rgba(108, 92, 231, 0.4);
+    animation: slideUpBanner 0.4s ease-out;
+}
+
+@keyframes slideUpBanner {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+}
+
+.pwa-install-text {
+    flex: 1;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.pwa-install-btn {
+    padding: 8px 20px;
+    font-size: 0.85rem;
+    border-radius: 20px;
+    white-space: nowrap;
+}
+
+.pwa-dismiss-btn {
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.6);
+    font-size: 1.3rem;
+    cursor: pointer;
+    padding: 4px 8px;
+    line-height: 1;
+}
+
+.pwa-dismiss-btn:hover {
+    color: #fff;
+}
+
+.pwa-install-banner.hidden {
+    display: none;
+}
+
 :root {
     --bg-dark: #0a0a0f;
     --bg-card: #12121a;
