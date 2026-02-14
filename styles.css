@@ -4578,6 +4578,16 @@ body.business-mode .focus-badge {
         font-size: 1rem;
     }
 
+    /* Mobile: mode toggle — icon only (hide text labels) */
+    .mode-toggle-btn {
+        font-size: 0;
+        padding: 10px 12px;
+        gap: 0;
+    }
+    .mode-toggle-btn .mode-icon {
+        font-size: 1.2rem;
+    }
+
     /* Mobile: hide locked badges — show only unlocked to fill row neatly */
     .badge-item.locked {
         display: none;
