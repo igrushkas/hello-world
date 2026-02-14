@@ -6051,11 +6051,11 @@ body.business-mode .btn-focus-action:hover {
     box-shadow: 0 4px 12px rgba(0, 184, 212, 0.35);
 }
 
-/* STUCK? Button */
+/* Reset Button (formerly Stuck?) */
 .btn-stuck {
-    background: rgba(231, 76, 60, 0.12);
-    border: 1px solid rgba(231, 76, 60, 0.3);
-    color: #e74c3c;
+    background: rgba(243, 156, 18, 0.6);
+    border: 1px solid rgba(243, 156, 18, 0.5);
+    color: #fff;
     padding: 8px 14px;
     border-radius: 20px;
     cursor: pointer;
@@ -6065,8 +6065,10 @@ body.business-mode .btn-focus-action:hover {
 }
 
 .btn-stuck:hover {
-    background: rgba(231, 76, 60, 0.22);
-    border-color: #e74c3c;
+    background: rgba(243, 156, 18, 0.9);
+    border-color: #f39c12;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(243, 156, 18, 0.35);
 }
 
 /* STUCK? Modal */
