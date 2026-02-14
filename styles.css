@@ -4609,10 +4609,16 @@ body.business-mode .focus-badge {
         display: none;
     }
 
-    /* Mobile: show only "X actions" + "to beat last wk" on one line */
-    .pwr-stat-cats,
-    .pwr-stat-streak,
-    .pwr-stat-combo {
+    /* Mobile MAIN (before quote): show all stats EXCEPT "to beat last wk" */
+    .pwr-context-main .pwr-stat-chase,
+    .pwr-context-main .pwr-stat-beat {
+        display: none;
+    }
+
+    /* Mobile ACTION LOG: show ONLY "X actions" + "to beat last wk" */
+    .pwr-context-log .pwr-stat-cats,
+    .pwr-context-log .pwr-stat-streak,
+    .pwr-context-log .pwr-stat-combo {
         display: none;
     }
 }

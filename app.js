@@ -1006,8 +1006,8 @@
         '</div>';
 
         // Render to both containers (main area + Action Log)
-        if (container) container.innerHTML = pwrBarHtml;
-        if (container2) container2.innerHTML = pwrBarHtml;
+        if (container) container.innerHTML = '<div class="pwr-context-main">' + pwrBarHtml + '</div>';
+        if (container2) container2.innerHTML = '<div class="pwr-context-log">' + pwrBarHtml + '</div>';
     }
 
     // ==========================================
