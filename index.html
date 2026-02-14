@@ -31,7 +31,7 @@
     <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
 
-    <link rel="stylesheet" href="styles.min.css?v=20260214r5">
+    <link rel="stylesheet" href="styles.min.css?v=20260214r6">
 
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
@@ -774,6 +774,12 @@
                     </div>
                     <div class="focus-header">
                         <h2 id="focusTitle">TODAY'S POWER FOCUS</h2>
+                        <select class="mode-select-mobile" id="modeSelectMobile">
+                            <option value="personal">&#127968; Personal</option>
+                            <option value="business">&#128188; Business</option>
+                            <option value="health">&#10084;&#65039; Health</option>
+                            <option value="finances">&#128176; Finances</option>
+                        </select>
                         <span class="focus-badge" id="focusBadge"></span>
                         <span class="date-display" id="todayDate"></span>
                     </div>
@@ -1477,7 +1483,7 @@
     </div>
 
     <script src="firebase-config.js"></script>
-    <script src="app.min.js?v=20260214r5"></script>
+    <script src="app.min.js?v=20260214r6"></script>
 
     <!-- Service Worker Registration -->
     <script>

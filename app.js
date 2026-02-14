@@ -2946,6 +2946,10 @@
             var btnFinances = document.getElementById('btnFinancesMode');
             if (btnFinances) btnFinances.classList.toggle('active', mode === 'finances');
 
+            // Sync mobile dropdown
+            var mobileSelect = document.getElementById('modeSelectMobile');
+            if (mobileSelect) mobileSelect.value = mode;
+
             // Update body class for background theming
             document.body.classList.toggle('business-mode', mode === 'business');
             document.body.classList.toggle('health-mode', mode === 'health');
@@ -7280,6 +7284,15 @@
                 if (mode && currentMode !== mode) switchMode(mode);
             });
         });
+
+        // Mobile mode dropdown
+        var modeSelectMobile = document.getElementById('modeSelectMobile');
+        if (modeSelectMobile) {
+            modeSelectMobile.addEventListener('change', function() {
+                var mode = this.value;
+                if (mode && currentMode !== mode) switchMode(mode);
+            });
+        }
 
         // Help button in top bar
         var btnHelpTopbar = document.getElementById('btnHelpTopbar');

@@ -1975,6 +1975,11 @@ body.light-mode .beta-badge {
     flex-direction: column;
 }
 
+/* Mobile mode dropdown — hidden on desktop */
+.mode-select-mobile {
+    display: none;
+}
+
 .focus-header {
     display: flex;
     align-items: center;
@@ -4370,14 +4375,32 @@ body.business-mode .focus-badge {
     }
 
     .mode-toggle-container {
-        width: 100%;
+        display: none;
     }
 
-    .mode-toggle-btn {
-        flex: 1;
-        justify-content: center;
-        padding: 10px 16px;
-        font-size: 0.85rem;
+    .mode-select-mobile {
+        display: inline-block;
+        appearance: none;
+        -webkit-appearance: none;
+        background: var(--bg-card);
+        border: 1px solid var(--accent-primary);
+        border-radius: 8px;
+        color: var(--accent-primary);
+        font-size: 0.75rem;
+        font-weight: 600;
+        padding: 6px 28px 6px 10px;
+        cursor: pointer;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%236c5ce7'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 8px center;
+    }
+
+    .focus-header h2 {
+        font-size: 0.95rem;
+    }
+
+    .date-display {
+        display: none;
     }
 
     /* Mobile: show only first word in Today's Power Focus + Outcomes filter */
@@ -4662,16 +4685,6 @@ body.business-mode .focus-badge {
 
     .praise-text {
         font-size: 1rem;
-    }
-
-    /* Mobile: mode toggle — icon only (hide text labels) */
-    .mode-toggle-btn {
-        font-size: 0;
-        padding: 10px 12px;
-        gap: 0;
-    }
-    .mode-toggle-btn .mode-icon {
-        font-size: 1.2rem;
     }
 
     /* Mobile: hide locked badges — show only unlocked to fill row neatly */
