@@ -176,7 +176,7 @@
             return cat ? catDisplayName(cat.name) : id;
         }).join(', ');
         if (isFreeDay()) {
-            return 'Free Day \u2192 ' + label + ' (weakest)';
+            return label + ' (weakest area)';
         }
         return label;
     }
@@ -5181,7 +5181,7 @@
         });
         // Add Saturday free day info
         html += '<div class="cat-guide-free-day">';
-        html += '<div class="cat-guide-name" style="color: var(--accent-yellow)">&#127775; Saturday &mdash; Free Day</div>';
+        html += '<div class="cat-guide-name" style="color: var(--accent-yellow)">&#127775; Saturday &mdash; Weakest Area</div>';
         html += '<div class="cat-guide-desc">Every Saturday, the app automatically focuses on your <strong>weakest wheel area</strong> &mdash; the category with the lowest score over the past 7 days. This ensures nothing falls behind!</div>';
         html += '</div>';
         content.innerHTML = html;
