@@ -165,6 +165,11 @@
     }
 
     function catDisplayName(name) {
+        return name ? name.replace(/\n/g, ' ') : '';
+    }
+
+    // HTML version — wraps second word in span for mobile CSS hiding
+    function catDisplayNameHtml(name) {
         if (!name) return '';
         var parts = name.split('\n');
         if (parts.length > 1) {
@@ -3661,7 +3666,7 @@
                 if (entry.category) {
                     var cat = CATEGORIES.concat(BUSINESS_CATEGORIES).concat(HEALTH_CATEGORIES).concat(FINANCES_CATEGORIES).find(function(c) { return c.id === entry.category; });
                     if (cat) {
-                        categoryLabel = '<span class="log-category" style="background:' + cat.color + '22;color:' + cat.color + ';border-color:' + cat.color + '44">' + catDisplayName(cat.name) + '</span>';
+                        categoryLabel = '<span class="log-category" style="background:' + cat.color + '22;color:' + cat.color + ';border-color:' + cat.color + '44">' + catDisplayNameHtml(cat.name) + '</span>';
                     }
                 }
 
