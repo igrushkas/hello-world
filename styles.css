@@ -4299,6 +4299,12 @@ body.business-mode .focus-badge {
         padding: 10px 16px;
         font-size: 0.85rem;
     }
+
+    /* Mobile: show only first word in Today's Power Focus + Outcomes filter */
+    .focus-cat-btn .btn-line:last-child,
+    .tab .btn-line:last-child {
+        display: none;
+    }
 }
 
 /* ==========================================
