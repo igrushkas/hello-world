@@ -176,7 +176,7 @@
             return cat ? catDisplayName(cat.name) : id;
         }).join(', ');
         if (isFreeDay()) {
-            return label + ' (weakest area)';
+            return label;
         }
         return label;
     }
@@ -2172,7 +2172,9 @@
         if (startBtn) startBtn.classList.remove('hidden');
         if (stopBtn) stopBtn.classList.add('hidden');
         var timerDisplay = document.getElementById('bodyDoubleTimerDisplay');
-        if (timerDisplay) timerDisplay.textContent = '25:00';
+        if (timerDisplay) timerDisplay.textContent = '15:00';
+        var repeatBtn = document.getElementById('btnRepeatBodyDouble');
+        if (repeatBtn) repeatBtn.classList.add('hidden');
     };
 
     // ==========================================
@@ -2180,7 +2182,7 @@
     // ==========================================
     var bodyDoubleInterval = null;
     var bodyDoubleBuddyInterval = null;
-    var bodyDoubleSeconds = 25 * 60;
+    var bodyDoubleSeconds = 15 * 60;
     var currentAmbientSound = null;
 
     var BUDDY_MESSAGES = [
@@ -2312,7 +2314,7 @@
     }
 
     function startBodyDouble() {
-        bodyDoubleSeconds = 25 * 60;
+        bodyDoubleSeconds = 15 * 60;
         var timerDisplay = document.getElementById('bodyDoubleTimerDisplay');
         var startBtn = document.getElementById('btnStartBodyDouble');
         var stopBtn = document.getElementById('btnStopBodyDouble');
@@ -2420,11 +2422,13 @@
 
         playCompletionAudio();
 
-        // Auto-close after 3 seconds
-        setTimeout(function() {
-            window.stopBodyDouble();
-            render();
-        }, 3000);
+        // Show Repeat button, hide Stop button
+        var stopBtn = document.getElementById('btnStopBodyDouble');
+        var repeatBtn = document.getElementById('btnRepeatBodyDouble');
+        if (stopBtn) stopBtn.classList.add('hidden');
+        if (repeatBtn) repeatBtn.classList.remove('hidden');
+
+        render();
     }
 
     // ==========================================
@@ -7235,6 +7239,12 @@
             document.getElementById('bodyDoubleOverlay').classList.remove('hidden');
         });
         safeBind('btnStartBodyDouble', 'click', function() {
+            startBodyDouble();
+        });
+
+        safeBind('btnRepeatBodyDouble', 'click', function() {
+            var repeatBtn = document.getElementById('btnRepeatBodyDouble');
+            if (repeatBtn) repeatBtn.classList.add('hidden');
             startBodyDouble();
         });
 
