@@ -5932,19 +5932,32 @@
                 '<p style="color:var(--text-secondary);margin-bottom:8px">Kids laughing is scientifically contagious. Try not to smile!</p>' +
                 '<div class="stuck-laugh-area">' +
                 '<div style="font-size:3rem;margin-bottom:12px">😂</div>' +
-                '<audio id="laughAudio" controls autoplay loop>' +
+                '<audio id="laughAudio" controls loop>' +
                 '<source src="audio/kids-laughing.mp3" type="audio/mpeg">' +
                 'Your browser does not support audio.' +
                 '</audio>' +
                 '</div>';
+            // Start playback programmatically (no autoplay attribute)
+            var laughEl = document.getElementById('laughAudio');
+            if (laughEl) { try { laughEl.play(); } catch(e) {} }
         });
 
         function closeStuckModal() {
             document.getElementById('stuckOverlay').classList.add('hidden');
             if (stuckBreathInterval) { clearTimeout(stuckBreathInterval); stuckBreathInterval = null; }
-            // Stop any playing audio
+            // Stop and destroy any playing audio completely
             var audio = document.getElementById('laughAudio');
-            if (audio) { audio.pause(); audio.currentTime = 0; }
+            if (audio) {
+                audio.pause();
+                audio.currentTime = 0;
+                audio.src = '';
+                audio.removeAttribute('src');
+                audio.load();
+                if (audio.parentNode) audio.parentNode.removeChild(audio);
+            }
+            // Clear activity content to prevent any residual playback
+            var actContent = document.getElementById('stuckActivityContent');
+            if (actContent) actContent.innerHTML = '';
         }
 
         safeBind('stuckDone', 'click', closeStuckModal);
