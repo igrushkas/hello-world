@@ -1935,14 +1935,18 @@ body.health-mode .focus-title-category {
     margin-bottom: 8px;
 }
 
-/* Compact buttons inside the action card */
+/* Compact buttons inside the action card — unified style */
 .next-action-buttons .btn-primary,
 .next-action-buttons .btn-secondary,
 .next-action-buttons .btn-timer-start,
 .next-action-buttons .btn-pick-for-me,
-.next-action-buttons .btn-body-double {
+.next-action-buttons .btn-body-double,
+.next-action-buttons .btn-hyperfocus,
+.next-action-buttons .btn-stuck {
     padding: 8px 14px;
     font-size: 0.85rem;
+    border-radius: 20px;
+    font-weight: 600;
 }
 
 .next-action-top-row {
@@ -6029,6 +6033,140 @@ body.business-mode .btn-focus-action:hover {
     border-color: var(--accent-primary);
 }
 
+/* Hyperfocus Button — bright cyan */
+.btn-hyperfocus {
+    background: linear-gradient(135deg, #00b8d4, #0097a7);
+    color: #fff;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 0.85rem;
+    transition: var(--transition);
+}
+
+.btn-hyperfocus:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 184, 212, 0.35);
+}
+
+/* STUCK? Button */
+.btn-stuck {
+    background: rgba(231, 76, 60, 0.12);
+    border: 1px solid rgba(231, 76, 60, 0.3);
+    color: #e74c3c;
+    padding: 8px 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 0.85rem;
+    transition: var(--transition);
+}
+
+.btn-stuck:hover {
+    background: rgba(231, 76, 60, 0.22);
+    border-color: #e74c3c;
+}
+
+/* STUCK? Modal */
+.stuck-modal {
+    max-width: 440px;
+}
+
+.stuck-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.stuck-option {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px;
+    background: var(--bg-input);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: var(--transition);
+    text-align: left;
+    color: var(--text-primary);
+}
+
+.stuck-option:hover {
+    border-color: var(--accent-primary);
+    background: rgba(108, 92, 231, 0.08);
+    transform: translateX(4px);
+}
+
+.stuck-icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+}
+
+.stuck-label {
+    font-weight: 700;
+    font-size: 1rem;
+    display: block;
+}
+
+.stuck-desc {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    display: block;
+}
+
+.stuck-activity {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.stuck-breathe-circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent-primary), #00b8d4);
+    margin: 20px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #fff;
+    transition: transform 4s ease-in-out;
+}
+
+.stuck-breathe-circle.inhale {
+    transform: scale(1.5);
+}
+
+.stuck-breathe-circle.exhale {
+    transform: scale(0.7);
+}
+
+.stuck-dance-area {
+    font-size: 4rem;
+    padding: 20px;
+    animation: danceWiggle 0.5s infinite alternate;
+}
+
+@keyframes danceWiggle {
+    0% { transform: rotate(-10deg) scale(1); }
+    100% { transform: rotate(10deg) scale(1.1); }
+}
+
+.stuck-laugh-area {
+    font-size: 1.1rem;
+    padding: 20px;
+}
+
+.stuck-laugh-area audio {
+    width: 100%;
+    margin-top: 12px;
+    border-radius: 20px;
+}
+
 .bd-sound-btn {
     background: var(--bg-input);
     border: 1px solid var(--border);
@@ -6170,6 +6308,10 @@ body.business-mode .btn-focus-action:hover {
 .outcomes-section.collapsed .section-header {
     margin-bottom: 0;
     padding-bottom: 0;
+}
+
+.outcomes-section.collapsed {
+    margin-bottom: 8px;
 }
 
 /* Make Create New button smaller */

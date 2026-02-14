@@ -2835,19 +2835,19 @@
             if (mode === 'business') {
                 document.getElementById('focusTitle').textContent = 'Business Focus';
                 document.getElementById('wheelTitle').innerHTML = 'Business Wheel <span class="wheel-period">Last 7 Days</span> <button class="btn-cat-guide" id="btnCatGuide" title="Category Guide">&#8505;</button>';
-                setOutcomesTitle('Business Outcomes');
+                setOutcomesTitle('\uD83C\uDFAF Business Outcomes');
             } else if (mode === 'health') {
                 document.getElementById('focusTitle').textContent = 'Health Focus';
                 document.getElementById('wheelTitle').innerHTML = 'Health Wheel <span class="wheel-period">Last 7 Days</span> <button class="btn-cat-guide" id="btnCatGuide" title="Category Guide">&#8505;</button>';
-                setOutcomesTitle('Health Goals');
+                setOutcomesTitle('\uD83C\uDFAF Health Goals');
             } else if (mode === 'finances') {
                 document.getElementById('focusTitle').textContent = 'Finances Focus';
                 document.getElementById('wheelTitle').innerHTML = 'Finances Wheel <span class="wheel-period">Last 7 Days</span> <button class="btn-cat-guide" id="btnCatGuide" title="Category Guide">&#8505;</button>';
-                setOutcomesTitle('Financial Goals');
+                setOutcomesTitle('\uD83C\uDFAF Financial Goals');
             } else {
                 document.getElementById('focusTitle').textContent = "Today's Power Focus";
                 document.getElementById('wheelTitle').innerHTML = 'Wheel of Life <span class="wheel-period">Last 7 Days</span>';
-                setOutcomesTitle('Your Outcomes');
+                setOutcomesTitle('\uD83C\uDFAF Your Outcomes');
             }
 
             // Update category filters
@@ -5842,6 +5842,108 @@
         });
         safeBind('btnMovementSkip', 'click', function() {
             document.getElementById('movementOverlay').classList.add('hidden');
+        });
+
+        // STUCK? Quick Reset
+        safeBind('btnStuck', 'click', function() {
+            document.getElementById('stuckOverlay').classList.remove('hidden');
+            var opts = document.querySelector('.stuck-options');
+            var activity = document.getElementById('stuckActivity');
+            if (opts) opts.style.display = '';
+            if (activity) activity.classList.add('hidden');
+        });
+
+        var stuckBreathInterval = null;
+
+        safeBind('stuckBreathe', 'click', function() {
+            document.querySelector('.stuck-options').style.display = 'none';
+            var activity = document.getElementById('stuckActivity');
+            activity.classList.remove('hidden');
+            var content = document.getElementById('stuckActivityContent');
+            content.innerHTML = '<h3>4-7-8 Breathing</h3>' +
+                '<p style="color:var(--text-secondary);margin-bottom:12px">Follow the circle. In through nose, hold, out through mouth.</p>' +
+                '<div class="stuck-breathe-circle" id="breatheCircle">Breathe In</div>' +
+                '<p id="breatheCount" style="color:var(--text-muted);font-size:0.85rem;margin-top:8px">Round 1 of 3</p>';
+            var circle = document.getElementById('breatheCircle');
+            var countEl = document.getElementById('breatheCount');
+            var round = 0;
+            var maxRounds = 3;
+            function doRound() {
+                if (round >= maxRounds) {
+                    circle.textContent = '✨ Done!';
+                    circle.className = 'stuck-breathe-circle';
+                    countEl.textContent = 'Great job! Feel that calm?';
+                    return;
+                }
+                round++;
+                countEl.textContent = 'Round ' + round + ' of ' + maxRounds;
+                circle.textContent = 'Breathe In';
+                circle.className = 'stuck-breathe-circle inhale';
+                setTimeout(function() {
+                    circle.textContent = 'Hold...';
+                    circle.className = 'stuck-breathe-circle';
+                }, 4000);
+                setTimeout(function() {
+                    circle.textContent = 'Breathe Out';
+                    circle.className = 'stuck-breathe-circle exhale';
+                }, 11000);
+                setTimeout(function() {
+                    doRound();
+                }, 19000);
+            }
+            if (stuckBreathInterval) clearTimeout(stuckBreathInterval);
+            doRound();
+        });
+
+        safeBind('stuckDance', 'click', function() {
+            document.querySelector('.stuck-options').style.display = 'none';
+            var activity = document.getElementById('stuckActivity');
+            activity.classList.remove('hidden');
+            var content = document.getElementById('stuckActivityContent');
+            content.innerHTML = '<h3>30-Second Dance Break!</h3>' +
+                '<p style="color:var(--text-secondary);margin-bottom:12px">Get up and move! Be as silly as possible!</p>' +
+                '<div class="stuck-dance-area" id="danceEmoji">💃</div>' +
+                '<p id="danceTimer" style="font-size:1.5rem;font-weight:700;color:var(--accent-primary)">30</p>';
+            var emojis = ['💃', '🕺', '🤸', '🎵', '🪩', '🎶', '💃'];
+            var danceEl = document.getElementById('danceEmoji');
+            var timerEl = document.getElementById('danceTimer');
+            var sec = 30;
+            var idx = 0;
+            var danceInt = setInterval(function() {
+                sec--;
+                timerEl.textContent = sec;
+                idx = (idx + 1) % emojis.length;
+                danceEl.textContent = emojis[idx];
+                if (sec <= 0) {
+                    clearInterval(danceInt);
+                    danceEl.textContent = '🎉';
+                    danceEl.style.animation = 'none';
+                    timerEl.textContent = 'Amazing!';
+                }
+            }, 1000);
+        });
+
+        safeBind('stuckLaugh', 'click', function() {
+            document.querySelector('.stuck-options').style.display = 'none';
+            var activity = document.getElementById('stuckActivity');
+            activity.classList.remove('hidden');
+            var content = document.getElementById('stuckActivityContent');
+            content.innerHTML = '<h3>Laugh It Out! 🤣</h3>' +
+                '<p style="color:var(--text-secondary);margin-bottom:8px">Kids laughing is scientifically contagious. Try not to smile!</p>' +
+                '<div class="stuck-laugh-area">' +
+                '<div style="font-size:3rem;margin-bottom:12px">😂</div>' +
+                '<audio id="laughAudio" controls autoplay loop>' +
+                '<source src="audio/kids-laughing.mp3" type="audio/mpeg">' +
+                'Your browser does not support audio.' +
+                '</audio>' +
+                '</div>';
+        });
+
+        safeBind('stuckDone', 'click', function() {
+            document.getElementById('stuckOverlay').classList.add('hidden');
+            if (stuckBreathInterval) { clearTimeout(stuckBreathInterval); stuckBreathInterval = null; }
+            var audio = document.getElementById('laughAudio');
+            if (audio) { audio.pause(); audio.currentTime = 0; }
         });
 
         // Extended break

@@ -20,7 +20,7 @@
     <meta name="twitter:description" content="Track habits, crush goals, earn XP & badges. Gamified productivity with streaks, combos, and dopamine-fueled progress.">
 
     <title>Habit Magic - Goal Tracker</title>
-    <link rel="stylesheet" href="styles.min.css?v=20260214e">
+    <link rel="stylesheet" href="styles.min.css?v=20260214f">
 
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
@@ -716,11 +716,12 @@
                         <div class="next-action-text" id="nextActionText">No actions yet. Create an outcome to get started!</div>
                         <div class="next-action-meta" id="nextActionMeta"></div>
                         <div class="next-action-buttons">
-                            <button class="btn-primary" id="btnCompleteNext" style="display:none">Done! What's Next? &#10003;</button>
-                            <button class="btn-secondary" id="btnStartPomodoro" style="display:none" title="Lock into hyperfocus mode for 15 minutes">&#9201; Hyperfocus Sprint (15min)</button>
+                            <button class="btn-primary" id="btnCompleteNext" style="display:none">&#10003; Done! Next?</button>
+                            <button class="btn-hyperfocus" id="btnStartPomodoro" style="display:none" title="Lock into hyperfocus mode for 15 minutes">&#9201; Hyperfocus</button>
                             <button class="btn-timer-start" id="btnStartTaskTimer" style="display:none">&#9201; Start Timer</button>
                             <button class="btn-pick-for-me" id="btnPickForMe">&#127919; Pick for me</button>
                             <button class="btn-body-double" id="btnBodyDoubleStart" title="Focus with a virtual study buddy">&#128101; Body Double</button>
+                            <button class="btn-stuck" id="btnStuck" title="Feeling stuck? Try a quick reset!">&#129300; Stuck?</button>
                             <button class="btn-primary btn-create-outcome-next" id="btnCreateOutcomeNext" style="display:none">+ Create New Outcome</button>
                         </div>
                         <div class="pomodoro-display hidden" id="pomodoroDisplay">
@@ -787,7 +788,7 @@
             <!-- Outcomes Grid -->
             <section class="outcomes-section" id="outcomesSection">
                 <div class="section-header">
-                    <h2 id="outcomesTitle">Your Outcomes <button class="btn-collapse-section" id="btnCollapseOutcomes" title="Hide/Show outcomes">&#9660;</button></h2>
+                    <h2 id="outcomesTitle">&#127919; Your Outcomes <button class="btn-collapse-section" id="btnCollapseOutcomes" title="Hide/Show outcomes">&#9660;</button></h2>
                     <button class="btn-new-outcome-pill" id="btnNewOutcome">+ Create New</button>
                     <div class="filter-tabs" id="outcomesFilterTabs">
                         <button class="tab active" data-filter="all">All</button>
@@ -847,7 +848,7 @@
 
             <!-- Weekly Action Log -->
             <section class="action-log-section collapsible-section" id="actionLogSection">
-                <h2 class="collapsible-header" data-section="actionLogSection">7 Days Action Log <button class="btn-export-log" id="btnExportLog" title="Download action log as CSV">&#128190;</button> <button class="btn-collapse-section" data-collapse="actionLogSection" title="Hide/Show action log">&#9660;</button></h2>
+                <h2 class="collapsible-header" data-section="actionLogSection">&#128190; 7 Days Action Log <button class="btn-export-log" id="btnExportLog" title="Download action log as CSV">&#11015;</button> <button class="btn-collapse-section" data-collapse="actionLogSection" title="Hide/Show action log">&#9660;</button></h2>
                 <div class="collapsible-content" id="actionLogSectionContent">
                 <!-- Power Score bar (2nd instance) -->
                 <div id="weeklyPowerContainer2"></div>
@@ -1037,7 +1038,7 @@
                             <div class="help-step-num">2</div>
                             <div class="help-step-content">
                                 <strong>Complete Your #1 Next Action</strong>
-                                <span>The purple card at the top shows your highest-impact task. Press <span class="help-btn-ref">Done! What's Next?</span> when finished. Celebrate the win!</span>
+                                <span>The purple card at the top shows your highest-impact task. Press <span class="help-btn-ref">✓ Done! Next?</span> when finished. Celebrate the win!</span>
                             </div>
                         </div>
                         <div class="help-step">
@@ -1271,6 +1272,37 @@
         </div>
     </div>
 
+    <!-- STUCK? Quick Reset Modal -->
+    <div id="stuckOverlay" class="modal-overlay hidden">
+        <div class="modal stuck-modal">
+            <button class="modal-close" onclick="document.getElementById('stuckOverlay').classList.add('hidden')">&times;</button>
+            <div style="text-align:center;font-size:3rem;margin-bottom:12px">&#129300;</div>
+            <h2 style="text-align:center">Feeling Stuck?</h2>
+            <p style="text-align:center;color:var(--text-secondary);margin-bottom:20px">Your brain needs a quick reset. Pick one — it only takes 60 seconds!</p>
+            <div class="stuck-options">
+                <button class="stuck-option" id="stuckBreathe" data-stuck="breathe">
+                    <span class="stuck-icon">&#128692;</span>
+                    <span class="stuck-label">Breathe</span>
+                    <span class="stuck-desc">4-7-8 breathing exercise</span>
+                </button>
+                <button class="stuck-option" id="stuckDance" data-stuck="dance">
+                    <span class="stuck-icon">&#128131;</span>
+                    <span class="stuck-label">Dance Break</span>
+                    <span class="stuck-desc">30 seconds of silly dancing</span>
+                </button>
+                <button class="stuck-option" id="stuckLaugh" data-stuck="laugh">
+                    <span class="stuck-icon">&#129315;</span>
+                    <span class="stuck-label">Laugh It Out</span>
+                    <span class="stuck-desc">Contagious kids laughing</span>
+                </button>
+            </div>
+            <div class="stuck-activity hidden" id="stuckActivity">
+                <div class="stuck-activity-content" id="stuckActivityContent"></div>
+                <button class="btn-primary" id="stuckDone" style="margin-top:16px">I Feel Better! &#10024; Back to Work</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Founding Member Feedback Modal -->
     <div id="feedbackOverlay" class="modal-overlay hidden">
         <div class="modal feedback-modal">
@@ -1345,6 +1377,6 @@
     </div>
 
     <script src="firebase-config.js"></script>
-    <script src="app.min.js?v=20260214e"></script>
+    <script src="app.min.js?v=20260214f"></script>
 </body>
 </html>
