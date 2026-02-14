@@ -2356,9 +2356,9 @@
         stopAmbientSound();
         if (key === 'none') return;
         // Audio-file based sounds
-        if (key === 'fireplace' || key === 'coffee') {
+        if (key === 'ocean' || key === 'coffee') {
             try {
-                var fileMap = { fireplace: 'audio/fireplace.m4a', coffee: 'audio/coffee-shop.m4a' };
+                var fileMap = { ocean: 'audio/ocean-waves.m4a', coffee: 'audio/coffee-shop.m4a' };
                 var audio = new Audio(fileMap[key]);
                 audio.loop = true;
                 audio.volume = 0.4;
@@ -5981,28 +5981,31 @@
                 id: 'dance',
                 icon: '\uD83D\uDC83',
                 label: 'Dance Break',
-                desc: '30 seconds of silly dancing — Brain Like A Pinball!',
+                desc: 'Full song dance party — Brain Like A Pinball!',
                 run: function(content) {
-                    content.innerHTML = '<h3>30-Second Dance Break! \uD83E\uDE69</h3>' +
-                        '<p style="color:var(--text-secondary);margin-bottom:12px">Get up and move! Be as silly as possible!</p>' +
+                    content.innerHTML = '<h3>\uD83C\uDFB5 Brain Like A Pinball \uD83E\uDE69</h3>' +
+                        '<p style="color:var(--text-secondary);margin-bottom:12px">Dance for the whole song! Be as silly as possible!</p>' +
                         '<div class="stuck-dance-area" id="danceEmoji">\uD83D\uDC83</div>' +
-                        '<p id="danceTimer" style="font-size:1.5rem;font-weight:700;color:var(--accent-primary)">30</p>' +
-                        '<audio id="danceAudio" loop><source src="audio/brain-like-a-pinball.mp3" type="audio/mpeg"></audio>';
+                        '<p id="danceTimer" style="font-size:1.5rem;font-weight:700;color:var(--accent-primary)">2:53</p>' +
+                        '<audio id="danceAudio"><source src="audio/brain-like-a-pinball.mp3" type="audio/mpeg"></audio>';
                     var danceAudioEl = document.getElementById('danceAudio');
                     if (danceAudioEl) { try { danceAudioEl.play(); } catch(e) {} }
                     var emojis = ['\uD83D\uDC83', '\uD83D\uDD7A', '\uD83E\uDD38', '\uD83C\uDFB5', '\uD83E\uDE69', '\uD83C\uDFB6', '\uD83D\uDC83'];
                     var danceEl = document.getElementById('danceEmoji');
                     var timerEl = document.getElementById('danceTimer');
-                    var sec = 30; var idx = 0;
+                    var sec = 173; var idx = 0;
                     var danceInt = setInterval(function() {
-                        sec--; timerEl.textContent = sec;
+                        sec--;
+                        var m = Math.floor(sec / 60);
+                        var s = sec % 60;
+                        timerEl.textContent = m + ':' + (s < 10 ? '0' + s : s);
                         idx = (idx + 1) % emojis.length;
                         danceEl.textContent = emojis[idx];
                         if (sec <= 0) {
                             clearInterval(danceInt);
                             danceEl.textContent = '\uD83C\uDF89';
                             danceEl.style.animation = 'none';
-                            timerEl.textContent = 'Amazing!';
+                            timerEl.textContent = 'Amazing! You danced the whole song!';
                             var da = document.getElementById('danceAudio');
                             if (da) { da.pause(); da.currentTime = 0; }
                         }
@@ -6169,34 +6172,37 @@
                 id: 'bodyShake',
                 icon: '\uD83E\uDEBB',
                 label: 'Shake It Off',
-                desc: 'Discharge stress with music — Brain Like A Pinball!',
+                desc: 'Full song body shake — Brain Like A Pinball!',
                 run: function(content) {
-                    content.innerHTML = '<h3>Shake It Off! \uD83E\uDEBB</h3>' +
-                        '<p style="color:var(--text-secondary);margin-bottom:12px">Animals shake after danger to release stress hormones. Your turn!</p>' +
+                    content.innerHTML = '<h3>\uD83C\uDFB5 Shake It Off! \uD83E\uDEBB</h3>' +
+                        '<p style="color:var(--text-secondary);margin-bottom:12px">Shake your whole body for the entire song! Release that stress!</p>' +
                         '<div class="stuck-dance-area" id="shakeEmoji" style="animation:danceWiggle 0.15s infinite alternate">\uD83E\uDEBB</div>' +
-                        '<p id="shakeTimer" style="font-size:1.5rem;font-weight:700;color:var(--accent-primary)">45</p>' +
+                        '<p id="shakeTimer" style="font-size:1.5rem;font-weight:700;color:var(--accent-primary)">2:53</p>' +
                         '<div style="background:rgba(108,92,231,0.08);border-radius:12px;padding:12px;margin-top:12px;text-align:left;font-size:0.9rem">' +
                         '<p>\uD83D\uDC4B Shake your hands vigorously</p>' +
                         '<p>\uD83E\uDDB6 Bounce on your feet</p>' +
                         '<p>\uD83D\uDCAA Shake your arms and shoulders</p>' +
                         '<p>\uD83C\uDFB5 Let your whole body wiggle!</p>' +
                         '</div>' +
-                        '<audio id="danceAudio" loop><source src="audio/brain-like-a-pinball.mp3" type="audio/mpeg"></audio>';
+                        '<audio id="danceAudio"><source src="audio/brain-like-a-pinball.mp3" type="audio/mpeg"></audio>';
                     var shakeAudioEl = document.getElementById('danceAudio');
                     if (shakeAudioEl) { try { shakeAudioEl.play(); } catch(e) {} }
                     var timerEl = document.getElementById('shakeTimer');
                     var emojis = ['\uD83E\uDEBB', '\uD83D\uDCAA', '\uD83E\uDD38', '\uD83C\uDFB5', '\uD83D\uDC4B', '\uD83E\uDEBB'];
                     var shakeEl = document.getElementById('shakeEmoji');
-                    var sec = 45; var idx = 0;
+                    var sec = 173; var idx = 0;
                     var shakeInt = setInterval(function() {
-                        sec--; timerEl.textContent = sec;
+                        sec--;
+                        var m = Math.floor(sec / 60);
+                        var s = sec % 60;
+                        timerEl.textContent = m + ':' + (s < 10 ? '0' + s : s);
                         idx = (idx + 1) % emojis.length;
                         shakeEl.textContent = emojis[idx];
                         if (sec <= 0) {
                             clearInterval(shakeInt);
                             shakeEl.textContent = '\uD83C\uDF89';
                             shakeEl.style.animation = 'none';
-                            timerEl.textContent = 'Stress discharged!';
+                            timerEl.textContent = 'Stress discharged! You rocked it!';
                             var _sa = document.getElementById('danceAudio');
                             if (_sa) { _sa.pause(); _sa.currentTime = 0; }
                         }
