@@ -4515,7 +4515,7 @@
                 '<select class="est-select est-input" title="Estimated minutes">' +
                     '<option value="5">5m</option>' +
                     '<option value="10">10m</option>' +
-                    '<option value="15">15m</option>' +
+                    '<option value="15" selected>15m</option>' +
                     '<option value="20">20m</option>' +
                 '</select>' +
                 '<input type="date" class="action-deadline-input" title="Deadline">' +
@@ -4634,7 +4634,7 @@
             document.getElementById('commitmentValue').textContent = '7';
             document.getElementById('commitmentBoost').value = '';
             var catOpts = buildExtraCatOptions();
-            var timeOpts = '<select class="est-select est-input" title="Estimated minutes"><option value="5">5m</option><option value="10">10m</option><option value="15">15m</option><option value="20">20m</option></select>';
+            var timeOpts = '<select class="est-select est-input" title="Estimated minutes"><option value="5">5m</option><option value="10">10m</option><option value="15" selected>15m</option><option value="20">20m</option></select>';
             var catSel = '<select class="est-select action-extra-cat" title="Extra category">' + catOpts + '</select>';
             document.getElementById('actionsList').innerHTML =
                 '<div class="action-input-row"><input type="text" class="input-field" placeholder="Action step 1...">' + timeOpts + '<input type="date" class="action-deadline-input" title="Deadline">' + catSel + '</div>' +
