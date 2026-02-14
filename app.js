@@ -3345,7 +3345,7 @@
             if (next.leverageScore !== undefined) metaParts.push('Leverage: ' + next.leverageScore + '%');
             metaEl.textContent = metaParts.join(' | ');
             btnComplete.style.display = '';
-            btnPomo.style.display = '';
+            if (btnPomo) btnPomo.style.display = '';
             if (btnStartTimer) btnStartTimer.style.display = taskTimerActive ? 'none' : '';
             // Show pick-for-me, hide create outcome
             var pickBtn = document.getElementById('btnPickForMe');
@@ -3368,7 +3368,7 @@
             textEl.textContent = 'All actions complete! Time to set a new goal.';
             metaEl.textContent = '';
             btnComplete.style.display = 'none';
-            btnPomo.style.display = 'none';
+            if (btnPomo) btnPomo.style.display = 'none';
             if (btnStartTimer) btnStartTimer.style.display = 'none';
             if (progressEl) progressEl.innerHTML = '';
             // Show "Create New Outcome" button instead of pick-for-me
@@ -4652,8 +4652,8 @@
         var remaining = 15 * 60;
         var display = document.getElementById('pomodoroTime');
         var container = document.getElementById('pomodoroDisplay');
-        container.classList.remove('hidden');
-        document.getElementById('btnStartPomodoro').style.display = 'none';
+        if (container) container.classList.remove('hidden');
+        var _bp1 = document.getElementById('btnStartPomodoro'); if (_bp1) _bp1.style.display = 'none';
 
         pomodoroInterval = setInterval(function() {
             remaining--;
@@ -4664,8 +4664,8 @@
                 clearInterval(pomodoroInterval);
                 pomodoroInterval = null;
                 display.textContent = "Time's up!";
-                container.classList.add('hidden');
-                document.getElementById('btnStartPomodoro').style.display = '';
+                if (container) container.classList.add('hidden');
+                var _bp2 = document.getElementById('btnStartPomodoro'); if (_bp2) _bp2.style.display = '';
             }
         }, 1000);
     }
@@ -4675,8 +4675,8 @@
             clearInterval(pomodoroInterval);
             pomodoroInterval = null;
         }
-        document.getElementById('pomodoroDisplay').classList.add('hidden');
-        document.getElementById('btnStartPomodoro').style.display = '';
+        var _pd = document.getElementById('pomodoroDisplay'); if (_pd) _pd.classList.add('hidden');
+        var _bp3 = document.getElementById('btnStartPomodoro'); if (_bp3) _bp3.style.display = '';
     }
 
     // ==========================================
@@ -6495,6 +6495,19 @@
             var activity = document.getElementById('stuckActivity');
             if (activity) activity.classList.add('hidden');
             renderStuckOptions();
+        });
+
+        // Dance Break button — directly opens the dance activity
+        safeBind('btnDanceBreak', 'click', function() {
+            document.getElementById('stuckOverlay').classList.remove('hidden');
+            var container = document.getElementById('stuckOptionsContainer');
+            if (container) container.style.display = 'none';
+            var activity = document.getElementById('stuckActivity');
+            if (activity) activity.classList.remove('hidden');
+            var content = document.getElementById('stuckActivityContent');
+            // Find the dance activity and run it directly
+            var danceAct = STUCK_ACTIVITIES.filter(function(a) { return a.id === 'dance'; })[0];
+            if (danceAct && content) danceAct.run(content);
         });
 
         function closeStuckModal() {

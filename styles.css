@@ -1940,8 +1940,8 @@ body.health-mode .focus-title-category {
 .next-action-buttons .btn-secondary,
 .next-action-buttons .btn-timer-start,
 .next-action-buttons .btn-pick-for-me,
-.next-action-buttons .btn-body-double,
-.next-action-buttons .btn-hyperfocus,
+.next-action-buttons .btn-focus-buddy,
+.next-action-buttons .btn-dance-break,
 .next-action-buttons .btn-stuck {
     padding: 6px 10px;
     font-size: 0.8rem;
@@ -6019,25 +6019,8 @@ body.business-mode .btn-focus-action:hover {
     animation: modalSlideUp 0.4s ease;
 }
 
-.btn-body-double {
-    background: rgba(108, 92, 231, 0.12);
-    border: 1px solid rgba(108, 92, 231, 0.3);
-    color: var(--accent-primary);
-    padding: 8px 14px;
-    border-radius: 20px;
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 0.82rem;
-    transition: var(--transition);
-}
-
-.btn-body-double:hover {
-    background: rgba(108, 92, 231, 0.22);
-    border-color: var(--accent-primary);
-}
-
-/* Hyperfocus Button — bright cyan */
-.btn-hyperfocus {
+/* Focus Buddy Button — cyan */
+.btn-focus-buddy {
     background: linear-gradient(135deg, #00b8d4, #0097a7);
     color: #fff;
     border: none;
@@ -6049,9 +6032,10 @@ body.business-mode .btn-focus-action:hover {
     transition: var(--transition);
 }
 
-.btn-hyperfocus:hover {
+.btn-focus-buddy:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 184, 212, 0.35);
+    background: linear-gradient(135deg, #00c9e0, #00a8b5);
 }
 
 /* Reset Button (formerly Stuck?) */
@@ -6072,6 +6056,25 @@ body.business-mode .btn-focus-action:hover {
     border-color: #f39c12;
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(243, 156, 18, 0.35);
+}
+
+/* Dance Break Button — pink/magenta fun vibe */
+.btn-dance-break {
+    background: linear-gradient(135deg, #e91e63, #c2185b);
+    color: #fff;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 0.85rem;
+    transition: var(--transition);
+}
+
+.btn-dance-break:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(233, 30, 99, 0.35);
+    background: linear-gradient(135deg, #f06292, #e91e63);
 }
 
 /* STUCK? Modal */
