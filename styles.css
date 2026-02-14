@@ -4598,6 +4598,11 @@ body.business-mode .focus-badge {
         display: none;
     }
 
+    /* Mobile: action log — show only first word of category */
+    .cat-second-word {
+        display: none;
+    }
+
     /* Mobile: show only "X actions" + "to beat last wk" on one line */
     .pwr-stat-cats,
     .pwr-stat-streak,

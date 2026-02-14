@@ -165,7 +165,12 @@
     }
 
     function catDisplayName(name) {
-        return name ? name.replace(/\n/g, ' ') : '';
+        if (!name) return '';
+        var parts = name.split('\n');
+        if (parts.length > 1) {
+            return parts[0] + '<span class="cat-second-word"> ' + parts[1] + '</span>';
+        }
+        return name;
     }
 
     function getTodayFocusLabel() {
