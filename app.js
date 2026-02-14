@@ -1223,7 +1223,7 @@
         { text: "Your to-do list is not your worth. You matter even on zero-productivity days.", author: "ADHD Coaching" },
         { text: "The only impossible journey is the one you never begin — and you've already begun.", author: "ADHD Affirmation" },
         { text: "Dopamine isn't your enemy. Learn what gives your brain healthy hits and use that knowledge.", author: "Dr. Ari Tuckman" },
-        { text: "Executive function challenges don't define your intelligence or your character.", author: "Dr. Thomas Brown" },
+        { text: "Your brain is brilliant — it just came with a different instruction manual. You'll write your own.", author: "ADHD Affirmation" },
         { text: "If plan A doesn't work, the alphabet has 25 more letters. ADHD brains are great at plan B through Z.", author: "ADHD Wisdom" },
         { text: "Hyperfocus is proof that you CAN concentrate. The challenge is choosing when.", author: "ADHD Community" },
         { text: "Be patient with yourself. Self-growth is tender; it's holy ground.", author: "Stephen Covey" },
