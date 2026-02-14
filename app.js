@@ -4503,7 +4503,7 @@
         });
 
         // Motivation quote refresh
-        document.getElementById('btnRefreshQuote').addEventListener('click', function() {
+        safeBind('btnRefreshQuote', 'click', function() {
             try { renderMotivationQuote(); } catch(e) { console.error('quote refresh error:', e); }
         });
 
@@ -4515,13 +4515,13 @@
         });
 
         // New Outcome (pill button in header)
-        document.getElementById('btnNewOutcome').addEventListener('click', function() {
+        safeBind('btnNewOutcome', 'click', function() {
             renderNewOutcomeCategoryPills();
             populateActionCatDropdowns();
             document.getElementById('newOutcomeOverlay').classList.remove('hidden');
         });
         // New Outcome (big button below grid)
-        document.getElementById('btnNewOutcome2').addEventListener('click', function() {
+        safeBind('btnNewOutcome2', 'click', function() {
             renderNewOutcomeCategoryPills();
             populateActionCatDropdowns();
             document.getElementById('newOutcomeOverlay').classList.remove('hidden');
@@ -4533,12 +4533,12 @@
             populateActionCatDropdowns();
             document.getElementById('newOutcomeOverlay').classList.remove('hidden');
         });
-        document.getElementById('closeNewOutcome').addEventListener('click', function() {
+        safeBind('closeNewOutcome', 'click', function() {
             document.getElementById('newOutcomeOverlay').classList.add('hidden');
         });
 
         // Add more actions
-        document.getElementById('addMoreActions').addEventListener('click', function() {
+        safeBind('addMoreActions', 'click', function() {
             var row = document.createElement('div');
             row.className = 'action-input-row';
             row.innerHTML = '<input type="text" class="input-field" placeholder="Action step...">' +
@@ -4570,7 +4570,7 @@
         });
 
         // Save Outcome
-        document.getElementById('saveOutcome').addEventListener('click', function() {
+        safeBind('saveOutcome', 'click', function() {
             var result = document.getElementById('outcomeResult').value.trim();
             var purpose = document.getElementById('outcomePurpose').value.trim();
             if (!result) return;
@@ -4673,22 +4673,22 @@
         });
 
         // Commitment slider
-        document.getElementById('commitmentSlider').addEventListener('input', function() {
+        safeBind('commitmentSlider', 'input', function() {
             document.getElementById('commitmentValue').textContent = this.value;
         });
-        document.getElementById('editCommitmentSlider').addEventListener('input', function() {
+        safeBind('editCommitmentSlider', 'input', function() {
             document.getElementById('editCommitmentValue').textContent = this.value;
         });
 
         // Complete next action
-        document.getElementById('btnCompleteNext').addEventListener('click', function() {
+        safeBind('btnCompleteNext', 'click', function() {
             var oid = this.dataset.outcomeId;
             var aid = this.dataset.actionId;
             if (oid && aid) completeAction(oid, aid);
         });
 
         // Complete/uncomplete via checkbox
-        document.getElementById('outcomesGrid').addEventListener('change', function(e) {
+        safeBind('outcomesGrid', 'change', function(e) {
             if (e.target.classList.contains('action-checkbox')) {
                 var oid = e.target.dataset.outcomeId;
                 var aid = e.target.dataset.actionId;
@@ -4701,7 +4701,7 @@
         });
 
         // Click action text to edit
-        document.getElementById('outcomesGrid').addEventListener('click', function(e) {
+        safeBind('outcomesGrid', 'click', function(e) {
             // Toggle completed actions dropdown
             var toggle = e.target.closest('.completed-actions-toggle');
             if (toggle) {
@@ -4779,11 +4779,11 @@
             }
         }
 
-        document.getElementById('closeEditAction').addEventListener('click', function() {
+        safeBind('closeEditAction', 'click', function() {
             document.getElementById('editActionOverlay').classList.add('hidden');
         });
 
-        document.getElementById('btnSaveEditAction').addEventListener('click', function() {
+        safeBind('btnSaveEditAction', 'click', function() {
             var outcome = data.outcomes.find(function(o) { return o.id === editingAction.outcomeId; });
             if (!outcome) return;
             var action = outcome.actions.find(function(a) { return a.id === editingAction.actionId; });
@@ -4812,7 +4812,7 @@
             document.getElementById('editActionOverlay').classList.add('hidden');
         });
 
-        document.getElementById('btnDeleteAction').addEventListener('click', function() {
+        safeBind('btnDeleteAction', 'click', function() {
             if (!confirm('Delete this action?')) return;
             var outcome = data.outcomes.find(function(o) { return o.id === editingAction.outcomeId; });
             if (!outcome) return;
@@ -4856,11 +4856,11 @@
             document.getElementById('editOutcomeOverlay').classList.remove('hidden');
         }
 
-        document.getElementById('closeEditOutcome').addEventListener('click', function() {
+        safeBind('closeEditOutcome', 'click', function() {
             document.getElementById('editOutcomeOverlay').classList.add('hidden');
         });
 
-        document.getElementById('btnSaveEditOutcome').addEventListener('click', function() {
+        safeBind('btnSaveEditOutcome', 'click', function() {
             var outcome = data.outcomes.find(function(o) { return o.id === editingOutcomeId; });
             if (!outcome) return;
             outcome.result = document.getElementById('editOutcomeResult').value.trim();
@@ -4888,11 +4888,11 @@
             document.getElementById('addActionOverlay').classList.remove('hidden');
         }
 
-        document.getElementById('closeAddAction').addEventListener('click', function() {
+        safeBind('closeAddAction', 'click', function() {
             document.getElementById('addActionOverlay').classList.add('hidden');
         });
 
-        document.getElementById('btnSaveAddAction').addEventListener('click', function() {
+        safeBind('btnSaveAddAction', 'click', function() {
             var text = document.getElementById('addActionText').value.trim();
             if (!text) return;
             var estValue = parseInt(document.getElementById('addActionEst').value);
@@ -4925,31 +4925,31 @@
         });
 
         // Pomodoro
-        document.getElementById('btnStartPomodoro').addEventListener('click', function() {
+        safeBind('btnStartPomodoro', 'click', function() {
             if (!requirePro('focus_timer')) return;
             startPomodoro();
         });
-        document.getElementById('btnStopPomodoro').addEventListener('click', stopPomodoro);
+        safeBind('btnStopPomodoro', 'click', stopPomodoro);
 
         // Task Timer
-        document.getElementById('btnStartTaskTimer').addEventListener('click', function() {
+        safeBind('btnStartTaskTimer', 'click', function() {
             if (!requirePro('task_timer')) return;
             startTaskTimer();
         });
-        document.getElementById('btnStopTaskTimer').addEventListener('click', stopTaskTimer);
-        document.getElementById('btnPauseTaskTimer').addEventListener('click', pauseTaskTimer);
-        document.getElementById('btnResumeTaskTimer').addEventListener('click', resumeTaskTimer);
+        safeBind('btnStopTaskTimer', 'click', stopTaskTimer);
+        safeBind('btnPauseTaskTimer', 'click', pauseTaskTimer);
+        safeBind('btnResumeTaskTimer', 'click', resumeTaskTimer);
 
         // Task Check-in
-        document.getElementById('btnCheckInYes').addEventListener('click', handleCheckInYes);
-        document.getElementById('btnCheckInNo').addEventListener('click', handleCheckInNo);
+        safeBind('btnCheckInYes', 'click', handleCheckInYes);
+        safeBind('btnCheckInNo', 'click', handleCheckInNo);
 
         // Pick for Me
-        document.getElementById('btnPickForMe').addEventListener('click', function() {
+        safeBind('btnPickForMe', 'click', function() {
             if (!requirePro('pick_for_me')) return;
             showPickForMe();
         });
-        document.getElementById('closePickForMe').addEventListener('click', function() {
+        safeBind('closePickForMe', 'click', function() {
             document.getElementById('pickForMeOverlay').classList.add('hidden');
         });
         document.querySelectorAll('.time-option-btn').forEach(function(btn) {
@@ -4960,31 +4960,31 @@
                 pickTaskForTime(parseInt(this.dataset.minutes));
             });
         });
-        document.getElementById('btnStartPickedTask').addEventListener('click', startPickedTask);
+        safeBind('btnStartPickedTask', 'click', startPickedTask);
 
         // Movement modal
-        document.getElementById('btnMovementDone').addEventListener('click', function() {
+        safeBind('btnMovementDone', 'click', function() {
             addExercisesToHealthOutcome();
             document.getElementById('movementOverlay').classList.add('hidden');
         });
-        document.getElementById('btnMovementSkip').addEventListener('click', function() {
+        safeBind('btnMovementSkip', 'click', function() {
             document.getElementById('movementOverlay').classList.add('hidden');
         });
 
         // Extended break
-        document.getElementById('btnStartExtendedBreak').addEventListener('click', startExtendedBreakTimer);
-        document.getElementById('btnSkipExtendedBreak').addEventListener('click', function() {
+        safeBind('btnStartExtendedBreak', 'click', startExtendedBreakTimer);
+        safeBind('btnSkipExtendedBreak', 'click', function() {
             if (extendedBreakInterval) clearInterval(extendedBreakInterval);
             extendedBreakInterval = null;
             document.getElementById('extendedBreakOverlay').classList.add('hidden');
         });
 
         // State priming
-        document.getElementById('btnSettings').addEventListener('click', function() {
+        safeBind('btnSettings', 'click', function() {
             if (!requirePro('rituals')) return;
             document.getElementById('statePrimingOverlay').classList.remove('hidden');
         });
-        document.getElementById('btnStartDay').addEventListener('click', function() {
+        safeBind('btnStartDay', 'click', function() {
             try {
                 var primingKey = 'lwp_priming_times_' + new Date().toDateString();
                 var primingTimes = JSON.parse(localStorage.getItem(primingKey) || '[]');
@@ -4993,7 +4993,7 @@
             } catch(e) { console.error('priming save error:', e); }
             document.getElementById('statePrimingOverlay').classList.add('hidden');
         });
-        document.getElementById('closePriming').addEventListener('click', function() {
+        safeBind('closePriming', 'click', function() {
             try {
                 var primingKey = 'lwp_priming_times_' + new Date().toDateString();
                 var primingTimes = JSON.parse(localStorage.getItem(primingKey) || '[]');
@@ -5011,19 +5011,19 @@
         });
 
         // Energy slider
-        document.getElementById('energySlider').addEventListener('input', function() {
+        safeBind('energySlider', 'input', function() {
             document.getElementById('energyValue').textContent = this.value;
         });
 
         // Weekly review
-        document.getElementById('btnWeeklyReview').addEventListener('click', function() {
+        safeBind('btnWeeklyReview', 'click', function() {
             if (!requirePro('weekly_review')) return;
             showWeeklyReview();
         });
-        document.getElementById('closeWeeklyReview').addEventListener('click', function() {
+        safeBind('closeWeeklyReview', 'click', function() {
             document.getElementById('weeklyReviewOverlay').classList.add('hidden');
         });
-        document.getElementById('saveReflection').addEventListener('click', function() {
+        safeBind('saveReflection', 'click', function() {
             var text = document.getElementById('weeklyReflection').value.trim();
             if (text) {
                 data.reflections.push({ date: new Date().toDateString(), text: text });
@@ -5033,7 +5033,7 @@
         });
 
         // Archive button on outcome cards
-        document.getElementById('outcomesGrid').addEventListener('click', function(e) {
+        safeBind('outcomesGrid', 'click', function(e) {
             var archiveBtn = e.target.closest('.btn-archive-outcome');
             if (archiveBtn) {
                 var oid = archiveBtn.dataset.outcomeId;
@@ -5044,48 +5044,48 @@
         });
 
         // Values modal
-        document.getElementById('btnValues').addEventListener('click', function() {
+        safeBind('btnValues', 'click', function() {
             if (!requirePro('values')) return;
             showValuesModal();
         });
-        document.getElementById('closeValues').addEventListener('click', function() {
+        safeBind('closeValues', 'click', function() {
             document.getElementById('valuesOverlay').classList.add('hidden');
         });
-        document.getElementById('btnSaveValues').addEventListener('click', saveValues);
+        safeBind('btnSaveValues', 'click', saveValues);
 
         // Business Pack modal
         var btnBP = document.getElementById('btnBusinessPack');
         if (btnBP) btnBP.addEventListener('click', showBusinessPack);
-        document.getElementById('closeBusinessPack').addEventListener('click', function() {
+        safeBind('closeBusinessPack', 'click', function() {
             document.getElementById('businessPackOverlay').classList.add('hidden');
         });
-        document.getElementById('btnNewBusinessOutcome').addEventListener('click', openNewBusinessOutcome);
+        safeBind('btnNewBusinessOutcome', 'click', openNewBusinessOutcome);
 
         // Help guide modal
         var btnHelp = document.getElementById('btnHelp');
         if (btnHelp) btnHelp.addEventListener('click', function() {
             document.getElementById('helpOverlay').classList.remove('hidden');
         });
-        document.getElementById('closeHelp').addEventListener('click', function() {
+        safeBind('closeHelp', 'click', function() {
             document.getElementById('helpOverlay').classList.add('hidden');
         });
 
         // Evening Seed Planting modal
-        document.getElementById('btnSaveSeed').addEventListener('click', function() {
+        safeBind('btnSaveSeed', 'click', function() {
             localStorage.setItem('lwp_evening_seed_' + new Date().toDateString(), 'done');
             document.getElementById('eveningSeedOverlay').classList.add('hidden');
         });
-        document.getElementById('closeEveningSeed').addEventListener('click', function() {
+        safeBind('closeEveningSeed', 'click', function() {
             localStorage.setItem('lwp_evening_seed_' + new Date().toDateString(), 'done');
             document.getElementById('eveningSeedOverlay').classList.add('hidden');
         });
 
         // Wind Down Ritual modal
-        document.getElementById('btnWindDownDone').addEventListener('click', function() {
+        safeBind('btnWindDownDone', 'click', function() {
             localStorage.setItem('lwp_wind_down_' + new Date().toDateString(), 'done');
             document.getElementById('windDownOverlay').classList.add('hidden');
         });
-        document.getElementById('closeWindDown').addEventListener('click', function() {
+        safeBind('closeWindDown', 'click', function() {
             localStorage.setItem('lwp_wind_down_' + new Date().toDateString(), 'done');
             document.getElementById('windDownOverlay').classList.add('hidden');
         });
@@ -5102,17 +5102,17 @@
 
         // Archive modal
         // Tomorrow's Plan button
-        document.getElementById('btnTomorrow').addEventListener('click', function() {
+        safeBind('btnTomorrow', 'click', function() {
             if (!requirePro('tomorrow')) return;
             try { showEveningSeedManual(); } catch(e) { console.error('tomorrow plan error:', e); }
         });
 
-        document.getElementById('btnArchive').addEventListener('click', function() {
+        safeBind('btnArchive', 'click', function() {
             if (!requirePro('archive')) return;
             renderArchive(currentArchivePeriod);
             document.getElementById('archiveOverlay').classList.remove('hidden');
         });
-        document.getElementById('closeArchive').addEventListener('click', function() {
+        safeBind('closeArchive', 'click', function() {
             document.getElementById('archiveOverlay').classList.add('hidden');
         });
 
@@ -5126,7 +5126,7 @@
         });
 
         // Unarchive button (delegated)
-        document.getElementById('archiveList').addEventListener('click', function(e) {
+        safeBind('archiveList', 'click', function(e) {
             var btn = e.target.closest('.archive-unarchive-btn');
             if (btn) {
                 var oid = btn.dataset.outcomeId;
@@ -5411,19 +5411,26 @@
         }
     }
 
+    // Safe event binding helper — prevents null crashes
+    function safeBind(id, event, handler) {
+        var el = document.getElementById(id);
+        if (el) el.addEventListener(event, handler);
+        else console.warn('safeBind: #' + id + ' not found');
+    }
+
     document.addEventListener('DOMContentLoaded', function() {
         // Preload celebration sounds
         preloadCelebrationSounds();
 
         // Auth button handlers
-        document.getElementById('btnGoogleLogin').addEventListener('click', googleLogin);
+        safeBind('btnGoogleLogin', 'click', googleLogin);
         // Additional landing page login buttons
         var btnNav = document.getElementById('btnGoogleLoginNav');
         if (btnNav) btnNav.addEventListener('click', googleLogin);
         var btnBottom = document.getElementById('btnGoogleLoginBottom');
         if (btnBottom) btnBottom.addEventListener('click', googleLogin);
 
-        document.getElementById('btnOfflineMode').addEventListener('click', function(e) {
+        safeBind('btnOfflineMode', 'click', function(e) {
             e.preventDefault();
             startOfflineMode();
         });
@@ -5513,7 +5520,7 @@
 
         // Theme toggle (light/dark)
         initTheme();
-        document.getElementById('btnTheme').addEventListener('click', toggleTheme);
+        safeBind('btnTheme', 'click', toggleTheme);
 
         if (firebaseReady) {
             // Handle redirect result (for when popup was blocked)
