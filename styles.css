@@ -6401,6 +6401,30 @@ body.business-mode .btn-focus-action:hover {
     100% { transform: scale(1); opacity: 1; }
 }
 
+/* Pulsing DANCE title */
+.joy-title-pulse {
+    font-size: 2rem;
+    font-weight: 900;
+    letter-spacing: 6px;
+    background: linear-gradient(135deg, #ff6b6b, #ffd93d, #6bcb77, #4d96ff, #e84393);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: joyTitlePulse 1.5s ease-in-out infinite, joyTitleColor 4s ease infinite;
+}
+
+@keyframes joyTitlePulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+}
+
+@keyframes joyTitleColor {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
 .stuck-laugh-area {
     font-size: 1.1rem;
     padding: 20px;

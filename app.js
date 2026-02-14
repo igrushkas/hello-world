@@ -6020,19 +6020,20 @@
                 label: 'Joy Break',
                 desc: 'Dance, move, feel alive — Brain Like A Pinball!',
                 run: function(content) {
-                    content.innerHTML = '<h3>\uD83C\uDFB5 Brain Like A Pinball \uD83E\uDE69</h3>' +
+                    content.innerHTML = '<h3 class="joy-title-pulse">\u2728 DANCE \u2728</h3>' +
                         '<div class="stuck-dance-area" id="danceEmoji">\uD83D\uDC83</div>' +
-                        '<div id="dancePrompt" class="dance-prompt dance-prompt-flash">MOVE!</div>' +
+                        '<div id="dancePrompt" class="dance-prompt dance-prompt-flash">DANCE!</div>' +
                         '<p id="danceTimer" style="font-size:1.5rem;font-weight:700;color:var(--accent-primary)">2:53</p>' +
                         '<audio id="danceAudio"><source src="audio/brain-like-a-pinball.mp3" type="audio/mpeg"></audio>';
                     var danceAudioEl = document.getElementById('danceAudio');
                     if (danceAudioEl) { try { danceAudioEl.play(); } catch(e) {} }
-                    var emojis = ['\uD83D\uDC83', '\uD83D\uDD7A', '\uD83E\uDD38', '\uD83E\uDE69'];
+                    var emojis = ['\uD83D\uDC83', '\uD83D\uDD7A', '\uD83E\uDD38', '\uD83C\uDF89', '\uD83C\uDF1F', '\uD83E\uDD29', '\uD83D\uDE80', '\uD83C\uDF08'];
                     var prompts = [
-                        { text: 'FEEL IT!', color: '#ff6b6b' },
-                        { text: 'JOY!', color: '#ffd93d' },
-                        { text: 'ALIVE!', color: '#6bcb77' },
-                        { text: 'YES!', color: '#4d96ff' }
+                        { text: 'DANCE!', color: '#ff6b6b' },
+                        { text: 'MOVE!', color: '#ffd93d' },
+                        { text: 'JUMP!', color: '#6bcb77' },
+                        { text: 'SMILE!', color: '#4d96ff' },
+                        { text: 'ENJOY!', color: '#e84393' }
                     ];
                     var danceEl = document.getElementById('danceEmoji');
                     var promptEl = document.getElementById('dancePrompt');
