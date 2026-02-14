@@ -10,7 +10,8 @@
     right: 0;
     background: linear-gradient(135deg, #1a1040, #6c5ce7);
     color: #fff;
-    padding: 12px 16px;
+    padding: 14px 16px;
+    padding-bottom: calc(14px + env(safe-area-inset-bottom, 0px));
     display: flex;
     align-items: center;
     gap: 12px;
@@ -41,10 +42,15 @@
     background: none;
     border: none;
     color: rgba(255,255,255,0.6);
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     cursor: pointer;
-    padding: 4px 8px;
+    padding: 10px 12px;
     line-height: 1;
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .pwa-dismiss-btn:hover {
@@ -2919,7 +2925,7 @@ body.finances-mode.light-mode .praise-banner {
     border-radius: var(--radius);
     padding: 16px 20px;
     position: relative;
-    overflow: hidden;
+    overflow: visible;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;

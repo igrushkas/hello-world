@@ -1,6 +1,6 @@
 // Habit Magic — Service Worker
 // Version is updated by build.sh on each deploy
-var CACHE_VERSION = 'habit-magic-20260214131111';
+var CACHE_VERSION = 'habit-magic-20260214131932';
 
 // Core files to pre-cache on install
 var CORE_ASSETS = [
@@ -110,12 +110,26 @@ self.addEventListener('fetch', function(event) {
         return;
     }
 
-    // Everything else — cache-first with network fallback
+    // HTML pages — network-first (ensures users get updates quickly)
+    if (event.request.mode === 'navigate' || url.pathname.endsWith('.html')) {
+        event.respondWith(
+            fetch(event.request).then(function(response) {
+                var clone = response.clone();
+                caches.open(CACHE_VERSION).then(function(cache) {
+                    cache.put(event.request, clone);
+                });
+                return response;
+            }).catch(function() {
+                return caches.match(event.request) || caches.match('/index.html');
+            })
+        );
+        return;
+    }
+
+    // JS/CSS/assets — stale-while-revalidate (serve cache instantly, update in background)
     event.respondWith(
         caches.match(event.request).then(function(cached) {
-            if (cached) return cached;
-            return fetch(event.request).then(function(response) {
-                // Cache successful responses
+            var fetchPromise = fetch(event.request).then(function(response) {
                 if (response.status === 200) {
                     var clone = response.clone();
                     caches.open(CACHE_VERSION).then(function(cache) {
@@ -123,12 +137,8 @@ self.addEventListener('fetch', function(event) {
                     });
                 }
                 return response;
-            }).catch(function() {
-                // Offline fallback for navigation
-                if (event.request.mode === 'navigate') {
-                    return caches.match('/index.html');
-                }
             });
+            return cached || fetchPromise;
         })
     );
 });

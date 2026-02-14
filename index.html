@@ -1415,7 +1415,7 @@
     <script>
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', function() {
-            navigator.serviceWorker.register('/sw.js').then(function(reg) {
+            navigator.serviceWorker.register('/sw.js', { updateViaCache: 'none' }).then(function(reg) {
                 console.log('[PWA] Service worker registered, scope:', reg.scope);
                 // Check for updates
                 reg.addEventListener('updatefound', function() {
