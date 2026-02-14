@@ -3025,13 +3025,14 @@ body.finances-mode.light-mode .praise-banner {
 .section-header {
     display: flex;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 12px;
     flex-wrap: wrap;
     gap: 8px;
 }
 
 .section-header h2 {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
+    font-weight: 700;
     margin-right: 0;
 }
 
@@ -3435,8 +3436,8 @@ body.finances-mode.light-mode .praise-banner {
 }
 
 .action-log-section h2 {
-    font-size: 1.3rem;
-    margin-bottom: 16px;
+    font-size: 1.1rem !important;
+    margin-bottom: 12px;
 }
 
 .action-log {
@@ -3992,11 +3993,13 @@ body.finances-mode.light-mode .praise-banner {
     border: 2px solid var(--border);
     border-radius: 10px;
     background: transparent;
-    color: var(--text-primary);
+    color: var(--text-muted);
     font-size: 0.95rem;
     font-weight: 600;
     cursor: pointer;
     transition: var(--transition);
+    opacity: 0.4;
+    filter: grayscale(60%);
 }
 
 /* Per-mode outlines when inactive */
@@ -4019,6 +4022,8 @@ body.finances-mode.light-mode .praise-banner {
 .mode-toggle-btn:hover {
     color: var(--text-primary);
     background: rgba(255,255,255,0.05);
+    opacity: 0.7;
+    filter: grayscale(20%);
 }
 
 .mode-toggle-btn[data-mode="personal"]:hover {
@@ -4046,6 +4051,8 @@ body.finances-mode.light-mode .praise-banner {
     color: #fff;
     border-color: transparent;
     box-shadow: 0 2px 8px rgba(108, 92, 231, 0.4);
+    opacity: 1;
+    filter: none;
 }
 
 .mode-toggle-btn .mode-icon {
@@ -5461,7 +5468,7 @@ body.business-mode .btn-focus-action:hover {
 }
 
 .badges-section h2 {
-    font-size: 1.1rem;
+    font-size: 1.1rem !important;
     margin-bottom: 4px;
 }
 
@@ -6177,6 +6184,18 @@ body.business-mode .btn-focus-action:hover {
     display: flex;
     align-items: center;
     gap: 8px;
+    font-size: 1.1rem !important;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.collapsible-section.collapsed .collapsible-header {
+    margin-bottom: 0;
+}
+
+.collapsible-section {
+    margin-top: 16px;
+    margin-bottom: 8px;
 }
 
 .collapsible-section.collapsed .collapsible-content {
@@ -6225,12 +6244,19 @@ body.focus-mode .action-log-section {
 }
 
 body.focus-mode .next-action-card {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     max-width: 700px;
-    margin: 40px auto;
+    width: 90%;
     padding: 40px;
     font-size: 1.1rem;
     border: 2px solid var(--accent-primary);
     box-shadow: 0 0 30px rgba(108, 92, 231, 0.2);
+    z-index: 1000;
+    background: var(--bg-card);
+    border-radius: var(--radius);
 }
 
 body.focus-mode .next-action-text {
