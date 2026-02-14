@@ -787,6 +787,8 @@
         data.log.forEach(function(entry) {
             var entryDate = new Date(entry.date);
             if (entryDate >= startOfWeek && entryDate < endOfWeek) {
+                // Apply category filter if set
+                if (currentFilter !== 'all' && entry.category && entry.category !== currentFilter) return;
                 actions++;
                 if (entry.category) categories[entry.category] = true;
             }
@@ -2133,13 +2135,27 @@
                 return '<button class="focus-cat-btn' + isActive + '" data-focus-cat="' + c.id + '">' + catBtnLabel(c.name) + '</button>';
             }).join('');
 
+        // Unified filter function — syncs both filter rows and re-renders everything
+        function applyGlobalCategoryFilter(catId) {
+            focusCategoryFilter = catId;
+            currentFilter = catId;
+            // Sync focus filter row
+            focusFilter.querySelectorAll('.focus-cat-btn').forEach(function(b) {
+                b.classList.toggle('active', b.dataset.focusCat === catId);
+            });
+            // Sync outcomes filter row
+            var filterTabs = document.getElementById('outcomesFilterTabs');
+            filterTabs.querySelectorAll('.tab').forEach(function(t) {
+                t.classList.toggle('active', t.dataset.filter === catId);
+            });
+            // Re-render all filtered sections
+            render();
+        }
+
         // Re-attach focus filter click handlers
         focusFilter.querySelectorAll('.focus-cat-btn').forEach(function(btn) {
             btn.addEventListener('click', function() {
-                focusFilter.querySelectorAll('.focus-cat-btn').forEach(function(b) { b.classList.remove('active'); });
-                this.classList.add('active');
-                focusCategoryFilter = this.dataset.focusCat;
-                renderNextAction();
+                applyGlobalCategoryFilter(this.dataset.focusCat);
             });
         });
 
@@ -2157,10 +2173,7 @@
         // Re-attach filter tabs click handlers
         filterTabs.querySelectorAll('.tab').forEach(function(tab) {
             tab.addEventListener('click', function() {
-                filterTabs.querySelectorAll('.tab').forEach(function(t) { t.classList.remove('active'); });
-                this.classList.add('active');
-                currentFilter = this.dataset.filter;
-                render();
+                applyGlobalCategoryFilter(this.dataset.filter);
             });
         });
     }
@@ -2679,6 +2692,10 @@
     function renderLog() {
         var logEl = document.getElementById('actionLog');
         var activeCatIds = getActiveCategories().map(function(c) { return c.id; });
+        // Apply category filter
+        if (currentFilter !== 'all') {
+            activeCatIds = [currentFilter];
+        }
         var modeLog = data.log.filter(function(entry) {
             return entry.category && activeCatIds.indexOf(entry.category) !== -1;
         });
@@ -2815,6 +2832,10 @@
         var today = new Date().toDateString();
         var total = 0, done = 0;
         var modeOutcomes = data.outcomes.filter(function(o) { return isOutcomeInCurrentMode(o); });
+        // Apply category filter
+        if (currentFilter !== 'all') {
+            modeOutcomes = modeOutcomes.filter(function(o) { return o.category === currentFilter; });
+        }
         modeOutcomes.forEach(function(o) {
             if (o.backBurner) return;
             o.actions.forEach(function(a) {
@@ -2824,7 +2845,8 @@
         });
         var pct = total > 0 ? Math.round((done / total) * 100) : 0;
         document.getElementById('dailyProgressFill').style.width = pct + '%';
-        document.getElementById('dailyProgressText').textContent = done + ' of ' + total + ' actions completed today (all outcomes)';
+        var filterLabel = currentFilter === 'all' ? '(all outcomes)' : '(' + catDisplayName(getActiveCategories().find(function(c) { return c.id === currentFilter; }).name) + ')';
+        document.getElementById('dailyProgressText').textContent = done + ' of ' + total + ' actions completed today ' + filterLabel;
     }
 
     // ==========================================
@@ -2972,6 +2994,10 @@
         var dailyGoal = 9;
         var done = 0;
         var activeCatIds = getActiveCategories().map(function(c) { return c.id; });
+        // Apply category filter
+        if (currentFilter !== 'all') {
+            activeCatIds = [currentFilter];
+        }
         // Count from mode-specific outcomes (active + archived)
         var allOutcomes = data.outcomes.concat(data.archived || []);
         allOutcomes.forEach(function(o) {
