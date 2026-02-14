@@ -5981,13 +5981,13 @@
                 id: 'dance',
                 icon: '\uD83D\uDC83',
                 label: 'Dance Break',
-                desc: '30 seconds of silly dancing with disco music',
+                desc: '30 seconds of silly dancing — Brain Like A Pinball!',
                 run: function(content) {
                     content.innerHTML = '<h3>30-Second Dance Break! \uD83E\uDE69</h3>' +
                         '<p style="color:var(--text-secondary);margin-bottom:12px">Get up and move! Be as silly as possible!</p>' +
                         '<div class="stuck-dance-area" id="danceEmoji">\uD83D\uDC83</div>' +
                         '<p id="danceTimer" style="font-size:1.5rem;font-weight:700;color:var(--accent-primary)">30</p>' +
-                        '<audio id="danceAudio" loop><source src="audio/dance-break.mp3" type="audio/mpeg"></audio>';
+                        '<audio id="danceAudio" loop><source src="audio/brain-like-a-pinball.mp3" type="audio/mpeg"></audio>';
                     var danceAudioEl = document.getElementById('danceAudio');
                     if (danceAudioEl) { try { danceAudioEl.play(); } catch(e) {} }
                     var emojis = ['\uD83D\uDC83', '\uD83D\uDD7A', '\uD83E\uDD38', '\uD83C\uDFB5', '\uD83E\uDE69', '\uD83C\uDFB6', '\uD83D\uDC83'];
@@ -6169,7 +6169,7 @@
                 id: 'bodyShake',
                 icon: '\uD83E\uDEBB',
                 label: 'Shake It Off',
-                desc: 'Discharge stress like animals do',
+                desc: 'Discharge stress with music — Brain Like A Pinball!',
                 run: function(content) {
                     content.innerHTML = '<h3>Shake It Off! \uD83E\uDEBB</h3>' +
                         '<p style="color:var(--text-secondary);margin-bottom:12px">Animals shake after danger to release stress hormones. Your turn!</p>' +
@@ -6180,7 +6180,10 @@
                         '<p>\uD83E\uDDB6 Bounce on your feet</p>' +
                         '<p>\uD83D\uDCAA Shake your arms and shoulders</p>' +
                         '<p>\uD83C\uDFB5 Let your whole body wiggle!</p>' +
-                        '</div>';
+                        '</div>' +
+                        '<audio id="danceAudio" loop><source src="audio/brain-like-a-pinball.mp3" type="audio/mpeg"></audio>';
+                    var shakeAudioEl = document.getElementById('danceAudio');
+                    if (shakeAudioEl) { try { shakeAudioEl.play(); } catch(e) {} }
                     var timerEl = document.getElementById('shakeTimer');
                     var emojis = ['\uD83E\uDEBB', '\uD83D\uDCAA', '\uD83E\uDD38', '\uD83C\uDFB5', '\uD83D\uDC4B', '\uD83E\uDEBB'];
                     var shakeEl = document.getElementById('shakeEmoji');
@@ -6194,6 +6197,8 @@
                             shakeEl.textContent = '\uD83C\uDF89';
                             shakeEl.style.animation = 'none';
                             timerEl.textContent = 'Stress discharged!';
+                            var _sa = document.getElementById('danceAudio');
+                            if (_sa) { _sa.pause(); _sa.currentTime = 0; }
                         }
                     }, 1000);
                     stuckActiveIntervals.push(shakeInt);
