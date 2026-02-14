@@ -20,7 +20,7 @@
     <meta name="twitter:description" content="Track habits, crush goals, earn XP & badges. Gamified productivity with streaks, combos, and dopamine-fueled progress.">
 
     <title>Habit Magic - Goal Tracker</title>
-    <link rel="stylesheet" href="styles.min.css?v=20260214f">
+    <link rel="stylesheet" href="styles.min.css?v=20260214g">
 
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
@@ -1275,7 +1275,7 @@
     <!-- STUCK? Quick Reset Modal -->
     <div id="stuckOverlay" class="modal-overlay hidden">
         <div class="modal stuck-modal">
-            <button class="modal-close" onclick="document.getElementById('stuckOverlay').classList.add('hidden')">&times;</button>
+            <button class="modal-close" id="closeStuck">&times;</button>
             <div style="text-align:center;font-size:3rem;margin-bottom:12px">&#129300;</div>
             <h2 style="text-align:center">Feeling Stuck?</h2>
             <p style="text-align:center;color:var(--text-secondary);margin-bottom:20px">Your brain needs a quick reset. Pick one — it only takes 60 seconds!</p>
@@ -1377,6 +1377,6 @@
     </div>
 
     <script src="firebase-config.js"></script>
-    <script src="app.min.js?v=20260214f"></script>
+    <script src="app.min.js?v=20260214g"></script>
 </body>
 </html>

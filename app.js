@@ -5939,12 +5939,16 @@
                 '</div>';
         });
 
-        safeBind('stuckDone', 'click', function() {
+        function closeStuckModal() {
             document.getElementById('stuckOverlay').classList.add('hidden');
             if (stuckBreathInterval) { clearTimeout(stuckBreathInterval); stuckBreathInterval = null; }
+            // Stop any playing audio
             var audio = document.getElementById('laughAudio');
             if (audio) { audio.pause(); audio.currentTime = 0; }
-        });
+        }
+
+        safeBind('stuckDone', 'click', closeStuckModal);
+        safeBind('closeStuck', 'click', closeStuckModal);
 
         // Extended break
         safeBind('btnStartExtendedBreak', 'click', startExtendedBreakTimer);
