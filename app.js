@@ -2845,7 +2845,11 @@
         });
         var pct = total > 0 ? Math.round((done / total) * 100) : 0;
         document.getElementById('dailyProgressFill').style.width = pct + '%';
-        var filterLabel = currentFilter === 'all' ? '(all outcomes)' : '(' + catDisplayName(getActiveCategories().find(function(c) { return c.id === currentFilter; }).name) + ')';
+        var filterLabel = '(all outcomes)';
+        if (currentFilter !== 'all') {
+            var filterCat = getActiveCategories().find(function(c) { return c.id === currentFilter; });
+            if (filterCat) filterLabel = '(' + catDisplayName(filterCat.name) + ')';
+        }
         document.getElementById('dailyProgressText').textContent = done + ' of ' + total + ' actions completed today ' + filterLabel;
     }
 
@@ -5058,7 +5062,8 @@
         document.getElementById('btnNewBusinessOutcome').addEventListener('click', openNewBusinessOutcome);
 
         // Help guide modal
-        document.getElementById('btnHelp').addEventListener('click', function() {
+        var btnHelp = document.getElementById('btnHelp');
+        if (btnHelp) btnHelp.addEventListener('click', function() {
             document.getElementById('helpOverlay').classList.remove('hidden');
         });
         document.getElementById('closeHelp').addEventListener('click', function() {
@@ -5422,7 +5427,8 @@
             e.preventDefault();
             startOfflineMode();
         });
-        document.getElementById('btnLogout').addEventListener('click', logout);
+        var btnLogout = document.getElementById('btnLogout');
+        if (btnLogout) btnLogout.addEventListener('click', logout);
 
         // Menu toggle (mobile dropdown)
         var menuToggle = document.getElementById('btnMenuToggle');
