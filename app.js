@@ -407,33 +407,33 @@
     const SELF_PRAISES = [
         "Are you glad you finished it so fast? Way to go!",
         "Notice how capable you are when you commit to something?",
-        "You didn't need anyone to push you. You chose this yourself.",
+        "You chose this yourself. That inner fire is all yours.",
         "Feel that momentum building? That's YOUR power at work.",
         "Another one done. You're proving to yourself what you're made of.",
         "How does it feel to keep your promises to yourself?",
         "You just showed up for yourself again. That's real strength.",
-        "Look at you — following through without needing approval from anyone.",
+        "Look at you — following through because YOU believe in yourself.",
         "Every task you complete is a vote for the person you're becoming.",
         "You decided, you acted, you delivered. That's self-trust in action.",
         "Can you feel your confidence growing? You earned that.",
-        "Nobody made you do that — you chose it. That's powerful.",
+        "You chose it. You owned it. That's pure power.",
         "This is what living with purpose looks like. You're doing it.",
         "Your future self is thanking you right now. Keep going.",
         "Each completed action rewires your brain for success. Feel the shift?",
-        "You don't need a cheerleader. You ARE the cheerleader.",
+        "You ARE your own biggest cheerleader. And the crowd goes wild!",
         "The discipline you're building right now is changing your life.",
         "Notice the difference between thinking about it and actually doing it? You did it.",
         "You're not waiting for permission anymore. You're taking charge.",
         "How good does it feel to be someone who finishes what they start?",
-        "You just proved that resistance is temporary but results are permanent.",
+        "Results are permanent and you just created one. Feel that power!",
         "Your actions are speaking louder than any doubt ever could.",
         "Remember this feeling of accomplishment — you created it yourself.",
         "You're building unstoppable momentum. One action at a time.",
         "The person who started this task and the person finishing it just leveled up.",
-        "You're not doing this for anyone else's approval. This is for YOU.",
+        "This is for YOU. Every action builds the life you want.",
         "That inner voice saying 'I can do this' — you just proved it right again.",
         "Progress isn't always visible, but you can feel it. Trust that.",
-        "You chose purpose over procrastination. That's a win worth celebrating.",
+        "You chose purpose. That's a win worth celebrating!",
         "Every completed task is evidence that you are exactly who you want to be.",
         // NCI-inspired (Chase Hughes FATE + Six-Axis Model) self-authority praises
         "You just exercised the most powerful form of influence — self-influence.",
@@ -441,22 +441,22 @@
         "Your brain just recorded evidence of who you really are. A finisher.",
         "Discipline is choosing your future self over your present self. You just did that.",
         "Focus creates authority. Authority creates momentum. You have both now.",
-        "You didn't negotiate with resistance. You overruled it. That's leadership.",
+        "You led yourself with clarity and action. That's true leadership.",
         "Every completed action raises your internal compliance threshold. You expect more from yourself now.",
         "The tribe follows the person who follows through. You just proved you're that person.",
         "Your emotional state just shifted. That's neurological proof of progress.",
         "Expectancy drives behavior. You just raised your own expectations. Level up.",
         // ADHD-specific encouragement
         "Your ADHD brain just crushed it. That dopamine hit? You earned it.",
-        "You didn't get lost in the rabbit hole. You stayed focused and finished. That's huge.",
-        "Starting is the hardest part for ADHD brains. You started AND finished. Legendary.",
-        "Your brain said 'do it later.' You said 'no, now.' That's executive function winning.",
-        "ADHD brains need wins. You just got one. Stack another.",
-        "Procrastination tried to visit. You weren't home. You were DOING.",
-        "That task was fighting your working memory the whole time. And you still won.",
-        "Transition between tasks is hard with ADHD. You just did it smoothly. Real progress.",
-        "Your brain thrives on novelty? Here's some: you just completed another task.",
-        "Hyperfocus isn't just for video games. You just proved that."
+        "You stayed focused and finished. That focus is your superpower!",
+        "You started AND finished. Legendary. Your brain is incredible.",
+        "You chose NOW. That's executive function at its finest!",
+        "ADHD brains collect wins like gold coins. You just got one. Stack another!",
+        "You showed up and got it DONE. Pure power move.",
+        "Your working memory held strong and you delivered. Champion energy!",
+        "Smooth transition between tasks — your brain is getting stronger every day!",
+        "Your brain loves novelty? Here's some: you just completed another task! Fresh win!",
+        "That focus? That drive? That's your ADHD superpower in full effect."
     ];
 
     // ==========================================
@@ -738,6 +738,26 @@
         setTimeout(function() { container.classList.add('hidden'); container.innerHTML = ''; }, 3000);
     }
 
+    // --- JOY BURST: Quick sparkle on every task completion ---
+    function joyBurst() {
+        var card = document.getElementById('nextActionCard');
+        if (!card) return;
+        var joyEmojis = ['\u2728', '\uD83C\uDF1F', '\uD83D\uDCAB', '\u2B50', '\uD83C\uDF89', '\uD83C\uDF8A', '\uD83D\uDE80', '\uD83D\uDC9B', '\uD83C\uDF08', '\uD83E\uDD29'];
+        for (var i = 0; i < 6; i++) {
+            var spark = document.createElement('div');
+            spark.className = 'joy-burst-particle';
+            spark.textContent = joyEmojis[Math.floor(Math.random() * joyEmojis.length)];
+            spark.style.left = (20 + Math.random() * 60) + '%';
+            spark.style.animationDelay = (Math.random() * 0.3) + 's';
+            spark.style.fontSize = (1 + Math.random() * 1.2) + 'rem';
+            card.appendChild(spark);
+        }
+        setTimeout(function() {
+            var particles = card.querySelectorAll('.joy-burst-particle');
+            for (var j = 0; j < particles.length; j++) particles[j].remove();
+        }, 1200);
+    }
+
     function showLevelUpOverlay(level) {
         var overlay = document.getElementById('levelUpOverlay');
         if (!overlay) return;
@@ -822,7 +842,7 @@
         "Confidence comes from kept promises. You just kept one to yourself.",
         "The five pillars of authority: confidence, discipline, leadership, gratitude, enjoyment. You're building all five.",
         "Focus creates authority. Authority creates compliance. Your focus just leveled up.",
-        "You didn't wait for permission. That's what leaders do.",
+        "You took the lead. That's what champions do.",
         "Your brain just recorded this win. It's rewiring for more success.",
         "Expectancy drives behavior. Expect more from yourself — you just proved you can deliver.",
         "The strongest form of influence is self-influence. You just exercised it."
@@ -4605,6 +4625,9 @@
             showPraise();
         }
 
+        // Joy burst — sparkle emojis fly up from the card
+        joyBurst();
+
         // Play celebration audio
         playCompletionAudio();
 
@@ -5983,9 +6006,9 @@
             },
             {
                 id: 'dance',
-                icon: '\uD83D\uDC83',
-                label: 'Dance Break',
-                desc: 'Full song dance party — Brain Like A Pinball!',
+                icon: '\u2728',
+                label: 'Joy Break',
+                desc: 'Dance, move, feel alive — Brain Like A Pinball!',
                 run: function(content) {
                     content.innerHTML = '<h3>\uD83C\uDFB5 Brain Like A Pinball \uD83E\uDE69</h3>' +
                         '<div class="stuck-dance-area" id="danceEmoji">\uD83D\uDC83</div>' +
@@ -5996,10 +6019,10 @@
                     if (danceAudioEl) { try { danceAudioEl.play(); } catch(e) {} }
                     var emojis = ['\uD83D\uDC83', '\uD83D\uDD7A', '\uD83E\uDD38', '\uD83E\uDE69'];
                     var prompts = [
-                        { text: 'MOVE!', color: '#ff6b6b' },
-                        { text: 'DANCE!', color: '#ffd93d' },
-                        { text: 'JUMP!', color: '#6bcb77' },
-                        { text: 'SMILE!', color: '#4d96ff' }
+                        { text: 'FEEL IT!', color: '#ff6b6b' },
+                        { text: 'JOY!', color: '#ffd93d' },
+                        { text: 'ALIVE!', color: '#6bcb77' },
+                        { text: 'YES!', color: '#4d96ff' }
                     ];
                     var danceEl = document.getElementById('danceEmoji');
                     var promptEl = document.getElementById('dancePrompt');
@@ -6030,7 +6053,7 @@
                             promptEl.textContent = 'AMAZING!';
                             promptEl.style.color = '#ffd93d';
                             promptEl.classList.remove('dance-prompt-flash');
-                            timerEl.textContent = 'You danced the whole song!';
+                            timerEl.textContent = 'Pure joy! You felt that!';
                             var da = document.getElementById('danceAudio');
                             if (da) { da.pause(); da.currentTime = 0; }
                         }
@@ -6522,7 +6545,7 @@
             renderStuckOptions();
         });
 
-        // Dance Break button — directly opens the dance activity
+        // Joy button — instant dopamine hit via dance/movement
         safeBind('btnDanceBreak', 'click', function() {
             document.getElementById('stuckOverlay').classList.remove('hidden');
             var container = document.getElementById('stuckOptionsContainer');
@@ -6530,9 +6553,9 @@
             var activity = document.getElementById('stuckActivity');
             if (activity) activity.classList.remove('hidden');
             var content = document.getElementById('stuckActivityContent');
-            // Find the dance activity and run it directly
-            var danceAct = STUCK_ACTIVITIES.filter(function(a) { return a.id === 'dance'; })[0];
-            if (danceAct && content) danceAct.run(content);
+            // Find the joy/dance activity and run it directly
+            var joyAct = STUCK_ACTIVITIES.filter(function(a) { return a.id === 'dance'; })[0];
+            if (joyAct && content) joyAct.run(content);
         });
 
         // Thank Yourself button & modal

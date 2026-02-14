@@ -1936,6 +1936,8 @@ body.health-mode .focus-title-category {
     padding: 16px;
     box-shadow: var(--shadow-glow);
     margin-bottom: 8px;
+    position: relative;
+    overflow: visible;
 }
 
 /* Compact buttons inside the action card — unified style */
@@ -1944,7 +1946,7 @@ body.health-mode .focus-title-category {
 .next-action-buttons .btn-timer-start,
 .next-action-buttons .btn-pick-for-me,
 .next-action-buttons .btn-focus-buddy,
-.next-action-buttons .btn-dance-break,
+.next-action-buttons .btn-joy,
 .next-action-buttons .btn-thank-yourself,
 .next-action-buttons .btn-stuck {
     padding: 6px 10px;
@@ -6062,9 +6064,11 @@ body.business-mode .btn-focus-action:hover {
     box-shadow: 0 4px 12px rgba(243, 156, 18, 0.35);
 }
 
-/* Dance Break Button — pink/magenta fun vibe */
-.btn-dance-break {
-    background: linear-gradient(135deg, #e91e63, #c2185b);
+/* Joy Button — rainbow sparkle energy */
+.btn-joy {
+    background: linear-gradient(135deg, #ff6b6b, #ffd93d, #6bcb77, #4d96ff, #9b59b6);
+    background-size: 300% 300%;
+    animation: joyShimmer 3s ease infinite;
     color: #fff;
     border: none;
     padding: 8px 14px;
@@ -6073,12 +6077,34 @@ body.business-mode .btn-focus-action:hover {
     font-weight: 700;
     font-size: 0.85rem;
     transition: var(--transition);
+    text-shadow: 0 1px 3px rgba(0,0,0,0.3);
 }
 
-.btn-dance-break:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(233, 30, 99, 0.35);
-    background: linear-gradient(135deg, #f06292, #e91e63);
+@keyframes joyShimmer {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.btn-joy:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 4px 16px rgba(255, 107, 107, 0.4), 0 0 20px rgba(255, 217, 61, 0.3);
+}
+
+/* Joy Burst — sparkle particles fly up on task completion */
+.joy-burst-particle {
+    position: absolute;
+    bottom: 50%;
+    pointer-events: none;
+    z-index: 100;
+    animation: joyFloat 1s ease-out forwards;
+    opacity: 0;
+}
+
+@keyframes joyFloat {
+    0% { transform: translateY(0) scale(0.3) rotate(0deg); opacity: 1; }
+    50% { opacity: 1; }
+    100% { transform: translateY(-80px) scale(1.2) rotate(360deg); opacity: 0; }
 }
 
 /* Thank Yourself Button — warm golden yellow */
