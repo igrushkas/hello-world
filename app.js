@@ -1351,7 +1351,24 @@
     var currentUser = null;
     var isOfflineMode = false;
     var firestoreUnsubscribe = null;
-    var userTier = 'free'; // 'free' or 'pro'
+    var userTier = 'free'; // 'free', 'starter', 'pro', or 'founding'
+
+    var TIER_ALLOWED_MODES = {
+        free: ['personal'],
+        starter: ['personal', 'health'],
+        pro: ['personal', 'business', 'health', 'finances'],
+        founding: ['personal', 'business', 'health', 'finances']
+    };
+
+    function canAccessMode(mode) {
+        if (isFoundingMember || isTrialUser) return true;
+        var allowed = TIER_ALLOWED_MODES[userTier] || TIER_ALLOWED_MODES.free;
+        return allowed.indexOf(mode) !== -1;
+    }
+
+    function hasUnlimitedOutcomes() {
+        return userTier !== 'free' || isFoundingMember || isTrialUser;
+    }
 
     // ==========================================
     //  PRO TIER SYSTEM
@@ -1375,8 +1392,7 @@
     };
 
     function isProUser() {
-        return true; // FREE BETA: all features unlocked for everyone
-        // Original: return userTier === 'pro' || isTrialUser();
+        return userTier === 'pro' || userTier === 'starter' || userTier === 'founding' || isFoundingMember || isTrialUser;
     }
 
     function isTrialUser() {
@@ -1434,30 +1450,128 @@
     function updateUpgradeButtonVisibility() {
         var btn = document.getElementById('btnUpgrade');
         if (!btn) return;
-        btn.style.display = 'none'; // FREE BETA: hide upgrade button
-        // Original logic preserved for future reactivation:
-        // if (currentUser && !isOfflineMode && userTier !== 'pro') {
-        //     btn.style.display = 'inline-flex';
-        // } else {
-        //     btn.style.display = 'none';
-        // }
-        updateCheckoutLink();
+        if (currentUser && !isOfflineMode && userTier === 'free' && !isFoundingMember && !isTrialUser) {
+            btn.style.display = 'inline-flex';
+        } else {
+            btn.style.display = 'none';
+        }
+        updateCheckoutLinks();
     }
 
-    var CHECKOUT_BASE_URL = 'https://myhabitmagic.lemonsqueezy.com/checkout/buy/bebf041d-868c-40b7-9968-8f458e1cd57e';
+    var CHECKOUT_URLS = {
+        starter_monthly: 'https://myhabitmagic.lemonsqueezy.com/checkout/buy/STARTER_MONTHLY_PLACEHOLDER',
+        starter_annual: 'https://myhabitmagic.lemonsqueezy.com/checkout/buy/STARTER_ANNUAL_PLACEHOLDER',
+        pro_monthly: 'https://myhabitmagic.lemonsqueezy.com/checkout/buy/PRO_MONTHLY_PLACEHOLDER',
+        pro_annual: 'https://myhabitmagic.lemonsqueezy.com/checkout/buy/PRO_ANNUAL_PLACEHOLDER'
+    };
 
-    function updateCheckoutLink() {
-        var link = document.getElementById('checkoutLink');
-        if (!link) return;
+    function updateCheckoutLinks() {
+        var isAnnual = document.getElementById('billingToggle') && document.getElementById('billingToggle').checked;
+        var starterLink = document.getElementById('starterCheckoutLink');
+        var proLink = document.getElementById('proCheckoutLink');
+        var baseStarter = isAnnual ? CHECKOUT_URLS.starter_annual : CHECKOUT_URLS.starter_monthly;
+        var basePro = isAnnual ? CHECKOUT_URLS.pro_annual : CHECKOUT_URLS.pro_monthly;
+        var params = '';
         if (currentUser) {
-            var params = '?checkout[custom][uid]=' + encodeURIComponent(currentUser.uid);
+            params = '?checkout[custom][uid]=' + encodeURIComponent(currentUser.uid);
             if (currentUser.email) {
                 params += '&checkout[email]=' + encodeURIComponent(currentUser.email);
             }
-            link.href = CHECKOUT_BASE_URL + params;
-        } else {
-            link.href = CHECKOUT_BASE_URL;
         }
+        if (starterLink) starterLink.href = baseStarter + params;
+        if (proLink) proLink.href = basePro + params;
+    }
+
+    function showPricingModal(lockedMode) {
+        var overlay = document.getElementById('upgradeOverlay');
+        if (!overlay) return;
+        var subtitle = document.getElementById('pricingSubtitle');
+        if (subtitle && lockedMode) {
+            var modeNames = { business: 'Business', health: 'Health', finances: 'Finances' };
+            subtitle.textContent = 'Upgrade to unlock ' + (modeNames[lockedMode] || lockedMode) + ' mode';
+        } else if (subtitle) {
+            subtitle.textContent = 'Unlock more modes and unlimited outcomes';
+        }
+        updatePricingButtons();
+        updateCheckoutLinks();
+        overlay.classList.remove('hidden');
+    }
+
+    function updatePricingButtons() {
+        var btnFree = document.getElementById('btnPlanFree');
+        if (btnFree) {
+            if (userTier === 'free' && !isFoundingMember && !isTrialUser) {
+                btnFree.textContent = 'Current Plan';
+                btnFree.disabled = true;
+            } else {
+                btnFree.textContent = 'Free Plan';
+                btnFree.disabled = true;
+            }
+        }
+        var starterBtn = document.getElementById('starterCheckoutLink');
+        if (starterBtn) {
+            if (userTier === 'starter') {
+                starterBtn.textContent = 'Current Plan';
+                starterBtn.style.pointerEvents = 'none';
+                starterBtn.style.opacity = '0.6';
+            } else {
+                starterBtn.textContent = 'Get Starter \u2192';
+                starterBtn.style.pointerEvents = '';
+                starterBtn.style.opacity = '';
+            }
+        }
+        var proBtn = document.getElementById('proCheckoutLink');
+        if (proBtn) {
+            if (userTier === 'pro') {
+                proBtn.textContent = 'Current Plan';
+                proBtn.style.pointerEvents = 'none';
+                proBtn.style.opacity = '0.6';
+            } else {
+                proBtn.textContent = 'Get Pro \u2192';
+                proBtn.style.pointerEvents = '';
+                proBtn.style.opacity = '';
+            }
+        }
+    }
+
+    function updateModeLocksUI() {
+        var btnIds = {
+            personal: 'btnPersonalMode',
+            business: 'btnBusinessMode',
+            health: 'btnHealthMode',
+            finances: 'btnFinancesMode'
+        };
+        ['personal', 'business', 'health', 'finances'].forEach(function(mode) {
+            var btn = document.getElementById(btnIds[mode]);
+            if (!btn) return;
+            if (canAccessMode(mode)) {
+                btn.classList.remove('mode-locked');
+            } else {
+                btn.classList.add('mode-locked');
+            }
+        });
+        // Update mobile dropdown options
+        var mobileSelect = document.getElementById('modeSelectMobile');
+        if (mobileSelect) {
+            Array.from(mobileSelect.options).forEach(function(opt) {
+                var cleanText = opt.textContent.replace(' \uD83D\uDD12', '');
+                if (!canAccessMode(opt.value)) {
+                    opt.textContent = cleanText + ' \uD83D\uDD12';
+                    opt.disabled = true;
+                } else {
+                    opt.textContent = cleanText;
+                    opt.disabled = false;
+                }
+            });
+        }
+        // If current mode is locked, switch to personal
+        if (!canAccessMode(currentMode)) {
+            switchMode('personal');
+        }
+    }
+
+    function showUpgradeModal() {
+        showPricingModal();
     }
 
     function showLoginScreen() {
@@ -2570,7 +2684,8 @@
                 db.collection('users').doc(currentUser.uid).set({
                     lastFeedbackDate: new Date().toISOString(),
                     feedbackStreak: firebase.firestore.FieldValue.increment(1),
-                    lastActiveDate: new Date().toISOString()
+                    lastActiveDate: new Date().toISOString(),
+                    feedbackWarned: false
                 }, { merge: true });
             } catch(e) { console.error('Daily feedback error:', e); }
         }
@@ -3032,6 +3147,11 @@
 
     function switchMode(mode) {
         try {
+            // Tier gate: check if user can access this mode
+            if (!canAccessMode(mode)) {
+                showPricingModal(mode);
+                return;
+            }
             currentMode = mode;
             localStorage.setItem('lwp_current_mode', mode);
 
@@ -5611,6 +5731,38 @@
         safeBind('btnSubmitDailyFeedback', 'click', function() {
             try { submitDailyFeedback(); } catch(e) { console.error('daily feedback error:', e); }
         });
+
+        // Billing toggle for pricing modal
+        safeBind('billingToggle', 'change', function() {
+            var isAnnual = this.checked;
+            var starterPrice = document.getElementById('starterPrice');
+            var starterPeriod = document.getElementById('starterPeriod');
+            var starterSavings = document.getElementById('starterSavings');
+            var proPrice = document.getElementById('proPrice');
+            var proPeriod = document.getElementById('proPeriod');
+            var proSavings = document.getElementById('proSavings');
+
+            if (isAnnual) {
+                if (starterPrice) starterPrice.textContent = '$8.25';
+                if (starterPeriod) starterPeriod.textContent = '/mo ($99/yr)';
+                if (starterSavings) starterSavings.classList.remove('hidden');
+                if (proPrice) proPrice.textContent = '$14.92';
+                if (proPeriod) proPeriod.textContent = '/mo ($179/yr)';
+                if (proSavings) proSavings.classList.remove('hidden');
+            } else {
+                if (starterPrice) starterPrice.textContent = '$9.99';
+                if (starterPeriod) starterPeriod.textContent = '/month';
+                if (starterSavings) starterSavings.classList.add('hidden');
+                if (proPrice) proPrice.textContent = '$19.99';
+                if (proPeriod) proPeriod.textContent = '/month';
+                if (proSavings) proSavings.classList.add('hidden');
+            }
+
+            document.getElementById('billingMonthlyLabel').classList.toggle('active', !isAnnual);
+            document.getElementById('billingAnnualLabel').classList.toggle('active', isAnnual);
+            updateCheckoutLinks();
+        });
+
         document.querySelectorAll('.emoji-rating-btn').forEach(function(btn) {
             btn.addEventListener('click', function() {
                 document.querySelectorAll('.emoji-rating-btn').forEach(function(b) { b.classList.remove('selected'); });
@@ -5725,8 +5877,8 @@
             if (!purpose) return;
 
             // Pro gate: max 3 outcomes for free users
-            if (data && data.outcomes && data.outcomes.length >= 3 && !isProUser()) {
-                showUpgradeModal();
+            if (data && data.outcomes && data.outcomes.length >= 3 && !hasUnlimitedOutcomes()) {
+                showPricingModal();
                 return;
             }
 
@@ -7134,7 +7286,15 @@
                     return;
                 }
                 isFoundingMember = true;
+                userTier = 'founding';
                 updateFoundingMemberUI();
+                // Check if promoted from waitlist — show congrats
+                if (userData.foundingMemberPromotedFromWaitlist) {
+                    if (!localStorage.getItem('lwp_waitlist_congrats_' + uid)) {
+                        localStorage.setItem('lwp_waitlist_congrats_' + uid, '1');
+                        setTimeout(function() { showWaitlistPromotionCongrats(); }, 1500);
+                    }
+                }
                 return;
             }
 
@@ -7241,27 +7401,53 @@
         db.collection('users').doc(currentUser.uid).get().then(function(doc) {
             if (!doc.exists || !doc.data().foundingMember) return;
             var userData = doc.data();
-            var lastActive = userData.lastActiveDate ? new Date(userData.lastActiveDate) : new Date();
             var now = new Date();
+
+            // Check 1: Inactivity (14 days no login = revoke)
+            var lastActive = userData.lastActiveDate ? new Date(userData.lastActiveDate) : new Date();
             var daysSinceActive = Math.floor((now - lastActive) / (1000 * 60 * 60 * 24));
 
             if (daysSinceActive >= 14) {
-                revokeFoundingMemberStatus(currentUser.uid);
+                revokeFoundingMemberStatus(currentUser.uid, 'inactivity');
+                return;
             } else if (daysSinceActive >= 7 && userData.foundingMemberStatus !== 'warned') {
                 showInactivityNudge(daysSinceActive);
                 db.collection('users').doc(currentUser.uid).set({
                     foundingMemberStatus: 'warned'
                 }, { merge: true });
             }
+
+            // Check 2: Feedback gap (3 days no daily feedback = warning, then revoke)
+            var lastFeedback = userData.lastFeedbackDate ? new Date(userData.lastFeedbackDate) : null;
+            if (lastFeedback) {
+                var daysSinceFeedback = Math.floor((now - lastFeedback) / (1000 * 60 * 60 * 24));
+                if (daysSinceFeedback >= 4 && userData.feedbackWarned) {
+                    // Already warned, still no feedback — revoke
+                    revokeFoundingMemberStatus(currentUser.uid, 'no_feedback');
+                    return;
+                } else if (daysSinceFeedback >= 3 && !userData.feedbackWarned) {
+                    // First warning at 3 days
+                    showFeedbackWarningModal(daysSinceFeedback);
+                    db.collection('users').doc(currentUser.uid).set({
+                        feedbackWarned: true
+                    }, { merge: true });
+                }
+            }
         }).catch(function(e) { console.error('Engagement check error:', e); });
     }
 
-    function revokeFoundingMemberStatus(uid) {
+    function revokeFoundingMemberStatus(uid, reason) {
         isFoundingMember = false;
+        userTier = 'free';
         db.collection('users').doc(uid).set({
             foundingMember: false,
             foundingMemberStatus: 'revoked',
-            foundingMemberRevokedDate: new Date().toISOString()
+            foundingMemberRevokedDate: new Date().toISOString(),
+            foundingMemberRevokedReason: reason || 'unknown',
+            feedbackWarned: false,
+            // Start 14-day trial for revoked member
+            trialUser: true,
+            trialEndDate: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString()
         }, { merge: true });
 
         // Decrement founding member count to open spot
@@ -7273,13 +7459,21 @@
         // Notify owner that a spot opened
         db.collection('feedback_notifications').add({
             type: 'spot_opened',
+            reason: reason,
             revokedUserUid: uid,
             revokedUserEmail: currentUser ? currentUser.email : '',
             date: new Date().toISOString(),
             ownerEmail: 'ereana.swan@gmail.com'
         }).catch(function(e) { console.error('Notification error:', e); });
 
-        showFoundingMemberRevokedNotice();
+        // Auto-promote next person on waitlist
+        promoteNextWaitlistMember();
+
+        if (reason === 'no_feedback') {
+            showFeedbackRevokedNotice();
+        } else {
+            showFoundingMemberRevokedNotice();
+        }
     }
 
     function showInactivityNudge(days) {
@@ -7292,6 +7486,69 @@
 
     function showFoundingMemberRevokedNotice() {
         var overlay = document.getElementById('revokedOverlay');
+        if (overlay) overlay.classList.remove('hidden');
+    }
+
+    function showFeedbackWarningModal(daysMissed) {
+        var overlay = document.getElementById('feedbackWarningOverlay');
+        if (!overlay) return;
+        var daysEl = document.getElementById('feedbackWarningDays');
+        if (daysEl) daysEl.textContent = daysMissed;
+        overlay.classList.remove('hidden');
+    }
+
+    function showFeedbackRevokedNotice() {
+        var overlay = document.getElementById('feedbackRevokedOverlay');
+        if (overlay) overlay.classList.remove('hidden');
+    }
+
+    // ── Waitlist Auto-Promotion ──────────────────────────────────
+    function promoteNextWaitlistMember() {
+        if (!firebaseReady) return;
+        db.collection('waitlist').orderBy('joinDate', 'asc').limit(1).get()
+            .then(function(snapshot) {
+                if (snapshot.empty) return; // No one on waitlist
+                var waitlistDoc = snapshot.docs[0];
+                var waitlistData = waitlistDoc.data();
+                var promotedUid = waitlistData.uid;
+
+                if (!promotedUid) return; // No uid stored, can't auto-promote
+
+                // Promote: set as founding member
+                db.collection('users').doc(promotedUid).set({
+                    foundingMember: true,
+                    foundingMemberStatus: 'active',
+                    foundingMemberJoinDate: new Date().toISOString(),
+                    foundingMemberPromotedFromWaitlist: true,
+                    trialUser: false,
+                    feedbackStreak: 0,
+                    feedbackWarned: false,
+                    lastActiveDate: new Date().toISOString()
+                }, { merge: true });
+
+                // Increment founding member count
+                db.collection('meta').doc('founding_members').set({
+                    count: firebase.firestore.FieldValue.increment(1)
+                }, { merge: true });
+
+                // Remove from waitlist
+                waitlistDoc.ref.delete();
+
+                // Notify owner about promotion
+                db.collection('feedback_notifications').add({
+                    type: 'waitlist_promoted',
+                    promotedUid: promotedUid,
+                    promotedEmail: waitlistData.email || '',
+                    promotedName: waitlistData.displayName || '',
+                    date: new Date().toISOString(),
+                    ownerEmail: 'ereana.swan@gmail.com'
+                }).catch(function(e) { console.error('Promotion notification error:', e); });
+            })
+            .catch(function(e) { console.error('Waitlist promotion error:', e); });
+    }
+
+    function showWaitlistPromotionCongrats() {
+        var overlay = document.getElementById('waitlistCongratsOverlay');
         if (overlay) overlay.classList.remove('hidden');
     }
 
@@ -7447,18 +7704,23 @@
         if (!firebaseReady) return;
         try {
             db.collection('users').doc(uid).get().then(function(doc) {
-                if (doc.exists && doc.data().tier) {
-                    userTier = doc.data().tier;
-                } else {
-                    // No tier in DB yet — bootstrap pro for known email
-                    if (currentUser && currentUser.email === 'irishka.lebedeva@gmail.com') {
+                if (doc.exists) {
+                    var userData = doc.data();
+                    if (userData.foundingMember) {
+                        userTier = 'founding';
+                    } else if (userData.tier) {
+                        userTier = userData.tier; // 'free', 'starter', or 'pro'
+                    } else if (currentUser && currentUser.email === 'irishka.lebedeva@gmail.com') {
                         userTier = 'pro';
                         db.collection('users').doc(uid).set({ tier: 'pro' }, { merge: true });
                     } else {
                         userTier = 'free';
                     }
+                } else {
+                    userTier = 'free';
                 }
                 updateUpgradeButtonVisibility();
+                updateModeLocksUI();
             }).catch(function() {
                 userTier = 'free';
                 updateUpgradeButtonVisibility();
@@ -7572,7 +7834,14 @@
         if (modeSelectMobile) {
             modeSelectMobile.addEventListener('change', function() {
                 var mode = this.value;
-                if (mode && currentMode !== mode) switchMode(mode);
+                if (mode && currentMode !== mode) {
+                    if (!canAccessMode(mode)) {
+                        this.value = currentMode; // Reset dropdown
+                        showPricingModal(mode);
+                        return;
+                    }
+                    switchMode(mode);
+                }
             });
         }
 

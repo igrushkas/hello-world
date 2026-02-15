@@ -31,7 +31,7 @@
     <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
 
-    <link rel="stylesheet" href="styles.min.css?v=20260214r7">
+    <link rel="stylesheet" href="styles.min.css?v=20260214r8">
 
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
@@ -308,17 +308,64 @@
                 </div>
                 <div class="faq-item">
                     <div class="faq-q">Can I lose my founding member spot?</div>
-                    <div class="faq-a">Only if you&rsquo;re inactive for 14+ days. We send a gentle reminder at 7 days. Stay active and give feedback, and your spot is safe.</div>
+                    <div class="faq-a">Yes &mdash; if you miss daily feedback for 3+ days or are inactive for 14+ days. We send a warning first. Stay active, give feedback, and your spot is safe. If you lose it, you get a free 2-week trial while a waitlisted user gets your spot.</div>
                 </div>
                 <div class="faq-item">
                     <div class="faq-q">What happens after the free period?</div>
-                    <div class="faq-a">Active founding members get locked in at a special grandfather price &mdash; significantly lower than the regular price. You&rsquo;ll never pay full price.</div>
+                    <div class="faq-a">Active founding members get locked in at a special grandfather price. Regular users choose between Free (1 mode, 3 goals), Starter at $9.99/mo (Life + Health), or Pro at $19.99/mo (all 4 modes). Annual plans save up to 25%.</div>
                 </div>
                 <div class="faq-item">
                     <div class="faq-q">Is this app really built for ADHD?</div>
                     <div class="faq-a">Yes. One task at a time, zero decision fatigue, instant dopamine hits (XP, badges, praise), 10 nervous system reset tools, movement breaks, and a focus timer with ambient sounds. Every feature is designed for brains that need momentum, not motivation.</div>
                 </div>
             </div>
+        </section>
+
+        <!-- Pricing Section -->
+        <section class="landing-pricing" id="landingPricing">
+            <h2>Simple, Honest Pricing</h2>
+            <p class="pricing-lead">Start free. Upgrade when you&rsquo;re ready. Built for ADHD brains on any budget.</p>
+            <div class="landing-pricing-cards">
+                <div class="landing-price-card">
+                    <h3>Free</h3>
+                    <div class="landing-price">$0</div>
+                    <div class="landing-price-desc">forever</div>
+                    <ul>
+                        <li>&#10003; Personal Life Mode</li>
+                        <li>&#10003; Up to 3 Goals</li>
+                        <li>&#10003; Daily Focus &amp; Streaks</li>
+                        <li>&#10003; Core Badges</li>
+                    </ul>
+                </div>
+                <div class="landing-price-card popular">
+                    <div class="popular-tag">Best Value</div>
+                    <h3>Starter</h3>
+                    <div class="landing-price">$9.99<span>/mo</span></div>
+                    <div class="landing-price-desc">or $99/year <strong>(save $21)</strong></div>
+                    <div class="landing-price-effective">That&rsquo;s $8.25/mo &mdash; less than 2 coffees</div>
+                    <ul>
+                        <li>&#10003; Life + Health Modes</li>
+                        <li>&#10003; Unlimited Goals</li>
+                        <li>&#10003; All Features &amp; Badges</li>
+                        <li>&#10003; Focus Timer &amp; Rituals</li>
+                    </ul>
+                    <div class="landing-price-anchor">ADHD coaching: $200&ndash;500/mo. You pay $9.99.</div>
+                </div>
+                <div class="landing-price-card">
+                    <h3>Pro</h3>
+                    <div class="landing-price">$19.99<span>/mo</span></div>
+                    <div class="landing-price-desc">or $179/year <strong>(save $61)</strong></div>
+                    <div class="landing-price-effective">$14.92/mo &mdash; less than 1 therapy session</div>
+                    <ul>
+                        <li>&#10003; All 4 Modes unlocked</li>
+                        <li>&#10003; Business + Finances</li>
+                        <li>&#10003; Unlimited Everything</li>
+                        <li>&#10003; All 4 Life Wheels</li>
+                    </ul>
+                    <div class="landing-price-anchor">Just $10 more for double the modes</div>
+                </div>
+            </div>
+            <p class="landing-pricing-note">&#127775; Or become a <strong>Founding Member</strong> &mdash; get everything free for 3&ndash;6 months. Just give daily feedback.</p>
         </section>
 
         <!-- Final CTA -->
@@ -1305,88 +1352,93 @@
 
     <!-- Upgrade to Pro Modal -->
     <div id="upgradeOverlay" class="modal-overlay hidden">
-        <div class="modal upgrade-modal">
+        <div class="modal pricing-modal">
             <button class="modal-close" onclick="document.getElementById('upgradeOverlay').classList.add('hidden')">&times;</button>
-            <div class="upgrade-header">
-                <span class="upgrade-header-emoji">&#10024;</span>
-                <h2 class="upgrade-title">Unlock Your Full Potential</h2>
-                <p class="upgrade-subtitle">Go Pro and supercharge your habit-building journey</p>
-            </div>
-            <div class="pro-feature-grid">
-                <div class="pro-grid-header">
-                    <span></span>
-                    <span class="pro-col-label">Free</span>
-                    <span class="pro-col-label pro-col-pro">Pro</span>
-                </div>
-                <div class="pro-feature-row">
-                    <span class="pro-feature-name">Personal Mode</span>
-                    <span class="pro-check">&#10003;</span>
-                    <span class="pro-check">&#10003;</span>
-                </div>
-                <div class="pro-feature-row">
-                    <span class="pro-feature-name">Streak Tracking</span>
-                    <span class="pro-check">&#10003;</span>
-                    <span class="pro-check">&#10003;</span>
-                </div>
-                <div class="pro-feature-row">
-                    <span class="pro-feature-name">Daily Badges (7)</span>
-                    <span class="pro-check">&#10003;</span>
-                    <span class="pro-check">&#10003;</span>
-                </div>
-                <div class="pro-feature-row">
-                    <span class="pro-feature-name">Up to 3 Outcomes</span>
-                    <span class="pro-check">&#10003;</span>
-                    <span class="pro-check">&#10003;</span>
-                </div>
-                <div class="pro-feature-row pro-highlight-row">
-                    <span class="pro-feature-name">Business Mode</span>
-                    <span class="pro-cross">&mdash;</span>
-                    <span class="pro-check">&#10003;</span>
-                </div>
-                <div class="pro-feature-row pro-highlight-row">
-                    <span class="pro-feature-name">Unlimited Outcomes</span>
-                    <span class="pro-cross">&mdash;</span>
-                    <span class="pro-check">&#10003;</span>
-                </div>
-                <div class="pro-feature-row pro-highlight-row">
-                    <span class="pro-feature-name">All 16+ Badges</span>
-                    <span class="pro-cross">&mdash;</span>
-                    <span class="pro-check">&#10003;</span>
-                </div>
-                <div class="pro-feature-row pro-highlight-row">
-                    <span class="pro-feature-name">Combo Multiplier (3x)</span>
-                    <span class="pro-cross">&mdash;</span>
-                    <span class="pro-check">&#10003;</span>
-                </div>
-                <div class="pro-feature-row pro-highlight-row">
-                    <span class="pro-feature-name">Focus &amp; Task Timers</span>
-                    <span class="pro-cross">&mdash;</span>
-                    <span class="pro-check">&#10003;</span>
-                </div>
-                <div class="pro-feature-row pro-highlight-row">
-                    <span class="pro-feature-name">Daily Rituals</span>
-                    <span class="pro-cross">&mdash;</span>
-                    <span class="pro-check">&#10003;</span>
-                </div>
-                <div class="pro-feature-row pro-highlight-row">
-                    <span class="pro-feature-name">Wheel of Life</span>
-                    <span class="pro-cross">&mdash;</span>
-                    <span class="pro-check">&#10003;</span>
-                </div>
-                <div class="pro-feature-row pro-highlight-row">
-                    <span class="pro-feature-name">Weekly Review &amp; More</span>
-                    <span class="pro-cross">&mdash;</span>
-                    <span class="pro-check">&#10003;</span>
+            <div class="pricing-header">
+                <h2 class="pricing-title">Choose Your Plan</h2>
+                <p class="pricing-subtitle" id="pricingSubtitle">Unlock more modes and unlimited outcomes</p>
+                <div class="billing-toggle">
+                    <span class="billing-label active" id="billingMonthlyLabel">Monthly</span>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="billingToggle">
+                        <span class="toggle-slider"></span>
+                    </label>
+                    <span class="billing-label" id="billingAnnualLabel">Annual <span class="save-badge">Save up to 25%</span></span>
                 </div>
             </div>
-            <div class="upgrade-cta-section">
-                <div class="upgrade-price">
-                    <span class="price-amount">$9.99</span>
-                    <span class="price-period">/month</span>
+            <div class="pricing-cards">
+                <!-- FREE -->
+                <div class="pricing-card" data-tier="free">
+                    <div class="pricing-card-header">
+                        <h3>Free</h3>
+                        <div class="pricing-price">
+                            <span class="price-amount">$0</span>
+                            <span class="price-period">forever</span>
+                        </div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li class="included">&#10003; Personal Life Mode</li>
+                        <li class="included">&#10003; Up to 3 Outcomes</li>
+                        <li class="included">&#10003; Daily Focus &amp; Streaks</li>
+                        <li class="included">&#10003; 7 Core Badges</li>
+                        <li class="excluded">&#10007; Health Mode</li>
+                        <li class="excluded">&#10007; Business Mode</li>
+                        <li class="excluded">&#10007; Finances Mode</li>
+                        <li class="excluded">&#10007; Unlimited Outcomes</li>
+                    </ul>
+                    <button class="pricing-btn pricing-btn-free" id="btnPlanFree" disabled>Current Plan</button>
                 </div>
-                <a id="checkoutLink" href="https://myhabitmagic.lemonsqueezy.com/checkout/buy/bebf041d-868c-40b7-9968-8f458e1cd57e" target="_blank" rel="noopener" class="btn-go-pro">Go Pro Now &#8594;</a>
-                <p class="upgrade-guarantee">Cancel anytime &bull; 7-day money-back guarantee</p>
+                <!-- STARTER -->
+                <div class="pricing-card pricing-card-popular" data-tier="starter">
+                    <div class="popular-badge">Most Popular</div>
+                    <div class="pricing-card-header">
+                        <h3>Starter</h3>
+                        <div class="pricing-price">
+                            <span class="price-amount" id="starterPrice">$9.99</span>
+                            <span class="price-period" id="starterPeriod">/month</span>
+                        </div>
+                        <div class="pricing-savings hidden" id="starterSavings">Save $21/year</div>
+                        <div class="pricing-anchor">ADHD coaching: $200&ndash;500/mo</div>
+                        <div class="pricing-compare">Less than 2 coffees a week</div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li class="included">&#10003; Personal Life Mode</li>
+                        <li class="included highlight">&#10003; Health Mode</li>
+                        <li class="included">&#10003; Unlimited Outcomes</li>
+                        <li class="included">&#10003; All Features &amp; Badges</li>
+                        <li class="included">&#10003; Wheel of Life + Health</li>
+                        <li class="included">&#10003; Focus Timer &amp; Rituals</li>
+                        <li class="excluded">&#10007; Business Mode</li>
+                        <li class="excluded">&#10007; Finances Mode</li>
+                    </ul>
+                    <a id="starterCheckoutLink" href="#" target="_blank" rel="noopener" class="pricing-btn pricing-btn-starter">Get Starter &rarr;</a>
+                </div>
+                <!-- PRO -->
+                <div class="pricing-card" data-tier="pro">
+                    <div class="pricing-card-header">
+                        <h3>Pro</h3>
+                        <div class="pricing-price">
+                            <span class="price-amount" id="proPrice">$19.99</span>
+                            <span class="price-period" id="proPeriod">/month</span>
+                        </div>
+                        <div class="pricing-savings hidden" id="proSavings">Save $61/year</div>
+                        <div class="pricing-anchor">Just $10 more for everything</div>
+                        <div class="pricing-compare">Less than 1 therapy session</div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li class="included">&#10003; Personal Life Mode</li>
+                        <li class="included">&#10003; Health Mode</li>
+                        <li class="included highlight">&#10003; Business Mode</li>
+                        <li class="included highlight">&#10003; Finances Mode</li>
+                        <li class="included">&#10003; Unlimited Outcomes</li>
+                        <li class="included">&#10003; All Features &amp; Badges</li>
+                        <li class="included">&#10003; All 4 Wheels</li>
+                        <li class="included">&#10003; Everything unlocked</li>
+                    </ul>
+                    <a id="proCheckoutLink" href="#" target="_blank" rel="noopener" class="pricing-btn pricing-btn-pro">Get Pro &rarr;</a>
+                </div>
             </div>
+            <p class="pricing-guarantee">Cancel anytime &bull; 7-day money-back guarantee</p>
         </div>
     </div>
 
@@ -1602,6 +1654,42 @@
         </div>
     </div>
 
+    <!-- Feedback Warning Modal (3 days no feedback) -->
+    <div id="feedbackWarningOverlay" class="modal-overlay hidden">
+        <div class="modal feedback-warning-modal">
+            <button class="modal-close" onclick="document.getElementById('feedbackWarningOverlay').classList.add('hidden')">&times;</button>
+            <div style="font-size:3rem;margin-bottom:12px">&#9888;&#65039;</div>
+            <h2>Feedback Needed!</h2>
+            <p>You haven&rsquo;t submitted daily feedback in <strong><span id="feedbackWarningDays">3</span> days</strong>.</p>
+            <p style="margin-top:8px;color:var(--text-secondary);font-size:0.9rem">As a founding member, daily feedback is how you keep your free access. Complete 3+ actions today and submit your feedback to stay active.</p>
+            <button class="btn-primary" onclick="document.getElementById('feedbackWarningOverlay').classList.add('hidden')" style="margin-top:16px">Got It &mdash; I&rsquo;ll Submit Today</button>
+        </div>
+    </div>
+
+    <!-- Feedback Revoked Modal -->
+    <div id="feedbackRevokedOverlay" class="modal-overlay hidden">
+        <div class="modal feedback-revoked-modal">
+            <button class="modal-close" onclick="document.getElementById('feedbackRevokedOverlay').classList.add('hidden')">&times;</button>
+            <div style="font-size:3rem;margin-bottom:12px">&#128532;</div>
+            <h2>Founding Spot Released</h2>
+            <p>Your founding member spot has been released because daily feedback wasn&rsquo;t submitted for multiple days.</p>
+            <p style="margin-top:8px;color:var(--text-secondary);font-size:0.9rem">You now have a <strong>14-day free trial</strong> of all features. After that, choose a plan to continue.</p>
+            <button class="btn-primary" onclick="document.getElementById('feedbackRevokedOverlay').classList.add('hidden')" style="margin-top:16px">Continue with Trial</button>
+        </div>
+    </div>
+
+    <!-- Waitlist Promotion Congrats Modal -->
+    <div id="waitlistCongratsOverlay" class="modal-overlay hidden">
+        <div class="modal waitlist-congrats-modal">
+            <button class="modal-close" onclick="document.getElementById('waitlistCongratsOverlay').classList.add('hidden')">&times;</button>
+            <div style="font-size:3rem;margin-bottom:12px">&#127881;&#127775;</div>
+            <h2>You Got a Founding Spot!</h2>
+            <p>A founding member spot just opened up and <strong>you&rsquo;re in!</strong></p>
+            <p style="margin-top:8px;color:var(--text-secondary);font-size:0.9rem">You now have <strong>3&ndash;6 months free</strong> access to everything. Just keep using the app, give daily feedback, and your spot is secure.</p>
+            <button class="btn-primary" onclick="document.getElementById('waitlistCongratsOverlay').classList.add('hidden')" style="margin-top:16px">Let&rsquo;s Go! &#128170;</button>
+        </div>
+    </div>
+
     <!-- Body Double Timer Modal -->
     <div id="bodyDoubleOverlay" class="modal-overlay hidden">
         <div class="modal body-double-modal">
@@ -1663,7 +1751,7 @@
     </div>
 
     <script src="firebase-config.js"></script>
-    <script src="app.min.js?v=20260214r7"></script>
+    <script src="app.min.js?v=20260214r8"></script>
 
     <!-- Service Worker Registration -->
     <script>
