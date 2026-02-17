@@ -85,6 +85,13 @@
     --shadow: 0 4px 20px rgba(0,0,0,0.25);
     --shadow-glow: 0 0 20px rgba(124,111,186,0.08);
     --transition: all 0.2s ease;
+    /* Aliases for variables used in newer CSS blocks */
+    --accent-purple: var(--accent-primary);
+    --border-color: var(--border);
+    --radius-md: 10px;
+    --bg-secondary: var(--bg-input);
+    --bg-tertiary: var(--bg-card-hover);
+    --surface: var(--bg-card);
 }
 
 /* ==========================================
@@ -103,6 +110,11 @@ body.light-mode {
     --border: #d8d8e8;
     --shadow: 0 4px 20px rgba(0,0,0,0.06);
     --shadow-glow: 0 0 15px rgba(124,111,186,0.05);
+    --accent-purple: var(--accent-primary);
+    --border-color: var(--border);
+    --bg-secondary: var(--bg-input);
+    --bg-tertiary: var(--bg-card-hover);
+    --surface: var(--bg-card);
 }
 
 body.light-mode .login-screen {

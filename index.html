@@ -31,7 +31,7 @@
     <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
 
-    <link rel="stylesheet" href="styles.min.css?v=20260214r26">
+    <link rel="stylesheet" href="styles.min.css?v=20260214r27">
 
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
@@ -50,7 +50,7 @@
                     <span class="logo-text">My Habit <strong>Magic</strong></span>
                 </div>
                 <div class="landing-nav-actions">
-                    <span class="beta-badge">&#127775; Early Access</span>
+                    <span class="beta-badge" id="betaBadge">&#127775; Early Access</span>
                     <button class="btn-google-login-nav" id="btnGoogleLoginNav">Sign in</button>
                 </div>
             </div>
@@ -908,7 +908,7 @@
                     </div>
                     <div class="focus-header">
                         <h2 id="focusTitle">TODAY'S POWER FOCUS</h2>
-                        <select class="mode-select-mobile" id="modeSelectMobile" style="display:none">
+                        <select class="mode-select-mobile" id="modeSelectMobile">
                             <option value="personal">&#127968; Personal</option>
                             <option value="business" disabled style="display:none">&#128188; Business</option>
                             <option value="health" disabled style="display:none">&#10084;&#65039; Health</option>
@@ -1852,7 +1852,7 @@
     </div>
 
     <script src="firebase-config.js"></script>
-    <script src="app.min.js?v=20260214r26"></script>
+    <script src="app.min.js?v=20260214r27"></script>
 
     <!-- Service Worker Registration -->
     <script>

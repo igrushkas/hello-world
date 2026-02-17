@@ -1610,16 +1610,13 @@
 
     function updateUserUI(user) {
         var menu = document.getElementById('userMenu');
-        var logoutBtn = document.getElementById('btnLogout');
         if (user) {
             menu.style.display = 'flex';
             var avatar = document.getElementById('userAvatar');
             avatar.src = user.photoURL || '';
             avatar.alt = user.displayName || 'User';
-            if (logoutBtn) logoutBtn.style.display = '';
         } else {
             menu.style.display = 'none';
-            if (logoutBtn) logoutBtn.style.display = 'none';
         }
     }
 
@@ -5625,55 +5622,17 @@
             if (data && data.outcomes && data.outcomes.length === 0 && (!data.log || data.log.length === 0)) {
                 var today = new Date().toDateString();
                 // Personal mode starter
+                // Personal mode starter only (other modes are hidden/disabled)
                 data.outcomes.push({
                     id: uid(),
                     result: 'Clean Room - Clean Mind',
                     purpose: 'A clean space helps me focus, reduces stress, and sets the tone for a productive day',
                     actions: [
-                        { id: uid(), text: 'Clean Desk', done: false, timeEstimate: 15, leverage: 80, categories: ['fun_environment'] },
-                        { id: uid(), text: 'Dust Desk & Computer', done: false, timeEstimate: 10, leverage: 60, categories: ['fun_environment'] },
-                        { id: uid(), text: 'Watch How To Use My Habit Magic', done: false, timeEstimate: 10, leverage: 90, categories: ['personal_growth'] }
+                        { id: uid(), text: 'Clean Desk', done: false, estMinutes: 15, categories: ['fun_environment'] },
+                        { id: uid(), text: 'Dust Desk & Computer', done: false, estMinutes: 10, categories: ['fun_environment'] },
+                        { id: uid(), text: 'Watch How To Use My Habit Magic', done: false, estMinutes: 10, categories: ['personal_growth'] }
                     ],
                     category: 'fun_environment',
-                    deadline: null, commitment: 8, completed: false, createdDate: today
-                });
-                // Business mode starter
-                data.outcomes.push({
-                    id: uid(),
-                    result: 'Launch My First Business Task',
-                    purpose: 'Taking the first step builds momentum and proves to myself I can make progress every day',
-                    actions: [
-                        { id: uid(), text: 'Write down my top 3 business priorities', done: false, timeEstimate: 10, leverage: 90, categories: ['leadership_vision'] },
-                        { id: uid(), text: 'Organize my workspace for focus', done: false, timeEstimate: 15, leverage: 70, categories: ['operations_systems'] },
-                        { id: uid(), text: 'Set one measurable goal for this week', done: false, timeEstimate: 10, leverage: 85, categories: ['leadership_vision'] }
-                    ],
-                    category: 'leadership_vision',
-                    deadline: null, commitment: 8, completed: false, createdDate: today
-                });
-                // Health mode starter
-                data.outcomes.push({
-                    id: uid(),
-                    result: 'Start My Health Journey Today',
-                    purpose: 'My body is the foundation of everything — when I feel good physically, everything else improves',
-                    actions: [
-                        { id: uid(), text: 'Drink a full glass of water right now', done: false, timeEstimate: 5, leverage: 80, categories: ['nutrition_fuel'] },
-                        { id: uid(), text: 'Take a 10-minute walk outside', done: false, timeEstimate: 10, leverage: 85, categories: ['exercise_movement'] },
-                        { id: uid(), text: 'Write down what I ate today', done: false, timeEstimate: 5, leverage: 70, categories: ['nutrition_fuel'] }
-                    ],
-                    category: 'nutrition_fuel',
-                    deadline: null, commitment: 8, completed: false, createdDate: today
-                });
-                // Finances mode starter
-                data.outcomes.push({
-                    id: uid(),
-                    result: 'Take Control of My Finances',
-                    purpose: 'Financial clarity removes anxiety and empowers me to build the life I want',
-                    actions: [
-                        { id: uid(), text: 'List all monthly subscriptions', done: false, timeEstimate: 15, leverage: 85, categories: ['budget'] },
-                        { id: uid(), text: 'Check my bank balance right now', done: false, timeEstimate: 5, leverage: 80, categories: ['budget'] },
-                        { id: uid(), text: 'Set one savings goal for this month', done: false, timeEstimate: 10, leverage: 90, categories: ['investments'] }
-                    ],
-                    category: 'budget',
                     deadline: null, commitment: 8, completed: false, createdDate: today
                 });
                 saveData();
@@ -5707,6 +5666,9 @@
                                 var remaining = Math.max(0, FOUNDING_MEMBER_LIMIT - foundingMemberCount);
                                 document.querySelectorAll('.founding-spots-count').forEach(function(el) { el.textContent = remaining; });
                             });
+                            // Update referral link with user's actual referral code
+                            var refInput = document.getElementById('referralLinkInput');
+                            if (refInput) refInput.value = getReferralLink();
                             var overlay = document.getElementById('referralOverlay');
                             if (overlay) overlay.classList.remove('hidden');
                         }, 240000);
@@ -7402,26 +7364,30 @@
                 return;
             }
 
-            // Check if spots available
-            if (foundingMemberCount >= FOUNDING_MEMBER_LIMIT) {
-                registerTrialUser(uid);
-                return;
-            }
-
-            // Register as founding member
-            db.collection('users').doc(uid).set({
-                foundingMember: true,
-                foundingMemberDate: new Date().toISOString(),
-                foundingMemberStatus: 'active',
-                lastActiveDate: new Date().toISOString(),
-                feedbackStreak: 0
-            }, { merge: true });
-            db.collection('meta').doc('founding_members').set({
-                count: firebase.firestore.FieldValue.increment(1)
-            }, { merge: true });
-            isFoundingMember = true;
-            foundingMemberCount++;
-            updateFoundingMemberUI();
+            // Check if spots available — refresh count from Firestore first to avoid race condition
+            db.collection('meta').doc('founding_members').get().then(function(metaDoc) {
+                if (metaDoc.exists && metaDoc.data().count) {
+                    foundingMemberCount = metaDoc.data().count;
+                }
+                if (foundingMemberCount >= FOUNDING_MEMBER_LIMIT) {
+                    registerTrialUser(uid);
+                    return;
+                }
+                // Register as founding member
+                db.collection('users').doc(uid).set({
+                    foundingMember: true,
+                    foundingMemberDate: new Date().toISOString(),
+                    foundingMemberStatus: 'active',
+                    lastActiveDate: new Date().toISOString(),
+                    feedbackStreak: 0
+                }, { merge: true });
+                db.collection('meta').doc('founding_members').set({
+                    count: firebase.firestore.FieldValue.increment(1)
+                }, { merge: true });
+                isFoundingMember = true;
+                foundingMemberCount++;
+                updateFoundingMemberUI();
+            }).catch(function(e) { console.error('Founding member count check error:', e); });
         }).catch(function(e) { console.error('Founding member error:', e); });
     }
 
@@ -7850,9 +7816,6 @@
             e.preventDefault();
             startOfflineMode();
         });
-        var btnLogout = document.getElementById('btnLogout');
-        if (btnLogout) btnLogout.addEventListener('click', logout);
-
         // Landing page billing toggle (must bind here, pre-login)
         safeBind('landingBillingToggle', 'change', function() {
             var isAnnual = this.checked;
@@ -8029,6 +7992,9 @@
                 var remaining = Math.max(0, FOUNDING_MEMBER_LIMIT - foundingMemberCount);
                 document.querySelectorAll('.founding-spots-count').forEach(function(el) { el.textContent = remaining; });
             });
+            // Update referral link with user's actual referral code
+            var refInput = document.getElementById('referralLinkInput');
+            if (refInput) refInput.value = getReferralLink();
             var overlay = document.getElementById('referralOverlay');
             if (overlay) overlay.classList.remove('hidden');
             var dd = document.getElementById('topActionsDropdown');
@@ -8052,13 +8018,16 @@
             }
         });
         safeBind('btnShareWhatsApp', 'click', function() {
-            window.open('https://wa.me/?text=' + encodeURIComponent('I\u2019ve been using Habit Magic \u2014 a gamified habit tracker built for ADHD brains. Founding member spots are limited! https://myhabitmagic.com'), '_blank');
+            var link = getReferralLink();
+            window.open('https://wa.me/?text=' + encodeURIComponent('I\u2019ve been using Habit Magic \u2014 a gamified habit tracker built for ADHD brains. Founding member spots are limited! ' + link), '_blank');
         });
         safeBind('btnShareTwitter', 'click', function() {
-            window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent('I\u2019ve been using Habit Magic \u2014 a gamified habit tracker built for ADHD brains. Founding member spots are limited! https://myhabitmagic.com'), '_blank');
+            var link = getReferralLink();
+            window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent('I\u2019ve been using Habit Magic \u2014 a gamified habit tracker built for ADHD brains. Founding member spots are limited! ' + link), '_blank');
         });
         safeBind('btnShareEmail', 'click', function() {
-            window.location.href = 'mailto:?subject=' + encodeURIComponent('Check out Habit Magic') + '&body=' + encodeURIComponent('Hey! I\u2019ve been using Habit Magic \u2014 a gamified habit tracker built for ADHD brains. It\u2019s really helping me stay on track. Founding member spots are limited \u2014 check it out: https://myhabitmagic.com');
+            var link = getReferralLink();
+            window.location.href = 'mailto:?subject=' + encodeURIComponent('Check out Habit Magic') + '&body=' + encodeURIComponent('Hey! I\u2019ve been using Habit Magic \u2014 a gamified habit tracker built for ADHD brains. It\u2019s really helping me stay on track. Founding member spots are limited \u2014 check it out: ' + link);
         });
 
         if (firebaseReady) {
