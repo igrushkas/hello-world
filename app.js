@@ -5689,6 +5689,25 @@
             }
         } catch(e) { console.error('first login help error:', e); }
 
+        // Weekly referral popup — show once per week for weeks 1, 2, 3
+        try {
+            if (data && data.log && data.log.length > 0) {
+                var firstLogDate = new Date(data.log[0].date || data.log[0].createdDate);
+                var daysSinceStart = Math.floor((Date.now() - firstLogDate.getTime()) / 86400000);
+                var currentWeek = Math.floor(daysSinceStart / 7) + 1;
+                if (currentWeek >= 1 && currentWeek <= 3) {
+                    var referralKey = 'lwp_referral_shown_week_' + currentWeek;
+                    if (!localStorage.getItem(referralKey)) {
+                        localStorage.setItem(referralKey, '1');
+                        setTimeout(function() {
+                            var overlay = document.getElementById('referralOverlay');
+                            if (overlay) overlay.classList.remove('hidden');
+                        }, 3000);
+                    }
+                }
+            }
+        } catch(e) { console.error('referral popup error:', e); }
+
         try { renderCategoryFilters(); } catch(e) { console.error('category filter error:', e); }
         try { restoreCombo(); } catch(e) { console.error('combo restore error:', e); }
         try { render(); } catch(e) { console.error('render error:', e); }
@@ -7996,6 +8015,40 @@
         // Theme toggle (light/dark)
         initTheme();
         safeBind('btnTheme', 'click', toggleTheme);
+
+        // Referral modal
+        safeBind('btnRefer', 'click', function() {
+            var overlay = document.getElementById('referralOverlay');
+            if (overlay) overlay.classList.remove('hidden');
+            var dd = document.getElementById('topActionsDropdown');
+            if (dd) dd.classList.add('hidden');
+        });
+        safeBind('btnCopyReferral', 'click', function() {
+            var input = document.getElementById('referralLinkInput');
+            if (!input) return;
+            input.select();
+            try {
+                if (navigator.clipboard) {
+                    navigator.clipboard.writeText(input.value);
+                } else {
+                    document.execCommand('copy');
+                }
+            } catch(e) { document.execCommand('copy'); }
+            var msg = document.getElementById('referralCopiedMsg');
+            if (msg) {
+                msg.classList.remove('hidden');
+                setTimeout(function() { msg.classList.add('hidden'); }, 3000);
+            }
+        });
+        safeBind('btnShareWhatsApp', 'click', function() {
+            window.open('https://wa.me/?text=' + encodeURIComponent('I\u2019ve been using Habit Magic \u2014 a gamified habit tracker built for ADHD brains. Founding member spots are limited! https://myhabitmagic.com'), '_blank');
+        });
+        safeBind('btnShareTwitter', 'click', function() {
+            window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent('I\u2019ve been using Habit Magic \u2014 a gamified habit tracker built for ADHD brains. Founding member spots are limited! https://myhabitmagic.com'), '_blank');
+        });
+        safeBind('btnShareEmail', 'click', function() {
+            window.location.href = 'mailto:?subject=' + encodeURIComponent('Check out Habit Magic') + '&body=' + encodeURIComponent('Hey! I\u2019ve been using Habit Magic \u2014 a gamified habit tracker built for ADHD brains. It\u2019s really helping me stay on track. Founding member spots are limited \u2014 check it out: https://myhabitmagic.com');
+        });
 
         if (firebaseReady) {
             // Handle redirect result (for when popup was blocked)

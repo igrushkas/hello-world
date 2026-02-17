@@ -31,7 +31,7 @@
     <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
 
-    <link rel="stylesheet" href="styles.min.css?v=20260214r21">
+    <link rel="stylesheet" href="styles.min.css?v=20260214r22">
 
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
@@ -439,6 +439,7 @@
                     <button class="dropdown-item" id="btnWeeklyReview">&#128200; Weekly Review</button>
                     <button class="dropdown-item" id="btnValues">&#127775; My Values</button>
                     <button class="dropdown-item" id="btnTheme">&#9790; Theme</button>
+                    <button class="dropdown-item dropdown-item-refer" id="btnRefer">&#128140; Refer a Friend</button>
                 </div>
             </div>
         </header>
@@ -1763,6 +1764,33 @@
         </div>
     </div>
 
+    <!-- Referral Modal -->
+    <div id="referralOverlay" class="modal-overlay hidden">
+        <div class="modal referral-modal">
+            <button class="modal-close" onclick="document.getElementById('referralOverlay').classList.add('hidden')">&times;</button>
+            <div style="text-align:center;font-size:2.5rem;margin-bottom:8px">&#128140;</div>
+            <h2 style="text-align:center">Share Habit Magic</h2>
+            <p style="text-align:center;color:var(--text-secondary);margin-bottom:16px">Know someone who struggles with habits or ADHD? Send them Habit Magic &mdash; founding spots are limited!</p>
+            <div class="referral-link-box">
+                <input type="text" class="input-field" id="referralLinkInput" value="https://myhabitmagic.com" readonly>
+                <button class="btn-primary" id="btnCopyReferral" style="white-space:nowrap">&#128203; Copy</button>
+            </div>
+            <p id="referralCopiedMsg" class="referral-copied hidden">&#9989; Link copied!</p>
+            <div class="referral-share-row">
+                <button class="referral-share-btn referral-share-whatsapp" id="btnShareWhatsApp" title="WhatsApp">
+                    <span style="font-size:1.3rem">&#128172;</span> WhatsApp
+                </button>
+                <button class="referral-share-btn referral-share-twitter" id="btnShareTwitter" title="Twitter / X">
+                    <span style="font-size:1.3rem">&#120143;</span> Twitter
+                </button>
+                <button class="referral-share-btn referral-share-email" id="btnShareEmail" title="Email">
+                    <span style="font-size:1.3rem">&#9993;</span> Email
+                </button>
+            </div>
+            <p style="text-align:center;font-size:0.8rem;color:var(--text-secondary);margin-top:14px">Only <strong class="founding-spots-count">100</strong> founding spots available. Help a friend grab one!</p>
+        </div>
+    </div>
+
     <!-- Body Double Timer Modal -->
     <div id="bodyDoubleOverlay" class="modal-overlay hidden">
         <div class="modal body-double-modal">
@@ -1824,7 +1852,7 @@
     </div>
 
     <script src="firebase-config.js"></script>
-    <script src="app.min.js?v=20260214r21"></script>
+    <script src="app.min.js?v=20260214r22"></script>
 
     <!-- Service Worker Registration -->
     <script>

@@ -3730,6 +3730,65 @@ body.finances-mode.light-mode .praise-banner {
     padding: 4px 12px;
 }
 
+/* Referral modal */
+.referral-modal {
+    max-width: 420px;
+}
+.referral-modal .referral-link-box {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    padding: 8px;
+    margin-bottom: 6px;
+}
+.referral-modal .referral-link-box .input-field {
+    flex: 1;
+    margin-bottom: 0;
+    font-size: 0.85rem;
+    text-align: center;
+    background: var(--bg-secondary);
+}
+.referral-copied {
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--accent-green);
+    font-weight: 600;
+    margin: 4px 0 10px;
+}
+.referral-share-row {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-top: 12px;
+}
+.referral-share-btn {
+    flex: 1;
+    padding: 10px 8px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+    text-align: center;
+}
+.referral-share-btn:hover {
+    background: var(--bg-tertiary);
+}
+.referral-share-whatsapp:hover { border-color: #25d366; color: #25d366; }
+.referral-share-twitter:hover { border-color: #1da1f2; color: #1da1f2; }
+.referral-share-email:hover { border-color: var(--accent-primary); color: var(--accent-primary); }
+
+.dropdown-item-refer {
+    color: var(--accent-primary);
+    font-weight: 600;
+    border-top: 1px solid var(--border-color);
+    margin-top: 4px;
+    padding-top: 10px;
+}
+
 .review-skip {
     font-size: 0.75rem;
     opacity: 0.5;
