@@ -8,7 +8,7 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background: linear-gradient(135deg, #1a1040, #6c5ce7);
+    background: linear-gradient(135deg, #1a1040, #7c6fba);
     color: #fff;
     padding: 14px 16px;
     padding-bottom: calc(14px + env(safe-area-inset-bottom, 0px));
@@ -16,7 +16,7 @@
     align-items: center;
     gap: 12px;
     z-index: 10000;
-    box-shadow: 0 -4px 20px rgba(108, 92, 231, 0.4);
+    box-shadow: 0 -4px 20px rgba(124, 111, 186, 0.2);
     animation: slideUpBanner 0.4s ease-out;
 }
 
@@ -69,21 +69,21 @@
     --text-primary: #f0f0f5;
     --text-secondary: #8888a0;
     --text-muted: #555570;
-    --accent-primary: #6c5ce7;
-    --accent-glow: #7c6cf7;
-    --accent-red: #e74c3c;
-    --accent-orange: #f39c12;
-    --accent-green: #00d2a0;
-    --accent-blue: #3498db;
-    --accent-pink: #e84393;
-    --accent-yellow: #ffd32a;
-    --accent-teal: #00b894;
-    --accent-coral: #ff7675;
-    --border: #2a2a3a;
+    --accent-primary: #7c6fba;
+    --accent-glow: #8a7fc7;
+    --accent-red: #c07a73;
+    --accent-orange: #c4996a;
+    --accent-green: #6aad99;
+    --accent-blue: #6a9dba;
+    --accent-pink: #7c6fba;
+    --accent-yellow: #c4996a;
+    --accent-teal: #6aad99;
+    --accent-coral: #c07a73;
+    --border: #252535;
     --radius: 12px;
     --radius-sm: 8px;
-    --shadow: 0 4px 24px rgba(0,0,0,0.3);
-    --shadow-glow: 0 0 30px rgba(108,92,231,0.15);
+    --shadow: 0 4px 20px rgba(0,0,0,0.25);
+    --shadow-glow: 0 0 20px rgba(124,111,186,0.08);
     --transition: all 0.2s ease;
 }
 
@@ -98,11 +98,11 @@ body.light-mode {
     --text-primary: #1a1a2e;
     --text-secondary: #555570;
     --text-muted: #8888a0;
-    --accent-primary: #6c5ce7;
-    --accent-glow: #7c6cf7;
+    --accent-primary: #7c6fba;
+    --accent-glow: #8a7fc7;
     --border: #d8d8e8;
-    --shadow: 0 4px 24px rgba(0,0,0,0.08);
-    --shadow-glow: 0 0 30px rgba(108,92,231,0.08);
+    --shadow: 0 4px 20px rgba(0,0,0,0.06);
+    --shadow-glow: 0 0 15px rgba(124,111,186,0.05);
 }
 
 body.light-mode .login-screen {
@@ -165,7 +165,7 @@ body.light-mode .log-entry {
 body.light-mode .next-action-card {
     background: linear-gradient(135deg, #ede8ff, #e0e6ff);
     border-color: var(--accent-primary);
-    box-shadow: 0 4px 20px rgba(108, 92, 231, 0.12);
+    box-shadow: 0 4px 20px rgba(124, 111, 186, 0.12);
 }
 
 body.light-mode .next-action-label {
@@ -178,7 +178,7 @@ body.light-mode .next-action-text {
 
 body.light-mode .wheel-of-life-card {
     background: linear-gradient(135deg, #f0edff, #e8e5fa);
-    border-color: rgba(108, 92, 231, 0.3);
+    border-color: rgba(124, 111, 186, 0.3);
 }
 
 body.light-mode .wheel-of-life-card h3 {
@@ -188,7 +188,7 @@ body.light-mode .wheel-of-life-card h3 {
 body.light-mode .wheel-balance-score {
     background: linear-gradient(135deg, #ede8ff, #e0d8ff, #d8d0fa) !important;
     border-color: #8b7cf0;
-    box-shadow: 0 0 15px rgba(108, 92, 231, 0.15), inset 0 1px 0 rgba(108, 92, 231, 0.1);
+    box-shadow: 0 0 15px rgba(124, 111, 186, 0.15), inset 0 1px 0 rgba(124, 111, 186, 0.1);
 }
 
 body.light-mode .balance-level {
@@ -219,18 +219,18 @@ body.light-mode .motivation-card .motivation-text {
 body.light-mode .level-up-card {
     background: linear-gradient(135deg, #f0edff, #e6eeff);
     border-color: var(--accent-purple);
-    box-shadow: 0 0 40px rgba(108, 92, 231, 0.15), 0 0 80px rgba(108, 92, 231, 0.05);
+    box-shadow: 0 0 40px rgba(124, 111, 186, 0.15), 0 0 80px rgba(124, 111, 186, 0.05);
 }
 
 body.light-mode .badge-unlock-card {
     background: linear-gradient(135deg, #fff9e6, #fff3cc);
     border-color: var(--accent-yellow);
-    box-shadow: 0 0 30px rgba(255, 211, 42, 0.15);
+    box-shadow: 0 0 30px rgba(196, 153, 106, 0.15);
 }
 
 body.light-mode .sleep-reminder {
     background: linear-gradient(135deg, #ede8ff, #e8e0ff);
-    border-color: rgba(108, 92, 231, 0.3);
+    border-color: rgba(124, 111, 186, 0.3);
 }
 
 body.light-mode .cat-guide-free-day {
@@ -252,47 +252,47 @@ body.business-mode.light-mode #app {
 
 body.business-mode.light-mode .top-bar {
     background: #e8f5ec;
-    border-bottom-color: rgba(39, 174, 96, 0.25);
+    border-bottom-color: rgba(90, 154, 120, 0.25);
 }
 
 body.business-mode.light-mode .login-card {
     background: #ffffff;
-    border-color: rgba(39, 174, 96, 0.3);
+    border-color: rgba(90, 154, 120, 0.3);
 }
 
 body.business-mode.light-mode .next-action-card {
     background: linear-gradient(135deg, #e8f8ee, #dff5e5);
-    border-color: #27ae60;
+    border-color: #5a9a78;
 }
 
 body.business-mode.light-mode .wheel-of-life-card {
     background: linear-gradient(135deg, #e8f8ee, #dff5e5);
-    border-color: rgba(39, 174, 96, 0.35);
+    border-color: rgba(90, 154, 120, 0.35);
 }
 
 body.business-mode.light-mode .motivation-card {
     background: #ffffff;
-    border-color: rgba(39, 174, 96, 0.2);
+    border-color: rgba(90, 154, 120, 0.2);
 }
 
 body.business-mode.light-mode .outcome-item {
     background: #ffffff;
-    border-color: rgba(39, 174, 96, 0.2);
+    border-color: rgba(90, 154, 120, 0.2);
 }
 
 body.business-mode.light-mode .modal {
     background: #ffffff;
-    border-color: rgba(39, 174, 96, 0.3);
+    border-color: rgba(90, 154, 120, 0.3);
 }
 
 body.business-mode.light-mode .focus-cat-btn {
-    border-color: rgba(39, 174, 96, 0.3);
+    border-color: rgba(90, 154, 120, 0.3);
     color: #1a4a2e;
 }
 
 body.business-mode.light-mode .btn-add-outcome {
     background: #f0f9f4;
-    border-color: rgba(39, 174, 96, 0.35);
+    border-color: rgba(90, 154, 120, 0.35);
     color: #1a4a2e;
 }
 
@@ -300,22 +300,22 @@ body.business-mode.light-mode input,
 body.business-mode.light-mode select,
 body.business-mode.light-mode textarea {
     background: #f0f9f4;
-    border-color: rgba(39, 174, 96, 0.3);
+    border-color: rgba(90, 154, 120, 0.3);
     color: #1a4a2e;
 }
 
 body.business-mode.light-mode .outcomes-section {
-    border-color: rgba(39, 174, 96, 0.15);
+    border-color: rgba(90, 154, 120, 0.15);
 }
 
 body.business-mode.light-mode .focus-badge {
-    background: linear-gradient(135deg, rgba(39, 174, 96, 0.15), rgba(39, 174, 96, 0.08));
-    color: #1e8449;
+    background: linear-gradient(135deg, rgba(90, 154, 120, 0.15), rgba(90, 154, 120, 0.08));
+    color: #4a8068;
 }
 
 body.business-mode.light-mode .help-btn-ref {
-    background: rgba(39, 174, 96, 0.12);
-    color: #1e8449;
+    background: rgba(90, 154, 120, 0.12);
+    color: #4a8068;
 }
 
 body.business-mode.light-mode .praise-banner {
@@ -324,13 +324,13 @@ body.business-mode.light-mode .praise-banner {
 }
 
 body.business-mode.light-mode .log-entry {
-    border-bottom-color: rgba(39, 174, 96, 0.15);
+    border-bottom-color: rgba(90, 154, 120, 0.15);
 }
 
 body.business-mode.light-mode .wheel-balance-score {
     background: linear-gradient(135deg, #e0f5e8, #d0eedb, #c5e8d2) !important;
-    border-color: #27ae60;
-    box-shadow: 0 0 15px rgba(39, 174, 96, 0.12);
+    border-color: #5a9a78;
+    box-shadow: 0 0 15px rgba(90, 154, 120, 0.12);
 }
 
 body.business-mode.light-mode .balance-count {
@@ -347,7 +347,7 @@ body.business-mode.light-mode .balance-message {
 
 body.business-mode.light-mode .sleep-reminder {
     background: linear-gradient(135deg, #e0f5e8, #d5eedc);
-    border-color: rgba(39, 174, 96, 0.3);
+    border-color: rgba(90, 154, 120, 0.3);
 }
 
 /* Theme toggle (now in dropdown) */
@@ -387,7 +387,7 @@ body {
     z-index: 100;
     background: rgba(10, 10, 26, 0.92);
     backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(108, 92, 231, 0.15);
+    border-bottom: 1px solid rgba(124, 111, 186, 0.15);
     padding: 12px 24px;
 }
 
@@ -448,8 +448,8 @@ body {
 .hero-badge {
     display: inline-block;
     padding: 6px 18px;
-    background: rgba(108, 92, 231, 0.15);
-    border: 1px solid rgba(108, 92, 231, 0.3);
+    background: rgba(124, 111, 186, 0.15);
+    border: 1px solid rgba(124, 111, 186, 0.3);
     border-radius: 20px;
     font-size: 0.8rem;
     font-weight: 600;
@@ -609,9 +609,9 @@ body {
 .landing-early-adopter {
     text-align: center;
     padding: 70px 24px;
-    background: rgba(108, 92, 231, 0.04);
-    border-top: 1px solid rgba(108, 92, 231, 0.1);
-    border-bottom: 1px solid rgba(108, 92, 231, 0.1);
+    background: rgba(124, 111, 186, 0.04);
+    border-top: 1px solid rgba(124, 111, 186, 0.1);
+    border-bottom: 1px solid rgba(124, 111, 186, 0.1);
 }
 
 .early-adopter-inner {
@@ -729,7 +729,7 @@ body {
 /* Light Mode Landing Page */
 body.light-mode .landing-nav {
     background: rgba(245, 245, 250, 0.92);
-    border-bottom-color: rgba(108, 92, 231, 0.15);
+    border-bottom-color: rgba(124, 111, 186, 0.15);
 }
 
 body.light-mode .hero-title {
@@ -742,8 +742,8 @@ body.light-mode .feature-visual {
 }
 
 body.light-mode .landing-early-adopter {
-    background: rgba(108, 92, 231, 0.04);
-    border-color: rgba(108, 92, 231, 0.1);
+    background: rgba(124, 111, 186, 0.04);
+    border-color: rgba(124, 111, 186, 0.1);
 }
 
 body.light-mode .perk-item {
@@ -795,7 +795,7 @@ body.light-mode .landing-footer {
     background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: 20px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    box-shadow: 0 20px 15px rgba(0,0,0,0.5);
     max-width: 380px;
     width: 90%;
 }
@@ -1006,12 +1006,12 @@ body.light-mode .landing-footer {
     align-items: center;
     gap: 4px;
     padding: 4px 12px;
-    background: linear-gradient(135deg, rgba(255, 211, 42, 0.15), rgba(243, 156, 18, 0.15));
-    border: 1px solid rgba(255, 211, 42, 0.3);
+    background: linear-gradient(135deg, rgba(196, 153, 106, 0.15), rgba(196, 153, 106, 0.15));
+    border: 1px solid rgba(196, 153, 106, 0.3);
     border-radius: 20px;
     font-size: 0.7rem;
     font-weight: 700;
-    color: #ffd32a;
+    color: #c4996a;
     letter-spacing: 0.5px;
     white-space: nowrap;
 }
@@ -1035,7 +1035,7 @@ body.light-mode .landing-footer {
     gap: 6px;
     font-size: 0.82rem;
     font-weight: 600;
-    color: var(--accent-yellow, #ffd32a);
+    color: var(--accent-yellow, #c4996a);
 }
 
 .founding-spots-pulse {
@@ -1043,8 +1043,8 @@ body.light-mode .landing-footer {
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: #ffd32a;
-    animation: spotsPulse 2s infinite;
+    background: #c4996a;
+    animation: spotsPulse 2s 3;
 }
 
 @keyframes spotsPulse {
@@ -1066,7 +1066,7 @@ body.light-mode .landing-footer {
 }
 
 .founding-desc strong {
-    color: var(--accent-yellow, #ffd32a);
+    color: var(--accent-yellow, #c4996a);
 }
 
 body.light-mode .founding-spots {
@@ -1082,9 +1082,9 @@ body.light-mode .founding-spots-pulse {
 }
 
 body.light-mode .beta-badge {
-    background: linear-gradient(135deg, rgba(243, 156, 18, 0.12), rgba(230, 126, 34, 0.1));
+    background: linear-gradient(135deg, rgba(196, 153, 106, 0.12), rgba(176, 136, 88, 0.1));
     color: #b87a00;
-    border-color: rgba(243, 156, 18, 0.3);
+    border-color: rgba(196, 153, 106, 0.3);
 }
 
 /* ==========================================
@@ -1096,7 +1096,7 @@ body.light-mode .beta-badge {
     align-items: center;
     gap: 4px;
     padding: 5px 14px;
-    background: linear-gradient(135deg, #f9a825, #ff8f00);
+    background: linear-gradient(135deg, #c4996a, #b08858);
     color: #1a1a2e;
     border: none;
     border-radius: 20px;
@@ -1104,19 +1104,19 @@ body.light-mode .beta-badge {
     font-weight: 800;
     cursor: pointer;
     transition: all 0.3s;
-    box-shadow: 0 0 12px rgba(249, 168, 37, 0.3);
-    animation: upgradeGlow 2s ease-in-out infinite alternate;
+    box-shadow: 0 0 12px rgba(196, 153, 106, 0.3);
+    animation: upgradeGlow 2s ease-in-out 2 alternate;
     white-space: nowrap;
 }
 
 @keyframes upgradeGlow {
-    from { box-shadow: 0 0 8px rgba(249, 168, 37, 0.2); }
-    to { box-shadow: 0 0 18px rgba(249, 168, 37, 0.5); }
+    from { box-shadow: 0 0 8px rgba(196, 153, 106, 0.2); }
+    to { box-shadow: 0 0 18px rgba(196, 153, 106, 0.25); }
 }
 
 .btn-upgrade:hover {
     transform: scale(1.08);
-    box-shadow: 0 0 24px rgba(249, 168, 37, 0.6);
+    box-shadow: 0 0 24px rgba(196, 153, 106, 0.3);
 }
 
 /* Upgrade Modal */
@@ -1175,7 +1175,7 @@ body.light-mode .beta-badge {
 }
 
 .pro-col-pro {
-    color: #f9a825;
+    color: #c4996a;
 }
 
 .pro-feature-row {
@@ -1188,7 +1188,7 @@ body.light-mode .beta-badge {
 }
 
 .pro-highlight-row {
-    background: rgba(249, 168, 37, 0.04);
+    background: rgba(196, 153, 106, 0.04);
     border-radius: 4px;
     padding: 6px 8px;
 }
@@ -1205,7 +1205,7 @@ body.light-mode .beta-badge {
 
 .pro-check {
     text-align: center;
-    color: #27ae60;
+    color: #5a9a78;
     font-weight: 700;
     font-size: 0.9rem;
 }
@@ -1229,7 +1229,7 @@ body.light-mode .beta-badge {
 .price-amount {
     font-size: 2rem;
     font-weight: 800;
-    color: #f9a825;
+    color: #c4996a;
 }
 
 .price-period {
@@ -1240,7 +1240,7 @@ body.light-mode .beta-badge {
 .btn-go-pro {
     display: inline-block;
     padding: 14px 40px;
-    background: linear-gradient(135deg, #f9a825, #ff8f00);
+    background: linear-gradient(135deg, #c4996a, #b08858);
     color: #1a1a2e;
     border: none;
     border-radius: 12px;
@@ -1249,12 +1249,12 @@ body.light-mode .beta-badge {
     cursor: pointer;
     text-decoration: none;
     transition: all 0.3s;
-    box-shadow: 0 4px 20px rgba(249, 168, 37, 0.4);
+    box-shadow: 0 4px 20px rgba(196, 153, 106, 0.2);
 }
 
 .btn-go-pro:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 30px rgba(249, 168, 37, 0.6);
+    box-shadow: 0 6px 15px rgba(196, 153, 106, 0.3);
 }
 
 .upgrade-guarantee {
@@ -1268,7 +1268,7 @@ body.light-mode .beta-badge {
 .pro-lock-badge {
     display: inline-block;
     font-size: 0.6rem;
-    background: linear-gradient(135deg, #f9a825, #ff8f00);
+    background: linear-gradient(135deg, #c4996a, #b08858);
     color: #1a1a2e;
     padding: 1px 5px;
     border-radius: 4px;
@@ -1339,13 +1339,13 @@ body.light-mode .beta-badge {
     font-weight: 700;
     font-size: 0.8rem;
     border: 1px solid rgba(255, 152, 0, 0.25);
-    color: #ff9800;
+    color: #c4996a;
     white-space: nowrap;
 }
 
 .streak-flame {
     font-size: 0.9rem;
-    animation: flicker 1.5s ease-in-out infinite alternate;
+    animation: flicker 1.5s ease-in-out 3 alternate;
 }
 
 @keyframes flicker {
@@ -1371,7 +1371,7 @@ body.light-mode .beta-badge {
 }
 
 .btn-menu-toggle:hover {
-    background: rgba(108, 92, 231, 0.15);
+    background: rgba(124, 111, 186, 0.15);
     border-color: var(--accent-primary);
 }
 
@@ -1409,7 +1409,7 @@ body.light-mode .beta-badge {
 }
 
 .dropdown-item:hover {
-    background: rgba(108, 92, 231, 0.1);
+    background: rgba(124, 111, 186, 0.1);
 }
 
 .btn-icon {
@@ -1443,7 +1443,7 @@ body.light-mode .beta-badge {
     font-size: 1.3rem;
     font-weight: 900;
     font-family: 'Arial Black', 'Helvetica Neue', Arial, sans-serif;
-    color: #ff9800;
+    color: #c4996a;
     background: rgba(255, 152, 0, 0.15);
     border: 2px solid rgba(255, 152, 0, 0.5);
     text-shadow: 0 0 6px rgba(255, 152, 0, 0.4);
@@ -1451,8 +1451,8 @@ body.light-mode .beta-badge {
 
 .btn-icon.btn-help-topbar:hover {
     color: #fff;
-    background: #e67e22;
-    border-color: #e67e22;
+    background: #b08858;
+    border-color: #b08858;
 }
 
 /* ==========================================
@@ -1472,7 +1472,7 @@ body.light-mode .beta-badge {
     max-width: 600px;
     width: 90%;
     text-align: center;
-    box-shadow: 0 8px 40px rgba(108,92,231,0.4);
+    box-shadow: 0 8px 15px rgba(124,111,186,0.2);
     opacity: 0;
     transition: opacity 0.5s ease, transform 0.5s ease;
     pointer-events: none;
@@ -1530,7 +1530,7 @@ body.light-mode .beta-badge {
 
 .btn-primary:hover {
     transform: translateY(-1px);
-    box-shadow: 0 4px 20px rgba(108,92,231,0.4);
+    box-shadow: 0 4px 20px rgba(124,111,186,0.2);
 }
 
 .btn-large {
@@ -1766,7 +1766,7 @@ body.light-mode .beta-badge {
 }
 
 .required {
-    color: #e84393;
+    color: #7c6fba;
     font-weight: 700;
 }
 
@@ -1804,7 +1804,7 @@ body.light-mode .beta-badge {
 .input-field:focus {
     outline: none;
     border-color: var(--accent-primary);
-    box-shadow: 0 0 0 3px rgba(108,92,231,0.15);
+    box-shadow: 0 0 0 3px rgba(124,111,186,0.15);
 }
 
 /* Make date picker calendar icon visible on dark backgrounds */
@@ -1998,11 +1998,11 @@ body.light-mode .beta-badge {
 }
 
 body.business-mode .focus-title-category {
-    color: #27ae60;
+    color: #5a9a78;
 }
 
 body.health-mode .focus-title-category {
-    color: #00b8d4;
+    color: #5a9ab0;
 }
 
 .date-display {
@@ -2151,7 +2151,7 @@ body.health-mode .focus-title-category {
 
 /* Task Timer */
 .btn-timer-start {
-    background: linear-gradient(135deg, #00b894, #00d2a0);
+    background: linear-gradient(135deg, #6aad99, #6aad99);
     color: #fff;
     border: none;
     padding: 10px 18px;
@@ -2164,15 +2164,15 @@ body.health-mode .focus-title-category {
 
 .btn-timer-start:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 210, 160, 0.35);
+    box-shadow: 0 4px 12px rgba(106, 173, 153, 0.35);
 }
 
 .task-timer-display {
     text-align: center;
     margin-top: 16px;
     padding: 16px;
-    background: linear-gradient(135deg, rgba(0, 210, 160, 0.1), rgba(0, 184, 148, 0.05));
-    border: 1px solid rgba(0, 210, 160, 0.3);
+    background: linear-gradient(135deg, rgba(106, 173, 153, 0.1), rgba(0, 184, 148, 0.05));
+    border: 1px solid rgba(106, 173, 153, 0.3);
     border-radius: var(--radius);
 }
 
@@ -2191,7 +2191,7 @@ body.health-mode .focus-title-category {
 .task-timer-time {
     font-size: 2.5rem;
     font-weight: 700;
-    color: #00d2a0;
+    color: #6aad99;
     font-variant-numeric: tabular-nums;
     margin-bottom: 12px;
 }
@@ -2218,9 +2218,9 @@ body.health-mode .focus-title-category {
 }
 
 .btn-timer-stop {
-    background: rgba(232, 67, 147, 0.2);
-    color: #e84393;
-    border: 1px solid rgba(232, 67, 147, 0.4);
+    background: rgba(124, 111, 186, 0.2);
+    color: #7c6fba;
+    border: 1px solid rgba(124, 111, 186, 0.4);
     padding: 8px 16px;
     border-radius: var(--radius);
     font-size: 0.85rem;
@@ -2229,7 +2229,7 @@ body.health-mode .focus-title-category {
 }
 
 .btn-timer-stop:hover {
-    background: rgba(232, 67, 147, 0.3);
+    background: rgba(124, 111, 186, 0.3);
 }
 
 /* Task Check-In Modal */
@@ -2255,7 +2255,7 @@ body.health-mode .focus-title-category {
 }
 
 .check-in-time strong {
-    color: #00d2a0;
+    color: #6aad99;
 }
 
 .check-in-task {
@@ -2331,12 +2331,12 @@ body.health-mode .focus-title-category {
 
 .time-option-btn:hover {
     border-color: var(--accent-primary);
-    background: rgba(108, 92, 231, 0.1);
+    background: rgba(124, 111, 186, 0.1);
 }
 
 .time-option-btn.active {
     border-color: var(--accent-primary);
-    background: rgba(108, 92, 231, 0.2);
+    background: rgba(124, 111, 186, 0.2);
     color: var(--accent-primary);
 }
 
@@ -2398,7 +2398,7 @@ body.health-mode .focus-title-category {
 }
 
 .btn-pick-for-me {
-    background: linear-gradient(135deg, #f39c12, #e17055);
+    background: linear-gradient(135deg, #c4996a, #e17055);
     color: #fff;
     border: none;
     padding: 10px 16px;
@@ -2411,13 +2411,13 @@ body.health-mode .focus-title-category {
 
 .btn-pick-for-me:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(243, 156, 18, 0.35);
+    box-shadow: 0 4px 12px rgba(196, 153, 106, 0.35);
 }
 
 /* Input Error State */
 .input-error {
-    border-color: #e84393 !important;
-    background: rgba(232, 67, 147, 0.1) !important;
+    border-color: #7c6fba !important;
+    background: rgba(124, 111, 186, 0.1) !important;
 }
 
 /* Values Modal */
@@ -2427,7 +2427,7 @@ body.health-mode .focus-title-category {
 }
 
 .values-modal h2 {
-    color: #f1c40f;
+    color: #c4996a;
     margin-bottom: 8px;
 }
 
@@ -2448,7 +2448,7 @@ body.health-mode .focus-title-category {
     width: 28px;
     height: 28px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #f1c40f, #f39c12);
+    background: linear-gradient(135deg, #c4996a, #c4996a);
     color: #000;
     display: flex;
     align-items: center;
@@ -2473,13 +2473,13 @@ body.health-mode .focus-title-category {
 .pick-values-match {
     margin-top: 10px;
     font-size: 0.85rem;
-    color: #f1c40f;
+    color: #c4996a;
 }
 
 .pick-value-tag {
     display: inline-block;
     background: rgba(241, 196, 15, 0.2);
-    color: #f1c40f;
+    color: #c4996a;
     padding: 3px 10px;
     border-radius: 12px;
     font-size: 0.8rem;
@@ -2497,11 +2497,11 @@ body.health-mode .focus-title-category {
     max-width: 600px;
     padding: 32px;
     background: linear-gradient(135deg, #0a2e1a, #132f1e, #1a3a25);
-    border: 1px solid rgba(39, 174, 96, 0.3);
+    border: 1px solid rgba(90, 154, 120, 0.3);
 }
 
 .business-pack-modal h2 {
-    color: #27ae60;
+    color: #5a9a78;
     margin-bottom: 8px;
 }
 
@@ -2527,7 +2527,7 @@ body.health-mode .focus-title-category {
     width: 100%;
     margin-top: 16px;
     padding: 12px 20px;
-    background: linear-gradient(135deg, #27ae60, #1e8449);
+    background: linear-gradient(135deg, #5a9a78, #4a8068);
     color: #fff;
     border: none;
     border-radius: var(--radius);
@@ -2539,7 +2539,7 @@ body.health-mode .focus-title-category {
 
 .btn-business-pack:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(39, 174, 96, 0.4);
+    box-shadow: 0 4px 15px rgba(90, 154, 120, 0.2);
 }
 
 /* Business Mode - green hue for entire page */
@@ -2553,22 +2553,22 @@ body.business-mode #app {
 
 body.business-mode .top-bar {
     background: #0c1a12;
-    border-bottom-color: rgba(39, 174, 96, 0.15);
+    border-bottom-color: rgba(90, 154, 120, 0.15);
 }
 
 body.business-mode .login-card {
     background: #0c1a12;
-    border-color: rgba(39, 174, 96, 0.2);
+    border-color: rgba(90, 154, 120, 0.2);
 }
 
 body.business-mode .next-action-card {
     background: linear-gradient(135deg, #0a2e1a, #0c2416);
-    border-color: #27ae60;
+    border-color: #5a9a78;
 }
 
 body.business-mode .wheel-of-life-card {
     background: linear-gradient(135deg, #0a2e1a, #0c2416);
-    border-color: rgba(39, 174, 96, 0.25);
+    border-color: rgba(90, 154, 120, 0.25);
 }
 
 body.business-mode .wheel-chart-container {
@@ -2581,49 +2581,49 @@ body.business-mode .wheel-svg {
 
 body.business-mode .motivation-card {
     background: #101e15;
-    border-color: rgba(39, 174, 96, 0.15);
+    border-color: rgba(90, 154, 120, 0.15);
 }
 
 body.business-mode .outcome-item {
     background: #101e15;
-    border-color: rgba(39, 174, 96, 0.15);
+    border-color: rgba(90, 154, 120, 0.15);
 }
 
 body.business-mode .modal {
     background: #101e15;
-    border-color: rgba(39, 174, 96, 0.2);
+    border-color: rgba(90, 154, 120, 0.2);
 }
 
 body.business-mode .mode-toggle-btn.active {
-    background: #27ae60;
+    background: #5a9a78;
     color: #fff;
-    box-shadow: 0 2px 8px rgba(39, 174, 96, 0.4);
+    box-shadow: 0 2px 8px rgba(90, 154, 120, 0.2);
 }
 
 body.business-mode .focus-cat-btn {
-    border-color: rgba(39, 174, 96, 0.2);
+    border-color: rgba(90, 154, 120, 0.2);
 }
 
 body.business-mode .focus-cat-btn.active {
-    background: #27ae60;
-    border-color: #27ae60;
+    background: #5a9a78;
+    border-color: #5a9a78;
     color: #fff;
 }
 
 body.business-mode .btn-add-outcome {
     background: #101e15;
-    border-color: rgba(39, 174, 96, 0.3);
+    border-color: rgba(90, 154, 120, 0.3);
 }
 
 body.business-mode input,
 body.business-mode select,
 body.business-mode textarea {
     background: #0a1610;
-    border-color: rgba(39, 174, 96, 0.2);
+    border-color: rgba(90, 154, 120, 0.2);
 }
 
 body.business-mode .outcomes-section {
-    border-color: rgba(39, 174, 96, 0.1);
+    border-color: rgba(90, 154, 120, 0.1);
 }
 
 /* ==========================================
@@ -2640,128 +2640,128 @@ body.health-mode #app {
 
 body.health-mode .top-bar {
     background: #0c1a20;
-    border-bottom-color: rgba(0, 184, 212, 0.15);
+    border-bottom-color: rgba(90, 154, 176, 0.15);
 }
 
 body.health-mode .login-card {
     background: #0c1a20;
-    border-color: rgba(0, 184, 212, 0.2);
+    border-color: rgba(90, 154, 176, 0.2);
 }
 
 body.health-mode .next-action-card {
     background: linear-gradient(135deg, #0a2028, #0c1e26);
-    border-color: #00b8d4;
+    border-color: #5a9ab0;
 }
 
 body.health-mode .wheel-of-life-card {
     background: linear-gradient(135deg, #0a2028, #0c1e26);
-    border-color: rgba(0, 184, 212, 0.25);
+    border-color: rgba(90, 154, 176, 0.25);
 }
 
 body.health-mode .motivation-card {
     background: #101c20;
-    border-color: rgba(0, 184, 212, 0.15);
+    border-color: rgba(90, 154, 176, 0.15);
 }
 
 body.health-mode .outcome-item {
     background: #101c20;
-    border-color: rgba(0, 184, 212, 0.15);
+    border-color: rgba(90, 154, 176, 0.15);
 }
 
 body.health-mode .modal {
     background: #101c20;
-    border-color: rgba(0, 184, 212, 0.2);
+    border-color: rgba(90, 154, 176, 0.2);
 }
 
 body.health-mode .mode-toggle-btn.active {
-    background: #00b8d4;
+    background: #5a9ab0;
     color: #fff;
-    box-shadow: 0 2px 8px rgba(0, 184, 212, 0.4);
+    box-shadow: 0 2px 8px rgba(90, 154, 176, 0.2);
 }
 
 body.health-mode .focus-cat-btn {
-    border-color: rgba(0, 184, 212, 0.2);
+    border-color: rgba(90, 154, 176, 0.2);
 }
 
 body.health-mode .focus-cat-btn.active {
-    background: #00b8d4;
-    border-color: #00b8d4;
+    background: #5a9ab0;
+    border-color: #5a9ab0;
     color: #fff;
 }
 
 body.health-mode .btn-add-outcome {
     background: #101c20;
-    border-color: rgba(0, 184, 212, 0.3);
+    border-color: rgba(90, 154, 176, 0.3);
 }
 
 body.health-mode input,
 body.health-mode select,
 body.health-mode textarea {
     background: #0a1418;
-    border-color: rgba(0, 184, 212, 0.2);
+    border-color: rgba(90, 154, 176, 0.2);
 }
 
 body.health-mode .outcomes-section {
-    border-color: rgba(0, 184, 212, 0.1);
+    border-color: rgba(90, 154, 176, 0.1);
 }
 
 body.health-mode .focus-badge {
-    background: linear-gradient(135deg, rgba(0, 184, 212, 0.2), rgba(0, 184, 212, 0.1));
-    color: #00b8d4;
-    border-color: rgba(0, 184, 212, 0.4);
+    background: linear-gradient(135deg, rgba(90, 154, 176, 0.2), rgba(90, 154, 176, 0.1));
+    color: #5a9ab0;
+    border-color: rgba(90, 154, 176, 0.4);
 }
 
 body.health-mode .btn-help {
-    background: #00b8d4;
-    box-shadow: 0 0 12px rgba(0, 184, 212, 0.4);
+    background: #5a9ab0;
+    box-shadow: 0 0 12px rgba(90, 154, 176, 0.2);
 }
 
 body.health-mode .btn-help:hover {
     background: #00d4f5;
-    box-shadow: 0 0 20px rgba(0, 184, 212, 0.6);
+    box-shadow: 0 0 20px rgba(90, 154, 176, 0.3);
 }
 
 body.health-mode .help-section h3 {
-    color: #00b8d4;
+    color: #5a9ab0;
 }
 
 body.health-mode .help-step-num {
-    background: #00b8d4;
+    background: #5a9ab0;
 }
 
 body.health-mode .help-btn-ref {
-    background: rgba(0, 184, 212, 0.2);
-    color: #00b8d4;
+    background: rgba(90, 154, 176, 0.2);
+    color: #5a9ab0;
 }
 
 body.health-mode .help-day {
-    color: #00b8d4;
+    color: #5a9ab0;
 }
 
 body.health-mode .help-tips li::before {
-    color: #00b8d4;
+    color: #5a9ab0;
 }
 
 body.health-mode .btn-cat-guide {
-    border-color: #00b8d4;
-    color: #00b8d4;
+    border-color: #5a9ab0;
+    color: #5a9ab0;
 }
 
 body.health-mode .btn-cat-guide:hover {
-    background: #00b8d4;
+    background: #5a9ab0;
     color: #fff;
-    box-shadow: 0 0 12px rgba(0, 184, 212, 0.4);
+    box-shadow: 0 0 12px rgba(90, 154, 176, 0.2);
 }
 
 body.health-mode .btn-focus-action {
-    border-color: #00b8d4;
-    color: #00b8d4;
+    border-color: #5a9ab0;
+    color: #5a9ab0;
 }
 
 body.health-mode .btn-focus-action:hover {
-    background: #00b8d4;
+    background: #5a9ab0;
     color: #fff;
-    box-shadow: 0 0 10px rgba(0, 184, 212, 0.4);
+    box-shadow: 0 0 10px rgba(90, 154, 176, 0.2);
 }
 
 /* ── Health Mode + Light Theme ──────────────────────────────── */
@@ -2776,47 +2776,47 @@ body.health-mode.light-mode #app {
 
 body.health-mode.light-mode .top-bar {
     background: #e0f7fa;
-    border-bottom-color: rgba(0, 184, 212, 0.25);
+    border-bottom-color: rgba(90, 154, 176, 0.25);
 }
 
 body.health-mode.light-mode .login-card {
     background: #ffffff;
-    border-color: rgba(0, 184, 212, 0.3);
+    border-color: rgba(90, 154, 176, 0.3);
 }
 
 body.health-mode.light-mode .next-action-card {
     background: linear-gradient(135deg, #e0f7fa, #d5f0f5);
-    border-color: #00b8d4;
+    border-color: #5a9ab0;
 }
 
 body.health-mode.light-mode .wheel-of-life-card {
     background: linear-gradient(135deg, #e0f7fa, #d5f0f5);
-    border-color: rgba(0, 184, 212, 0.35);
+    border-color: rgba(90, 154, 176, 0.35);
 }
 
 body.health-mode.light-mode .motivation-card {
     background: #ffffff;
-    border-color: rgba(0, 184, 212, 0.2);
+    border-color: rgba(90, 154, 176, 0.2);
 }
 
 body.health-mode.light-mode .outcome-item {
     background: #ffffff;
-    border-color: rgba(0, 184, 212, 0.2);
+    border-color: rgba(90, 154, 176, 0.2);
 }
 
 body.health-mode.light-mode .modal {
     background: #ffffff;
-    border-color: rgba(0, 184, 212, 0.3);
+    border-color: rgba(90, 154, 176, 0.3);
 }
 
 body.health-mode.light-mode .focus-cat-btn {
-    border-color: rgba(0, 184, 212, 0.3);
+    border-color: rgba(90, 154, 176, 0.3);
     color: #0a4a54;
 }
 
 body.health-mode.light-mode .btn-add-outcome {
     background: #f0fafb;
-    border-color: rgba(0, 184, 212, 0.35);
+    border-color: rgba(90, 154, 176, 0.35);
     color: #0a4a54;
 }
 
@@ -2824,18 +2824,18 @@ body.health-mode.light-mode input,
 body.health-mode.light-mode select,
 body.health-mode.light-mode textarea {
     background: #f0fafb;
-    border-color: rgba(0, 184, 212, 0.3);
+    border-color: rgba(90, 154, 176, 0.3);
     color: #0a4a54;
 }
 
 body.health-mode.light-mode .outcomes-section {
-    border-color: rgba(0, 184, 212, 0.15);
+    border-color: rgba(90, 154, 176, 0.15);
 }
 
 body.health-mode.light-mode .wheel-balance-score {
     background: linear-gradient(135deg, #d5f0f5, #c0e8ee, #b0e0e8) !important;
-    border-color: #00b8d4;
-    box-shadow: 0 0 15px rgba(0, 184, 212, 0.12);
+    border-color: #5a9ab0;
+    box-shadow: 0 0 15px rgba(90, 154, 176, 0.12);
 }
 
 body.health-mode.light-mode .praise-banner {
@@ -2844,7 +2844,7 @@ body.health-mode.light-mode .praise-banner {
 }
 
 body.health-mode.light-mode .help-btn-ref {
-    background: rgba(0, 184, 212, 0.12);
+    background: rgba(90, 154, 176, 0.12);
     color: #007a8a;
 }
 
@@ -2852,58 +2852,58 @@ body.health-mode.light-mode .help-btn-ref {
    FINANCES MODE THEME
    ========================================== */
 body.finances-mode {
-    --accent-primary: #e67e22;
-    --accent-green: #f39c12;
+    --accent-primary: #b08858;
+    --accent-green: #c4996a;
 }
 
 body.finances-mode .top-bar {
     background: #1a120c;
-    border-bottom-color: rgba(230, 126, 34, 0.15);
+    border-bottom-color: rgba(176, 136, 88, 0.15);
 }
 
 body.finances-mode .mode-toggle-btn.active {
-    background: #e67e22;
+    background: #b08858;
     color: #fff;
-    box-shadow: 0 2px 8px rgba(230, 126, 34, 0.4);
+    box-shadow: 0 2px 8px rgba(176, 136, 88, 0.2);
 }
 
 body.finances-mode .btn-add-outcome {
     background: #1c140e;
-    border-color: rgba(230, 126, 34, 0.3);
+    border-color: rgba(176, 136, 88, 0.3);
 }
 
 body.finances-mode input,
 body.finances-mode select,
 body.finances-mode textarea {
     background: #16100a;
-    border-color: rgba(230, 126, 34, 0.2);
+    border-color: rgba(176, 136, 88, 0.2);
 }
 
 body.finances-mode .focus-cat-btn {
-    border-color: rgba(230, 126, 34, 0.2);
+    border-color: rgba(176, 136, 88, 0.2);
 }
 
 body.finances-mode .focus-cat-btn.active {
-    background: rgba(230, 126, 34, 0.2);
-    border-color: #e67e22;
-    color: #e67e22;
+    background: rgba(176, 136, 88, 0.2);
+    border-color: #b08858;
+    color: #b08858;
 }
 
 body.finances-mode .tab.active {
-    background: rgba(230, 126, 34, 0.15);
-    border-color: rgba(230, 126, 34, 0.3);
-    color: #e67e22;
+    background: rgba(176, 136, 88, 0.15);
+    border-color: rgba(176, 136, 88, 0.3);
+    color: #b08858;
 }
 
 body.finances-mode .focus-badge {
-    background: rgba(230, 126, 34, 0.15);
-    border-color: rgba(230, 126, 34, 0.35);
-    color: #e67e22;
+    background: rgba(176, 136, 88, 0.15);
+    border-color: rgba(176, 136, 88, 0.35);
+    color: #b08858;
 }
 
 body.finances-mode .praise-banner {
-    background: linear-gradient(135deg, rgba(230, 126, 34, 0.2), rgba(243, 156, 18, 0.15));
-    color: #f39c12;
+    background: linear-gradient(135deg, rgba(176, 136, 88, 0.2), rgba(196, 153, 106, 0.15));
+    color: #c4996a;
 }
 
 /* Finances Light Mode */
@@ -2914,17 +2914,17 @@ body.finances-mode.light-mode {
     --bg-input: #fef3e8;
     --text-primary: #2e1a0c;
     --text-secondary: #6a4a2e;
-    --border: rgba(230, 126, 34, 0.2);
+    --border: rgba(176, 136, 88, 0.2);
 }
 
 body.finances-mode.light-mode .top-bar {
     background: #fdf0e4;
-    border-bottom-color: rgba(230, 126, 34, 0.25);
+    border-bottom-color: rgba(176, 136, 88, 0.25);
 }
 
 body.finances-mode.light-mode .btn-add-outcome {
     background: #fef6ee;
-    border-color: rgba(230, 126, 34, 0.35);
+    border-color: rgba(176, 136, 88, 0.35);
     color: #4a2e10;
 }
 
@@ -2932,7 +2932,7 @@ body.finances-mode.light-mode input,
 body.finances-mode.light-mode select,
 body.finances-mode.light-mode textarea {
     background: #fef3e8;
-    border-color: rgba(230, 126, 34, 0.3);
+    border-color: rgba(176, 136, 88, 0.3);
 }
 
 body.finances-mode.light-mode .praise-banner {
@@ -3059,7 +3059,7 @@ body.finances-mode.light-mode .praise-banner {
 
 .wheel-of-life-card {
     background: linear-gradient(135deg, #111827, #0f172a);
-    border: 1px solid rgba(108, 92, 231, 0.25);
+    border: 1px solid rgba(124, 111, 186, 0.25);
     border-radius: var(--radius);
     padding: 24px;
     display: flex;
@@ -3097,9 +3097,9 @@ body.finances-mode.light-mode .praise-banner {
 .wheel-balance-score {
     padding: 14px 16px;
     background: linear-gradient(135deg, #251458, #1b1045, #131035) !important;
-    border: 1px solid #7c6cf7;
+    border: 1px solid #8a7fc7;
     border-radius: var(--radius);
-    box-shadow: 0 0 25px rgba(108, 92, 231, 0.35), inset 0 1px 0 rgba(108, 92, 231, 0.15);
+    box-shadow: 0 0 12px rgba(124, 111, 186, 0.15), inset 0 1px 0 rgba(124, 111, 186, 0.15);
 }
 
 .balance-level {
@@ -3128,7 +3128,7 @@ body.finances-mode.light-mode .praise-banner {
 .balance-bar-fill {
     height: 100%;
     border-radius: 4px;
-    background: linear-gradient(90deg, #f39c12, #e17055);
+    background: linear-gradient(90deg, #c4996a, #e17055);
     transition: width 0.6s ease;
 }
 
@@ -3177,14 +3177,14 @@ body.finances-mode.light-mode .praise-banner {
     letter-spacing: 0.5px;
     text-transform: uppercase;
     transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
-    box-shadow: 0 3px 12px rgba(255, 107, 53, 0.4);
+    box-shadow: 0 3px 12px rgba(255, 107, 53, 0.2);
     margin-left: 8px;
 }
 
 .btn-new-outcome-pill:hover {
     transform: translateY(-2px);
     background: #ff8c5a;
-    box-shadow: 0 6px 20px rgba(255, 107, 53, 0.5);
+    box-shadow: 0 6px 20px rgba(255, 107, 53, 0.25);
 }
 
 .filter-tabs {
@@ -3304,9 +3304,9 @@ body.finances-mode.light-mode .praise-banner {
     font-style: italic;
     margin-bottom: 16px;
     padding: 8px 12px;
-    background: rgba(243, 156, 18, 0.08);
+    background: rgba(196, 153, 106, 0.08);
     border-radius: var(--radius-sm);
-    border: 2px solid rgba(243, 156, 18, 0.35);
+    border: 2px solid rgba(196, 153, 106, 0.35);
 }
 
 .purpose-label-tag {
@@ -3377,7 +3377,7 @@ body.finances-mode.light-mode .praise-banner {
 
 .outcome-actions-list li.dragging {
     opacity: 0.4;
-    background: rgba(108,92,231,0.1);
+    background: rgba(124,111,186,0.1);
 }
 
 .outcome-actions-list li.drag-over {
@@ -3425,8 +3425,8 @@ body.finances-mode.light-mode .praise-banner {
     font-size: 0.65rem;
     padding: 1px 6px;
     border-radius: 8px;
-    background: rgba(108, 92, 231, 0.15);
-    color: #6c5ce7;
+    background: rgba(124, 111, 186, 0.15);
+    color: #7c6fba;
     font-weight: 600;
     white-space: nowrap;
     flex-shrink: 0;
@@ -3586,7 +3586,7 @@ body.finances-mode.light-mode .praise-banner {
     text-transform: uppercase;
     color: var(--accent-primary);
     padding: 12px 0 6px;
-    border-bottom: 1px solid rgba(108,92,231,0.2);
+    border-bottom: 1px solid rgba(124,111,186,0.2);
     margin-top: 4px;
     display: flex;
     justify-content: space-between;
@@ -3601,10 +3601,10 @@ body.finances-mode.light-mode .praise-banner {
 .log-day-total {
     font-size: 0.75rem;
     font-weight: 600;
-    color: #00d2a0;
+    color: #6aad99;
     letter-spacing: 0.5px;
     text-transform: none;
-    background: rgba(0, 210, 160, 0.12);
+    background: rgba(106, 173, 153, 0.12);
     padding: 3px 10px;
     border-radius: 12px;
 }
@@ -3645,7 +3645,7 @@ body.finances-mode.light-mode .praise-banner {
 
 .btn-log-repeat {
     background: none;
-    border: 1px solid rgba(108, 92, 231, 0.2);
+    border: 1px solid rgba(124, 111, 186, 0.2);
     border-radius: 6px;
     cursor: pointer;
     font-size: 0.75rem;
@@ -3657,7 +3657,7 @@ body.finances-mode.light-mode .praise-banner {
 
 .btn-log-repeat:hover {
     opacity: 1;
-    background: rgba(108, 92, 231, 0.15);
+    background: rgba(124, 111, 186, 0.15);
 }
 
 /* --- Review / Feedback Modal --- */
@@ -3692,8 +3692,8 @@ body.finances-mode.light-mode .praise-banner {
 }
 
 .referral-link-box {
-    background: rgba(108, 92, 231, 0.08);
-    border: 1px solid rgba(108, 92, 231, 0.2);
+    background: rgba(124, 111, 186, 0.08);
+    border: 1px solid rgba(124, 111, 186, 0.2);
     border-radius: var(--radius-md);
     padding: 12px;
     margin-bottom: 12px;
@@ -3723,10 +3723,10 @@ body.finances-mode.light-mode .praise-banner {
 }
 
 .log-actual-time {
-    color: #00d2a0;
+    color: #6aad99;
     font-size: 0.8rem;
     padding: 2px 8px;
-    background: rgba(0, 210, 160, 0.15);
+    background: rgba(106, 173, 153, 0.15);
     border-radius: 10px;
     margin-right: 8px;
 }
@@ -3963,28 +3963,28 @@ body.finances-mode.light-mode .praise-banner {
     gap: 10px;
     margin-top: 14px;
     padding: 10px 14px;
-    background: rgba(0, 210, 160, 0.1);
-    border: 1px solid rgba(0, 210, 160, 0.3);
+    background: rgba(106, 173, 153, 0.1);
+    border: 1px solid rgba(106, 173, 153, 0.3);
     border-radius: var(--radius-sm);
     cursor: pointer;
     transition: var(--transition);
 }
 
 .exercise-add-checkbox:hover {
-    background: rgba(0, 210, 160, 0.15);
-    border-color: rgba(0, 210, 160, 0.5);
+    background: rgba(106, 173, 153, 0.15);
+    border-color: rgba(106, 173, 153, 0.5);
 }
 
 .exercise-add-checkbox input[type="checkbox"] {
     width: 18px;
     height: 18px;
-    accent-color: #00d2a0;
+    accent-color: #6aad99;
     cursor: pointer;
 }
 
 .exercise-add-checkbox span {
     font-size: 0.85rem;
-    color: #00d2a0;
+    color: #6aad99;
     font-weight: 500;
 }
 
@@ -4128,19 +4128,19 @@ body.finances-mode.light-mode .praise-banner {
 
 /* Per-mode outlines when inactive */
 .mode-toggle-btn[data-mode="personal"] {
-    border-color: rgba(108, 92, 231, 0.4);
+    border-color: rgba(124, 111, 186, 0.4);
 }
 
 .mode-toggle-btn[data-mode="business"] {
-    border-color: rgba(39, 174, 96, 0.4);
+    border-color: rgba(90, 154, 120, 0.4);
 }
 
 .mode-toggle-btn[data-mode="health"] {
-    border-color: rgba(0, 184, 212, 0.4);
+    border-color: rgba(90, 154, 176, 0.4);
 }
 
 .mode-toggle-btn[data-mode="finances"] {
-    border-color: rgba(230, 126, 34, 0.4);
+    border-color: rgba(176, 136, 88, 0.4);
 }
 
 .mode-toggle-btn:hover {
@@ -4151,30 +4151,30 @@ body.finances-mode.light-mode .praise-banner {
 }
 
 .mode-toggle-btn[data-mode="personal"]:hover {
-    border-color: rgba(108, 92, 231, 0.7);
-    background: rgba(108, 92, 231, 0.08);
+    border-color: rgba(124, 111, 186, 0.7);
+    background: rgba(124, 111, 186, 0.08);
 }
 
 .mode-toggle-btn[data-mode="business"]:hover {
-    border-color: rgba(39, 174, 96, 0.7);
-    background: rgba(39, 174, 96, 0.08);
+    border-color: rgba(90, 154, 120, 0.7);
+    background: rgba(90, 154, 120, 0.08);
 }
 
 .mode-toggle-btn[data-mode="health"]:hover {
-    border-color: rgba(0, 184, 212, 0.7);
-    background: rgba(0, 184, 212, 0.08);
+    border-color: rgba(90, 154, 176, 0.7);
+    background: rgba(90, 154, 176, 0.08);
 }
 
 .mode-toggle-btn[data-mode="finances"]:hover {
-    border-color: rgba(230, 126, 34, 0.7);
-    background: rgba(230, 126, 34, 0.08);
+    border-color: rgba(176, 136, 88, 0.7);
+    background: rgba(176, 136, 88, 0.08);
 }
 
 .mode-toggle-btn.active {
     background: linear-gradient(135deg, var(--accent-primary), #5a4bd6);
     color: #fff;
     border-color: transparent;
-    box-shadow: 0 2px 8px rgba(108, 92, 231, 0.4);
+    box-shadow: 0 2px 8px rgba(124, 111, 186, 0.2);
     opacity: 1;
     filter: none;
 }
@@ -4202,21 +4202,21 @@ body.finances-mode.light-mode .praise-banner {
 }
 
 .leverage-badge.leverage-high {
-    background: rgba(0, 210, 160, 0.2);
-    color: #00d2a0;
-    border: 1px solid rgba(0, 210, 160, 0.4);
+    background: rgba(106, 173, 153, 0.2);
+    color: #6aad99;
+    border: 1px solid rgba(106, 173, 153, 0.4);
 }
 
 .leverage-badge.leverage-mid {
-    background: rgba(243, 156, 18, 0.2);
-    color: #f39c12;
-    border: 1px solid rgba(243, 156, 18, 0.4);
+    background: rgba(196, 153, 106, 0.2);
+    color: #c4996a;
+    border: 1px solid rgba(196, 153, 106, 0.4);
 }
 
 .leverage-badge.leverage-low {
-    background: rgba(231, 76, 60, 0.2);
-    color: #e74c3c;
-    border: 1px solid rgba(231, 76, 60, 0.4);
+    background: rgba(192, 122, 115, 0.2);
+    color: #c07a73;
+    border: 1px solid rgba(192, 122, 115, 0.4);
 }
 
 /* ==========================================
@@ -4229,18 +4229,18 @@ body.finances-mode.light-mode .praise-banner {
     border-radius: 50px;
     font-size: 0.95rem;
     font-weight: 700;
-    background: linear-gradient(135deg, rgba(108, 92, 231, 0.2), rgba(108, 92, 231, 0.1));
+    background: linear-gradient(135deg, rgba(124, 111, 186, 0.2), rgba(124, 111, 186, 0.1));
     color: var(--accent-primary);
-    border: 1px solid rgba(108, 92, 231, 0.4);
+    border: 1px solid rgba(124, 111, 186, 0.4);
     margin-left: 8px;
     letter-spacing: 0.5px;
     text-transform: uppercase;
 }
 
 body.business-mode .focus-badge {
-    background: linear-gradient(135deg, rgba(39, 174, 96, 0.2), rgba(39, 174, 96, 0.1));
-    color: #27ae60;
-    border-color: rgba(39, 174, 96, 0.4);
+    background: linear-gradient(135deg, rgba(90, 154, 120, 0.2), rgba(90, 154, 120, 0.1));
+    color: #5a9a78;
+    border-color: rgba(90, 154, 120, 0.4);
 }
 
 /* Back Burner Outcomes */
@@ -4259,10 +4259,10 @@ body.business-mode .focus-badge {
     font-weight: 700;
     letter-spacing: 2px;
     color: var(--accent-orange);
-    background: rgba(243, 156, 18, 0.15);
+    background: rgba(196, 153, 106, 0.15);
     padding: 2px 8px;
     border-radius: 8px;
-    border: 1px solid rgba(243, 156, 18, 0.3);
+    border: 1px solid rgba(196, 153, 106, 0.3);
 }
 
 /* Back Burner Collapsible Toggle */
@@ -4284,7 +4284,7 @@ body.business-mode .focus-badge {
 }
 
 .bb-toggle-header:active {
-    background: rgba(243, 156, 18, 0.1);
+    background: rgba(196, 153, 106, 0.1);
 }
 
 .bb-toggle-arrow {
@@ -4428,7 +4428,7 @@ body.business-mode .focus-badge {
 .outcome-drag-handle:hover {
     opacity: 1;
     color: var(--accent-orange);
-    background: rgba(243, 156, 18, 0.1);
+    background: rgba(196, 153, 106, 0.1);
 }
 
 .outcome-drag-handle:active {
@@ -4447,7 +4447,7 @@ body.business-mode .focus-badge {
 
 .outcome-card.outcome-drag-over {
     border-color: var(--accent-orange) !important;
-    box-shadow: 0 0 0 2px var(--accent-orange), 0 4px 24px rgba(243, 156, 18, 0.25);
+    box-shadow: 0 0 0 2px var(--accent-orange), 0 4px 24px rgba(196, 153, 106, 0.25);
     transform: scale(1.02);
 }
 
@@ -4591,7 +4591,7 @@ body.business-mode .focus-badge {
 
 .archive-actions-list li::before {
     content: '\2713';
-    color: #00d2a0;
+    color: #6aad99;
     font-weight: 700;
 }
 
@@ -4622,8 +4622,8 @@ body.business-mode .focus-badge {
 }
 
 .archive-unarchive-btn:hover {
-    border-color: #ff7675;
-    color: #ff7675;
+    border-color: #c07a73;
+    color: #c07a73;
 }
 
 /* Archive button on completed outcome cards */
@@ -4760,21 +4760,21 @@ body.business-mode .focus-badge {
     cursor: pointer;
     border: none;
     transition: var(--transition);
-    box-shadow: 0 0 12px rgba(108,92,231,0.4);
+    box-shadow: 0 0 12px rgba(124,111,186,0.2);
 }
 .btn-help:hover {
     background: var(--accent-glow);
-    box-shadow: 0 0 20px rgba(108,92,231,0.6);
+    box-shadow: 0 0 20px rgba(124,111,186,0.3);
     transform: scale(1.1);
 }
 
 body.business-mode .btn-help {
-    background: #27ae60;
-    box-shadow: 0 0 12px rgba(39,174,96,0.4);
+    background: #5a9a78;
+    box-shadow: 0 0 12px rgba(39,174,96,0.2);
 }
 body.business-mode .btn-help:hover {
     background: #2ecc71;
-    box-shadow: 0 0 20px rgba(39,174,96,0.6);
+    box-shadow: 0 0 20px rgba(39,174,96,0.3);
 }
 
 .help-modal {
@@ -4812,7 +4812,7 @@ body.business-mode .btn-help:hover {
 }
 
 body.business-mode .help-section h3 {
-    color: #27ae60;
+    color: #5a9a78;
 }
 
 .help-section > p {
@@ -4882,7 +4882,7 @@ body.business-mode .help-section h3 {
 }
 
 body.business-mode .help-step-num {
-    background: #27ae60;
+    background: #5a9a78;
 }
 
 .help-step-content {
@@ -4902,7 +4902,7 @@ body.business-mode .help-step-num {
 }
 
 .help-btn-ref {
-    background: rgba(108,92,231,0.2);
+    background: rgba(124,111,186,0.2);
     color: var(--accent-primary);
     padding: 2px 8px;
     border-radius: 4px;
@@ -4913,7 +4913,7 @@ body.business-mode .help-step-num {
 
 body.business-mode .help-btn-ref {
     background: rgba(39,174,96,0.2);
-    color: #27ae60;
+    color: #5a9a78;
 }
 
 /* Button guide */
@@ -4970,7 +4970,7 @@ body.business-mode .help-btn-ref {
 }
 
 body.business-mode .help-day {
-    color: #27ae60;
+    color: #5a9a78;
 }
 
 .help-focus {
@@ -5014,7 +5014,7 @@ body.business-mode .help-day {
 }
 
 body.business-mode .help-tips li::before {
-    color: #27ae60;
+    color: #5a9a78;
 }
 
 .help-tips li strong {
@@ -5137,7 +5137,7 @@ body.business-mode .help-tips li::before {
 .seed-est {
     font-size: 0.75rem;
     color: var(--text-muted);
-    background: rgba(108,92,231,0.15);
+    background: rgba(124,111,186,0.15);
     padding: 2px 6px;
     border-radius: 3px;
     margin-left: 8px;
@@ -5235,7 +5235,7 @@ body.business-mode .help-tips li::before {
     gap: 14px;
     align-items: flex-start;
     background: linear-gradient(135deg, #1a1040, #0f0a2a);
-    border: 1px solid rgba(108,92,231,0.3);
+    border: 1px solid rgba(124,111,186,0.3);
     border-radius: var(--radius);
     padding: 18px;
 }
@@ -5329,7 +5329,7 @@ body.business-mode .help-tips li::before {
 .btn-cat-guide:hover {
     background: var(--accent-primary);
     color: #fff;
-    box-shadow: 0 0 12px rgba(108, 92, 231, 0.4);
+    box-shadow: 0 0 10px rgba(124, 111, 186, 0.2);
 }
 
 body.business-mode .btn-cat-guide {
@@ -5340,7 +5340,7 @@ body.business-mode .btn-cat-guide {
 body.business-mode .btn-cat-guide:hover {
     background: var(--accent-green);
     color: #fff;
-    box-shadow: 0 0 12px rgba(0, 210, 160, 0.4);
+    box-shadow: 0 0 10px rgba(106, 173, 153, 0.2);
 }
 
 .cat-guide-modal {
@@ -5407,7 +5407,7 @@ body.business-mode .btn-cat-guide:hover {
 .btn-focus-action:hover {
     background: var(--accent-primary);
     color: #fff;
-    box-shadow: 0 0 10px rgba(108, 92, 231, 0.4);
+    box-shadow: 0 0 8px rgba(124, 111, 186, 0.2);
 }
 
 body.business-mode .btn-focus-action {
@@ -5418,7 +5418,7 @@ body.business-mode .btn-focus-action {
 body.business-mode .btn-focus-action:hover {
     background: var(--accent-green);
     color: #fff;
-    box-shadow: 0 0 10px rgba(0, 210, 160, 0.4);
+    box-shadow: 0 0 8px rgba(106, 173, 153, 0.2);
 }
 
 /* Action deadline badge */
@@ -5434,18 +5434,18 @@ body.business-mode .btn-focus-action:hover {
 }
 
 .action-deadline-badge.soon {
-    background: rgba(243, 156, 18, 0.15);
+    background: rgba(196, 153, 106, 0.15);
     color: var(--accent-orange);
 }
 
 .action-deadline-badge.urgent {
-    background: rgba(231, 76, 60, 0.2);
+    background: rgba(192, 122, 115, 0.2);
     color: var(--accent-red);
     font-weight: 700;
 }
 
 .action-deadline-badge.overdue {
-    background: rgba(231, 76, 60, 0.3);
+    background: rgba(192, 122, 115, 0.3);
     color: #ff5252;
     font-weight: 700;
 }
@@ -5477,8 +5477,8 @@ body.business-mode .btn-focus-action:hover {
     display: flex;
     align-items: center;
     gap: 5px;
-    background: rgba(108, 92, 231, 0.15);
-    border: 1px solid rgba(108, 92, 231, 0.3);
+    background: rgba(124, 111, 186, 0.15);
+    border: 1px solid rgba(124, 111, 186, 0.3);
     border-radius: 20px;
     padding: 3px 10px;
     font-size: 0.7rem;
@@ -5552,19 +5552,19 @@ body.business-mode .btn-focus-action:hover {
     cursor: pointer;
     text-transform: uppercase;
     letter-spacing: 1px;
-    box-shadow: 0 4px 15px rgba(108, 92, 231, 0.4);
+    box-shadow: 0 4px 15px rgba(124, 111, 186, 0.2);
     transition: transform 0.15s ease, box-shadow 0.15s ease;
-    animation: pulseGlow 2s ease-in-out infinite;
+    animation: pulseGlow 2s ease-in-out 3;
 }
 
 .btn-create-outcome-next:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(108, 92, 231, 0.5);
+    box-shadow: 0 6px 15px rgba(124, 111, 186, 0.25);
 }
 
 @keyframes pulseGlow {
-    0%, 100% { box-shadow: 0 4px 15px rgba(108, 92, 231, 0.4); }
-    50% { box-shadow: 0 4px 25px rgba(108, 92, 231, 0.6); }
+    0%, 100% { box-shadow: 0 4px 12px rgba(124, 111, 186, 0.2); }
+    50% { box-shadow: 0 4px 18px rgba(124, 111, 186, 0.3); }
 }
 
 /* --- Combo Display --- */
@@ -5572,12 +5572,12 @@ body.business-mode .btn-focus-action:hover {
     text-align: center;
     padding: 8px 12px;
     margin-top: 8px;
-    background: linear-gradient(135deg, rgba(231, 76, 60, 0.15), rgba(243, 156, 18, 0.15));
-    border: 1px solid rgba(231, 76, 60, 0.3);
+    background: linear-gradient(135deg, rgba(192, 122, 115, 0.15), rgba(196, 153, 106, 0.15));
+    border: 1px solid rgba(192, 122, 115, 0.3);
     border-radius: var(--radius-md);
     font-weight: 800;
     font-size: 0.85rem;
-    color: #ff6b6b;
+    color: #c07a73;
     letter-spacing: 1px;
 }
 
@@ -5586,7 +5586,7 @@ body.business-mode .btn-focus-action:hover {
 }
 
 .combo-mult {
-    background: rgba(231, 76, 60, 0.2);
+    background: rgba(192, 122, 115, 0.2);
     padding: 2px 8px;
     border-radius: 10px;
     font-size: 0.75rem;
@@ -5599,7 +5599,7 @@ body.business-mode .btn-focus-action:hover {
 
 @keyframes comboPulse {
     0% { transform: scale(1); }
-    50% { transform: scale(1.08); box-shadow: 0 0 20px rgba(231, 76, 60, 0.4); }
+    50% { transform: scale(1.08); box-shadow: 0 0 15px rgba(192, 122, 115, 0.2); }
     100% { transform: scale(1); }
 }
 
@@ -5634,15 +5634,15 @@ body.business-mode .btn-focus-action:hover {
     gap: 8px;
     padding: 7px 10px;
     margin-bottom: 5px;
-    background: rgba(255, 211, 42, 0.05);
-    border: 1px solid rgba(255, 211, 42, 0.15);
+    background: rgba(196, 153, 106, 0.05);
+    border: 1px solid rgba(196, 153, 106, 0.15);
     border-radius: var(--radius-sm);
     transition: all 0.3s ease;
 }
 
 .challenge-card.completed {
-    background: rgba(0, 210, 160, 0.1);
-    border-color: rgba(0, 210, 160, 0.3);
+    background: rgba(106, 173, 153, 0.1);
+    border-color: rgba(106, 173, 153, 0.3);
 }
 
 .challenge-card.completed .challenge-text {
@@ -5713,9 +5713,9 @@ body.business-mode .btn-focus-action:hover {
 }
 
 .badge-item.earned {
-    background: rgba(108, 92, 231, 0.1);
-    border-color: rgba(108, 92, 231, 0.3);
-    box-shadow: 0 0 12px rgba(108, 92, 231, 0.15);
+    background: rgba(124, 111, 186, 0.1);
+    border-color: rgba(124, 111, 186, 0.3);
+    box-shadow: 0 0 12px rgba(124, 111, 186, 0.15);
 }
 
 .badge-item.locked {
@@ -5784,7 +5784,7 @@ body.business-mode .btn-focus-action:hover {
     font-size: 0.45rem;
     font-weight: 900;
     color: var(--accent-yellow);
-    background: rgba(255, 211, 42, 0.2);
+    background: rgba(196, 153, 106, 0.2);
     padding: 1px 4px;
     border-radius: 6px;
 }
@@ -5804,8 +5804,8 @@ body.business-mode .btn-focus-action:hover {
     align-items: center;
     flex-wrap: wrap;
     gap: 8px;
-    background: linear-gradient(135deg, rgba(108, 92, 231, 0.15), rgba(52, 152, 219, 0.12));
-    border: 1px solid rgba(108, 92, 231, 0.3);
+    background: linear-gradient(135deg, rgba(124, 111, 186, 0.15), rgba(52, 152, 219, 0.12));
+    border: 1px solid rgba(124, 111, 186, 0.3);
     border-radius: var(--radius-lg, 12px);
     padding: 14px 18px;
     margin-bottom: 14px;
@@ -5850,39 +5850,39 @@ body.business-mode .btn-focus-action:hover {
 }
 
 .pwr-stat-actions {
-    background: rgba(0, 210, 160, 0.15);
-    color: #00d2a0;
+    background: rgba(106, 173, 153, 0.15);
+    color: #6aad99;
 }
 
 .pwr-stat-cats {
-    background: rgba(108, 92, 231, 0.15);
+    background: rgba(124, 111, 186, 0.15);
     color: #a29bfe;
 }
 
 .pwr-stat-streak {
-    background: rgba(243, 156, 18, 0.15);
-    color: #f39c12;
+    background: rgba(196, 153, 106, 0.15);
+    color: #c4996a;
 }
 
 .pwr-stat-combo {
-    background: rgba(231, 76, 60, 0.15);
-    color: #ff6b6b;
+    background: rgba(192, 122, 115, 0.15);
+    color: #c07a73;
 }
 
 .pwr-stat-beat {
-    background: rgba(0, 210, 160, 0.2);
-    color: #00d2a0;
+    background: rgba(106, 173, 153, 0.2);
+    color: #6aad99;
 }
 
 .pwr-stat-chase {
-    background: rgba(255, 211, 42, 0.12);
-    color: #ffd32a;
+    background: rgba(196, 153, 106, 0.12);
+    color: #c4996a;
 }
 
 .pwr-stat-xp {
-    background: linear-gradient(135deg, rgba(108, 92, 231, 0.25), rgba(52, 152, 219, 0.18));
+    background: linear-gradient(135deg, rgba(124, 111, 186, 0.25), rgba(52, 152, 219, 0.18));
     color: var(--accent-purple);
-    border: 1px solid rgba(108, 92, 231, 0.4);
+    border: 1px solid rgba(124, 111, 186, 0.4);
     font-weight: 800;
 }
 
@@ -5897,14 +5897,14 @@ body.business-mode .btn-focus-action:hover {
 .pwr-mini-bar {
     width: 12px;
     min-height: 4px;
-    background: rgba(108, 92, 231, 0.25);
+    background: rgba(124, 111, 186, 0.25);
     border-radius: 2px 2px 0 0;
     transition: height 0.3s ease;
 }
 
 .pwr-mini-bar.pwr-active {
     background: linear-gradient(180deg, var(--accent-purple), var(--accent-blue));
-    box-shadow: 0 0 6px rgba(108, 92, 231, 0.4);
+    box-shadow: 0 0 6px rgba(124, 111, 186, 0.2);
 }
 
 /* XP row inside Power Score bar */
@@ -5981,7 +5981,7 @@ body.business-mode .btn-focus-action:hover {
     background: linear-gradient(135deg, #1a1a2e, #16213e);
     border: 2px solid var(--accent-purple);
     border-radius: 20px;
-    box-shadow: 0 0 60px rgba(108, 92, 231, 0.4), 0 0 120px rgba(108, 92, 231, 0.1);
+    box-shadow: 0 0 15px rgba(124, 111, 186, 0.2), 0 0 30px rgba(124, 111, 186, 0.05);
     animation: levelUpPop 0.5s ease forwards;
 }
 
@@ -5994,7 +5994,7 @@ body.business-mode .btn-focus-action:hover {
 .level-up-emoji {
     font-size: 4rem;
     margin-bottom: 10px;
-    animation: levelUpBounce 1s ease infinite;
+    animation: levelUpBounce 1s ease 3;
 }
 
 @keyframes levelUpBounce {
@@ -6050,7 +6050,7 @@ body.business-mode .btn-focus-action:hover {
     background: linear-gradient(135deg, #1a1a2e, #0d1b2a);
     border: 2px solid var(--accent-yellow);
     border-radius: 20px;
-    box-shadow: 0 0 40px rgba(255, 211, 42, 0.3);
+    box-shadow: 0 0 40px rgba(196, 153, 106, 0.3);
     animation: levelUpPop 0.5s ease forwards;
 }
 
@@ -6087,8 +6087,8 @@ body.business-mode .btn-focus-action:hover {
     top: 70px;
     left: 50%;
     transform: translateX(-50%) translateY(-20px);
-    background: linear-gradient(135deg, rgba(255, 211, 42, 0.2), rgba(243, 156, 18, 0.2));
-    border: 1px solid rgba(255, 211, 42, 0.5);
+    background: linear-gradient(135deg, rgba(196, 153, 106, 0.2), rgba(196, 153, 106, 0.2));
+    border: 1px solid rgba(196, 153, 106, 0.5);
     color: var(--accent-yellow);
     padding: 10px 20px;
     border-radius: 12px;
@@ -6097,7 +6097,7 @@ body.business-mode .btn-focus-action:hover {
     z-index: 9997;
     opacity: 0;
     backdrop-filter: blur(10px);
-    box-shadow: 0 4px 20px rgba(255, 211, 42, 0.15);
+    box-shadow: 0 4px 20px rgba(196, 153, 106, 0.15);
 }
 
 .challenge-toast.toast-animate {
@@ -6116,7 +6116,7 @@ body.business-mode .btn-focus-action:hover {
 
 /* --- Streak Glow (7+ days) --- */
 .streak-flame {
-    animation: flameFlicker 1s ease-in-out infinite;
+    animation: flameFlicker 1s ease-in-out 3;
 }
 
 @keyframes fadeIn {
@@ -6181,8 +6181,8 @@ body.business-mode .btn-focus-action:hover {
 }
 
 .bad-day-task.completed {
-    background: rgba(0, 210, 160, 0.08);
-    border-color: rgba(0, 210, 160, 0.3);
+    background: rgba(106, 173, 153, 0.08);
+    border-color: rgba(106, 173, 153, 0.3);
     opacity: 0.8;
 }
 
@@ -6198,8 +6198,8 @@ body.business-mode .btn-focus-action:hover {
 }
 
 .btn-bad-day-done {
-    background: rgba(0, 210, 160, 0.15);
-    border: 1px solid rgba(0, 210, 160, 0.3);
+    background: rgba(106, 173, 153, 0.15);
+    border: 1px solid rgba(106, 173, 153, 0.3);
     color: var(--accent-green);
     padding: 6px 14px;
     border-radius: 20px;
@@ -6211,7 +6211,7 @@ body.business-mode .btn-focus-action:hover {
 }
 
 .btn-bad-day-done:hover {
-    background: rgba(0, 210, 160, 0.25);
+    background: rgba(106, 173, 153, 0.25);
 }
 
 .btn-bad-day-done:disabled {
@@ -6229,7 +6229,7 @@ body.business-mode .btn-focus-action:hover {
 
 /* Focus Buddy Button — cyan */
 .btn-focus-buddy {
-    background: linear-gradient(135deg, #00b8d4, #0097a7);
+    background: linear-gradient(135deg, #5a9ab0, #0097a7);
     color: #fff;
     border: none;
     padding: 8px 14px;
@@ -6242,14 +6242,14 @@ body.business-mode .btn-focus-action:hover {
 
 .btn-focus-buddy:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 184, 212, 0.35);
+    box-shadow: 0 4px 12px rgba(90, 154, 176, 0.35);
     background: linear-gradient(135deg, #00c9e0, #00a8b5);
 }
 
 /* Reset Button (formerly Stuck?) */
 .btn-stuck {
-    background: rgba(243, 156, 18, 0.6);
-    border: 1px solid rgba(243, 156, 18, 0.5);
+    background: rgba(196, 153, 106, 0.6);
+    border: 1px solid rgba(196, 153, 106, 0.5);
     color: #fff;
     padding: 8px 14px;
     border-radius: 20px;
@@ -6260,17 +6260,16 @@ body.business-mode .btn-focus-action:hover {
 }
 
 .btn-stuck:hover {
-    background: rgba(243, 156, 18, 0.9);
-    border-color: #f39c12;
+    background: rgba(196, 153, 106, 0.9);
+    border-color: #c4996a;
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(243, 156, 18, 0.35);
+    box-shadow: 0 4px 12px rgba(196, 153, 106, 0.35);
 }
 
 /* Joy Button — rainbow sparkle energy */
 .btn-joy {
-    background: linear-gradient(135deg, #ff6b6b, #ffd93d, #6bcb77, #4d96ff, #9b59b6);
-    background-size: 300% 300%;
-    animation: joyShimmer 3s ease infinite;
+    background: linear-gradient(135deg, #7c6fba, #6aad99);
+    background-size: 100% 100%;
     color: #fff;
     border: none;
     padding: 8px 14px;
@@ -6290,7 +6289,7 @@ body.business-mode .btn-focus-action:hover {
 
 .btn-joy:hover {
     transform: translateY(-2px) scale(1.05);
-    box-shadow: 0 4px 16px rgba(255, 107, 107, 0.4), 0 0 20px rgba(255, 217, 61, 0.3);
+    box-shadow: 0 4px 12px rgba(192, 122, 115, 0.2), 0 0 10px rgba(196, 153, 106, 0.15);
 }
 
 /* Joy Burst — sparkle particles fly up on task completion */
@@ -6311,7 +6310,7 @@ body.business-mode .btn-focus-action:hover {
 
 /* Thank Yourself Button — warm golden yellow */
 .btn-thank-yourself {
-    background: linear-gradient(135deg, #f9a825, #f57f17);
+    background: linear-gradient(135deg, #c4996a, #b08858);
     color: #fff;
     border: none;
     padding: 8px 14px;
@@ -6323,8 +6322,8 @@ body.business-mode .btn-focus-action:hover {
 }
 .btn-thank-yourself:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(249, 168, 37, 0.4);
-    background: linear-gradient(135deg, #fbc02d, #f9a825);
+    box-shadow: 0 4px 12px rgba(196, 153, 106, 0.2);
+    background: linear-gradient(135deg, #c4996a, #c4996a);
 }
 
 /* Thank Yourself Modal */
@@ -6349,7 +6348,7 @@ body.business-mode .btn-focus-action:hover {
     height: 28px;
     min-width: 28px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #f9a825, #f57f17);
+    background: linear-gradient(135deg, #c4996a, #b08858);
     color: #fff;
     font-weight: 800;
     font-size: 0.85rem;
@@ -6361,7 +6360,7 @@ body.business-mode .btn-focus-action:hover {
     text-align: center;
     padding: 20px;
     margin-top: 16px;
-    background: rgba(249, 168, 37, 0.08);
+    background: rgba(196, 153, 106, 0.08);
     border-radius: 16px;
     animation: thankFadeIn 0.6s ease-out;
 }
@@ -6377,9 +6376,9 @@ body.business-mode .btn-focus-action:hover {
 .thank-result .thank-item {
     padding: 8px 12px;
     margin: 6px 0;
-    background: rgba(249, 168, 37, 0.1);
+    background: rgba(196, 153, 106, 0.1);
     border-radius: 10px;
-    border-left: 3px solid #f9a825;
+    border-left: 3px solid #c4996a;
     text-align: left;
     font-weight: 500;
 }
@@ -6415,7 +6414,7 @@ body.business-mode .btn-focus-action:hover {
 
 .stuck-option:hover {
     border-color: var(--accent-primary);
-    background: rgba(108, 92, 231, 0.08);
+    background: rgba(124, 111, 186, 0.08);
     transform: translateX(4px);
 }
 
@@ -6445,7 +6444,7 @@ body.business-mode .btn-focus-action:hover {
     width: 120px;
     height: 120px;
     border-radius: 50%;
-    background: linear-gradient(135deg, var(--accent-primary), #00b8d4);
+    background: linear-gradient(135deg, var(--accent-primary), #5a9ab0);
     margin: 20px auto;
     display: flex;
     align-items: center;
@@ -6467,7 +6466,7 @@ body.business-mode .btn-focus-action:hover {
 .stuck-dance-area {
     font-size: 4rem;
     padding: 20px;
-    animation: danceWiggle 0.5s infinite alternate;
+    animation: danceWiggle 0.5s 6 alternate;
 }
 
 @keyframes danceWiggle {
@@ -6499,12 +6498,12 @@ body.business-mode .btn-focus-action:hover {
     font-size: 2rem;
     font-weight: 900;
     letter-spacing: 6px;
-    background: linear-gradient(135deg, #ff6b6b, #ffd93d, #6bcb77, #4d96ff, #e84393);
-    background-size: 300% 300%;
+    background: linear-gradient(135deg, #7c6fba, #6aad99);
+    background-size: 100% 100%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    animation: joyTitlePulse 1.5s ease-in-out infinite, joyTitleColor 4s ease infinite;
+    animation: joyTitlePulse 1.5s ease-in-out 3;
 }
 
 @keyframes joyTitlePulse {
@@ -6546,7 +6545,7 @@ body.business-mode .btn-focus-action:hover {
 }
 
 .bd-sound-btn.active {
-    background: rgba(108, 92, 231, 0.15);
+    background: rgba(124, 111, 186, 0.15);
     border-color: var(--accent-primary);
     color: var(--accent-primary);
     font-weight: 600;
@@ -6561,8 +6560,8 @@ body.business-mode .btn-focus-action:hover {
     gap: 8px;
     padding: 10px 14px;
     margin-top: 8px;
-    background: rgba(243, 156, 18, 0.1);
-    border: 1px solid rgba(243, 156, 18, 0.3);
+    background: rgba(196, 153, 106, 0.1);
+    border: 1px solid rgba(196, 153, 106, 0.3);
     border-radius: var(--radius-sm);
     font-size: 0.82rem;
     color: var(--text-primary);
@@ -6612,7 +6611,7 @@ body.business-mode .btn-focus-action:hover {
 }
 
 .btn-export-log:hover {
-    background: rgba(108, 92, 231, 0.12);
+    background: rgba(124, 111, 186, 0.12);
     color: var(--accent-primary);
 }
 
@@ -6728,7 +6727,7 @@ body.business-mode .btn-focus-action:hover {
 .btn-focus-mode:hover {
     color: var(--accent-primary);
     border-color: var(--accent-primary);
-    background: rgba(108, 92, 231, 0.1);
+    background: rgba(124, 111, 186, 0.1);
 }
 
 body.focus-mode .mode-toggle-container,
@@ -6757,7 +6756,7 @@ body.focus-mode .next-action-card {
     padding: 40px;
     font-size: 1.1rem;
     border: 2px solid var(--accent-primary);
-    box-shadow: 0 0 30px rgba(108, 92, 231, 0.2);
+    box-shadow: 0 0 30px rgba(124, 111, 186, 0.2);
     z-index: 1000;
     background: var(--bg-card);
     border-radius: var(--radius);
@@ -6771,7 +6770,7 @@ body.focus-mode .next-action-text {
 body.focus-mode .btn-focus-mode {
     color: var(--accent-orange);
     border-color: var(--accent-orange);
-    background: rgba(243, 156, 18, 0.1);
+    background: rgba(196, 153, 106, 0.1);
 }
 
 /* ==========================================
@@ -6825,8 +6824,8 @@ body.focus-mode .btn-focus-mode {
     gap: 4px;
     padding: 6px 10px;
     border-radius: 20px;
-    background: rgba(108, 92, 231, 0.08);
-    border: 1px solid rgba(108, 92, 231, 0.15);
+    background: rgba(124, 111, 186, 0.08);
+    border: 1px solid rgba(124, 111, 186, 0.15);
     cursor: pointer;
     font-size: 0.78rem;
     color: var(--text-secondary);
@@ -6839,20 +6838,20 @@ body.focus-mode .btn-focus-mode {
 
 .df-chip:has(input:checked),
 .df-chip.checked {
-    background: rgba(108, 92, 231, 0.2);
+    background: rgba(124, 111, 186, 0.2);
     border-color: var(--accent-primary);
     color: var(--text-primary);
 }
 
 .df-chip-issue:has(input:checked),
 .df-chip-issue.checked {
-    background: rgba(255, 107, 107, 0.15);
+    background: rgba(192, 122, 115, 0.15);
     border-color: var(--accent-red);
 }
 
 .df-chip-ok:has(input:checked),
 .df-chip-ok.checked {
-    background: rgba(0, 210, 160, 0.15);
+    background: rgba(106, 173, 153, 0.15);
     border-color: var(--accent-green);
 }
 
@@ -6877,7 +6876,7 @@ body.focus-mode .btn-focus-mode {
 .emoji-rating-btn.selected {
     opacity: 1;
     border-color: var(--accent-primary);
-    background: rgba(108, 92, 231, 0.1);
+    background: rgba(124, 111, 186, 0.1);
     transform: scale(1.15);
 }
 
@@ -6905,8 +6904,8 @@ body.focus-mode .btn-focus-mode {
 }
 
 .founder-col-yes {
-    background: rgba(108, 92, 231, 0.06);
-    border-color: rgba(108, 92, 231, 0.15);
+    background: rgba(124, 111, 186, 0.06);
+    border-color: rgba(124, 111, 186, 0.15);
 }
 
 .founder-col-no {
@@ -6931,8 +6930,8 @@ body.focus-mode .btn-focus-mode {
 .founder-commitment {
     margin-top: 24px;
     padding: 20px;
-    background: rgba(255, 211, 42, 0.04);
-    border: 1px solid rgba(255, 211, 42, 0.12);
+    background: rgba(196, 153, 106, 0.04);
+    border: 1px solid rgba(196, 153, 106, 0.12);
     border-radius: 12px;
     text-align: left;
 }
@@ -6982,8 +6981,8 @@ body.focus-mode .btn-focus-mode {
 /* Spots full states */
 .spots-full-badge {
     display: inline-block;
-    background: rgba(255, 107, 107, 0.12);
-    color: var(--accent-red, #ff6b6b);
+    background: rgba(192, 122, 115, 0.12);
+    color: var(--accent-red, #c07a73);
     padding: 6px 16px;
     border-radius: 20px;
     font-size: 0.85rem;
@@ -7000,7 +6999,7 @@ body.focus-mode .btn-focus-mode {
 .spots-full-large {
     font-size: 1.8rem;
     font-weight: 800;
-    color: var(--accent-red, #ff6b6b);
+    color: var(--accent-red, #c07a73);
 }
 
 /* ==========================================
@@ -7055,7 +7054,7 @@ body.focus-mode .btn-focus-mode {
 
 /* Light mode overrides for new sections */
 body.light-mode .founder-col-yes {
-    background: rgba(108, 92, 231, 0.04);
+    background: rgba(124, 111, 186, 0.04);
 }
 body.light-mode .founder-col-no {
     background: rgba(0, 0, 0, 0.02);
@@ -7065,13 +7064,13 @@ body.light-mode .faq-item {
     border-color: rgba(0, 0, 0, 0.08);
 }
 body.light-mode .df-chip {
-    background: rgba(108, 92, 231, 0.06);
+    background: rgba(124, 111, 186, 0.06);
 }
 body.light-mode .spots-full-badge {
-    background: rgba(255, 107, 107, 0.08);
+    background: rgba(192, 122, 115, 0.08);
 }
 body.light-mode .founder-commitment {
-    background: rgba(255, 211, 42, 0.03);
+    background: rgba(196, 153, 106, 0.03);
 }
 
 /* Mobile responsive for new sections */
@@ -7189,7 +7188,7 @@ body.light-mode .founder-commitment {
 }
 .pricing-card-popular {
     border-color: var(--accent-primary);
-    box-shadow: 0 0 20px rgba(108, 92, 231, 0.15);
+    box-shadow: 0 0 20px rgba(124, 111, 186, 0.15);
     transform: scale(1.03);
 }
 .popular-badge {
@@ -7366,7 +7365,7 @@ body.light-mode .founder-commitment {
 .landing-price-card.popular {
     border-color: var(--accent-primary);
     transform: scale(1.05);
-    box-shadow: 0 4px 24px rgba(108, 92, 231, 0.2);
+    box-shadow: 0 4px 24px rgba(124, 111, 186, 0.2);
 }
 .landing-price-card .popular-tag {
     position: absolute;
@@ -7475,4 +7474,15 @@ body.light-mode .founder-commitment {
 }
 .light-mode .landing-price-card.popular {
     border-color: var(--accent-primary);
+}
+
+/* ==========================================
+   REDUCED MOTION (ADHD / Accessibility)
+   ========================================== */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
 }

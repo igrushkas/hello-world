@@ -5,48 +5,48 @@
     //  WHEEL OF LIFE CATEGORIES (6 areas)
     // ==========================================
     const CATEGORIES = [
-        { id: 'fun_environment', name: 'Fun\nEnvironment', color: '#f39c12' },
-        { id: 'relationships', name: 'Relationships\nFamily', color: '#e84393' },
-        { id: 'money_finances', name: 'Money\nFinances', color: '#ffd32a' },
-        { id: 'career_contribution', name: 'Career\nContribution', color: '#3498db' },
-        { id: 'personal_growth', name: 'Personal\nGrowth', color: '#6c5ce7' },
-        { id: 'health_energy', name: 'Health\nEnergy', color: '#00d2a0' }
+        { id: 'fun_environment', name: 'Fun\nEnvironment', color: '#c4996a' },
+        { id: 'relationships', name: 'Relationships\nFamily', color: '#7c6fba' },
+        { id: 'money_finances', name: 'Money\nFinances', color: '#c4996a' },
+        { id: 'career_contribution', name: 'Career\nContribution', color: '#6a9dba' },
+        { id: 'personal_growth', name: 'Personal\nGrowth', color: '#7c6fba' },
+        { id: 'health_energy', name: 'Health\nEnergy', color: '#6aad99' }
     ];
 
     // ==========================================
     //  BUSINESS WHEEL CATEGORIES (6 areas)
     // ==========================================
     const BUSINESS_CATEGORIES = [
-        { id: 'leadership_vision', name: 'Leadership\nVision', color: '#e67e22' },
-        { id: 'operations_systems', name: 'Operations\nSystems', color: '#3498db' },
-        { id: 'finance_risk', name: 'Finance\nRisk', color: '#f1c40f' },
-        { id: 'marketing_sales', name: 'Marketing\nSales', color: '#e74c3c' },
-        { id: 'services_innovation', name: 'Services\nInnovation', color: '#1abc9c' },
-        { id: 'people_culture', name: 'People\nCulture', color: '#9b59b6' }
+        { id: 'leadership_vision', name: 'Leadership\nVision', color: '#b08858' },
+        { id: 'operations_systems', name: 'Operations\nSystems', color: '#6a9dba' },
+        { id: 'finance_risk', name: 'Finance\nRisk', color: '#c4996a' },
+        { id: 'marketing_sales', name: 'Marketing\nSales', color: '#c07a73' },
+        { id: 'services_innovation', name: 'Services\nInnovation', color: '#6aad99' },
+        { id: 'people_culture', name: 'People\nCulture', color: '#8a70a8' }
     ];
 
     // ==========================================
     //  HEALTH WHEEL CATEGORIES (6 areas)
     // ==========================================
     const HEALTH_CATEGORIES = [
-        { id: 'sleep_recovery', name: 'Sleep\nRecovery', color: '#5b6abf' },
-        { id: 'nutrition_fuel', name: 'Nutrition\nFuel', color: '#27ae60' },
-        { id: 'exercise_movement', name: 'Exercise\nMovement', color: '#e74c3c' },
-        { id: 'mindfulness_calm', name: 'Mindfulness\nCalm', color: '#8e44ad' },
-        { id: 'nature_outdoors', name: 'Nature\nOutdoors', color: '#16a085' },
-        { id: 'community_connection', name: 'Community\nConnection', color: '#e67e22' }
+        { id: 'sleep_recovery', name: 'Sleep\nRecovery', color: '#6a7bab' },
+        { id: 'nutrition_fuel', name: 'Nutrition\nFuel', color: '#5a9a78' },
+        { id: 'exercise_movement', name: 'Exercise\nMovement', color: '#c07a73' },
+        { id: 'mindfulness_calm', name: 'Mindfulness\nCalm', color: '#8a70a8' },
+        { id: 'nature_outdoors', name: 'Nature\nOutdoors', color: '#6aad99' },
+        { id: 'community_connection', name: 'Community\nConnection', color: '#b08858' }
     ];
 
     // ==========================================
     //  FINANCES WHEEL CATEGORIES (6 areas)
     // ==========================================
     const FINANCES_CATEGORIES = [
-        { id: 'giving_will', name: 'Giving\n& Will', color: '#e91e63' },
-        { id: 'ira_retirement', name: 'IRA\nRetirement', color: '#9c27b0' },
-        { id: 'investments', name: 'Investments\nGrowth', color: '#4caf50' },
-        { id: 'budget', name: 'Budget\nPlanning', color: '#2196f3' },
-        { id: 'insurance', name: 'Insurance\nProtection', color: '#ff9800' },
-        { id: 'debt_free', name: 'Debt\nMortgage', color: '#00bcd4' }
+        { id: 'giving_will', name: 'Giving\n& Will', color: '#c07a73' },
+        { id: 'ira_retirement', name: 'IRA\nRetirement', color: '#8a70a8' },
+        { id: 'investments', name: 'Investments\nGrowth', color: '#6aad99' },
+        { id: 'budget', name: 'Budget\nPlanning', color: '#6a9dba' },
+        { id: 'insurance', name: 'Insurance\nProtection', color: '#c4996a' },
+        { id: 'debt_free', name: 'Debt\nMortgage', color: '#5a9ab0' }
     ];
 
     // Category descriptions for guide popup
@@ -732,8 +732,8 @@
         var container = document.getElementById('confettiContainer');
         if (!container) return;
         container.innerHTML = '';
-        var colors = ['#f39c12', '#e84393', '#00d2a0', '#6c5ce7', '#3498db', '#ffd32a', '#e74c3c', '#1abc9c'];
-        for (var i = 0; i < 60; i++) {
+        var colors = ['#7c6fba', '#6aad99', '#c4996a'];
+        for (var i = 0; i < 25; i++) {
             var piece = document.createElement('div');
             piece.className = 'confetti-piece';
             piece.style.left = Math.random() * 100 + '%';
@@ -928,7 +928,7 @@
         });
 
         var typeLabels = { daily: 'DAILY', weekly: 'WEEKLY', permanent: '' };
-        var typeColors = { daily: '#00d2a0', weekly: '#3498db', permanent: '#6c5ce7' };
+        var typeColors = { daily: '#6aad99', weekly: '#6a9dba', permanent: '#7c6fba' };
 
         var html = '';
         items.forEach(function(item) {
@@ -1734,7 +1734,7 @@
             if (expiresEl) {
                 expiresEl.textContent = remaining === 1 ? '1 day' : remaining + ' days';
                 if (remaining <= 3) {
-                    expiresEl.style.color = '#ff4444';
+                    expiresEl.style.color = '#c07a73';
                     expiresEl.style.fontWeight = '800';
                 }
             }
@@ -1744,9 +1744,9 @@
                 var pct = Math.max(0, (remaining / DEMO_EXPIRY_DAYS) * 100);
                 progressFill.style.width = pct + '%';
                 if (remaining <= 3) {
-                    progressFill.style.background = '#ff4444';
+                    progressFill.style.background = '#c07a73';
                 } else if (remaining <= 7) {
-                    progressFill.style.background = '#ff9800';
+                    progressFill.style.background = '#c4996a';
                 }
             }
             // Smart mid-trial streak nudge
@@ -2995,14 +2995,10 @@
     //  MOTIVATION QUOTE
     // ==========================================
     var QUOTE_COLORS = [
-        { bg: 'rgba(232,67,147,0.12)', border: '#e84393', text: '#f8a5c2' },
-        { bg: 'rgba(108,92,231,0.12)', border: '#6c5ce7', text: '#a29bfe' },
-        { bg: 'rgba(0,210,160,0.12)', border: '#00d2a0', text: '#55efc4' },
-        { bg: 'rgba(243,156,18,0.12)', border: '#f39c12', text: '#ffeaa7' },
-        { bg: 'rgba(52,152,219,0.12)', border: '#3498db', text: '#74b9ff' },
-        { bg: 'rgba(255,118,117,0.12)', border: '#ff7675', text: '#fab1a0' },
-        { bg: 'rgba(253,203,110,0.12)', border: '#fdcb6e', text: '#ffeaa7' },
-        { bg: 'rgba(0,184,148,0.12)', border: '#00b894', text: '#55efc4' }
+        { bg: 'rgba(124,111,186,0.10)', border: '#7c6fba', text: '#a8a0d0' },
+        { bg: 'rgba(106,173,153,0.10)', border: '#6aad99', text: '#8dc4b0' },
+        { bg: 'rgba(196,153,106,0.10)', border: '#c4996a', text: '#d4b68a' },
+        { bg: 'rgba(106,157,186,0.10)', border: '#6a9dba', text: '#8db8d0' }
     ];
 
     function applyQuoteToElements(quoteElId, authorElId, cardElId) {
@@ -3417,7 +3413,7 @@
             }
 
             var leverageHtml = pickedTask.leverageScore !== undefined ? ' | Leverage: ' + pickedTask.leverageScore + '%' : '';
-            metaEl.innerHTML = '<span class="pick-category" style="background:' + (cat ? cat.color : '#6c5ce7') + '22;color:' + (cat ? cat.color : '#6c5ce7') + '">' + catName + '</span> ' + estStr + ' | ' + pickedTask.outcome + leverageHtml + valuesHtml;
+            metaEl.innerHTML = '<span class="pick-category" style="background:' + (cat ? cat.color : '#7c6fba') + '22;color:' + (cat ? cat.color : '#7c6fba') + '">' + catName + '</span> ' + estStr + ' | ' + pickedTask.outcome + leverageHtml + valuesHtml;
             resultDiv.classList.remove('hidden');
             document.getElementById('btnStartPickedTask').style.display = '';
         } else {
@@ -3688,7 +3684,7 @@
             var activeCats = getActiveCategories();
             var cat = activeCats.find(function(c) { return c.id === outcome.category; });
             if (!cat) cat = CATEGORIES.concat(BUSINESS_CATEGORIES).concat(HEALTH_CATEGORIES).concat(FINANCES_CATEGORIES).find(function(c) { return c.id === outcome.category; });
-            var catColor = cat ? cat.color : '#6c5ce7';
+            var catColor = cat ? cat.color : '#7c6fba';
             var catName = cat ? catDisplayNameHtml(cat.name) : outcome.category;
             card.style.borderLeftColor = catColor;
             card.style.background = 'linear-gradient(135deg, ' + catColor + '08, ' + catColor + '04, transparent)';
@@ -4078,7 +4074,7 @@
         svg.setAttribute('viewBox', '0 0 ' + vw + ' 460');
         var cx = cxVal, cy = 230, maxR = 160;
         var n = scores.length;
-        var polygonColor = currentMode === 'business' ? '#e74c3c' : currentMode === 'health' ? '#00b8d4' : currentMode === 'finances' ? '#e67e22' : '#6c5ce7';
+        var polygonColor = currentMode === 'business' ? '#c07a73' : currentMode === 'health' ? '#5a9ab0' : currentMode === 'finances' ? '#b08858' : '#7c6fba';
         var html = '';
 
         // Grid circles
@@ -4174,19 +4170,19 @@
         var msg;
         if (done === 0) {
             msg = 'Complete actions to claim your victories!';
-            fill.style.background = 'linear-gradient(90deg, #f39c12, #e17055)';
+            fill.style.background = 'linear-gradient(90deg, #c4996a, #b08858)';
         } else if (pct < 30) {
             msg = 'Momentum is building — keep pushing!';
-            fill.style.background = 'linear-gradient(90deg, #f39c12, #e17055)';
+            fill.style.background = 'linear-gradient(90deg, #c4996a, #b08858)';
         } else if (pct < 60) {
             msg = 'You\'re on a roll — don\'t stop now!';
-            fill.style.background = 'linear-gradient(90deg, #f39c12, #fdcb6e)';
+            fill.style.background = 'linear-gradient(90deg, #c4996a, #d4b68a)';
         } else if (pct < 100) {
             msg = 'Almost there — finish strong!';
-            fill.style.background = 'linear-gradient(90deg, #00b894, #00d2a0)';
+            fill.style.background = 'linear-gradient(90deg, #6aad99, #6aad99)';
         } else {
             msg = 'ALL VICTORIES CLAIMED — you crushed it!';
-            fill.style.background = 'linear-gradient(90deg, #00d2a0, #6c5ce7)';
+            fill.style.background = 'linear-gradient(90deg, #6aad99, #7c6fba)';
         }
         document.getElementById('balanceMessage').textContent = msg;
     }
@@ -4338,7 +4334,7 @@
             var r = (s.score / 10) * maxR;
             return (cx + r * Math.cos(angle)) + ',' + (cy + r * Math.sin(angle));
         }).join(' ');
-        html += '<polygon points="' + points + '" fill="rgba(231,76,60,0.2)" stroke="#e74c3c" stroke-width="2"/>';
+        html += '<polygon points="' + points + '" fill="rgba(192,122,115,0.2)" stroke="#c07a73" stroke-width="2"/>';
 
         // Data points
         scores.forEach(function(s, i) {
@@ -4356,7 +4352,7 @@
         var legend = document.getElementById('businessWheelLegend');
         legend.innerHTML = scores.map(function(s) {
             var trend = s.rawPoints > 3 ? '↑' : s.rawPoints > 1 ? '→' : '↓';
-            var trendColor = s.rawPoints > 3 ? '#00d2a0' : s.rawPoints > 1 ? '#f39c12' : '#e74c3c';
+            var trendColor = s.rawPoints > 3 ? '#6aad99' : s.rawPoints > 1 ? '#c4996a' : '#c07a73';
             return '<div class="business-legend-item">' +
                 '<span class="business-legend-emoji">' + s.emoji + '</span>' +
                 '<span class="business-legend-name">' + catDisplayNameHtml(s.name) + '</span>' +
@@ -4538,7 +4534,7 @@
         ocDrag.ghost.style.cssText =
             'position:fixed;left:' + rect.left + 'px;top:' + rect.top + 'px;width:' + rect.width +
             'px;opacity:0.75;pointer-events:none;z-index:9999;transition:none;max-height:130px;overflow:hidden;' +
-            'border:2px solid #f39c12;border-radius:12px;background:#1a1a2e;box-shadow:0 8px 32px rgba(243,156,18,0.3);';
+            'border:2px solid #c4996a;border-radius:12px;background:#1a1a2e;box-shadow:0 8px 15px rgba(196,153,106,0.15);';
         document.body.appendChild(ocDrag.ghost);
         card.classList.add('outcome-dragging');
 
@@ -4625,7 +4621,7 @@
         container.innerHTML = exercises.map(function(ex, idx) {
             var focusTags = ex.focus.map(function(f) {
                 var label = f === 'arms' ? 'Upper Arms' : f === 'butt' ? 'Glutes' : f === 'core' ? 'Core' : f === 'spine' ? 'Spine/Twist' : f;
-                var color = f === 'butt' ? '#e84393' : f === 'arms' ? '#3498db' : f === 'core' ? '#f39c12' : f === 'spine' ? '#00d2a0' : '#6c5ce7';
+                var color = f === 'butt' ? '#7c6fba' : f === 'arms' ? '#6a9dba' : f === 'core' ? '#c4996a' : f === 'spine' ? '#6aad99' : '#7c6fba';
                 return '<span class="exercise-focus-tag" style="background:' + color + '22;color:' + color + ';border:1px solid ' + color + '44">' + label + '</span>';
             }).join('');
 
@@ -4727,7 +4723,7 @@
     function showExtendedBreak() {
         var suggestions = getRandomExercises(3);
         var container = document.getElementById('breakSuggestions');
-        container.innerHTML = '<h3 style="margin-bottom:12px;color:#f39c12">Suggested stretches:</h3>' +
+        container.innerHTML = '<h3 style="margin-bottom:12px;color:#c4996a">Suggested stretches:</h3>' +
             suggestions.map(function(ex) {
                 return '<div class="break-suggestion-item">' +
                     '<span>' + ex.emoji + '</span> <strong>' + escapeHtml(ex.name) + '</strong> — ' + escapeHtml(ex.duration) +
@@ -5189,7 +5185,7 @@
             if (remaining <= 0) {
                 clearInterval(interval);
                 display.textContent = 'Done!';
-                display.style.color = '#00d2a0';
+                display.style.color = '#6aad99';
             }
         }, 1000);
     }
@@ -5364,7 +5360,7 @@
                 return '<li>' + escapeHtml(a.text) + '</li>';
             }).join('');
 
-            var catColor = '#f39c12';
+            var catColor = '#c4996a';
             var cat = CATEGORIES.concat(BUSINESS_CATEGORIES).concat(HEALTH_CATEGORIES).concat(FINANCES_CATEGORIES).find(function(c) { return c.id === o.category; });
             if (cat) catColor = cat.color;
 
@@ -5432,7 +5428,7 @@
 
                 found = true;
                 var catObj = allCats.find(function(c) { return c.id === o.category; });
-                var catColor = catObj ? catObj.color : '#6c5ce7';
+                var catColor = catObj ? catObj.color : '#7c6fba';
 
                 html += '<div class="seed-outcome">';
                 html += '<div class="seed-outcome-title" style="border-left: 3px solid ' + catColor + '">' + escapeHtml(o.result) + '</div>';
@@ -6335,11 +6331,11 @@
                     if (danceAudioEl) { try { danceAudioEl.play(); } catch(e) {} }
                     var emojis = ['\uD83D\uDC83', '\uD83D\uDD7A', '\uD83E\uDD38', '\uD83C\uDF89', '\uD83C\uDF1F', '\uD83E\uDD29', '\uD83D\uDE80', '\uD83C\uDF08'];
                     var prompts = [
-                        { text: 'DANCE!', color: '#ff6b6b' },
-                        { text: 'MOVE!', color: '#ffd93d' },
-                        { text: 'JUMP!', color: '#6bcb77' },
-                        { text: 'SMILE!', color: '#4d96ff' },
-                        { text: 'ENJOY!', color: '#e84393' }
+                        { text: 'DANCE!', color: '#c07a73' },
+                        { text: 'MOVE!', color: '#c4996a' },
+                        { text: 'JUMP!', color: '#6aad99' },
+                        { text: 'SMILE!', color: '#6a9dba' },
+                        { text: 'ENJOY!', color: '#7c6fba' }
                     ];
                     var danceEl = document.getElementById('danceEmoji');
                     var promptEl = document.getElementById('dancePrompt');
@@ -6368,7 +6364,7 @@
                             danceEl.textContent = '\uD83C\uDF89';
                             danceEl.style.animation = 'none';
                             promptEl.textContent = 'AMAZING!';
-                            promptEl.style.color = '#ffd93d';
+                            promptEl.style.color = '#c4996a';
                             promptEl.classList.remove('dance-prompt-flash');
                             timerEl.textContent = 'Pure joy! You felt that!';
                             var da = document.getElementById('danceAudio');
@@ -6729,8 +6725,8 @@
                     var r = reframes[Math.floor(Math.random() * reframes.length)];
                     content.innerHTML = '<h3>Reframe It \uD83D\uDCAC</h3>' +
                         '<p style="color:var(--text-secondary);margin-bottom:16px">Your thoughts aren\'t facts. Let\'s rewrite that script.</p>' +
-                        '<div style="background:rgba(231,76,60,0.08);border-radius:12px;padding:16px;margin-bottom:12px">' +
-                        '<p style="color:#e74c3c;font-size:0.8rem;font-weight:700;margin-bottom:4px">THE OLD STORY</p>' +
+                        '<div style="background:rgba(192,122,115,0.08);border-radius:12px;padding:16px;margin-bottom:12px">' +
+                        '<p style="color:#c07a73;font-size:0.8rem;font-weight:700;margin-bottom:4px">THE OLD STORY</p>' +
                         '<p style="font-size:1.1rem;font-style:italic">' + r.neg + '</p>' +
                         '</div>' +
                         '<div style="font-size:1.5rem;margin:8px 0">\u2B07\uFE0F</div>' +
