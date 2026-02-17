@@ -5741,39 +5741,7 @@
             try { submitDailyFeedback(); } catch(e) { console.error('daily feedback error:', e); }
         });
 
-        // Landing page billing toggle
-        safeBind('landingBillingToggle', 'change', function() {
-            var isAnnual = this.checked;
-            var sp = document.getElementById('landingStarterPrice');
-            var sper = document.getElementById('landingStarterPeriod');
-            var sdesc = document.getElementById('landingStarterDesc');
-            var seff = document.getElementById('landingStarterEffective');
-            var pp = document.getElementById('landingProPrice');
-            var pper = document.getElementById('landingProPeriod');
-            var pdesc = document.getElementById('landingProDesc');
-            var peff = document.getElementById('landingProEffective');
-            if (isAnnual) {
-                if (sp) sp.textContent = '$8.25';
-                if (sper) sper.textContent = '/mo';
-                if (sdesc) sdesc.innerHTML = 'Billed $99/year <strong>(save $21)</strong>';
-                if (seff) seff.textContent = 'Less than 2 coffees a week';
-                if (pp) pp.textContent = '$14.92';
-                if (pper) pper.textContent = '/mo';
-                if (pdesc) pdesc.innerHTML = 'Billed $179/year <strong>(save $61)</strong>';
-                if (peff) peff.textContent = 'Less than 1 therapy session';
-            } else {
-                if (sp) sp.textContent = '$9.99';
-                if (sper) sper.textContent = '/mo';
-                if (sdesc) sdesc.innerHTML = 'or $99/year <strong>(save $21)</strong>';
-                if (seff) seff.innerHTML = 'That\u2019s $8.25/mo \u2014 less than 2 coffees';
-                if (pp) pp.textContent = '$19.99';
-                if (pper) pper.textContent = '/mo';
-                if (pdesc) pdesc.innerHTML = 'or $179/year <strong>(save $61)</strong>';
-                if (peff) peff.innerHTML = '$14.92/mo \u2014 less than 1 therapy session';
-            }
-            document.getElementById('landingBillingMonthlyLabel').classList.toggle('active', !isAnnual);
-            document.getElementById('landingBillingAnnualLabel').classList.toggle('active', isAnnual);
-        });
+        // Landing page billing toggle moved to DOMContentLoaded (pre-login)
 
         // Billing toggle for pricing modal
         safeBind('billingToggle', 'change', function() {
@@ -7798,6 +7766,42 @@
         });
         var btnLogout = document.getElementById('btnLogout');
         if (btnLogout) btnLogout.addEventListener('click', logout);
+
+        // Landing page billing toggle (must bind here, pre-login)
+        safeBind('landingBillingToggle', 'change', function() {
+            var isAnnual = this.checked;
+            var sp = document.getElementById('landingStarterPrice');
+            var sper = document.getElementById('landingStarterPeriod');
+            var sdesc = document.getElementById('landingStarterDesc');
+            var seff = document.getElementById('landingStarterEffective');
+            var pp = document.getElementById('landingProPrice');
+            var pper = document.getElementById('landingProPeriod');
+            var pdesc = document.getElementById('landingProDesc');
+            var peff = document.getElementById('landingProEffective');
+            if (isAnnual) {
+                if (sp) sp.textContent = '$8.25';
+                if (sper) sper.textContent = '/mo';
+                if (sdesc) sdesc.innerHTML = 'Billed $99/year <strong>(save $21)</strong>';
+                if (seff) seff.textContent = 'Less than 2 coffees a week';
+                if (pp) pp.textContent = '$14.92';
+                if (pper) pper.textContent = '/mo';
+                if (pdesc) pdesc.innerHTML = 'Billed $179/year <strong>(save $61)</strong>';
+                if (peff) peff.textContent = 'Less than 1 therapy session';
+            } else {
+                if (sp) sp.textContent = '$9.99';
+                if (sper) sper.textContent = '/mo';
+                if (sdesc) sdesc.innerHTML = 'or $99/year <strong>(save $21)</strong>';
+                if (seff) seff.innerHTML = 'That\u2019s $8.25/mo \u2014 less than 2 coffees';
+                if (pp) pp.textContent = '$19.99';
+                if (pper) pper.textContent = '/mo';
+                if (pdesc) pdesc.innerHTML = 'or $179/year <strong>(save $61)</strong>';
+                if (peff) peff.innerHTML = '$14.92/mo \u2014 less than 1 therapy session';
+            }
+            var ml = document.getElementById('landingBillingMonthlyLabel');
+            var al = document.getElementById('landingBillingAnnualLabel');
+            if (ml) ml.classList.toggle('active', !isAnnual);
+            if (al) al.classList.toggle('active', isAnnual);
+        });
 
         // Menu toggle (mobile dropdown)
         var menuToggle = document.getElementById('btnMenuToggle');
