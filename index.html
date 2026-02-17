@@ -31,7 +31,7 @@
     <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
 
-    <link rel="stylesheet" href="styles.min.css?v=20260214r16">
+    <link rel="stylesheet" href="styles.min.css?v=20260214r17">
 
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
@@ -325,6 +325,14 @@
         <section class="landing-pricing" id="landingPricing">
             <h2>Simple, Honest Pricing</h2>
             <p class="pricing-lead">Start free. Upgrade when you&rsquo;re ready. Built for ADHD brains on any budget.</p>
+            <div class="billing-toggle" style="margin-bottom:20px">
+                <span class="billing-label active" id="landingBillingMonthlyLabel">Monthly</span>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="landingBillingToggle">
+                    <span class="toggle-slider"></span>
+                </label>
+                <span class="billing-label" id="landingBillingAnnualLabel">Annual <span style="color:var(--accent-green);font-weight:700;font-size:0.75rem">SAVE 20%+</span></span>
+            </div>
             <div class="landing-pricing-cards">
                 <div class="landing-price-card">
                     <h3>Free</h3>
@@ -340,9 +348,9 @@
                 <div class="landing-price-card popular">
                     <div class="popular-tag">Best Value</div>
                     <h3>Starter</h3>
-                    <div class="landing-price">$9.99<span>/mo</span></div>
-                    <div class="landing-price-desc">or $99/year <strong>(save $21)</strong></div>
-                    <div class="landing-price-effective">That&rsquo;s $8.25/mo &mdash; less than 2 coffees</div>
+                    <div class="landing-price"><span id="landingStarterPrice">$9.99</span><span id="landingStarterPeriod">/mo</span></div>
+                    <div class="landing-price-desc" id="landingStarterDesc">or $99/year <strong>(save $21)</strong></div>
+                    <div class="landing-price-effective" id="landingStarterEffective">That&rsquo;s $8.25/mo &mdash; less than 2 coffees</div>
                     <ul>
                         <li>&#10003; Life + Health Modes</li>
                         <li>&#10003; Unlimited Goals</li>
@@ -353,9 +361,9 @@
                 </div>
                 <div class="landing-price-card">
                     <h3>Pro</h3>
-                    <div class="landing-price">$19.99<span>/mo</span></div>
-                    <div class="landing-price-desc">or $179/year <strong>(save $61)</strong></div>
-                    <div class="landing-price-effective">$14.92/mo &mdash; less than 1 therapy session</div>
+                    <div class="landing-price"><span id="landingProPrice">$19.99</span><span id="landingProPeriod">/mo</span></div>
+                    <div class="landing-price-desc" id="landingProDesc">or $179/year <strong>(save $61)</strong></div>
+                    <div class="landing-price-effective" id="landingProEffective">$14.92/mo &mdash; less than 1 therapy session</div>
                     <ul>
                         <li>&#10003; All 4 Modes unlocked</li>
                         <li>&#10003; Business + Finances</li>
@@ -381,7 +389,8 @@
                 </svg>
                 Sign in with Google
             </button>
-            <div class="demo-mode-section landing-demo">
+            <!-- Demo mode hidden for now -->
+            <div class="demo-mode-section landing-demo" style="display:none">
                 <p class="login-offline" id="btnOfflineMode"><a href="#">Try Demo Mode first</a></p>
                 <p class="demo-warning">&#128161; Demo data lives in this browser and expires in 2 weeks. Sign in anytime to save permanently.</p>
             </div>
@@ -1752,7 +1761,7 @@
     </div>
 
     <script src="firebase-config.js"></script>
-    <script src="app.min.js?v=20260214r16"></script>
+    <script src="app.min.js?v=20260214r17"></script>
 
     <!-- Service Worker Registration -->
     <script>
