@@ -31,7 +31,7 @@
     <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
 
-    <link rel="stylesheet" href="styles.min.css?v=20260214r12">
+    <link rel="stylesheet" href="styles.min.css?v=20260214r13">
 
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
@@ -882,18 +882,18 @@
                 <div class="daily-focus">
                     <!-- Mode Toggle -->
                     <div class="mode-toggle-container">
-                        <!-- Hidden for now — Personal Life only during testing -->
-                        <button class="mode-toggle-btn" id="btnBusinessMode" data-mode="business" style="display:none">
-                            <span class="mode-icon">&#128188;</span> Business
+                        <button class="mode-toggle-btn active" id="btnPersonalMode" data-mode="personal">
+                            <span class="mode-icon">&#127968;</span> Personal Life
                         </button>
                         <button class="mode-toggle-btn mode-coming-soon" id="btnHealthMode" data-mode="health" disabled title="Coming soon">
                             <span class="mode-icon" style="color:#c07a73">&#10084;</span> Health <span style="font-size:0.6rem;opacity:0.6">soon</span>
                         </button>
+                        <!-- Hidden for now -->
+                        <button class="mode-toggle-btn" id="btnBusinessMode" data-mode="business" style="display:none">
+                            <span class="mode-icon">&#128188;</span> Business
+                        </button>
                         <button class="mode-toggle-btn" id="btnFinancesMode" data-mode="finances" style="display:none">
                             <span class="mode-icon">&#128176;</span> Finances
-                        </button>
-                        <button class="mode-toggle-btn active" id="btnPersonalMode" data-mode="personal">
-                            <span class="mode-icon">&#127968;</span> Personal Life
                         </button>
                     </div>
                     <div class="focus-header">
@@ -1752,7 +1752,7 @@
     </div>
 
     <script src="firebase-config.js"></script>
-    <script src="app.min.js?v=20260214r12"></script>
+    <script src="app.min.js?v=20260214r13"></script>
 
     <!-- Service Worker Registration -->
     <script>
