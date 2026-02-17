@@ -31,7 +31,7 @@
     <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
 
-    <link rel="stylesheet" href="styles.min.css?v=20260214r10">
+    <link rel="stylesheet" href="styles.min.css?v=20260214r11">
 
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
@@ -882,13 +882,14 @@
                 <div class="daily-focus">
                     <!-- Mode Toggle -->
                     <div class="mode-toggle-container">
-                        <button class="mode-toggle-btn" id="btnBusinessMode" data-mode="business">
+                        <!-- Hidden for now — Personal Life only during testing -->
+                        <button class="mode-toggle-btn" id="btnBusinessMode" data-mode="business" style="display:none">
                             <span class="mode-icon">&#128188;</span> Business
                         </button>
-                        <button class="mode-toggle-btn" id="btnHealthMode" data-mode="health">
-                            <span class="mode-icon" style="color:#e74c3c">&#10084;</span> Health
+                        <button class="mode-toggle-btn" id="btnHealthMode" data-mode="health" style="display:none">
+                            <span class="mode-icon" style="color:#c07a73">&#10084;</span> Health
                         </button>
-                        <button class="mode-toggle-btn" id="btnFinancesMode" data-mode="finances">
+                        <button class="mode-toggle-btn" id="btnFinancesMode" data-mode="finances" style="display:none">
                             <span class="mode-icon">&#128176;</span> Finances
                         </button>
                         <button class="mode-toggle-btn active" id="btnPersonalMode" data-mode="personal">
@@ -897,11 +898,11 @@
                     </div>
                     <div class="focus-header">
                         <h2 id="focusTitle">TODAY'S POWER FOCUS</h2>
-                        <select class="mode-select-mobile" id="modeSelectMobile">
+                        <select class="mode-select-mobile" id="modeSelectMobile" style="display:none">
                             <option value="personal">&#127968; Personal</option>
-                            <option value="business">&#128188; Business</option>
-                            <option value="health">&#10084;&#65039; Health</option>
-                            <option value="finances">&#128176; Finances</option>
+                            <option value="business" disabled style="display:none">&#128188; Business</option>
+                            <option value="health" disabled style="display:none">&#10084;&#65039; Health</option>
+                            <option value="finances" disabled style="display:none">&#128176; Finances</option>
                         </select>
                         <span class="focus-badge" id="focusBadge"></span>
                         <span class="date-display" id="todayDate"></span>
@@ -1751,7 +1752,7 @@
     </div>
 
     <script src="firebase-config.js"></script>
-    <script src="app.min.js?v=20260214r10"></script>
+    <script src="app.min.js?v=20260214r11"></script>
 
     <!-- Service Worker Registration -->
     <script>

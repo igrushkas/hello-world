@@ -1,6 +1,6 @@
 // Habit Magic — Service Worker
 // Version is updated by build.sh on each deploy
-var CACHE_VERSION = 'habit-magic-20260216203021';
+var CACHE_VERSION = 'habit-magic-20260216203307';
 
 // Core files to pre-cache on install
 var CORE_ASSETS = [
