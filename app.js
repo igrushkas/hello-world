@@ -5700,6 +5700,11 @@
                     if (!localStorage.getItem(referralKey)) {
                         localStorage.setItem(referralKey, '1');
                         setTimeout(function() {
+                            // Refresh founding spots count before showing
+                            loadFoundingMemberCount(function() {
+                                var remaining = Math.max(0, FOUNDING_MEMBER_LIMIT - foundingMemberCount);
+                                document.querySelectorAll('.founding-spots-count').forEach(function(el) { el.textContent = remaining; });
+                            });
                             var overlay = document.getElementById('referralOverlay');
                             if (overlay) overlay.classList.remove('hidden');
                         }, 240000);
@@ -8018,6 +8023,10 @@
 
         // Referral modal
         safeBind('btnRefer', 'click', function() {
+            loadFoundingMemberCount(function() {
+                var remaining = Math.max(0, FOUNDING_MEMBER_LIMIT - foundingMemberCount);
+                document.querySelectorAll('.founding-spots-count').forEach(function(el) { el.textContent = remaining; });
+            });
             var overlay = document.getElementById('referralOverlay');
             if (overlay) overlay.classList.remove('hidden');
             var dd = document.getElementById('topActionsDropdown');
