@@ -31,7 +31,7 @@
     <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
 
-    <link rel="stylesheet" href="styles.min.css?v=20260214r11">
+    <link rel="stylesheet" href="styles.min.css?v=20260214r12">
 
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
@@ -886,8 +886,8 @@
                         <button class="mode-toggle-btn" id="btnBusinessMode" data-mode="business" style="display:none">
                             <span class="mode-icon">&#128188;</span> Business
                         </button>
-                        <button class="mode-toggle-btn" id="btnHealthMode" data-mode="health" style="display:none">
-                            <span class="mode-icon" style="color:#c07a73">&#10084;</span> Health
+                        <button class="mode-toggle-btn mode-coming-soon" id="btnHealthMode" data-mode="health" disabled title="Coming soon">
+                            <span class="mode-icon" style="color:#c07a73">&#10084;</span> Health <span style="font-size:0.6rem;opacity:0.6">soon</span>
                         </button>
                         <button class="mode-toggle-btn" id="btnFinancesMode" data-mode="finances" style="display:none">
                             <span class="mode-icon">&#128176;</span> Finances
@@ -1752,7 +1752,7 @@
     </div>
 
     <script src="firebase-config.js"></script>
-    <script src="app.min.js?v=20260214r11"></script>
+    <script src="app.min.js?v=20260214r12"></script>
 
     <!-- Service Worker Registration -->
     <script>

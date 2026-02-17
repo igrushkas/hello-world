@@ -4170,6 +4170,18 @@ body.finances-mode.light-mode .praise-banner {
     background: rgba(176, 136, 88, 0.08);
 }
 
+.mode-toggle-btn.mode-coming-soon {
+    opacity: 0.4;
+    cursor: not-allowed;
+    filter: grayscale(40%);
+}
+
+.mode-toggle-btn.mode-coming-soon:hover {
+    opacity: 0.4;
+    background: none;
+    border-color: var(--border);
+}
+
 .mode-toggle-btn.active {
     background: linear-gradient(135deg, var(--accent-primary), #5a4bd6);
     color: #fff;
