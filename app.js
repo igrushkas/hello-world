@@ -5702,7 +5702,7 @@
                         setTimeout(function() {
                             var overlay = document.getElementById('referralOverlay');
                             if (overlay) overlay.classList.remove('hidden');
-                        }, 3000);
+                        }, 240000);
                     }
                 }
             }
