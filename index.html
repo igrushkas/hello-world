@@ -31,7 +31,7 @@
     <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
 
-    <link rel="stylesheet" href="styles.min.css?v=20260214r20">
+    <link rel="stylesheet" href="styles.min.css?v=20260214r21">
 
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
@@ -1520,6 +1520,51 @@
             <h2 style="text-align:center" id="feedbackTitle">Daily Feedback</h2>
             <p class="subtitle" style="text-align:center">As a Founding Member, your feedback shapes this app. Takes 30 seconds.</p>
             <div class="feedback-form">
+                <!-- First-time onboarding questions (hidden after first submission) -->
+                <div id="feedbackOnboardingSection" class="hidden">
+                    <div style="background:rgba(124,111,186,0.08);border-radius:12px;padding:14px;margin-bottom:16px">
+                        <p style="font-weight:700;margin:0 0 4px;color:var(--accent-primary)">&#128640; Quick background (first time only)</p>
+                        <p style="font-size:0.8rem;color:var(--text-secondary);margin:0">Helps us understand where you're coming from so we can build this for you.</p>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">&#128241; What apps have you tried before?</label>
+                        <div class="df-checkbox-grid" style="margin-bottom:8px">
+                            <label class="df-chip"><input type="checkbox" class="fb-prevapp-cb" value="todoist"><span>Todoist</span></label>
+                            <label class="df-chip"><input type="checkbox" class="fb-prevapp-cb" value="habitica"><span>Habitica</span></label>
+                            <label class="df-chip"><input type="checkbox" class="fb-prevapp-cb" value="notion"><span>Notion</span></label>
+                            <label class="df-chip"><input type="checkbox" class="fb-prevapp-cb" value="streaks"><span>Streaks</span></label>
+                            <label class="df-chip"><input type="checkbox" class="fb-prevapp-cb" value="google_tasks"><span>Google Tasks</span></label>
+                            <label class="df-chip"><input type="checkbox" class="fb-prevapp-cb" value="apple_reminders"><span>Reminders</span></label>
+                            <label class="df-chip"><input type="checkbox" class="fb-prevapp-cb" value="pen_paper"><span>Pen &amp; Paper</span></label>
+                            <label class="df-chip"><input type="checkbox" class="fb-prevapp-cb" value="none"><span>Nothing yet</span></label>
+                        </div>
+                        <input type="text" class="input-field" id="feedbackPrevAppsOther" placeholder="Other apps (optional)..." maxlength="100" style="margin-top:4px">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">&#128556; Why didn't they work for you?</label>
+                        <div class="df-checkbox-grid" style="margin-bottom:8px">
+                            <label class="df-chip df-chip-issue"><input type="checkbox" class="fb-whyfailed-cb" value="too_complex"><span>Too complex</span></label>
+                            <label class="df-chip df-chip-issue"><input type="checkbox" class="fb-whyfailed-cb" value="boring"><span>Boring / no rewards</span></label>
+                            <label class="df-chip df-chip-issue"><input type="checkbox" class="fb-whyfailed-cb" value="forgot"><span>Kept forgetting</span></label>
+                            <label class="df-chip df-chip-issue"><input type="checkbox" class="fb-whyfailed-cb" value="overwhelming"><span>Overwhelming</span></label>
+                            <label class="df-chip df-chip-issue"><input type="checkbox" class="fb-whyfailed-cb" value="no_adhd"><span>Not ADHD-friendly</span></label>
+                            <label class="df-chip df-chip-issue"><input type="checkbox" class="fb-whyfailed-cb" value="expensive"><span>Too expensive</span></label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">&#127919; What are you hoping Habit Magic helps with?</label>
+                        <div class="df-checkbox-grid">
+                            <label class="df-chip"><input type="checkbox" class="fb-hoping-cb" value="daily_routines"><span>Daily routines</span></label>
+                            <label class="df-chip"><input type="checkbox" class="fb-hoping-cb" value="fitness"><span>Fitness / health</span></label>
+                            <label class="df-chip"><input type="checkbox" class="fb-hoping-cb" value="productivity"><span>Productivity</span></label>
+                            <label class="df-chip"><input type="checkbox" class="fb-hoping-cb" value="focus"><span>Focus / less distraction</span></label>
+                            <label class="df-chip"><input type="checkbox" class="fb-hoping-cb" value="accountability"><span>Accountability</span></label>
+                            <label class="df-chip"><input type="checkbox" class="fb-hoping-cb" value="self_care"><span>Self-care</span></label>
+                        </div>
+                    </div>
+                    <hr style="border:none;border-top:1px solid var(--border-color);margin:16px 0">
+                </div>
+
                 <div class="form-group">
                     <label class="form-label">&#9989; What worked well today?</label>
                     <textarea class="input-field textarea" id="feedbackWorked" placeholder="What feature helped you most today?" rows="2"></textarea>
@@ -1604,6 +1649,24 @@
                         <button class="emoji-rating-btn" data-value="3" type="button">&#128528;</button>
                         <button class="emoji-rating-btn" data-value="4" type="button">&#128522;</button>
                         <button class="emoji-rating-btn" data-value="5" type="button">&#129321;</button>
+                    </div>
+                </div>
+                <div class="df-question">
+                    <div class="df-question-label">What did you work on today?</div>
+                    <div class="df-checkbox-grid">
+                        <label class="df-chip"><input type="checkbox" class="df-workedon-cb" value="set_goals"><span>&#127919; Set goals</span></label>
+                        <label class="df-chip"><input type="checkbox" class="df-workedon-cb" value="completed_actions"><span>&#9989; Did actions</span></label>
+                        <label class="df-chip"><input type="checkbox" class="df-workedon-cb" value="used_timer"><span>&#9201; Timer</span></label>
+                        <label class="df-chip"><input type="checkbox" class="df-workedon-cb" value="checked_progress"><span>&#128200; Progress</span></label>
+                        <label class="df-chip"><input type="checkbox" class="df-workedon-cb" value="just_browsed"><span>&#128064; Just browsed</span></label>
+                    </div>
+                </div>
+                <div class="df-question">
+                    <div class="df-question-label">Did the app help you stay on track?</div>
+                    <div class="df-checkbox-grid">
+                        <label class="df-chip df-chip-ok"><input type="radio" name="dfOnTrack" class="df-ontrack-radio" value="yes"><span>&#128170; Yes</span></label>
+                        <label class="df-chip"><input type="radio" name="dfOnTrack" class="df-ontrack-radio" value="somewhat"><span>&#129300; Somewhat</span></label>
+                        <label class="df-chip df-chip-issue"><input type="radio" name="dfOnTrack" class="df-ontrack-radio" value="no"><span>&#128533; Not really</span></label>
                     </div>
                 </div>
                 <div class="df-question">
@@ -1761,7 +1824,7 @@
     </div>
 
     <script src="firebase-config.js"></script>
-    <script src="app.min.js?v=20260214r20"></script>
+    <script src="app.min.js?v=20260214r21"></script>
 
     <!-- Service Worker Registration -->
     <script>

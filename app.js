@@ -2624,6 +2624,7 @@
 
         // Reset form
         overlay.querySelectorAll('input[type="checkbox"]').forEach(function(cb) { cb.checked = false; });
+        overlay.querySelectorAll('input[type="radio"]').forEach(function(rb) { rb.checked = false; });
         overlay.querySelectorAll('.df-chip').forEach(function(chip) { chip.classList.remove('checked'); });
         overlay.querySelectorAll('.emoji-rating-btn').forEach(function(btn) { btn.classList.remove('selected'); });
         var quickThought = document.getElementById('dfQuickThought');
@@ -2652,6 +2653,15 @@
 
         var quickThought = (document.getElementById('dfQuickThought') || {}).value || '';
 
+        var workedOn = [];
+        document.querySelectorAll('.df-workedon-cb:checked').forEach(function(cb) {
+            workedOn.push(cb.value);
+        });
+
+        var onTrack = '';
+        var selectedOnTrack = document.querySelector('.df-ontrack-radio:checked');
+        if (selectedOnTrack) onTrack = selectedOnTrack.value;
+
         var feedbackData = {
             uid: currentUser.uid,
             email: currentUser.email || '',
@@ -2661,6 +2671,8 @@
             helpfulFeatures: helpfulFeatures,
             issuesFound: issuesFound,
             motivationLevel: motivationLevel,
+            workedOn: workedOn,
+            onTrack: onTrack,
             quickThought: quickThought,
             streak: data.streak || 0,
             totalActions: data.log ? data.log.length : 0,
@@ -2679,6 +2691,8 @@
                         motivation: motivationLevel,
                         issues: issuesFound,
                         features: helpfulFeatures,
+                        workedOn: workedOn,
+                        onTrack: onTrack,
                         thought: quickThought
                     },
                     ownerEmail: 'ereana.swan@gmail.com'
@@ -2727,6 +2741,17 @@
         if (ratingValue) ratingValue.textContent = '7';
         if (testimonialSection) testimonialSection.classList.add('hidden');
 
+        // Show onboarding questions only on first feedback
+        var onboardingSection = document.getElementById('feedbackOnboardingSection');
+        if (onboardingSection) {
+            var alreadyOnboarded = localStorage.getItem('lwp_onboarding_done');
+            if (!alreadyOnboarded) {
+                onboardingSection.classList.remove('hidden');
+            } else {
+                onboardingSection.classList.add('hidden');
+            }
+        }
+
         // Dynamic title based on how long they've been using
         var daysSinceStart = data.log && data.log.length > 0 ? getDaysBetween(data.log[0].date, today) : 0;
         var titleEl = document.getElementById('feedbackTitle');
@@ -2766,6 +2791,30 @@
             totalActions: data.log ? data.log.length : 0,
             mode: currentMode
         };
+
+        // Capture onboarding data (first-time only)
+        if (!localStorage.getItem('lwp_onboarding_done')) {
+            var prevApps = [];
+            document.querySelectorAll('.fb-prevapp-cb:checked').forEach(function(cb) {
+                prevApps.push(cb.value);
+            });
+            var prevAppsOther = (document.getElementById('feedbackPrevAppsOther') || {}).value || '';
+            var whyFailed = [];
+            document.querySelectorAll('.fb-whyfailed-cb:checked').forEach(function(cb) {
+                whyFailed.push(cb.value);
+            });
+            var hopingFor = [];
+            document.querySelectorAll('.fb-hoping-cb:checked').forEach(function(cb) {
+                hopingFor.push(cb.value);
+            });
+            feedbackData.onboarding = {
+                previousApps: prevApps,
+                previousAppsOther: prevAppsOther,
+                whyPreviousFailed: whyFailed,
+                hopingFor: hopingFor
+            };
+            localStorage.setItem('lwp_onboarding_done', '1');
+        }
 
         // Add testimonial if provided
         if (testimonial && rating >= 8) {
@@ -5783,7 +5832,18 @@
         // Chip checkbox toggle visual
         document.querySelectorAll('.df-chip').forEach(function(chip) {
             chip.addEventListener('click', function() {
-                chip.classList.toggle('checked', chip.querySelector('input').checked);
+                var input = chip.querySelector('input');
+                if (input && input.type === 'radio') {
+                    // For radios, clear siblings then mark selected
+                    var name = input.name;
+                    document.querySelectorAll('input[name="' + name + '"]').forEach(function(rb) {
+                        var parentChip = rb.closest('.df-chip');
+                        if (parentChip) parentChip.classList.remove('checked');
+                    });
+                    chip.classList.toggle('checked', input.checked);
+                } else {
+                    chip.classList.toggle('checked', input.checked);
+                }
             });
         });
 
