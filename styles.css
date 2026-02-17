@@ -479,6 +479,15 @@ body {
     max-width: 600px;
     margin: 0 auto 32px;
 }
+.hero-free-highlight {
+    background: var(--accent-primary);
+    color: #fff;
+    padding: 2px 10px;
+    border-radius: 6px;
+    font-weight: 800;
+    font-size: 1.15rem;
+    white-space: nowrap;
+}
 
 .hero-cta-group {
     margin-bottom: 16px;
