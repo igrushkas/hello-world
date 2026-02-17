@@ -31,7 +31,7 @@
     <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
 
-    <link rel="stylesheet" href="styles.min.css?v=20260214r18">
+    <link rel="stylesheet" href="styles.min.css?v=20260214r19">
 
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
@@ -348,7 +348,7 @@
                 <div class="landing-price-card popular">
                     <div class="popular-tag">Best Value</div>
                     <h3>Starter</h3>
-                    <div class="landing-price"><span id="landingStarterPrice">$9.99</span><span id="landingStarterPeriod">/mo</span></div>
+                    <div class="landing-price"><span class="landing-price-amount" id="landingStarterPrice">$9.99</span><span class="landing-price-period" id="landingStarterPeriod">/mo</span></div>
                     <div class="landing-price-desc" id="landingStarterDesc">or $99/year <strong>(save $21)</strong></div>
                     <div class="landing-price-effective" id="landingStarterEffective">That&rsquo;s $8.25/mo &mdash; less than 2 coffees</div>
                     <ul>
@@ -361,7 +361,7 @@
                 </div>
                 <div class="landing-price-card">
                     <h3>Pro</h3>
-                    <div class="landing-price"><span id="landingProPrice">$19.99</span><span id="landingProPeriod">/mo</span></div>
+                    <div class="landing-price"><span class="landing-price-amount" id="landingProPrice">$19.99</span><span class="landing-price-period" id="landingProPeriod">/mo</span></div>
                     <div class="landing-price-desc" id="landingProDesc">or $179/year <strong>(save $61)</strong></div>
                     <div class="landing-price-effective" id="landingProEffective">$14.92/mo &mdash; less than 1 therapy session</div>
                     <ul>
@@ -1761,7 +1761,7 @@
     </div>
 
     <script src="firebase-config.js"></script>
-    <script src="app.min.js?v=20260214r18"></script>
+    <script src="app.min.js?v=20260214r19"></script>
 
     <!-- Service Worker Registration -->
     <script>

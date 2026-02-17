@@ -7406,7 +7406,12 @@ body.light-mode .founder-commitment {
     font-weight: 800;
     color: var(--accent-primary);
 }
-.landing-price span {
+.landing-price .landing-price-amount {
+    font-size: inherit;
+    font-weight: inherit;
+    color: inherit;
+}
+.landing-price .landing-price-period {
     font-size: 0.9rem;
     font-weight: 400;
     color: var(--text-secondary);
