@@ -7468,7 +7468,6 @@ body.light-mode .founder-commitment {
     }
     .landing-price-card.popular {
         transform: none;
-        order: -1;
     }
 }
 
