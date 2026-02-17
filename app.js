@@ -6281,7 +6281,7 @@
             document.getElementById('addActionOutcomeName').textContent = 'Adding to: ' + outcome.result;
             document.getElementById('addActionText').value = '';
             renderActionCategoryCheckboxes('addActionCategories', []);
-            document.getElementById('addActionEst').value = '';
+            document.getElementById('addActionEst').value = '15';
             document.getElementById('addActionOverlay').classList.remove('hidden');
         }
 
