@@ -834,7 +834,9 @@
             if (saved) challengesCompleted = parseInt(saved) || 0;
         } catch(e) {}
 
-        var score = (actions * 10) + (comboCount * 5) + (streakDays * 15) + (challengesCompleted * 25) + (Object.keys(categories).length * 10);
+        // Only include comboCount for current week (weekOffset 0), not historical weeks
+        var comboBonus = weekOffset === 0 ? (comboCount * 5) : 0;
+        var score = (actions * 10) + comboBonus + (streakDays * 15) + (challengesCompleted * 25) + (Object.keys(categories).length * 10);
         return { score: score, actions: actions, categories: Object.keys(categories).length, streakDays: streakDays };
     }
 
@@ -978,11 +980,11 @@
         var current = history[0];
         var last = history[1];
 
-        // Comparison badge
+        // Comparison badge (only show if last week had real actions)
         var comparison = '';
-        if (last.score > 0 && current.score > last.score) {
+        if (last.score > 0 && last.actions > 0 && current.score > last.score) {
             comparison = '<span class="pwr-stat pwr-stat-beat">&#128293; Beating last week!</span>';
-        } else if (last.score > 0 && last.score > current.score) {
+        } else if (last.score > 0 && last.actions > 0 && last.score > current.score) {
             comparison = '<span class="pwr-stat pwr-stat-chase">&#9650; ' + (last.score - current.score) + ' to beat last wk</span>';
         }
 
@@ -5626,6 +5628,17 @@
                 saveData();
             }
         } catch(e) { console.error('default outcome error:', e); }
+
+        // Auto-show help popup on first login (no log = brand new user)
+        try {
+            if (data && (!data.log || data.log.length === 0) && !localStorage.getItem('lwp_help_shown')) {
+                localStorage.setItem('lwp_help_shown', '1');
+                setTimeout(function() {
+                    var helpOverlay = document.getElementById('helpOverlay');
+                    if (helpOverlay) helpOverlay.classList.remove('hidden');
+                }, 500);
+            }
+        } catch(e) { console.error('first login help error:', e); }
 
         try { renderCategoryFilters(); } catch(e) { console.error('category filter error:', e); }
         try { restoreCombo(); } catch(e) { console.error('combo restore error:', e); }
