@@ -3900,12 +3900,14 @@
             return;
         }
         // Filter to last 7 calendar days (matches Wheel of Life rolling window)
-        var now = new Date();
-        var sevenDaysAgo = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 6);
+        var validDays = {};
+        for (var d = 0; d < 7; d++) {
+            var dayDate = new Date(Date.now() - d * 86400000);
+            validDays[dayDate.toDateString()] = true;
+        }
         var recent = modeLog.filter(function(entry) {
             if (!entry.date) return false;
-            var entryDate = new Date(entry.date);
-            return entryDate >= sevenDaysAgo;
+            return validDays[entry.date] === true;
         }).reverse();
 
         // Group by date
