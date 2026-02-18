@@ -779,13 +779,14 @@
                     </div>
                     <div class="next-action-card" id="nextActionCard">
                         <div class="next-action-top-row">
-                            <div class="next-action-label">JUST THIS ONE THING</div>
+                            <div class="next-action-label">JUST DO THIS ONE THING</div>
                             <button class="btn-focus-mode" id="btnFocusMode" title="Focus Mode — hide everything else">&#x26F6;</button>
                             <div class="next-action-outcome-progress" id="nextActionOutcomeProgress"></div>
                         </div>
                         <div class="next-action-text" id="nextActionText">No steps yet. Create a goal to get started!</div>
                         <div class="next-action-meta" id="nextActionMeta"></div>
                         <div class="next-action-buttons">
+                            <button class="btn-max-focus" id="btnMaxFocus" title="Maximize — focus on this one thing">MAX</button>
                             <button class="btn-primary" id="btnCompleteNext" style="display:none">&#10003; Done!</button>
                             <button class="btn-pick-for-me" id="btnPickForMe" title="Pick a task for you">&#127919; Pick For Me</button>
                             <button class="btn-primary btn-create-outcome-next" id="btnCreateOutcomeNext" style="display:none">+ New Goal</button>
@@ -845,17 +846,23 @@
 
                 <!-- Wheel of Life / Business Wheel -->
                 <div class="wheel-of-life-card">
-                    <h3 id="wheelTitle">Wheel of Life <span class="wheel-period">Last 7 Days</span> <button class="btn-cat-guide" id="btnCatGuide" title="Category Guide">&#8505;</button></h3>
-                    <div class="wheel-chart-container">
-                        <svg id="wheelChart" viewBox="0 0 400 400" class="wheel-svg"></svg>
-                    </div>
+                    <h3 id="wheelTitle"><span class="wheel-period">Last 7 Days</span> <button class="btn-cat-guide" id="btnCatGuide" title="Category Guide">&#8505;</button></h3>
                     <div class="wheel-balance-score" id="balanceScoreCard">
-                        <div class="balance-level">&#127942; My Victories Today</div>
+                        <div class="balance-header-row">
+                            <div class="balance-level">&#127942; My Victories Today</div>
+                            <div class="balance-goal-picker">
+                                <label for="victoryGoalSelect" class="balance-goal-label">How Many?</label>
+                                <select id="victoryGoalSelect" class="est-select balance-goal-select"></select>
+                            </div>
+                        </div>
                         <div class="balance-count" id="balanceCount">0 of 0</div>
                         <div class="balance-bar-wrap">
                             <div class="balance-bar-fill" id="balanceBarFill" style="width:0%"></div>
                         </div>
                         <div class="balance-message" id="balanceMessage">Complete actions to claim your victories!</div>
+                    </div>
+                    <div class="wheel-chart-container">
+                        <svg id="wheelChart" viewBox="0 0 400 400" class="wheel-svg"></svg>
                     </div>
                 </div>
             </section>
