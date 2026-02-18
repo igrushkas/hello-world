@@ -3099,6 +3099,13 @@
         try { renderStreakFreezeIndicator(); } catch(e) {}
         document.getElementById('streakCount').textContent = data.streak;
         document.getElementById('todayDate').textContent = new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+
+        // Progressive disclosure: hide Wheel of Life and Motivation card until user has some activity
+        var totalActions = data && data.log ? data.log.length : 0;
+        var wheelCard = document.querySelector('.wheel-of-life-card');
+        if (wheelCard) wheelCard.style.display = totalActions >= 3 ? '' : 'none';
+        var motivationCard = document.getElementById('motivationCard1');
+        if (motivationCard) motivationCard.style.display = totalActions >= 1 ? '' : 'none';
     }
 
     function renderFocusBadge() {
@@ -3641,7 +3648,7 @@
 
         if (next) {
             textEl.textContent = next.text;
-            var metaParts = ['Outcome: ' + next.outcome];
+            var metaParts = ['Goal: ' + next.outcome];
             if (next.estMinutes) metaParts.push('~' + next.estMinutes + ' min est.');
             if (next.leverageScore !== undefined) metaParts.push('Leverage: ' + next.leverageScore + '%');
             metaEl.textContent = metaParts.join(' | ');
@@ -3662,11 +3669,11 @@
                 var done = outcome.actions.filter(function(a) { return a.done; }).length;
                 var total = outcome.actions.length;
                 var pct = total > 0 ? Math.round((done / total) * 100) : 0;
-                progressEl.innerHTML = '<span class="na-progress-text">' + done + ' of ' + total + ' actions done</span>' +
+                progressEl.innerHTML = '<span class="na-progress-text">' + done + ' of ' + total + ' steps done</span>' +
                     '<div class="na-progress-bar"><div class="na-progress-fill" style="width:' + pct + '%"></div></div>';
             }
         } else {
-            textEl.textContent = 'All actions complete! Time to set a new goal.';
+            textEl.textContent = 'All done! Ready for a new goal?';
             metaEl.textContent = '';
             btnComplete.style.display = 'none';
             if (btnPomo) btnPomo.style.display = 'none';
@@ -4045,7 +4052,7 @@
             var filterCat = getActiveCategories().find(function(c) { return c.id === currentFilter; });
             if (filterCat) filterLabel = '(' + catDisplayNameHtml(filterCat.name) + ')';
         }
-        document.getElementById('dailyProgressText').innerHTML = done + ' of ' + total + ' actions completed today ' + filterLabel;
+        document.getElementById('dailyProgressText').innerHTML = done + ' of ' + total + ' steps completed today ' + filterLabel;
     }
 
     // ==========================================
@@ -4972,16 +4979,15 @@
             data.sessionTaskCount = 0;
             data.extendedBreakThreshold = Math.floor(Math.random() * 2) + 4;
             saveData();
-            // Show extended break after a short delay (let praise show first)
+            // Gently suggest a break after 4-5 tasks (not forced)
             setTimeout(function() {
                 showExtendedBreak();
             }, 1500);
         } else {
             saveData();
-            // Show regular movement break
-            setTimeout(function() {
-                showMovementBreak();
-            }, 1500);
+            // Movement breaks no longer auto-trigger after every action.
+            // Users can access Reset tools via the overflow menu when they want.
+            // This prevents interrupting flow state — critical for ADHD.
         }
     }
 
@@ -5656,7 +5662,7 @@
                 var firstLogDate = new Date(data.log[0].date || data.log[0].createdDate);
                 var daysSinceStart = Math.floor((Date.now() - firstLogDate.getTime()) / 86400000);
                 var currentWeek = Math.floor(daysSinceStart / 7) + 1;
-                if (currentWeek >= 1 && currentWeek <= 3) {
+                if (currentWeek >= 4 && currentWeek <= 6) {
                     var referralKey = 'lwp_referral_shown_week_' + currentWeek;
                     if (!localStorage.getItem(referralKey)) {
                         localStorage.setItem(referralKey, '1');
@@ -5710,6 +5716,8 @@
         }
 
         // Generic collapsible sections (Momentum, Badges, Action Log)
+        // Default to collapsed for new users (progressive disclosure)
+        var hasActivity = data && data.log && data.log.length > 0;
         document.querySelectorAll('.btn-collapse-section[data-collapse]').forEach(function(btn) {
             var sectionId = btn.dataset.collapse;
             btn.addEventListener('click', function(e) {
@@ -5721,12 +5729,28 @@
                 this.title = isCollapsed ? 'Show' : 'Hide';
                 localStorage.setItem('lwp_' + sectionId + '_collapsed', isCollapsed ? '1' : '0');
             });
-            // Restore collapsed state
-            if (localStorage.getItem('lwp_' + sectionId + '_collapsed') === '1') {
+            var savedState = localStorage.getItem('lwp_' + sectionId + '_collapsed');
+            // If no saved preference, default to collapsed for new users
+            if (savedState === '1' || (savedState === null && !hasActivity)) {
                 var section = document.getElementById(sectionId);
                 if (section) section.classList.add('collapsed');
                 btn.textContent = '\u25B6';
                 btn.title = 'Show';
+            }
+        });
+
+        // More Actions overflow menu toggle
+        safeBind('btnMoreActions', 'click', function(e) {
+            e.stopPropagation();
+            var menu = document.getElementById('moreActionsMenu');
+            if (menu) menu.classList.toggle('hidden');
+        });
+        // Close more actions menu when clicking outside
+        document.addEventListener('click', function(e) {
+            var menu = document.getElementById('moreActionsMenu');
+            if (menu && !menu.classList.contains('hidden')) {
+                var wrap = e.target.closest('.more-actions-wrap');
+                if (!wrap) menu.classList.add('hidden');
             }
         });
 
@@ -5835,29 +5859,18 @@
             });
         });
 
-        // Auto-show Power Priming Spark up to 3 times a day (every ~3 hours, before 6 PM only)
-        try {
-            var now = Date.now();
-            var currentHour = new Date().getHours();
-            // Only auto-show priming between 5 AM and 6 PM (not in the evening)
-            if (currentHour >= 5 && currentHour < 18 && isProUser()) {
-                var primingKey = 'lwp_priming_times_' + new Date().toDateString();
-                var primingTimes = JSON.parse(localStorage.getItem(primingKey) || '[]');
-                var lastPrimingTime = primingTimes.length > 0 ? primingTimes[primingTimes.length - 1] : 0;
-                var hoursSinceLast = (now - lastPrimingTime) / (1000 * 60 * 60);
-                if (primingTimes.length < 3 && hoursSinceLast >= 3) {
-                    document.getElementById('statePrimingOverlay').classList.remove('hidden');
-                }
-            }
-        } catch(e) { console.error('priming auto-show error:', e); }
+        // Power Priming — no longer auto-pops. Users access it via State Check in the menu.
+        // This reduces interruptions for ADHD users who need unbroken flow.
 
-        // Focus category filter
+        // Focus category filter — now also filters outcomes (single unified filter)
         document.querySelectorAll('.focus-cat-btn').forEach(function(btn) {
             btn.addEventListener('click', function() {
                 document.querySelectorAll('.focus-cat-btn').forEach(function(b) { b.classList.remove('active'); });
                 this.classList.add('active');
                 focusCategoryFilter = this.dataset.focusCat;
+                currentFilter = this.dataset.focusCat;
                 renderNextAction();
+                renderOutcomes();
             });
         });
 
@@ -5896,20 +5909,32 @@
             document.getElementById('newOutcomeOverlay').classList.add('hidden');
         });
 
+        // More options toggle (progressive disclosure)
+        safeBind('btnMoreOptions', 'click', function() {
+            var section = document.getElementById('moreOptionsSection');
+            if (section) {
+                var isHidden = section.classList.toggle('hidden');
+                this.innerHTML = isHidden ? 'More options &#9660;' : 'Less options &#9650;';
+            }
+        });
+        safeBind('btnEditMoreOptions', 'click', function() {
+            var section = document.getElementById('editMoreOptionsSection');
+            if (section) {
+                var isHidden = section.classList.toggle('hidden');
+                this.innerHTML = isHidden ? 'More options &#9660;' : 'Less options &#9650;';
+            }
+        });
+
         // Add more actions
         safeBind('addMoreActions', 'click', function() {
             var row = document.createElement('div');
             row.className = 'action-input-row';
-            row.innerHTML = '<input type="text" class="input-field" placeholder="Action step...">' +
+            row.innerHTML = '<input type="text" class="input-field" placeholder="Next step...">' +
                 '<select class="est-select est-input" title="Estimated minutes">' +
                     '<option value="5">5m</option>' +
                     '<option value="10">10m</option>' +
                     '<option value="15" selected>15m</option>' +
                     '<option value="20">20m</option>' +
-                '</select>' +
-                '<input type="date" class="action-deadline-input" title="Deadline">' +
-                '<select class="est-select action-extra-cat" title="Extra category">' +
-                    buildExtraCatOptions() +
                 '</select>';
             document.getElementById('actionsList').appendChild(row);
         });
@@ -5931,9 +5956,9 @@
         // Save Outcome
         safeBind('saveOutcome', 'click', function() {
             var result = document.getElementById('outcomeResult').value.trim();
-            var purpose = document.getElementById('outcomePurpose').value.trim();
+            var purposeEl = document.getElementById('outcomePurpose');
+            var purpose = purposeEl ? purposeEl.value.trim() : '';
             if (!result) return;
-            if (!purpose) return;
 
             // Pro gate: max 3 outcomes for free users
             if (data && data.outcomes && data.outcomes.length >= 3 && !hasUnlimitedOutcomes()) {
@@ -5990,7 +6015,7 @@
                 if (!proceed) return;
             }
 
-            // Assign outcome category + user-chosen extra category to each action
+            // Assign outcome category to each action
             actions.forEach(function(action) {
                 var assignedCats = [category];
                 if (action.extraCategory && action.extraCategory !== category) {
@@ -6000,14 +6025,16 @@
                 delete action.extraCategory;
             });
 
+            var deadlineEl = document.getElementById('outcomeDeadline');
+            var commitmentEl = document.getElementById('commitmentSlider');
             data.outcomes.push({
                 id: uid(),
                 result: result,
                 purpose: purpose,
                 actions: actions,
                 category: category,
-                deadline: document.getElementById('outcomeDeadline').value || null,
-                commitment: parseInt(document.getElementById('commitmentSlider').value),
+                deadline: (deadlineEl && deadlineEl.value) ? deadlineEl.value : null,
+                commitment: commitmentEl ? parseInt(commitmentEl.value) : 7,
                 completed: false,
                 createdDate: new Date().toDateString()
             });
@@ -6017,18 +6044,24 @@
             document.getElementById('newOutcomeOverlay').classList.add('hidden');
             // Reset form
             document.getElementById('outcomeResult').value = '';
-            document.getElementById('outcomePurpose').value = '';
-            document.getElementById('outcomeDeadline').value = '';
-            document.getElementById('commitmentSlider').value = '7';
-            document.getElementById('commitmentValue').textContent = '7';
-            document.getElementById('commitmentBoost').value = '';
-            var catOpts = buildExtraCatOptions();
+            var purposeReset = document.getElementById('outcomePurpose');
+            if (purposeReset) purposeReset.value = '';
+            var deadlineReset = document.getElementById('outcomeDeadline');
+            if (deadlineReset) deadlineReset.value = '';
+            var commitReset = document.getElementById('commitmentSlider');
+            if (commitReset) commitReset.value = '7';
+            var commitValReset = document.getElementById('commitmentValue');
+            if (commitValReset) commitValReset.textContent = '7';
+            // Collapse more options
+            var moreSection = document.getElementById('moreOptionsSection');
+            if (moreSection) moreSection.classList.add('hidden');
+            var moreBtnReset = document.getElementById('btnMoreOptions');
+            if (moreBtnReset) moreBtnReset.innerHTML = 'More options &#9660;';
             var timeOpts = '<select class="est-select est-input" title="Estimated minutes"><option value="5">5m</option><option value="10">10m</option><option value="15" selected>15m</option><option value="20">20m</option></select>';
-            var catSel = '<select class="est-select action-extra-cat" title="Extra category">' + catOpts + '</select>';
             document.getElementById('actionsList').innerHTML =
-                '<div class="action-input-row"><input type="text" class="input-field" placeholder="Action step 1...">' + timeOpts + '<input type="date" class="action-deadline-input" title="Deadline">' + catSel + '</div>' +
-                '<div class="action-input-row"><input type="text" class="input-field" placeholder="Action step 2...">' + timeOpts + '<input type="date" class="action-deadline-input" title="Deadline">' + catSel + '</div>' +
-                '<div class="action-input-row"><input type="text" class="input-field" placeholder="Action step 3...">' + timeOpts + '<input type="date" class="action-deadline-input" title="Deadline">' + catSel + '</div>';
+                '<div class="action-input-row"><input type="text" class="input-field" placeholder="Step 1...">' + timeOpts + '</div>' +
+                '<div class="action-input-row"><input type="text" class="input-field" placeholder="Step 2...">' + timeOpts + '</div>' +
+                '<div class="action-input-row"><input type="text" class="input-field" placeholder="Step 3...">' + timeOpts + '</div>';
         });
 
         // Commitment slider
