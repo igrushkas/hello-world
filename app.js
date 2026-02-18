@@ -2101,6 +2101,89 @@
         if (!data.reflections) data.reflections = [];
         if (!data.values) data.values = [];
         if (!data.badges) data.badges = [];
+        // Seed starter outcomes for first-time users
+        if (data.outcomes.length === 0) seedStarterOutcomes();
+    }
+
+    function seedStarterOutcomes() {
+        var today = new Date().toDateString();
+        var d7 = new Date();
+        d7.setDate(d7.getDate() + 7);
+        var deadline = d7.toISOString().split('T')[0];
+
+        function makeAction(text, cat) {
+            return { id: uid(), text: text, categories: [cat], estMinutes: 15, deadline: deadline, done: false, completedDate: null };
+        }
+
+        var seeds = [
+            {
+                result: 'Clean Living Space',
+                purpose: 'Create a tidy, energizing environment',
+                category: 'fun_environment',
+                actions: [
+                    makeAction('Clean Desk', 'fun_environment'),
+                    makeAction('Clean Bathroom', 'fun_environment'),
+                    makeAction('Wash floors in the kitchen', 'fun_environment')
+                ]
+            },
+            {
+                result: 'Connect with Loved Ones',
+                purpose: 'Nurture relationships that matter',
+                category: 'relationships',
+                actions: [
+                    makeAction('Meet with a friend / family for Lunch / Dinner / Walk', 'relationships')
+                ]
+            },
+            {
+                result: 'Healthy Daily Habits',
+                purpose: 'Build energy and vitality',
+                category: 'health_energy',
+                actions: [
+                    makeAction('Workout 20 mins', 'health_energy'),
+                    makeAction('Plan your Meal for tomorrow', 'health_energy')
+                ]
+            },
+            {
+                result: 'Apply & Grow',
+                purpose: 'Turn knowledge into action',
+                category: 'personal_growth',
+                actions: [
+                    makeAction('Apply What you\'ve learned', 'personal_growth')
+                ]
+            },
+            {
+                result: 'Share Your Knowledge',
+                purpose: 'Contribute and build your reputation',
+                category: 'career_contribution',
+                actions: [
+                    makeAction('Share your knowledge with one person', 'career_contribution')
+                ]
+            },
+            {
+                result: 'Get Finances in Order',
+                purpose: 'Take control of your money',
+                category: 'money_finances',
+                actions: [
+                    makeAction('Check all your statements', 'money_finances'),
+                    makeAction('Close one / all credit card(s)', 'money_finances'),
+                    makeAction('Set up a budget for next week / month', 'money_finances')
+                ]
+            }
+        ];
+
+        seeds.forEach(function(s) {
+            data.outcomes.push({
+                id: uid(),
+                result: s.result,
+                purpose: s.purpose,
+                actions: s.actions,
+                category: s.category,
+                deadline: deadline,
+                commitment: 7,
+                completed: false,
+                createdDate: today
+            });
+        });
     }
 
     // ==========================================
@@ -4047,12 +4130,24 @@
         });
         var pct = total > 0 ? Math.round((done / total) * 100) : 0;
         document.getElementById('dailyProgressFill').style.width = pct + '%';
-        var filterLabel = '(all outcomes)';
-        if (currentFilter !== 'all') {
-            var filterCat = getActiveCategories().find(function(c) { return c.id === currentFilter; });
-            if (filterCat) filterLabel = '(' + catDisplayNameHtml(filterCat.name) + ')';
+
+        // Stats bar: reuse weekly power score data
+        var current = calculateWeeklyPowerScore(0);
+        var last = calculateWeeklyPowerScore(1);
+        var diffText = '';
+        if (last.score > 0 && last.actions > 0) {
+            if (current.score > last.score) {
+                diffText = '<span class="pwr-stat pwr-stat-beat">\u{1F525} Beating last week!</span>';
+            } else {
+                diffText = '<span class="pwr-stat pwr-stat-chase">\u25B2 ' + (last.score - current.score) + ' to beat last wk</span>';
+            }
         }
-        document.getElementById('dailyProgressText').innerHTML = done + ' of ' + total + ' steps completed today ' + filterLabel;
+        document.getElementById('dailyProgressText').innerHTML =
+            'Completed: ' +
+            '<span class="pwr-stat pwr-stat-actions">\u2705 ' + current.actions + ' actions</span>' +
+            '<span class="pwr-stat pwr-stat-cats">\u{1F308} ' + current.categories + ' categories</span>' +
+            '<span class="pwr-stat pwr-stat-streak">\u{1F525} ' + current.streakDays + 'd streak</span>' +
+            diffText;
     }
 
     // ==========================================
@@ -4086,6 +4181,19 @@
         else if (currentMode === 'finances') scores = calculateFinancesWheelScores();
         else scores = calculateWheelScores();
         drawRadarChart(scores);
+        // Make wheel category labels clickable — filter by category
+        var svg = document.getElementById('wheelChart');
+        if (svg) {
+            svg.querySelectorAll('.wheel-cat-label').forEach(function(label) {
+                label.addEventListener('click', function() {
+                    var catId = this.getAttribute('data-cat-id');
+                    if (catId) {
+                        var focusBtn = document.querySelector('.focus-cat-btn[data-focus-cat="' + catId + '"]');
+                        if (focusBtn) focusBtn.click();
+                    }
+                });
+            });
+        }
         renderBalanceScore();
     }
 
@@ -4146,17 +4254,17 @@
             var x2 = cx + maxR * Math.cos(angle);
             var y2 = cy + maxR * Math.sin(angle);
             html += '<line x1="' + cx + '" y1="' + cy + '" x2="' + x2 + '" y2="' + y2 + '" stroke="rgba(148,163,184,0.2)" stroke-width="1"/>';
-            var labelOffset = 35;
+            var labelOffset = 40;
             var lx = cx + (maxR + labelOffset) * Math.cos(angle);
             var ly = cy + (maxR + labelOffset) * Math.sin(angle);
             var anchor = 'middle';
             if (lx < cx - 10) anchor = 'end';
             else if (lx > cx + 10) anchor = 'start';
             var lines = s.name.split('\n');
-            html += '<text x="' + lx + '" y="' + ly + '" text-anchor="' + anchor + '" fill="' + s.color + '" font-size="12" font-weight="600">';
+            html += '<text x="' + lx + '" y="' + ly + '" text-anchor="' + anchor + '" fill="' + s.color + '" font-size="15" font-weight="600" class="wheel-cat-label" data-cat-id="' + s.id + '" style="cursor:pointer">';
             if (lines.length > 1) {
-                html += '<tspan x="' + lx + '" dy="-7">' + lines[0] + '</tspan>';
-                html += '<tspan x="' + lx + '" dy="14">' + lines[1] + '</tspan>';
+                html += '<tspan x="' + lx + '" dy="-8">' + lines[0] + '</tspan>';
+                html += '<tspan x="' + lx + '" dy="16">' + lines[1] + '</tspan>';
             } else {
                 html += '<tspan dominant-baseline="middle">' + lines[0] + '</tspan>';
             }
@@ -4198,6 +4306,10 @@
     function renderBalanceScore() {
         var today = new Date().toDateString();
         var dailyGoal = 9;
+        try {
+            var savedGoal = parseInt(localStorage.getItem('lwp_victory_goal'));
+            if (savedGoal >= 3 && savedGoal <= 21) dailyGoal = savedGoal;
+        } catch(e) {}
         var done = 0;
         var activeCatIds = getActiveCategories().map(function(c) { return c.id; });
         // Apply category filter
@@ -5760,6 +5872,33 @@
             this.textContent = isFocused ? '\u2716' : '\u26F6';
             this.title = isFocused ? 'Exit Focus Mode' : 'Focus Mode — hide everything else';
         });
+
+        // MAX button — triggers same focus mode
+        safeBind('btnMaxFocus', 'click', function() {
+            var focusBtn = document.getElementById('btnFocusMode');
+            if (focusBtn) focusBtn.click();
+        });
+
+        // Victory Goal dropdown — populate and persist
+        (function initVictoryGoalDropdown() {
+            var select = document.getElementById('victoryGoalSelect');
+            if (!select) return;
+            var saved = 9;
+            try { saved = parseInt(localStorage.getItem('lwp_victory_goal')) || 9; } catch(e) {}
+            if (saved < 3 || saved > 21) saved = 9;
+            for (var i = 3; i <= 21; i++) {
+                var opt = document.createElement('option');
+                opt.value = i;
+                opt.textContent = i;
+                if (i === saved) opt.selected = true;
+                select.appendChild(opt);
+            }
+            select.addEventListener('change', function() {
+                var val = parseInt(this.value) || 9;
+                try { localStorage.setItem('lwp_victory_goal', val); } catch(e) {}
+                renderBalanceScore();
+            });
+        })();
 
         // Create New button — auto-expand outcomes when collapsed
         safeBind('btnNewOutcome', 'click', function() {
