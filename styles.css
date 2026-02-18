@@ -2041,6 +2041,12 @@ body.health-mode .focus-title-category {
     gap: 4px;
     flex-wrap: wrap;
     margin-bottom: 10px;
+    align-items: center;
+}
+
+/* Last 7 Days + Info icon in category filter row */
+.filter-row-period {
+    margin-left: auto;
 }
 
 .focus-cat-btn {
@@ -3003,7 +3009,7 @@ body.finances-mode.light-mode .praise-banner {
    ========================================== */
 
 .motivation-card {
-    margin-top: 16px;
+    margin-top: 4px;
     background: linear-gradient(135deg, #0f1a2a, #1a1040);
     border: 1px solid var(--border);
     border-radius: var(--radius);
@@ -3018,13 +3024,7 @@ body.finances-mode.light-mode .praise-banner {
 }
 
 .motivation-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, var(--accent-orange), var(--accent-yellow), var(--accent-orange));
+    display: none;
 }
 
 .motivation-header {
@@ -3210,19 +3210,26 @@ body.focus-mode #btnCompleteNext {
     font-size: 1.4rem !important;
 }
 
-/* MAX button */
+/* MAX button — positioned top-right of the card */
 .btn-max-focus {
     background: linear-gradient(135deg, var(--accent-primary), #5a4bd6);
     color: #fff;
     border: none;
-    padding: 8px 18px;
-    font-size: 0.85rem;
+    padding: 6px 14px;
+    font-size: 0.75rem;
     font-weight: 800;
     letter-spacing: 2px;
     border-radius: 20px;
     cursor: pointer;
     transition: var(--transition);
     text-transform: uppercase;
+}
+
+.btn-max-corner {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 2;
 }
 
 .btn-max-focus:hover {
