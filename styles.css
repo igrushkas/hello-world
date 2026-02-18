@@ -2109,9 +2109,9 @@ body.health-mode .focus-title-category {
 }
 
 .next-action-label {
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 3px;
+    font-size: 1.1rem;
+    font-weight: 900;
+    letter-spacing: 4px;
     color: var(--accent-primary);
     text-transform: uppercase;
 }
@@ -2444,6 +2444,43 @@ body.health-mode .focus-title-category {
 .btn-pick-for-me:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(196, 153, 106, 0.35);
+}
+
+/* Focus Buddy inline button */
+.btn-body-double-inline {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: #fff;
+    border: none;
+    padding: 10px 16px;
+    border-radius: var(--radius);
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-body-double-inline:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.35);
+}
+
+/* PANIC button */
+.btn-panic {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    color: #fff;
+    border: none;
+    padding: 10px 16px;
+    border-radius: var(--radius);
+    font-size: 0.85rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-panic:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(231, 76, 60, 0.35);
 }
 
 /* Input Error State */
