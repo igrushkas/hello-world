@@ -3520,7 +3520,10 @@
         return candidates[0] || null;
     }
 
-    // Pick from least-used category (different from current task's category)
+    // Pick from least-used category — cycles through on repeated clicks
+    var pickForMeCycleIndex = 0;
+    var pickForMeLastSortedCats = null;
+
     function pickFromLeastUsedCategory() {
         var today = new Date().toDateString();
         var activeCats = getActiveCategories();
@@ -3536,39 +3539,56 @@
             });
         });
 
-        // Get current task's category so we pick from a different one
-        var currentNext = getNextAction();
-        var currentCat = currentNext ? currentNext.category : null;
-
-        // Sort categories by usage (least used first), exclude current
+        // Sort categories by usage (least used first)
         var sortedCats = Object.keys(catCounts)
-            .filter(function(cat) { return cat !== currentCat; })
             .sort(function(a, b) { return catCounts[a] - catCounts[b]; });
 
-        // If all filtered out, include current cat too
-        if (sortedCats.length === 0) {
-            sortedCats = Object.keys(catCounts).sort(function(a, b) { return catCounts[a] - catCounts[b]; });
-        }
-
-        // Find first available action from least-used categories
-        for (var i = 0; i < sortedCats.length; i++) {
-            var cat = sortedCats[i];
+        // Only keep categories that have available tasks
+        var catsWithTasks = sortedCats.filter(function(cat) {
             for (var j = 0; j < data.outcomes.length; j++) {
                 var o = data.outcomes[j];
                 if (o.completed || o.backBurner || !isOutcomeInCurrentMode(o)) continue;
                 if (o.category !== cat) continue;
                 for (var k = 0; k < o.actions.length; k++) {
-                    var a = o.actions[k];
-                    if (a.done) continue;
-                    return {
-                        text: a.text,
-                        outcome: o.result,
-                        outcomeId: o.id,
-                        actionId: a.id,
-                        estMinutes: a.estMinutes,
-                        category: o.category
-                    };
+                    if (!o.actions[k].done) return true;
                 }
+            }
+            return false;
+        });
+
+        if (catsWithTasks.length === 0) return null;
+
+        // Reset cycle if categories changed
+        var catsKey = catsWithTasks.join(',');
+        if (pickForMeLastSortedCats !== catsKey) {
+            pickForMeLastSortedCats = catsKey;
+            pickForMeCycleIndex = 0;
+        }
+
+        // Wrap around
+        if (pickForMeCycleIndex >= catsWithTasks.length) {
+            pickForMeCycleIndex = 0;
+        }
+
+        var targetCat = catsWithTasks[pickForMeCycleIndex];
+        pickForMeCycleIndex++;
+
+        // Find first available action in target category
+        for (var j = 0; j < data.outcomes.length; j++) {
+            var o = data.outcomes[j];
+            if (o.completed || o.backBurner || !isOutcomeInCurrentMode(o)) continue;
+            if (o.category !== targetCat) continue;
+            for (var k = 0; k < o.actions.length; k++) {
+                var a = o.actions[k];
+                if (a.done) continue;
+                return {
+                    text: a.text,
+                    outcome: o.result,
+                    outcomeId: o.id,
+                    actionId: a.id,
+                    estMinutes: a.estMinutes,
+                    category: o.category
+                };
             }
         }
         return null;
@@ -4203,7 +4223,7 @@
             }
         }
         document.getElementById('dailyProgressText').innerHTML =
-            'Completed: ' +
+            '<strong>Accomplished:</strong> ' +
             '<span class="pwr-stat pwr-stat-actions">\u2705 ' + current.actions + ' actions</span>' +
             '<span class="pwr-stat pwr-stat-cats">\u{1F308} ' + current.categories + ' categories</span>' +
             '<span class="pwr-stat pwr-stat-streak">\u{1F525} ' + current.streakDays + 'd streak</span>' +
