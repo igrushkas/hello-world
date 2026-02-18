@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habit Magic - Before vs After Comparison</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0d0b14; color: #fff; }
+        .header {
+            background: #1a1730;
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+        .header h1 { font-size: 1.1rem; }
+        .header h1 span { color: #6c5ce7; }
+        .tabs { display: flex; gap: 8px; }
+        .tab-btn {
+            padding: 8px 20px;
+            border: 1px solid rgba(108,92,231,0.3);
+            border-radius: 8px;
+            background: transparent;
+            color: #aaa;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+        .tab-btn.active { background: #6c5ce7; color: #fff; border-color: #6c5ce7; }
+        .tab-btn:hover { border-color: #6c5ce7; color: #fff; }
+        .frames { display: flex; height: calc(100vh - 56px); margin-top: 56px; }
+        .frame-wrap {
+            flex: 1;
+            position: relative;
+            border-right: 2px solid #6c5ce7;
+        }
+        .frame-wrap:last-child { border-right: none; }
+        .frame-label {
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.8);
+            color: #fff;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            z-index: 10;
+            pointer-events: none;
+            letter-spacing: 0.5px;
+        }
+        .frame-label.before { background: rgba(231,76,60,0.85); }
+        .frame-label.after { background: rgba(46,204,113,0.85); }
+        iframe { width: 100%; height: 100%; border: none; }
+        .single-view .frame-wrap { display: none; }
+        .single-view .frame-wrap.visible { display: block; flex: 1; }
+        .open-links {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        .open-link {
+            color: #6c5ce7;
+            text-decoration: none;
+            font-size: 0.85rem;
+            padding: 6px 12px;
+            border: 1px solid rgba(108,92,231,0.3);
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+        .open-link:hover { background: rgba(108,92,231,0.15); }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1><span>Habit Magic</span> &mdash; Before vs After</h1>
+        <div class="tabs">
+            <button class="tab-btn active" onclick="showView('split')">Side by Side</button>
+            <button class="tab-btn" onclick="showView('before')">Before Only</button>
+            <button class="tab-btn" onclick="showView('after')">After Only</button>
+        </div>
+        <div class="open-links">
+            <a class="open-link" href="before/index.html" target="_blank">Open Before &nearr;</a>
+            <a class="open-link" href="index.html" target="_blank">Open After &nearr;</a>
+        </div>
+    </div>
+    <div class="frames" id="frames">
+        <div class="frame-wrap visible" id="beforeFrame">
+            <div class="frame-label before">BEFORE (Original)</div>
+            <iframe src="before/index.html"></iframe>
+        </div>
+        <div class="frame-wrap visible" id="afterFrame">
+            <div class="frame-label after">AFTER (Simplified)</div>
+            <iframe src="index.html"></iframe>
+        </div>
+    </div>
+    <script>
+        function showView(mode) {
+            var btns = document.querySelectorAll('.tab-btn');
+            btns.forEach(function(b) { b.classList.remove('active'); });
+            event.target.classList.add('active');
+            var container = document.getElementById('frames');
+            var before = document.getElementById('beforeFrame');
+            var after = document.getElementById('afterFrame');
+            if (mode === 'split') {
+                container.classList.remove('single-view');
+                before.classList.add('visible');
+                after.classList.add('visible');
+            } else if (mode === 'before') {
+                container.classList.add('single-view');
+                before.classList.add('visible');
+                after.classList.remove('visible');
+            } else {
+                container.classList.add('single-view');
+                before.classList.remove('visible');
+                after.classList.add('visible');
+            }
+        }
+    </script>
+</body>
+</html>

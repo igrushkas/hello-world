@@ -1,0 +1,1934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Habit Magic — Your daily habit and goal tracker with gamified dopamine hits. Set outcomes, track actions, build streaks, earn badges, and level up your life. Personal Life & Business modes with focus timer, combo multipliers, and weekly power scores.">
+    <meta name="keywords" content="habit tracker, goal tracker, gamified productivity, streak tracker, dopamine hits, daily habits, action planner, personal growth, business goals, focus timer">
+    <meta name="author" content="Habit Magic">
+
+    <!-- Open Graph / Social Sharing -->
+    <meta property="og:title" content="Habit Magic — Gamified Habit & Goal Tracker">
+    <meta property="og:description" content="Track habits, crush goals, earn XP & badges. Gamified productivity with streaks, combos, and dopamine-fueled progress. Personal Life & Business modes.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://myhabitmagic.com">
+    <meta property="og:site_name" content="Habit Magic">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Habit Magic — Gamified Habit & Goal Tracker">
+    <meta name="twitter:description" content="Track habits, crush goals, earn XP & badges. Gamified productivity with streaks, combos, and dopamine-fueled progress.">
+
+    <title>Habit Magic - BEFORE (Original)</title>
+
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#6c5ce7">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Habit Magic">
+    <link rel="apple-touch-icon" href="../icons/icon-192.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="../icons/icon-192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="../icons/icon-512.png">
+
+    <link rel="stylesheet" href="styles.min.css?v=20260214r27">
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+</head>
+<body>
+    <!-- Login Screen -->
+    <div id="loginScreen" class="login-screen hidden">
+
+        <!-- Navigation -->
+        <nav class="landing-nav">
+            <div class="landing-nav-inner">
+                <div class="landing-logo">
+                    <span class="logo-icon">&#10024;</span>
+                    <span class="logo-text">My Habit <strong>Magic</strong></span>
+                </div>
+                <div class="landing-nav-actions">
+                    <span class="beta-badge" id="betaBadge">&#127775; Early Access</span>
+                    <button class="btn-google-login-nav" id="btnGoogleLoginNav">Sign in</button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="landing-hero">
+            <div class="landing-hero-inner">
+                <div class="hero-badge">Built for ADHD brains &amp; busy humans</div>
+                <h1 class="hero-title">Finally &mdash; a productivity app that works <em>with</em> your brain</h1>
+                <p class="hero-subtitle">Gamified habit tracking with dopamine-friendly rewards, zero decision fatigue, and one-task focus. 100 founding members get <strong class="hero-free-highlight">6 months free</strong> &mdash; just share daily feedback to help us build it for you.</p>
+                <div class="hero-cta-group">
+                    <button class="btn-google-login hero-cta" id="btnGoogleLogin">
+                        <svg class="google-icon" viewBox="0 0 24 24" width="20" height="20">
+                            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/>
+                            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+                            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+                        </svg>
+                        Get Started Free
+                    </button>
+                    <p class="hero-cta-note">No credit card required</p>
+                </div>
+                <div class="hero-spots">
+                    <span class="founding-spots-pulse"></span>
+                    <span class="founding-spots-count">100</span> of 100 Founding Member spots remaining
+                </div>
+            </div>
+        </section>
+
+        <!-- Feature Sections -->
+        <section class="landing-features">
+
+            <div class="feature-block feature-alt">
+                <div class="feature-content">
+                    <div class="feature-tag">Zero Decision Fatigue</div>
+                    <h2>Just This One Thing</h2>
+                    <p>No more staring at a list of 50 tasks. Leverage scoring surfaces the ONE action that matters most right now. Just do that one thing.</p>
+                </div>
+                <div class="feature-visual">
+                    <div class="feature-placeholder">&#127919;</div>
+                </div>
+            </div>
+
+            <div class="feature-block">
+                <div class="feature-content">
+                    <div class="feature-tag">Beats Decision Paralysis</div>
+                    <h2>Pick For Me</h2>
+                    <p>Tell the app how much time you have. It picks the best task. No thinking, no choosing, no paralysis. Your ADHD brain will thank you.</p>
+                </div>
+                <div class="feature-visual">
+                    <div class="feature-placeholder">&#129504;</div>
+                </div>
+            </div>
+
+            <div class="feature-block feature-alt">
+                <div class="feature-content">
+                    <div class="feature-tag">Dopamine-Friendly Progress</div>
+                    <h2>XP, Badges, Streaks &amp; Combos</h2>
+                    <p>Every completed action earns XP, praise, and badge progress. 16+ badges to unlock. Combo multipliers for back-to-back actions. Your brain gets the reward loop it craves.</p>
+                </div>
+                <div class="feature-visual">
+                    <div class="feature-placeholder">&#9889;</div>
+                </div>
+            </div>
+
+            <div class="feature-block">
+                <div class="feature-content">
+                    <div class="feature-tag">Visual Life Balance</div>
+                    <h2>Wheel of Life</h2>
+                    <p>See all 6 life areas on a radar chart. Watch it grow as you complete actions. Visual progress is the strongest motivator for ADHD brains.</p>
+                </div>
+                <div class="feature-visual">
+                    <div class="feature-placeholder">&#128200;</div>
+                </div>
+            </div>
+
+            <div class="feature-block feature-alt">
+                <div class="feature-content">
+                    <div class="feature-tag">4 Life Modes</div>
+                    <h2>Personal, Health, Business &amp; Finances</h2>
+                    <p>Switch between Personal Life, Health, Business, and Finances modes. Each has its own wheel, categories, and daily focus schedule. All in one place.</p>
+                </div>
+                <div class="feature-visual">
+                    <div class="feature-placeholder">&#127968;</div>
+                </div>
+            </div>
+
+            <div class="feature-block">
+                <div class="feature-content">
+                    <div class="feature-tag">Harness Hyperfocus</div>
+                    <h2>Focus Timer &amp; Body Double</h2>
+                    <p>A 15-minute countdown that removes all friction. Add ambient sounds &mdash; rain, coffee shop, ocean &mdash; for a virtual body double. Starting is the hardest part. This eliminates that barrier.</p>
+                </div>
+                <div class="feature-visual">
+                    <div class="feature-placeholder">&#9201;</div>
+                </div>
+            </div>
+
+            <div class="feature-block feature-alt">
+                <div class="feature-content">
+                    <div class="feature-tag">Instant Nervous System Reset</div>
+                    <h2>10 Quick Reset Tools</h2>
+                    <p>Feeling stuck? Choose from Dance Break, 4-7-8 Breathing, Box Breathing, Physiological Sigh, 5-4-3-2-1 Grounding, Laugh It Out, Cold Reset, Shake It Off, Butterfly Hug, and more. All science-backed.</p>
+                </div>
+                <div class="feature-visual">
+                    <div class="feature-placeholder">&#128131;</div>
+                </div>
+            </div>
+
+            <div class="feature-block">
+                <div class="feature-content">
+                    <div class="feature-tag">Self-Compassion Built In</div>
+                    <h2>Praise, Quotes &amp; Thank Yourself</h2>
+                    <p>40+ compassionate praise messages after every action. Motivational quotes from icons. A dedicated Thank Yourself space to practice self-validation.</p>
+                </div>
+                <div class="feature-visual">
+                    <div class="feature-placeholder">&#128150;</div>
+                </div>
+            </div>
+
+            <div class="feature-block feature-alt">
+                <div class="feature-content">
+                    <div class="feature-tag">Smart Daily Focus</div>
+                    <h2>Today&rsquo;s Power Focus &amp; Evening Seed</h2>
+                    <p>Each day highlights one category to concentrate on. In the evening, preview tomorrow&rsquo;s focus and seed your next actions. No more morning paralysis.</p>
+                </div>
+                <div class="feature-visual">
+                    <div class="feature-placeholder">&#127775;</div>
+                </div>
+            </div>
+
+            <div class="feature-block">
+                <div class="feature-content">
+                    <div class="feature-tag">Tough Days Covered</div>
+                    <h2>Bad Day Mode &amp; Streak Compassion</h2>
+                    <p>Having a rough day? Bad Day Mode gives you 3 micro-tasks focused on self-care. Your streak stays alive. No guilt, no shame &mdash; just kindness.</p>
+                </div>
+                <div class="feature-visual">
+                    <div class="feature-placeholder">&#128155;</div>
+                </div>
+            </div>
+
+            <!-- Summary of ALL features -->
+            <div class="feature-summary">
+                <h2>And So Much More Inside</h2>
+                <div class="feature-summary-grid">
+                    <div class="feature-summary-item">&#127919; Leverage Scoring</div>
+                    <div class="feature-summary-item">&#128203; Action Log &amp; History</div>
+                    <div class="feature-summary-item">&#127942; 16+ Badges to Earn</div>
+                    <div class="feature-summary-item">&#128170; Exercise Library (30+)</div>
+                    <div class="feature-summary-item">&#128293; Streak &amp; Best Streak</div>
+                    <div class="feature-summary-item">&#127793; 9-Level Progression</div>
+                    <div class="feature-summary-item">&#128172; Weekly Review</div>
+                    <div class="feature-summary-item">&#128274; Values Alignment</div>
+                    <div class="feature-summary-item">&#128247; Export to CSV</div>
+                    <div class="feature-summary-item">&#128241; Install as App (PWA)</div>
+                    <div class="feature-summary-item">&#128137; Movement Breaks</div>
+                    <div class="feature-summary-item">&#127911; Ambient Soundscapes</div>
+                    <div class="feature-summary-item">&#9200; Pomodoro Timer</div>
+                    <div class="feature-summary-item">&#128221; Drag &amp; Drop Reorder</div>
+                    <div class="feature-summary-item">&#9729;&#65039; Cloud Sync (Google)</div>
+                    <div class="feature-summary-item">&#128225; Offline Mode</div>
+                </div>
+                <p class="feature-summary-cta">Sign in to explore all features &mdash; it&rsquo;s free.</p>
+            </div>
+
+        </section>
+
+        <!-- Founding Member Deal Section -->
+        <section class="landing-early-adopter">
+            <div class="early-adopter-inner">
+                <h2>&#127775; Be a Founding Member &mdash; Here&rsquo;s the Deal</h2>
+                <p class="early-adopter-desc">The first 100 users get <strong>6 months completely free</strong>. After that, you&rsquo;re locked in at a special founder&rsquo;s price &mdash; forever.</p>
+                <div class="early-adopter-spots">
+                    <div class="spots-counter-large founding-spots-count">100</div>
+                    <div class="spots-label-large">spots remaining</div>
+                </div>
+
+                <div class="founder-comparison">
+                    <div class="founder-col founder-col-yes">
+                        <h3>&#127775; Founding Members Get</h3>
+                        <ul class="founder-perks-list">
+                            <li>&#9989; All features unlocked &mdash; 6 months free</li>
+                            <li>&#9989; Permanent Founding Member badge</li>
+                            <li>&#9989; Grandfather pricing after free period</li>
+                            <li>&#9989; Direct line to the developer</li>
+                            <li>&#9989; Shape the app&rsquo;s future with daily feedback</li>
+                        </ul>
+                    </div>
+                    <div class="founder-col founder-col-no">
+                        <h3>&#128100; Regular Users</h3>
+                        <ul class="founder-perks-list founder-perks-muted">
+                            <li>&#10060; Limited free tier (3 outcomes max)</li>
+                            <li>&#10060; Standard pricing</li>
+                            <li>&#10060; No founding member badge</li>
+                            <li>&#10060; No direct developer access</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="founder-commitment">
+                    <h3>&#129309; Your Side of the Deal</h3>
+                    <p class="founder-commitment-desc">Free access isn&rsquo;t free-for-nothing. Founding members commit to:</p>
+                    <div class="commitment-items">
+                        <div class="commitment-item">
+                            <span class="commitment-icon">&#128172;</span>
+                            <div>
+                                <strong>Daily Feedback</strong>
+                                <span>15-second checkbox form after 3+ actions. Helps us build what you need.</span>
+                            </div>
+                        </div>
+                        <div class="commitment-item">
+                            <span class="commitment-icon">&#128227;</span>
+                            <div>
+                                <strong>Tell a Friend</strong>
+                                <span>Share your referral link. More users = better app for everyone.</span>
+                            </div>
+                        </div>
+                        <div class="commitment-item">
+                            <span class="commitment-icon">&#128170;</span>
+                            <div>
+                                <strong>Stay Active</strong>
+                                <span>Use the app regularly. 14 days inactive = your spot opens for the waitlist.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Placeholder -->
+        <section class="landing-testimonials">
+            <h2>What Early Users Say</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-placeholder">Testimonials coming soon from our founding members...</div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="landing-faq">
+            <h2>How It Works &mdash; FAQ</h2>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-q">What do founding members actually get?</div>
+                    <div class="faq-a">All features unlocked for 6 months free. After that, you&rsquo;re grandfathered at a special price &mdash; lower than anyone who joins later. Plus a permanent Founding Member badge and direct access to the developer.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q">What&rsquo;s the &ldquo;daily feedback&rdquo; commitment?</div>
+                    <div class="faq-a">After you complete 3+ actions in a day, a quick checkbox form pops up. 5 questions, mostly checkboxes, takes about 15 seconds. It helps us know what&rsquo;s working and what to build next.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q">What happens if all 100 spots are taken?</div>
+                    <div class="faq-a">You get a free 2-week trial of everything. If a founding member goes inactive for 14+ days, their spot opens up and we&rsquo;ll email waitlisted users.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q">Can I lose my founding member spot?</div>
+                    <div class="faq-a">Yes &mdash; if you miss daily feedback for 3+ days or are inactive for 14+ days. We send a warning first. Stay active, give feedback, and your spot is safe. If you lose it, you get a free 2-week trial while a waitlisted user gets your spot.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q">What happens after the free period?</div>
+                    <div class="faq-a">Active founding members get locked in at a special grandfather price. Regular users choose between Free (1 mode, 3 goals), Starter at $9.99/mo (Life + Health), or Pro at $19.99/mo (all 4 modes). Annual plans save up to 25%.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q">Is this app really built for ADHD?</div>
+                    <div class="faq-a">Yes. One task at a time, zero decision fatigue, instant dopamine hits (XP, badges, praise), 10 nervous system reset tools, movement breaks, and a focus timer with ambient sounds. Every feature is designed for brains that need momentum, not motivation.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Section -->
+        <section class="landing-pricing" id="landingPricing">
+            <h2>Simple, Honest Pricing</h2>
+            <p class="pricing-lead">Start free. Upgrade when you&rsquo;re ready. Built for ADHD brains on any budget.</p>
+            <div class="billing-toggle" style="margin-bottom:36px">
+                <span class="billing-label active" id="landingBillingMonthlyLabel">Monthly</span>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="landingBillingToggle">
+                    <span class="toggle-slider"></span>
+                </label>
+                <span class="billing-label" id="landingBillingAnnualLabel">Annual <span style="color:var(--accent-green);font-weight:700;font-size:0.75rem">SAVE 20%+</span></span>
+            </div>
+            <div class="landing-pricing-cards">
+                <div class="landing-price-card">
+                    <h3>Free</h3>
+                    <div class="landing-price">$0</div>
+                    <div class="landing-price-desc">forever</div>
+                    <ul>
+                        <li>&#10003; Personal Life Mode</li>
+                        <li>&#10003; Up to 3 Goals</li>
+                        <li>&#10003; Daily Focus &amp; Streaks</li>
+                        <li>&#10003; Core Badges</li>
+                    </ul>
+                </div>
+                <div class="landing-price-card popular">
+                    <div class="popular-tag">Best Value</div>
+                    <h3>Starter</h3>
+                    <div class="landing-price"><span class="landing-price-amount" id="landingStarterPrice">$9.99</span><span class="landing-price-period" id="landingStarterPeriod">/mo</span></div>
+                    <div class="landing-price-desc" id="landingStarterDesc">or $99/year <strong>(save $21)</strong></div>
+                    <div class="landing-price-effective" id="landingStarterEffective">That&rsquo;s $8.25/mo &mdash; less than 2 coffees</div>
+                    <ul>
+                        <li>&#10003; Life + Health Modes</li>
+                        <li>&#10003; Unlimited Goals</li>
+                        <li>&#10003; All Features &amp; Badges</li>
+                        <li>&#10003; Focus Timer &amp; Rituals</li>
+                    </ul>
+                    <div class="landing-price-anchor">ADHD coaching: $200&ndash;500/mo. You pay $9.99.</div>
+                </div>
+                <div class="landing-price-card">
+                    <h3>Pro</h3>
+                    <div class="landing-price"><span class="landing-price-amount" id="landingProPrice">$19.99</span><span class="landing-price-period" id="landingProPeriod">/mo</span></div>
+                    <div class="landing-price-desc" id="landingProDesc">or $179/year <strong>(save $61)</strong></div>
+                    <div class="landing-price-effective" id="landingProEffective">$14.92/mo &mdash; less than 1 therapy session</div>
+                    <ul>
+                        <li>&#10003; All 4 Modes unlocked</li>
+                        <li>&#10003; Business + Finances</li>
+                        <li>&#10003; Unlimited Everything</li>
+                        <li>&#10003; All 4 Life Wheels</li>
+                    </ul>
+                    <div class="landing-price-anchor">Just $10 more for double the modes</div>
+                </div>
+            </div>
+            <p class="landing-pricing-note">&#127775; Or become a <strong>Founding Member</strong> &mdash; get everything free for 6 months. Just share daily feedback.</p>
+        </section>
+
+        <!-- Final CTA -->
+        <section class="landing-final-cta">
+            <h2>Ready to Work <em>With</em> Your Brain?</h2>
+            <p>100 founding member spots. 6 months free. Daily feedback keeps your access. No credit card.</p>
+            <button class="btn-google-login hero-cta" id="btnGoogleLoginBottom">
+                <svg class="google-icon" viewBox="0 0 24 24" width="20" height="20">
+                    <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/>
+                    <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                    <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+                    <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+                </svg>
+                Sign in with Google
+            </button>
+            <!-- Demo mode hidden for now -->
+            <div class="demo-mode-section landing-demo" style="display:none">
+                <p class="login-offline" id="btnOfflineMode"><a href="#">Try Demo Mode first</a></p>
+                <p class="demo-warning">&#128161; Demo data lives in this browser and expires in 2 weeks. Sign in anytime to save permanently.</p>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="landing-footer">
+            <p>&copy; 2026 My Habit Magic. Built with &#10024; and behavioral science.</p>
+        </footer>
+
+    </div>
+
+    <div id="app" class="hidden">
+        <!-- Top Bar -->
+        <header class="top-bar">
+            <div class="topbar-left">
+                <div class="logo">
+                    <span class="logo-icon">&#10024;</span>
+                    <span class="logo-text">My Habit <strong>Magic</strong></span>
+                </div>
+                <div class="topbar-stats">
+                    <div class="streak-bar">
+                        <span class="streak-flame">&#128293;</span>
+                        <span id="streakCount">0</span>d
+                    </div>
+                    <div class="level-badge-bar" id="levelBadge">
+                        <span class="level-emoji">&#127793;</span>
+                        <span class="level-title">Starter</span>
+                    </div>
+                </div>
+            </div>
+            <div class="topbar-right">
+                <button class="btn-upgrade" id="btnUpgrade" title="Upgrade to Pro" style="display:none">&#11088; Pro</button>
+                <button class="btn-icon btn-help-topbar" id="btnHelpTopbar" title="How to Use">?</button>
+                <div class="user-menu" id="userMenu" style="display:none">
+                    <img class="user-avatar" id="userAvatar" src="" alt="">
+                    <div class="avatar-dropdown hidden" id="avatarDropdown">
+                        <button class="dropdown-item" id="btnAvatarLogout">&#9211; Sign Out</button>
+                    </div>
+                </div>
+                <button class="btn-icon btn-menu-toggle" id="btnMenuToggle" title="Menu">&#9776;</button>
+                <div class="top-actions-dropdown hidden" id="topActionsDropdown">
+                    <button class="dropdown-item" id="btnSettings">&#9881; State Check</button>
+                    <button class="dropdown-item" id="btnTomorrow">&#127793; Tomorrow</button>
+                    <button class="dropdown-item" id="btnArchive">&#128218; Archive</button>
+                    <button class="dropdown-item" id="btnWeeklyReview">&#128200; Weekly Review</button>
+                    <button class="dropdown-item" id="btnValues">&#127775; My Values</button>
+                    <button class="dropdown-item" id="btnTheme">&#9790; Theme</button>
+                    <button class="dropdown-item dropdown-item-refer" id="btnRefer">&#128140; Refer a Friend</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Demo Mode Banner -->
+        <div id="demoBanner" class="demo-banner hidden">
+            <div class="demo-banner-row">
+                <span class="demo-banner-text">&#127922; Demo Mode — <strong><span id="demoExpiresIn">14 days</span> left</strong></span>
+                <div class="demo-banner-progress"><div class="demo-banner-progress-fill" id="demoProgressFill"></div></div>
+            </div>
+            <div class="demo-banner-row">
+                <button class="demo-banner-btn demo-btn-download" id="btnDemoDownload">&#128190; Download Tasks</button>
+                <button class="demo-banner-btn demo-btn-signin" id="btnDemoSignIn">Sign in to keep &#8594;</button>
+            </div>
+        </div>
+
+        <!-- Praise Banner (shows after task completion) -->
+        <div id="praiseBanner" class="praise-banner hidden">
+            <div class="praise-text" id="praiseText"></div>
+        </div>
+
+        <!-- Movement Modal -->
+        <div id="movementOverlay" class="modal-overlay hidden">
+            <div class="modal movement-modal">
+                <button class="modal-close" onclick="document.getElementById('movementOverlay').classList.add('hidden')">&times;</button>
+                <h2 id="movementTitle">&#128170; Movement Break!</h2>
+                <p class="subtitle" id="movementSubtitle">Great job completing that action! Try these exercises:</p>
+                <div class="movement-exercises" id="movementExercises">
+                    <!-- Exercise cards rendered by JS -->
+                </div>
+                <div class="movement-bottom-actions">
+                    <button class="btn-primary btn-large" id="btnMovementDone">Done! Back to Action &#128170;</button>
+                    <button class="btn-secondary" id="btnMovementSkip" style="margin-top:8px;width:100%;text-align:center;">Skip this time</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Task Check-In Modal (Every 10 minutes) -->
+        <div id="taskCheckInOverlay" class="modal-overlay hidden">
+            <div class="modal check-in-modal">
+                <button class="modal-close" onclick="document.getElementById('taskCheckInOverlay').classList.add('hidden')">&times;</button>
+                <div class="check-in-icon">&#128336;</div>
+                <h2>Quick Check-In</h2>
+                <p class="check-in-time">You've been working for <strong id="checkInElapsedTime">10 minutes</strong></p>
+                <p class="check-in-task">Are you still working on:<br><strong id="checkInTaskName">current task</strong>?</p>
+                <div class="check-in-buttons">
+                    <button class="btn-primary btn-large" id="btnCheckInYes">&#10003; Yes, Keep Going!</button>
+                    <button class="btn-secondary" id="btnCheckInNo">No, I got distracted</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pick For Me Modal -->
+        <div id="pickForMeOverlay" class="modal-overlay hidden">
+            <div class="modal pick-for-me-modal">
+                <div class="pick-icon">&#127919;</div>
+                <h2>How much time do you have?</h2>
+                <p class="pick-subtitle">Decision fatigue is real. Tell me your time &mdash; I'll pick the highest-impact task. Zero thinking required.</p>
+                <div class="time-options">
+                    <button class="time-option-btn" data-minutes="5">5 min</button>
+                    <button class="time-option-btn" data-minutes="15">15 min</button>
+                    <button class="time-option-btn" data-minutes="30">30 min</button>
+                    <button class="time-option-btn" data-minutes="60">1 hour</button>
+                    <button class="time-option-btn" data-minutes="120">2+ hours</button>
+                </div>
+                <div class="pick-result hidden" id="pickResult">
+                    <div class="pick-result-label">Your best next action:</div>
+                    <div class="pick-result-task" id="pickResultTask"></div>
+                    <div class="pick-result-meta" id="pickResultMeta"></div>
+                    <button class="btn-primary" id="btnStartPickedTask">Let's do it!</button>
+                </div>
+                <button class="btn-close-pick" id="closePickForMe">&times;</button>
+            </div>
+        </div>
+
+        <!-- Extended Break Modal (10 min after 4-5 tasks) -->
+        <div id="extendedBreakOverlay" class="modal-overlay hidden">
+            <div class="modal extended-break-modal">
+                <button class="modal-close" onclick="document.getElementById('extendedBreakOverlay').classList.add('hidden')">&times;</button>
+                <h2>&#127774; Extended Recovery Break!</h2>
+                <p class="subtitle">You've completed multiple tasks in a row! Take a proper 10-minute break to recharge.</p>
+                <div class="extended-break-content">
+                    <div class="break-timer-display">
+                        <div class="break-time" id="extendedBreakTime">10:00</div>
+                        <p class="break-hint">Stand up, stretch deeply, walk around, hydrate, and breathe.</p>
+                    </div>
+                    <div class="break-suggestions" id="breakSuggestions">
+                        <!-- Filled by JS -->
+                    </div>
+                    <div class="break-buttons">
+                        <button class="btn-primary" id="btnStartExtendedBreak">Start 10-Min Timer</button>
+                        <button class="btn-secondary" id="btnSkipExtendedBreak">I'm good, back to work</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Edit Action Modal -->
+        <div id="editActionOverlay" class="modal-overlay hidden">
+            <div class="modal edit-action-modal">
+                <button class="modal-close" id="closeEditAction">&times;</button>
+                <h2>&#9998; Edit Action</h2>
+                <div class="outcome-form">
+                    <div class="form-group">
+                        <label class="form-label">Action Text</label>
+                        <input type="text" class="input-field input-large" id="editActionText">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Categories Impacted</label>
+                        <div class="category-checkboxes" id="editActionCategories">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Estimated Time (minutes) <span class="required">*</span></label>
+                        <select class="est-select est-input" id="editActionEst" style="width:100%">
+                            <option value="5">5 min</option>
+                            <option value="10">10 min</option>
+                            <option value="15" selected>15 min</option>
+                            <option value="20">20 min</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Deadline</label>
+                        <input type="date" class="input-field" id="editActionDeadline">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Move to Outcome</label>
+                        <select class="est-select" id="editActionOutcome" style="width:100%">
+                            <!-- Options populated by JS -->
+                        </select>
+                    </div>
+                    <div class="edit-action-buttons">
+                        <button class="btn-primary" id="btnSaveEditAction">Save Changes</button>
+                        <button class="btn-danger" id="btnDeleteAction">Delete Action</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Edit Outcome Modal -->
+        <div id="editOutcomeOverlay" class="modal-overlay hidden">
+            <div class="modal edit-outcome-modal">
+                <button class="modal-close" id="closeEditOutcome">&times;</button>
+                <h2>&#9998; Edit Outcome</h2>
+                <div class="outcome-form">
+                    <div class="form-group">
+                        <label class="form-label outcome-label">RESULT</label>
+                        <input type="text" class="input-field input-large" id="editOutcomeResult">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label outcome-label purpose-label">WHY THIS MATTERS TO ME</label>
+                        <textarea class="input-field textarea" id="editOutcomePurpose"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Deadline</label>
+                        <input type="date" class="input-field" id="editOutcomeDeadline">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Category</label>
+                        <div class="category-pills edit-category-pills">
+                            <button class="pill" data-category="fun_environment"><span class="btn-line">Fun</span><span class="btn-line">Environment</span></button>
+                            <button class="pill" data-category="relationships"><span class="btn-line">Relationships</span><span class="btn-line">Family</span></button>
+                            <button class="pill" data-category="money_finances"><span class="btn-line">Money</span><span class="btn-line">Finances</span></button>
+                            <button class="pill" data-category="career_contribution"><span class="btn-line">Career</span><span class="btn-line">Contribution</span></button>
+                            <button class="pill" data-category="personal_growth"><span class="btn-line">Personal</span><span class="btn-line">Growth</span></button>
+                            <button class="pill" data-category="health_energy"><span class="btn-line">Health</span><span class="btn-line">Energy</span></button>
+                        </div>
+                    </div>
+                    <div class="form-group commitment-box">
+                        <label class="form-label">&#128170; Commitment Level</label>
+                        <input type="range" id="editCommitmentSlider" min="1" max="10" value="7">
+                        <span id="editCommitmentValue">7</span>
+                    </div>
+                    <button class="btn-primary btn-large" id="btnSaveEditOutcome">Save Outcome Changes</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add Action to Outcome Modal -->
+        <div id="addActionOverlay" class="modal-overlay hidden">
+            <div class="modal add-action-modal">
+                <button class="modal-close" id="closeAddAction">&times;</button>
+                <h2>&#10133; Add Action to Outcome</h2>
+                <p class="subtitle" id="addActionOutcomeName"></p>
+                <div class="outcome-form">
+                    <div class="form-group">
+                        <label class="form-label">Action Text</label>
+                        <input type="text" class="input-field input-large" id="addActionText" placeholder="What action will you take?">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Categories Impacted</label>
+                        <div class="category-checkboxes" id="addActionCategories">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Estimated Time (minutes) <span class="required">*</span></label>
+                        <select class="est-select est-input" id="addActionEst" style="width:100%">
+                            <option value="5">5 min</option>
+                            <option value="10">10 min</option>
+                            <option value="15" selected>15 min</option>
+                            <option value="20">20 min</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Deadline</label>
+                        <input type="date" class="input-field" id="addActionDeadline">
+                    </div>
+                    <button class="btn-primary btn-large" id="btnSaveAddAction">Add Action</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- State Priming Modal -->
+        <div id="statePrimingOverlay" class="modal-overlay hidden">
+            <div class="modal state-priming-modal">
+                <button class="modal-close" id="closePriming">&times;</button>
+                <h2>&#10024; Power Priming Spark</h2>
+                <p class="subtitle">Reset your state &amp; refocus your energy</p>
+                <div class="priming-steps">
+                    <div class="priming-step" data-step="1">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Breathe & Move</h3>
+                            <p>Take 10 power breaths. Stand tall. Move your body for 60 seconds.</p>
+                            <button class="btn-secondary btn-timer" data-seconds="60">Start 60s Timer</button>
+                            <div class="timer-display hidden">00:60</div>
+                        </div>
+                        <input type="checkbox" class="priming-check">
+                    </div>
+                    <div class="priming-step" data-step="2">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>Gratitude Focus</h3>
+                            <p>Name 3 things you're grateful for right now:</p>
+                            <input type="text" class="input-field" id="grateful1" placeholder="I'm grateful for...">
+                            <input type="text" class="input-field" id="grateful2" placeholder="I'm grateful for...">
+                            <input type="text" class="input-field" id="grateful3" placeholder="I'm grateful for...">
+                        </div>
+                        <input type="checkbox" class="priming-check">
+                    </div>
+                    <div class="priming-step" data-step="3">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>Outcome Visualization</h3>
+                            <p>Close your eyes for 30 seconds. See yourself crushing today's actions.</p>
+                            <button class="btn-secondary btn-timer" data-seconds="30">Start 30s Timer</button>
+                            <div class="timer-display hidden">00:30</div>
+                        </div>
+                        <input type="checkbox" class="priming-check">
+                    </div>
+                    <div class="priming-step" data-step="4">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h3>Incantation</h3>
+                            <p>Say with conviction: "I live my life with purpose. Every action I take moves me closer to my vision."</p>
+                        </div>
+                        <input type="checkbox" class="priming-check">
+                    </div>
+                </div>
+                <div class="energy-level">
+                    <label>Your energy level right now (1-10):</label>
+                    <input type="range" id="energySlider" min="1" max="10" value="5">
+                    <span id="energyValue">5</span>
+                </div>
+                <button class="btn-primary btn-large" id="btnStartDay">Launch Into Action &#128640;</button>
+            </div>
+        </div>
+
+        <!-- My Values Modal -->
+        <div id="valuesOverlay" class="modal-overlay hidden">
+            <div class="modal values-modal">
+                <button class="modal-close" id="closeValues">&times;</button>
+                <h2>&#127775; My Core Values</h2>
+                <p class="subtitle">What matters most to you? Tasks aligned with your values get prioritized.</p>
+                <div class="values-list" id="valuesList">
+                    <div class="value-input-row">
+                        <span class="value-number">1</span>
+                        <input type="text" class="input-field value-input" placeholder="e.g., Family" maxlength="30">
+                    </div>
+                    <div class="value-input-row">
+                        <span class="value-number">2</span>
+                        <input type="text" class="input-field value-input" placeholder="e.g., Health" maxlength="30">
+                    </div>
+                    <div class="value-input-row">
+                        <span class="value-number">3</span>
+                        <input type="text" class="input-field value-input" placeholder="e.g., Financial Freedom" maxlength="30">
+                    </div>
+                    <div class="value-input-row">
+                        <span class="value-number">4</span>
+                        <input type="text" class="input-field value-input" placeholder="e.g., Growth" maxlength="30">
+                    </div>
+                    <div class="value-input-row">
+                        <span class="value-number">5</span>
+                        <input type="text" class="input-field value-input" placeholder="e.g., Adventure" maxlength="30">
+                    </div>
+                </div>
+                <p class="values-hint">Tasks that align with multiple values will be prioritized higher.</p>
+                <button class="btn-primary btn-large" id="btnSaveValues">Save My Values</button>
+            </div>
+        </div>
+
+        <!-- Business Pack Modal -->
+        <div id="businessPackOverlay" class="modal-overlay hidden">
+            <div class="modal business-pack-modal">
+                <button class="modal-close" id="closeBusinessPack">&times;</button>
+                <h2>&#128188; Business Wheel</h2>
+                <p class="subtitle">Track your business performance across 6 key areas</p>
+                <div class="business-wheel-container">
+                    <svg id="businessWheelChart" viewBox="0 0 400 400" class="wheel-svg business-wheel-svg"></svg>
+                </div>
+                <div class="business-actions">
+                    <button class="btn-primary" id="btnNewBusinessOutcome">+ New Business Outcome</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Weekly Review Modal -->
+        <div id="weeklyReviewOverlay" class="modal-overlay hidden">
+            <div class="modal weekly-review-modal">
+                <button class="modal-close" id="closeWeeklyReview">&times;</button>
+                <h2>&#128200; Weekly Power Review</h2>
+                <div id="weeklyReviewContent">
+                    <div class="review-section">
+                        <h3>Completion Rate</h3>
+                        <div class="progress-ring-container">
+                            <svg class="progress-ring" width="120" height="120">
+                                <circle class="progress-ring-bg" cx="60" cy="60" r="52"></circle>
+                                <circle class="progress-ring-fill" id="weeklyProgressRing" cx="60" cy="60" r="52"></circle>
+                            </svg>
+                            <span class="progress-ring-text" id="weeklyProgressText">0%</span>
+                        </div>
+                    </div>
+                    <div class="review-section">
+                        <h3>This Week's Wins</h3>
+                        <ul id="weeklyWins" class="wins-list"></ul>
+                    </div>
+                    <div class="review-section">
+                        <h3>Carried Over (Need Attention)</h3>
+                        <ul id="weeklyCarryOver" class="carry-list"></ul>
+                    </div>
+                    <div class="review-section">
+                        <h3>Momentum Score</h3>
+                        <div id="momentumScore" class="momentum-display">0</div>
+                        <p class="momentum-label">Points this week</p>
+                    </div>
+                    <div class="review-section">
+                        <h3>Reflect & Recalibrate</h3>
+                        <textarea id="weeklyReflection" class="input-field textarea" placeholder="What worked? What didn't? What will you do differently?"></textarea>
+                        <button class="btn-primary" id="saveReflection">Save Reflection</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- New Outcome Modal -->
+        <div id="newOutcomeOverlay" class="modal-overlay hidden">
+            <div class="modal new-outcome-modal">
+                <button class="modal-close" id="closeNewOutcome">&times;</button>
+                <h2 id="outcomeModalTitle">&#127919; Define Your Outcome</h2>
+                <div class="outcome-form">
+                    <div class="form-group">
+                        <label class="form-label outcome-label">RESULT</label>
+                        <p class="form-hint">What specifically do you want? Be precise and measurable.</p>
+                        <input type="text" class="input-field input-large" id="outcomeResult" placeholder="e.g., Launch my online course by March 15th">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label outcome-label purpose-label">WHY THIS MATTERS TO ME</label>
+                        <p class="form-hint">How will this change your life? Paint the picture — your brain needs a reason to care!</p>
+                        <textarea class="input-field textarea" id="outcomePurpose" placeholder="e.g., Because when I have financial freedom, I stop worrying at 3am. Because I'll finally prove to myself that I can finish what I start..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label outcome-label action-label">ACTION PLAN</label>
+                        <p class="form-hint">What specific actions will produce this result? Time estimate is required <span class="required">*</span></p>
+                        <div id="actionsList">
+                            <div class="action-input-row">
+                                <input type="text" class="input-field" placeholder="Action step 1...">
+                                <select class="est-select est-input" title="Estimated minutes">
+                                    <option value="5">5m</option>
+                                    <option value="10">10m</option>
+                                    <option value="15" selected>15m</option>
+                                    <option value="20">20m</option>
+                                </select>
+                                <input type="date" class="action-deadline-input" title="Deadline">
+                                <select class="est-select action-extra-cat" title="Extra category">
+                                    <option value="">+ Cat</option>
+                                </select>
+                            </div>
+                            <div class="action-input-row">
+                                <input type="text" class="input-field" placeholder="Action step 2...">
+                                <select class="est-select est-input" title="Estimated minutes">
+                                    <option value="5">5m</option>
+                                    <option value="10">10m</option>
+                                    <option value="15" selected>15m</option>
+                                    <option value="20">20m</option>
+                                </select>
+                                <input type="date" class="action-deadline-input" title="Deadline">
+                                <select class="est-select action-extra-cat" title="Extra category">
+                                    <option value="">+ Cat</option>
+                                </select>
+                            </div>
+                            <div class="action-input-row">
+                                <input type="text" class="input-field" placeholder="Action step 3...">
+                                <select class="est-select est-input" title="Estimated minutes">
+                                    <option value="5">5m</option>
+                                    <option value="10">10m</option>
+                                    <option value="15" selected>15m</option>
+                                    <option value="20">20m</option>
+                                </select>
+                                <input type="date" class="action-deadline-input" title="Deadline">
+                                <select class="est-select action-extra-cat" title="Extra category">
+                                    <option value="">+ Cat</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button class="btn-secondary" id="addMoreActions">+ Add Another Action</button>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Deadline</label>
+                        <input type="date" class="input-field" id="outcomeDeadline">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Category</label>
+                        <div class="category-pills">
+                            <button class="pill active" data-category="fun_environment"><span class="btn-line">Fun</span><span class="btn-line">Environment</span></button>
+                            <button class="pill" data-category="relationships"><span class="btn-line">Relationships</span><span class="btn-line">Family</span></button>
+                            <button class="pill" data-category="money_finances"><span class="btn-line">Money</span><span class="btn-line">Finances</span></button>
+                            <button class="pill" data-category="career_contribution"><span class="btn-line">Career</span><span class="btn-line">Contribution</span></button>
+                            <button class="pill" data-category="personal_growth"><span class="btn-line">Personal</span><span class="btn-line">Growth</span></button>
+                            <button class="pill" data-category="health_energy"><span class="btn-line">Health</span><span class="btn-line">Energy</span></button>
+                        </div>
+                    </div>
+                    <div class="form-group commitment-box">
+                        <label class="form-label">&#128170; Commitment Level</label>
+                        <p class="form-hint">On a scale of 1-10, how committed are you? (If it's not a 10, what would make it a 10?)</p>
+                        <input type="range" id="commitmentSlider" min="1" max="10" value="7">
+                        <span id="commitmentValue">7</span>
+                        <textarea class="input-field textarea" id="commitmentBoost" placeholder="What would make this a 10/10 commitment?"></textarea>
+                    </div>
+                    <button class="btn-primary btn-large" id="saveOutcome">Create Outcome & Start Taking Action</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Daily Focus + Wheel of Life -->
+            <section class="daily-focus-row">
+                <div class="daily-focus">
+                    <!-- Mode Toggle -->
+                    <div class="mode-toggle-container">
+                        <button class="mode-toggle-btn active" id="btnPersonalMode" data-mode="personal">
+                            <span class="mode-icon">&#127968;</span> Personal Life
+                        </button>
+                        <button class="mode-toggle-btn mode-coming-soon" id="btnHealthMode" data-mode="health" disabled title="Coming soon">
+                            <span class="mode-icon" style="color:#c07a73">&#10084;</span> Health <span style="font-size:0.6rem;opacity:0.6">soon</span>
+                        </button>
+                        <!-- Hidden for now -->
+                        <button class="mode-toggle-btn" id="btnBusinessMode" data-mode="business" style="display:none">
+                            <span class="mode-icon">&#128188;</span> Business
+                        </button>
+                        <button class="mode-toggle-btn" id="btnFinancesMode" data-mode="finances" style="display:none">
+                            <span class="mode-icon">&#128176;</span> Finances
+                        </button>
+                    </div>
+                    <div class="focus-header">
+                        <h2 id="focusTitle">TODAY'S POWER FOCUS</h2>
+                        <select class="mode-select-mobile" id="modeSelectMobile">
+                            <option value="personal">&#127968; Personal</option>
+                            <option value="business" disabled style="display:none">&#128188; Business</option>
+                            <option value="health" disabled style="display:none">&#10084;&#65039; Health</option>
+                            <option value="finances" disabled style="display:none">&#128176; Finances</option>
+                        </select>
+                        <span class="focus-badge" id="focusBadge"></span>
+                        <span class="date-display" id="todayDate"></span>
+                    </div>
+                    <div class="focus-category-filter" id="focusCategoryFilter">
+                        <button class="focus-cat-btn active" data-focus-cat="all">All</button>
+                        <button class="focus-cat-btn" data-focus-cat="fun_environment"><span class="btn-line">Fun</span><span class="btn-line">Environment</span></button>
+                        <button class="focus-cat-btn" data-focus-cat="relationships"><span class="btn-line">Relationships</span><span class="btn-line">Family</span></button>
+                        <button class="focus-cat-btn" data-focus-cat="money_finances"><span class="btn-line">Money</span><span class="btn-line">Finances</span></button>
+                        <button class="focus-cat-btn" data-focus-cat="career_contribution"><span class="btn-line">Career</span><span class="btn-line">Contribution</span></button>
+                        <button class="focus-cat-btn" data-focus-cat="personal_growth"><span class="btn-line">Personal</span><span class="btn-line">Growth</span></button>
+                        <button class="focus-cat-btn" data-focus-cat="health_energy"><span class="btn-line">Health</span><span class="btn-line">Energy</span></button>
+                    </div>
+                    <div class="next-action-card" id="nextActionCard">
+                        <div class="next-action-top-row">
+                            <div class="next-action-label">JUST THIS ONE THING</div>
+                            <button class="btn-focus-mode" id="btnFocusMode" title="Focus Mode — hide everything else">&#x26F6;</button>
+                            <div class="next-action-outcome-progress" id="nextActionOutcomeProgress"></div>
+                        </div>
+                        <div class="next-action-text" id="nextActionText">No actions yet. Create an outcome to get started!</div>
+                        <div class="next-action-meta" id="nextActionMeta"></div>
+                        <div class="next-action-buttons">
+                            <button class="btn-primary" id="btnCompleteNext" style="display:none">&#10003; Done!</button>
+                            <button class="btn-pick-for-me" id="btnPickForMe" title="Pick a random task for you">&#127919; Pick</button>
+                            <button class="btn-focus-buddy" id="btnBodyDoubleStart" title="Focus with ambient sounds &amp; a virtual buddy">&#128101; Focus Buddy</button>
+                            <button class="btn-stuck" id="btnStuck" title="Reset your nervous system">&#128260; Reset</button>
+                            <button class="btn-joy" id="btnDanceBreak" title="Instant joy — dance, move, feel alive!">&#10024; Joy</button>
+                            <button class="btn-thank-yourself" id="btnThankYourself" title="Thank yourself for what you did today">&#128155; Thanks</button>
+                            <button class="btn-primary btn-create-outcome-next" id="btnCreateOutcomeNext" style="display:none">+ New Outcome</button>
+                        </div>
+                        <div class="pomodoro-display hidden" id="pomodoroDisplay">
+                            <div class="pomodoro-time" id="pomodoroTime">15:00</div>
+                            <button class="btn-secondary" id="btnStopPomodoro">Stop</button>
+                        </div>
+                        <div class="task-timer-display hidden" id="taskTimerDisplay">
+                            <div class="task-timer-label">Time Spent</div>
+                            <div class="task-timer-time" id="taskTimerTime">00:00</div>
+                            <div class="task-timer-buttons">
+                                <button class="btn-timer-control" id="btnPauseTaskTimer">&#10074;&#10074; Pause</button>
+                                <button class="btn-timer-control" id="btnResumeTaskTimer" style="display:none">&#9654; Resume</button>
+                                <button class="btn-timer-stop" id="btnStopTaskTimer">&#9632; Stop</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="daily-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="dailyProgressFill" style="width: 0%"></div>
+                        </div>
+                        <span class="progress-text" id="dailyProgressText">0 of 0 actions completed today</span>
+                    </div>
+                    <!-- Combo Display -->
+                    <div class="combo-display hidden" id="comboDisplay"></div>
+                    <!-- Power Score -->
+                    <div id="weeklyPowerContainer"></div>
+                    <!-- Daily Challenges (hidden - tracked internally) -->
+                    <div class="daily-challenges-section hidden" id="dailyChallengesSection">
+                        <div class="challenges-header">
+                            <span class="challenges-icon">&#9876;</span>
+                            <span class="challenges-label">DAILY QUESTS</span>
+                        </div>
+                        <div id="dailyChallengesContainer"></div>
+                    </div>
+                    <!-- Motivation Quote Module -->
+                    <div class="motivation-card" id="motivationCard1">
+                        <div class="motivation-header">
+                            <span class="motivation-icon">&#9889;</span>
+                            <span class="motivation-label">FUEL FOR YOUR FIRE</span>
+                            <button class="btn-icon motivation-refresh" id="btnRefreshQuote" title="New quote">&#8635;</button>
+                        </div>
+                        <div class="motivation-quote" id="motivationQuote"></div>
+                        <div class="motivation-author" id="motivationAuthor"></div>
+                    </div>
+                </div>
+
+                <!-- Wheel of Life / Business Wheel -->
+                <div class="wheel-of-life-card">
+                    <h3 id="wheelTitle">Wheel of Life <span class="wheel-period">Last 7 Days</span> <button class="btn-cat-guide" id="btnCatGuide" title="Category Guide">&#8505;</button></h3>
+                    <div class="wheel-chart-container">
+                        <svg id="wheelChart" viewBox="0 0 400 400" class="wheel-svg"></svg>
+                    </div>
+                    <div class="wheel-balance-score" id="balanceScoreCard">
+                        <div class="balance-level">&#127942; My Victories Today</div>
+                        <div class="balance-count" id="balanceCount">0 of 0</div>
+                        <div class="balance-bar-wrap">
+                            <div class="balance-bar-fill" id="balanceBarFill" style="width:0%"></div>
+                        </div>
+                        <div class="balance-message" id="balanceMessage">Complete actions to claim your victories!</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Outcomes Grid -->
+            <section class="outcomes-section" id="outcomesSection">
+                <div class="section-header">
+                    <h2 id="outcomesTitle">&#127919; Your Outcomes <button class="btn-collapse-section" id="btnCollapseOutcomes" title="Hide/Show outcomes">&#9660;</button></h2>
+                    <button class="btn-new-outcome-pill" id="btnNewOutcome">+ Create New</button>
+                    <div class="filter-tabs" id="outcomesFilterTabs">
+                        <button class="tab active" data-filter="all">All</button>
+                        <button class="tab" data-filter="fun_environment"><span class="btn-line">Fun</span><span class="btn-line">Environment</span></button>
+                        <button class="tab" data-filter="relationships"><span class="btn-line">Relationships</span><span class="btn-line">Family</span></button>
+                        <button class="tab" data-filter="money_finances"><span class="btn-line">Money</span><span class="btn-line">Finances</span></button>
+                        <button class="tab" data-filter="career_contribution"><span class="btn-line">Career</span><span class="btn-line">Contribution</span></button>
+                        <button class="tab" data-filter="personal_growth"><span class="btn-line">Personal</span><span class="btn-line">Growth</span></button>
+                        <button class="tab" data-filter="health_energy"><span class="btn-line">Health</span><span class="btn-line">Energy</span></button>
+                    </div>
+                </div>
+                <div class="outcomes-grid" id="outcomesGrid">
+                    <!-- Outcome cards rendered by JS -->
+                </div>
+                <button class="btn-add-outcome" id="btnNewOutcome2"><span class="plus">+</span> Create New Outcome</button>
+            </section>
+
+            <!-- Accountability & Momentum Section -->
+            <section class="momentum-section collapsible-section" id="momentumSection">
+                <h2 class="collapsible-header" data-section="momentumSection">&#128200; Stats &amp; Momentum <button class="btn-collapse-section" data-collapse="momentumSection" title="Hide/Show momentum">&#9660;</button></h2>
+                <div class="collapsible-content" id="momentumSectionContent">
+                <div class="momentum-grid">
+                    <div class="momentum-card">
+                        <h3>&#128170; Momentum Score</h3>
+                        <div class="score-display" id="totalMomentum">0</div>
+                        <p class="score-subtitle">Total points earned</p>
+                    </div>
+                    <div class="momentum-card">
+                        <h3>&#127919; Outcomes Hit</h3>
+                        <div class="score-display" id="outcomesCompleted">0</div>
+                        <p class="score-subtitle">Goals achieved</p>
+                    </div>
+                    <div class="momentum-card">
+                        <h3>&#9889; Actions Taken</h3>
+                        <div class="score-display" id="totalActions">0</div>
+                        <p class="score-subtitle">Steps completed</p>
+                    </div>
+                    <div class="momentum-card">
+                        <h3>&#128293; Best Streak</h3>
+                        <div class="score-display" id="bestStreak">0</div>
+                        <p class="score-subtitle">Consecutive days</p>
+                    </div>
+                </div>
+                </div>
+            </section>
+
+            <!-- Badges / Trophies Section -->
+            <section class="badges-section collapsible-section" id="badgesSection">
+                <h2 class="collapsible-header" data-section="badgesSection">&#127942; Trophies &amp; Badges <button class="btn-collapse-section" data-collapse="badgesSection" title="Hide/Show badges">&#9660;</button></h2>
+                <div class="collapsible-content" id="badgesSectionContent">
+                <p class="badges-subtitle"><span style="color:#00d2a0">DAILY</span> badges reset each day &bull; <span style="color:#3498db">WEEKLY</span> badges reset Monday &bull; Earn again for XP!</p>
+                <div class="badges-grid" id="badgesGrid">
+                    <!-- Rendered by JS -->
+                </div>
+                </div>
+            </section>
+
+            <!-- Weekly Action Log -->
+            <section class="action-log-section collapsible-section" id="actionLogSection">
+                <h2 class="collapsible-header" data-section="actionLogSection">&#128190; 7 Days Action Log <button class="btn-export-log" id="btnExportLog" title="Download action log as CSV">&#11015;</button> <button class="btn-collapse-section" data-collapse="actionLogSection" title="Hide/Show action log">&#9660;</button></h2>
+                <div class="collapsible-content" id="actionLogSectionContent">
+                <!-- Power Score bar (2nd instance) -->
+                <div id="weeklyPowerContainer2"></div>
+                <div class="action-log" id="actionLog">
+                    <p class="empty-state">Your completed actions will appear here. Start by creating an outcome above!</p>
+                </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Confetti Container -->
+    <div class="confetti-container hidden" id="confettiContainer"></div>
+
+    <!-- Level Up Overlay -->
+    <div class="level-up-overlay hidden" id="levelUpOverlay">
+        <div class="level-up-card">
+            <button class="modal-close" onclick="document.getElementById('levelUpOverlay').classList.add('hidden')" style="position:absolute;top:8px;right:8px;">&times;</button>
+            <div class="level-up-emoji" id="levelUpEmoji">&#127793;</div>
+            <div class="level-up-label">LEVEL UP!</div>
+            <div class="level-up-title" id="levelUpTitle">Starter</div>
+            <div class="level-up-msg" id="levelUpMsg"></div>
+        </div>
+    </div>
+
+    <!-- Badge Unlock Overlay -->
+    <div class="badge-unlock-overlay hidden" id="badgeUnlockOverlay">
+        <div class="badge-unlock-card">
+            <button class="modal-close" onclick="document.getElementById('badgeUnlockOverlay').classList.add('hidden')" style="position:absolute;top:8px;right:8px;">&times;</button>
+            <div class="badge-unlock-emoji" id="badgeUnlockEmoji">&#127942;</div>
+            <div class="badge-unlock-label">BADGE UNLOCKED!</div>
+            <div class="badge-unlock-name" id="badgeUnlockName"></div>
+            <div class="badge-unlock-desc" id="badgeUnlockDesc"></div>
+        </div>
+    </div>
+
+    <!-- Challenge Complete Toast -->
+    <div class="challenge-toast hidden" id="challengeToast">
+        <span class="challenge-toast-text" id="challengeToastText"></span>
+    </div>
+
+    <!-- Evening Seed Planting Modal (8PM) -->
+    <div id="eveningSeedOverlay" class="modal-overlay hidden">
+        <div class="modal evening-seed-modal">
+            <button class="modal-close" id="closeEveningSeed">&times;</button>
+            <h2>&#127793; Evening Seed Planting</h2>
+            <p class="subtitle">Plant tomorrow's seeds tonight &mdash; your brain will work on them while you sleep.</p>
+
+            <div class="seed-section">
+                <h3>&#9989; 3 Wins From Today</h3>
+                <p class="seed-hint">What worked well today that you can reuse tomorrow?</p>
+                <input type="text" class="input-field" id="seedWin1" placeholder="Win #1 - What went right...">
+                <input type="text" class="input-field" id="seedWin2" placeholder="Win #2 - What strategy worked...">
+                <input type="text" class="input-field" id="seedWin3" placeholder="Win #3 - What felt good...">
+            </div>
+
+            <div class="seed-section">
+                <h3 id="seedTomorrowTitle">&#127775; Tomorrow's Focus</h3>
+                <p class="seed-hint" id="seedTomorrowHint">Loading tomorrow's focus...</p>
+                <div class="seed-tomorrow-preview" id="seedTomorrowPreview">
+                    <!-- Filled by JS: outcome + actions for tomorrow's category -->
+                </div>
+            </div>
+
+            <button class="btn-primary btn-large" id="btnSaveSeed">Seeds Planted &#127793; Goodnight Mind!</button>
+        </div>
+    </div>
+
+    <!-- Wind Down Ritual Modal (8:30PM) -->
+    <div id="windDownOverlay" class="modal-overlay hidden">
+        <div class="modal wind-down-modal">
+            <button class="modal-close" id="closeWindDown">&times;</button>
+            <h2>&#127769; Wind Down Ritual</h2>
+            <p class="subtitle">Your body and brain need recovery to perform tomorrow.</p>
+
+            <div class="sleep-reminder">
+                <div class="sleep-reminder-icon">&#128566;</div>
+                <div class="sleep-reminder-text">
+                    <strong>8 hours of sleep is your #1 performance hack.</strong>
+                    <p>Sleep is when your brain consolidates learning, restores willpower, and processes emotions. Skipping sleep destroys focus, creativity, and decision-making &mdash; the exact things you need to hit your goals. This is non-negotiable.</p>
+                </div>
+            </div>
+
+            <div class="wind-down-steps">
+                <div class="wind-down-step">
+                    <span class="wind-down-icon">&#129495;</span>
+                    <div class="wind-down-content">
+                        <strong>10-Minute Stretch</strong>
+                        <p>Release the tension from today. Focus on neck, shoulders, hips and lower back.</p>
+                        <button class="btn-secondary btn-wind-timer" data-seconds="600" id="btnStretchTimer">Start 10 Min Timer</button>
+                        <div class="wind-timer-display hidden" id="stretchTimerDisplay">10:00</div>
+                    </div>
+                    <input type="checkbox" class="wind-down-check" id="windCheck1">
+                </div>
+                <div class="wind-down-step">
+                    <span class="wind-down-icon">&#129502;</span>
+                    <div class="wind-down-content">
+                        <strong>5-Minute Meditation</strong>
+                        <p>Close your eyes. Breathe slowly. Let go of today. Quiet the mind for sleep.</p>
+                        <button class="btn-secondary btn-wind-timer" data-seconds="300" id="btnMeditateTimer">Start 5 Min Timer</button>
+                        <div class="wind-timer-display hidden" id="meditateTimerDisplay">05:00</div>
+                    </div>
+                    <input type="checkbox" class="wind-down-check" id="windCheck2">
+                </div>
+                <div class="wind-down-step">
+                    <span class="wind-down-icon">&#128164;</span>
+                    <div class="wind-down-content">
+                        <strong>Prepare For Bed</strong>
+                        <p>Screens off, lights low, room cool. Set yourself up for deep rest.</p>
+                    </div>
+                    <input type="checkbox" class="wind-down-check" id="windCheck3">
+                </div>
+            </div>
+
+            <button class="btn-primary btn-large" id="btnWindDownDone">Ready For Rest &#127769;</button>
+        </div>
+    </div>
+
+    <!-- Category Guide Modal -->
+    <div id="catGuideOverlay" class="modal-overlay hidden">
+        <div class="modal cat-guide-modal">
+            <button class="modal-close" id="closeCatGuide" onclick="document.getElementById('catGuideOverlay').classList.add('hidden')">&times;</button>
+            <h2 id="catGuideTitle">&#127793; Category Guide</h2>
+            <p class="subtitle" id="catGuideSubtitle">Each category covers these areas of your life:</p>
+            <div id="catGuideContent">
+                <!-- Populated dynamically by JS based on current mode -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Help Guide Modal -->
+    <div id="helpOverlay" class="modal-overlay hidden">
+        <div class="modal help-modal">
+            <button class="modal-close" id="closeHelp" onclick="document.getElementById('helpOverlay').classList.add('hidden')">&times;</button>
+            <div class="help-guide">
+                <h2 class="help-title">&#10024; Habit Magic</h2>
+                <p class="help-tagline">The goal tracker built for how your brain actually works.</p>
+
+                <div class="help-section help-why">
+                    <h3>&#129504; Why This App?</h3>
+                    <p>Traditional planners fail ADHD brains. Too many choices = paralysis. No dopamine = abandoned goals. This app uses <strong>neuroscience principles</strong> to fix that:</p>
+                    <div class="help-nci-grid">
+                        <div class="help-nci-card">
+                            <span class="help-nci-icon">&#127919;</span>
+                            <strong>One Task at a Time</strong>
+                            <span>Your #1 Next Action is always front and center. No overwhelm.</span>
+                        </div>
+                        <div class="help-nci-card">
+                            <span class="help-nci-icon">&#9889;</span>
+                            <strong>Instant Dopamine Hits</strong>
+                            <span>Praise banners, streak fire, momentum score &mdash; your brain gets rewarded immediately.</span>
+                        </div>
+                        <div class="help-nci-card">
+                            <span class="help-nci-icon">&#129504;</span>
+                            <strong>Auto-Focus System</strong>
+                            <span>Each day has one focus area pre-selected. No decision fatigue about what to work on.</span>
+                        </div>
+                        <div class="help-nci-card">
+                            <span class="help-nci-icon">&#128170;</span>
+                            <strong>Movement Breaks</strong>
+                            <span>After tasks, you get exercise prompts. Movement resets focus and boosts dopamine.</span>
+                        </div>
+                        <div class="help-nci-card">
+                            <span class="help-nci-icon">&#128200;</span>
+                            <strong>Leverage Scoring (80/20)</strong>
+                            <span>Tasks are auto-ranked by impact. The highest-leverage action floats to the top.</span>
+                        </div>
+                        <div class="help-nci-card">
+                            <span class="help-nci-icon">&#9201;</span>
+                            <strong>Time Anchoring</strong>
+                            <span>Every task has a time estimate. Short tasks feel doable. Timer keeps you on track.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="help-section">
+                    <h3>&#128640; Quick Start (3 Steps)</h3>
+                    <div class="help-steps">
+                        <div class="help-step">
+                            <div class="help-step-num">1</div>
+                            <div class="help-step-content">
+                                <strong>Create an Outcome</strong>
+                                <span>Press the <span class="help-btn-ref">+ New Outcome</span> button at the bottom. Enter your goal, pick a life category, and add 3+ action steps with time estimates.</span>
+                            </div>
+                        </div>
+                        <div class="help-step">
+                            <div class="help-step-num">2</div>
+                            <div class="help-step-content">
+                                <strong>Complete Your #1 Next Action</strong>
+                                <span>The purple card at the top shows your highest-impact task. Press <span class="help-btn-ref">✓ Done! Next?</span> when finished. Celebrate the win!</span>
+                            </div>
+                        </div>
+                        <div class="help-step">
+                            <div class="help-step-num">3</div>
+                            <div class="help-step-content">
+                                <strong>Watch Your Wheel Grow</strong>
+                                <span>Every completed action fills your Wheel of Life. A balanced wheel = a balanced life. Aim to grow all 6 areas over 7 days.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="help-section">
+                    <h3>&#128268; Button Guide</h3>
+                    <div class="help-buttons-list">
+                        <div class="help-button-row">
+                            <span class="help-btn-icon">&#127968; / &#128188;</span>
+                            <span><strong>Personal Life / Business</strong> &mdash; Switch between your life goals and business goals. Each has its own wheel, categories, and focus schedule.</span>
+                        </div>
+                        <div class="help-button-row">
+                            <span class="help-btn-icon">&#127919;</span>
+                            <span><strong>Pick for me</strong> &mdash; Can't decide? Tell the app how much time you have and it picks the best task for you using leverage scoring.</span>
+                        </div>
+                        <div class="help-button-row">
+                            <span class="help-btn-icon">&#9201;</span>
+                            <span><strong>Focus Sprint / Start Timer</strong> &mdash; 15-minute focused work sprint or a free-running task timer. Helps you start &mdash; starting is the hardest part.</span>
+                        </div>
+                        <div class="help-button-row">
+                            <span class="help-btn-icon">&#128218;</span>
+                            <span><strong>Archive</strong> &mdash; View all your completed outcomes organized by time period. Proof of progress when you doubt yourself.</span>
+                        </div>
+                        <div class="help-button-row">
+                            <span class="help-btn-icon">&#128200;</span>
+                            <span><strong>Weekly Review</strong> &mdash; See your weekly stats, wins, and areas that need attention.</span>
+                        </div>
+                        <div class="help-button-row">
+                            <span class="help-btn-icon">&#127775;</span>
+                            <span><strong>My Values</strong> &mdash; Define your core values. Tasks that align with your values get a higher leverage score.</span>
+                        </div>
+                        <div class="help-button-row">
+                            <span class="help-btn-icon">&#9881;</span>
+                            <span><strong>State Check</strong> &mdash; Quick emotional/energy check-in. Understanding your state helps you pick the right task.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="help-section">
+                    <h3>&#128197; Daily Focus Schedule</h3>
+                    <p>Each day auto-focuses on one life area so you don't waste energy deciding:</p>
+                    <div class="help-schedule">
+                        <div class="help-schedule-row">
+                            <span class="help-day">Mon</span><span class="help-focus">Health &amp; Energy</span>
+                            <span class="help-day">Tue</span><span class="help-focus">Money &amp; Finances</span>
+                        </div>
+                        <div class="help-schedule-row">
+                            <span class="help-day">Wed</span><span class="help-focus">Career &amp; Contribution</span>
+                            <span class="help-day">Thu</span><span class="help-focus">Personal &amp; Growth</span>
+                        </div>
+                        <div class="help-schedule-row">
+                            <span class="help-day">Fri</span><span class="help-focus">Fun &amp; Environment</span>
+                            <span class="help-day">Sat</span><span class="help-focus help-free-day">Weakest Area</span>
+                        </div>
+                        <div class="help-schedule-row">
+                            <span class="help-day">Sun</span><span class="help-focus">Relationships &amp; Family</span>
+                            <span class="help-day-note">Saturday auto-picks your lowest wheel score</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="help-section help-bottom">
+                    <h3>&#129504; Built for ADHD Brains</h3>
+                    <ul class="help-tips">
+                        <li><strong>Paralyzed by choices?</strong> Hit "Pick for me" and let the algorithm decide. Your brain doesn't need another decision right now.</li>
+                        <li><strong>Can't start?</strong> Press the timer. You don't need motivation &mdash; movement creates motivation. Just press Start.</li>
+                        <li><strong>Keep actions under 30 min.</strong> Shorter tasks = more completions = more dopamine = more momentum. ADHD brains love quick wins.</li>
+                        <li><strong>Do the movement breaks.</strong> Your prefrontal cortex needs resets. The breaks aren't lazy &mdash; they're neuroscience.</li>
+                        <li><strong>Check your wheel daily.</strong> Visual progress is the most powerful motivator for ADHD brains. Watch it grow.</li>
+                        <li><strong>Forget perfection.</strong> Done &gt; Perfect. One action completed beats ten planned.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Archive Modal -->
+    <div id="archiveOverlay" class="modal-overlay hidden">
+        <div class="modal archive-modal">
+            <button class="modal-close" id="closeArchive">&times;</button>
+            <h2>&#128218; Achievement Archive</h2>
+            <p class="subtitle">Everything you've accomplished</p>
+            <div class="archive-period-tabs">
+                <button class="archive-tab active" data-period="week">Last Week</button>
+                <button class="archive-tab" data-period="month">Last Month</button>
+                <button class="archive-tab" data-period="year">Last Year</button>
+                <button class="archive-tab" data-period="all">All Time</button>
+            </div>
+            <div class="archive-stats" id="archiveStats"></div>
+            <div class="archive-list" id="archiveList">
+                <p class="empty-state">No archived outcomes yet. Complete an outcome and archive it!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Upgrade to Pro Modal -->
+    <div id="upgradeOverlay" class="modal-overlay hidden">
+        <div class="modal pricing-modal">
+            <button class="modal-close" onclick="document.getElementById('upgradeOverlay').classList.add('hidden')">&times;</button>
+            <div class="pricing-header">
+                <h2 class="pricing-title">Choose Your Plan</h2>
+                <p class="pricing-subtitle" id="pricingSubtitle">Unlock more modes and unlimited outcomes</p>
+                <div class="billing-toggle">
+                    <span class="billing-label active" id="billingMonthlyLabel">Monthly</span>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="billingToggle">
+                        <span class="toggle-slider"></span>
+                    </label>
+                    <span class="billing-label" id="billingAnnualLabel">Annual <span class="save-badge">Save up to 25%</span></span>
+                </div>
+            </div>
+            <div class="pricing-cards">
+                <!-- FREE -->
+                <div class="pricing-card" data-tier="free">
+                    <div class="pricing-card-header">
+                        <h3>Free</h3>
+                        <div class="pricing-price">
+                            <span class="price-amount">$0</span>
+                            <span class="price-period">forever</span>
+                        </div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li class="included">&#10003; Personal Life Mode</li>
+                        <li class="included">&#10003; Up to 3 Outcomes</li>
+                        <li class="included">&#10003; Daily Focus &amp; Streaks</li>
+                        <li class="included">&#10003; 7 Core Badges</li>
+                        <li class="excluded">&#10007; Health Mode</li>
+                        <li class="excluded">&#10007; Business Mode</li>
+                        <li class="excluded">&#10007; Finances Mode</li>
+                        <li class="excluded">&#10007; Unlimited Outcomes</li>
+                    </ul>
+                    <button class="pricing-btn pricing-btn-free" id="btnPlanFree" disabled>Current Plan</button>
+                </div>
+                <!-- STARTER -->
+                <div class="pricing-card pricing-card-popular" data-tier="starter">
+                    <div class="popular-badge">Most Popular</div>
+                    <div class="pricing-card-header">
+                        <h3>Starter</h3>
+                        <div class="pricing-price">
+                            <span class="price-amount" id="starterPrice">$9.99</span>
+                            <span class="price-period" id="starterPeriod">/month</span>
+                        </div>
+                        <div class="pricing-savings hidden" id="starterSavings">Save $21/year</div>
+                        <div class="pricing-anchor">ADHD coaching: $200&ndash;500/mo</div>
+                        <div class="pricing-compare">Less than 2 coffees a week</div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li class="included">&#10003; Personal Life Mode</li>
+                        <li class="included highlight">&#10003; Health Mode</li>
+                        <li class="included">&#10003; Unlimited Outcomes</li>
+                        <li class="included">&#10003; All Features &amp; Badges</li>
+                        <li class="included">&#10003; Wheel of Life + Health</li>
+                        <li class="included">&#10003; Focus Timer &amp; Rituals</li>
+                        <li class="excluded">&#10007; Business Mode</li>
+                        <li class="excluded">&#10007; Finances Mode</li>
+                    </ul>
+                    <a id="starterCheckoutLink" href="#" target="_blank" rel="noopener" class="pricing-btn pricing-btn-starter">Get Starter &rarr;</a>
+                </div>
+                <!-- PRO -->
+                <div class="pricing-card" data-tier="pro">
+                    <div class="pricing-card-header">
+                        <h3>Pro</h3>
+                        <div class="pricing-price">
+                            <span class="price-amount" id="proPrice">$19.99</span>
+                            <span class="price-period" id="proPeriod">/month</span>
+                        </div>
+                        <div class="pricing-savings hidden" id="proSavings">Save $61/year</div>
+                        <div class="pricing-anchor">Just $10 more for everything</div>
+                        <div class="pricing-compare">Less than 1 therapy session</div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li class="included">&#10003; Personal Life Mode</li>
+                        <li class="included">&#10003; Health Mode</li>
+                        <li class="included highlight">&#10003; Business Mode</li>
+                        <li class="included highlight">&#10003; Finances Mode</li>
+                        <li class="included">&#10003; Unlimited Outcomes</li>
+                        <li class="included">&#10003; All Features &amp; Badges</li>
+                        <li class="included">&#10003; All 4 Wheels</li>
+                        <li class="included">&#10003; Everything unlocked</li>
+                    </ul>
+                    <a id="proCheckoutLink" href="#" target="_blank" rel="noopener" class="pricing-btn pricing-btn-pro">Get Pro &rarr;</a>
+                </div>
+            </div>
+            <p class="pricing-guarantee">Cancel anytime &bull; 7-day money-back guarantee</p>
+        </div>
+    </div>
+
+    <!-- Compassionate Re-Entry Modal -->
+    <div id="welcomeBackOverlay" class="modal-overlay hidden">
+        <div class="modal welcome-back-modal">
+            <button class="modal-close" onclick="document.getElementById('welcomeBackOverlay').classList.add('hidden')">&times;</button>
+            <div style="text-align:center;font-size:3rem;margin-bottom:12px">&#127793;</div>
+            <h2 id="welcomeBackTitle" style="text-align:center">Welcome Back!</h2>
+            <p id="welcomeBackMsg" class="subtitle" style="text-align:center">No judgment. You're here now, and that's what matters.</p>
+            <div id="welcomeBackStreakInfo" style="text-align:center;margin:16px 0;padding:12px;border-radius:12px;background:rgba(108,92,231,0.1)"></div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:16px">
+                <button class="btn-primary" id="btnWelcomeBackStart" onclick="document.getElementById('welcomeBackOverlay').classList.add('hidden')">Let's Go! &#128170;</button>
+                <button class="btn-secondary" id="btnBadDayMode">Having a Rough Day? &#128156;</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bad Day Mode Modal -->
+    <div id="badDayOverlay" class="modal-overlay hidden">
+        <div class="modal bad-day-modal">
+            <button class="modal-close" onclick="document.getElementById('badDayOverlay').classList.add('hidden')">&times;</button>
+            <div style="text-align:center;font-size:3rem;margin-bottom:12px">&#128156;</div>
+            <h2 style="text-align:center">Gentle Mode</h2>
+            <p class="subtitle" style="text-align:center">It's okay. Just do one tiny thing. That's enough to keep your streak alive.</p>
+            <div class="bad-day-tasks" id="badDayTasks">
+                <div class="bad-day-task" data-task="water">
+                    <span class="bad-day-icon">&#128167;</span>
+                    <span>Drink a glass of water</span>
+                    <button class="btn-bad-day-done" onclick="completeBadDayTask(this)">Done &#10003;</button>
+                </div>
+                <div class="bad-day-task" data-task="stretch">
+                    <span class="bad-day-icon">&#129495;</span>
+                    <span>Stand up and stretch for 1 minute</span>
+                    <button class="btn-bad-day-done" onclick="completeBadDayTask(this)">Done &#10003;</button>
+                </div>
+                <div class="bad-day-task" data-task="gratitude">
+                    <span class="bad-day-icon">&#128153;</span>
+                    <span>Write 1 thing you're grateful for</span>
+                    <button class="btn-bad-day-done" onclick="completeBadDayTask(this)">Done &#10003;</button>
+                </div>
+            </div>
+            <p class="bad-day-footer" id="badDayFooter" style="text-align:center;color:var(--text-secondary);font-size:0.85rem;margin-top:16px">Complete any one to keep your streak alive &#128150;</p>
+        </div>
+    </div>
+
+    <!-- STUCK? Quick Reset Modal -->
+    <div id="stuckOverlay" class="modal-overlay hidden">
+        <div class="modal stuck-modal">
+            <button class="modal-close" id="closeStuck">&times;</button>
+            <div style="text-align:center;font-size:3rem;margin-bottom:12px">&#128260;</div>
+            <h2 style="text-align:center">Quick Reset</h2>
+            <p style="text-align:center;color:var(--text-secondary);margin-bottom:20px">Your brain needs a reset. Pick one — takes under 2 minutes!</p>
+            <div class="stuck-options" id="stuckOptionsContainer">
+                <!-- 3 random activities rendered by JS each time -->
+            </div>
+            <div class="stuck-activity hidden" id="stuckActivity">
+                <div class="stuck-activity-content" id="stuckActivityContent"></div>
+                <button class="btn-primary" id="stuckDone" style="margin-top:16px">I Feel Better! &#10024; Back to Work</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Founding Member Feedback Modal -->
+    <div id="feedbackOverlay" class="modal-overlay hidden">
+        <div class="modal feedback-modal">
+            <button class="modal-close" onclick="document.getElementById('feedbackOverlay').classList.add('hidden')">&times;</button>
+            <div style="text-align:center;font-size:2.5rem;margin-bottom:8px">&#128172;</div>
+            <h2 style="text-align:center" id="feedbackTitle">Daily Feedback</h2>
+            <p class="subtitle" style="text-align:center">As a Founding Member, your feedback shapes this app. Takes 30 seconds.</p>
+            <div class="feedback-form">
+                <!-- First-time onboarding questions (hidden after first submission) -->
+                <div id="feedbackOnboardingSection" class="hidden">
+                    <div style="background:rgba(124,111,186,0.08);border-radius:12px;padding:14px;margin-bottom:16px">
+                        <p style="font-weight:700;margin:0 0 4px;color:var(--accent-primary)">&#128640; Quick background (first time only)</p>
+                        <p style="font-size:0.8rem;color:var(--text-secondary);margin:0">Helps us understand where you're coming from so we can build this for you.</p>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">&#128241; What apps have you tried before?</label>
+                        <div class="df-checkbox-grid" style="margin-bottom:8px">
+                            <label class="df-chip"><input type="checkbox" class="fb-prevapp-cb" value="todoist"><span>Todoist</span></label>
+                            <label class="df-chip"><input type="checkbox" class="fb-prevapp-cb" value="habitica"><span>Habitica</span></label>
+                            <label class="df-chip"><input type="checkbox" class="fb-prevapp-cb" value="notion"><span>Notion</span></label>
+                            <label class="df-chip"><input type="checkbox" class="fb-prevapp-cb" value="streaks"><span>Streaks</span></label>
+                            <label class="df-chip"><input type="checkbox" class="fb-prevapp-cb" value="google_tasks"><span>Google Tasks</span></label>
+                            <label class="df-chip"><input type="checkbox" class="fb-prevapp-cb" value="apple_reminders"><span>Reminders</span></label>
+                            <label class="df-chip"><input type="checkbox" class="fb-prevapp-cb" value="pen_paper"><span>Pen &amp; Paper</span></label>
+                            <label class="df-chip"><input type="checkbox" class="fb-prevapp-cb" value="none"><span>Nothing yet</span></label>
+                        </div>
+                        <input type="text" class="input-field" id="feedbackPrevAppsOther" placeholder="Other apps (optional)..." maxlength="100" style="margin-top:4px">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">&#128556; Why didn't they work for you?</label>
+                        <div class="df-checkbox-grid" style="margin-bottom:8px">
+                            <label class="df-chip df-chip-issue"><input type="checkbox" class="fb-whyfailed-cb" value="too_complex"><span>Too complex</span></label>
+                            <label class="df-chip df-chip-issue"><input type="checkbox" class="fb-whyfailed-cb" value="boring"><span>Boring / no rewards</span></label>
+                            <label class="df-chip df-chip-issue"><input type="checkbox" class="fb-whyfailed-cb" value="forgot"><span>Kept forgetting</span></label>
+                            <label class="df-chip df-chip-issue"><input type="checkbox" class="fb-whyfailed-cb" value="overwhelming"><span>Overwhelming</span></label>
+                            <label class="df-chip df-chip-issue"><input type="checkbox" class="fb-whyfailed-cb" value="no_adhd"><span>Not ADHD-friendly</span></label>
+                            <label class="df-chip df-chip-issue"><input type="checkbox" class="fb-whyfailed-cb" value="expensive"><span>Too expensive</span></label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">&#127919; What are you hoping Habit Magic helps with?</label>
+                        <div class="df-checkbox-grid">
+                            <label class="df-chip"><input type="checkbox" class="fb-hoping-cb" value="daily_routines"><span>Daily routines</span></label>
+                            <label class="df-chip"><input type="checkbox" class="fb-hoping-cb" value="fitness"><span>Fitness / health</span></label>
+                            <label class="df-chip"><input type="checkbox" class="fb-hoping-cb" value="productivity"><span>Productivity</span></label>
+                            <label class="df-chip"><input type="checkbox" class="fb-hoping-cb" value="focus"><span>Focus / less distraction</span></label>
+                            <label class="df-chip"><input type="checkbox" class="fb-hoping-cb" value="accountability"><span>Accountability</span></label>
+                            <label class="df-chip"><input type="checkbox" class="fb-hoping-cb" value="self_care"><span>Self-care</span></label>
+                        </div>
+                    </div>
+                    <hr style="border:none;border-top:1px solid var(--border-color);margin:16px 0">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">&#9989; What worked well today?</label>
+                    <textarea class="input-field textarea" id="feedbackWorked" placeholder="What feature helped you most today?" rows="2"></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">&#10060; What didn't work or felt confusing?</label>
+                    <textarea class="input-field textarea" id="feedbackBroken" placeholder="Any bugs, frustrations, or confusing parts?" rows="2"></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">&#128161; What new feature would you love?</label>
+                    <textarea class="input-field textarea" id="feedbackWish" placeholder="If you could add one thing to this app..." rows="2"></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">&#127775; How happy are you with the app? (1-10)</label>
+                    <div style="display:flex;align-items:center;gap:10px">
+                        <input type="range" id="feedbackRating" min="1" max="10" value="7" style="flex:1">
+                        <span id="feedbackRatingValue" style="font-weight:700;font-size:1.2rem">7</span>
+                    </div>
+                </div>
+                <!-- Testimonial section (only shown when rating >= 8) -->
+                <div class="feedback-testimonial hidden" id="feedbackTestimonialSection">
+                    <div style="text-align:center;padding:12px;background:rgba(0,210,160,0.08);border-radius:12px;margin-bottom:12px">
+                        <span style="font-size:1.5rem">&#128525;</span>
+                        <p style="margin:4px 0 0;font-weight:600;color:var(--accent-green)">You love the app! Would you leave a quick testimonial?</p>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Your testimonial (will be shown on our landing page)</label>
+                        <textarea class="input-field textarea" id="feedbackTestimonial" placeholder="What would you tell a friend about Habit Magic?" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Display name (first name or nickname)</label>
+                        <input type="text" class="input-field" id="feedbackDisplayName" placeholder="e.g., Sarah M.">
+                    </div>
+                </div>
+                <button class="btn-primary btn-large" id="btnSubmitFeedback">Submit Feedback &#128640;</button>
+                <button class="btn-secondary" style="width:100%;margin-top:8px;text-align:center" onclick="document.getElementById('feedbackOverlay').classList.add('hidden')">Maybe Later</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Daily Feedback (Quick Checkbox Form - 15 seconds) -->
+    <div id="dailyFeedbackOverlay" class="modal-overlay hidden">
+        <div class="modal daily-feedback-modal">
+            <button class="modal-close" onclick="document.getElementById('dailyFeedbackOverlay').classList.add('hidden')">&times;</button>
+            <div style="text-align:center;font-size:2rem;margin-bottom:4px">&#128172;</div>
+            <h2 style="text-align:center">Quick Daily Check-In</h2>
+            <p class="subtitle" style="text-align:center">15 seconds. Your feedback = free access. &#10024;</p>
+            <div class="df-form">
+                <div class="df-question">
+                    <label class="df-check-label">
+                        <input type="checkbox" id="dfCompletedTop" class="df-checkbox">
+                        <span>Did you complete your #1 action today?</span>
+                    </label>
+                </div>
+                <div class="df-question">
+                    <div class="df-question-label">Which feature helped most?</div>
+                    <div class="df-checkbox-grid">
+                        <label class="df-chip"><input type="checkbox" class="df-feature-cb" value="pick_for_me"><span>&#127919; Pick For Me</span></label>
+                        <label class="df-chip"><input type="checkbox" class="df-feature-cb" value="focus_timer"><span>&#9201; Timer</span></label>
+                        <label class="df-chip"><input type="checkbox" class="df-feature-cb" value="wheel"><span>&#128200; Wheel</span></label>
+                        <label class="df-chip"><input type="checkbox" class="df-feature-cb" value="badges"><span>&#127942; Badges</span></label>
+                        <label class="df-chip"><input type="checkbox" class="df-feature-cb" value="reset_tools"><span>&#128131; Reset</span></label>
+                        <label class="df-chip"><input type="checkbox" class="df-feature-cb" value="quotes"><span>&#128150; Quotes</span></label>
+                        <label class="df-chip"><input type="checkbox" class="df-feature-cb" value="other"><span>&#10024; Other</span></label>
+                    </div>
+                </div>
+                <div class="df-question">
+                    <div class="df-question-label">Anything broken or confusing?</div>
+                    <div class="df-checkbox-grid">
+                        <label class="df-chip df-chip-issue"><input type="checkbox" class="df-issue-cb" value="loading_slow"><span>&#128034; Slow</span></label>
+                        <label class="df-chip df-chip-issue"><input type="checkbox" class="df-issue-cb" value="confusing_ui"><span>&#128565; Confusing</span></label>
+                        <label class="df-chip df-chip-issue"><input type="checkbox" class="df-issue-cb" value="missing_feature"><span>&#128161; Missing</span></label>
+                        <label class="df-chip df-chip-issue"><input type="checkbox" class="df-issue-cb" value="bug"><span>&#128027; Bug</span></label>
+                        <label class="df-chip df-chip-ok"><input type="checkbox" class="df-issue-cb" value="no_issues"><span>&#9989; All good</span></label>
+                    </div>
+                </div>
+                <div class="df-question">
+                    <div class="df-question-label">How motivated did you feel today?</div>
+                    <div class="df-emoji-scale">
+                        <button class="emoji-rating-btn" data-value="1" type="button">&#128553;</button>
+                        <button class="emoji-rating-btn" data-value="2" type="button">&#128533;</button>
+                        <button class="emoji-rating-btn" data-value="3" type="button">&#128528;</button>
+                        <button class="emoji-rating-btn" data-value="4" type="button">&#128522;</button>
+                        <button class="emoji-rating-btn" data-value="5" type="button">&#129321;</button>
+                    </div>
+                </div>
+                <div class="df-question">
+                    <div class="df-question-label">What did you work on today?</div>
+                    <div class="df-checkbox-grid">
+                        <label class="df-chip"><input type="checkbox" class="df-workedon-cb" value="set_goals"><span>&#127919; Set goals</span></label>
+                        <label class="df-chip"><input type="checkbox" class="df-workedon-cb" value="completed_actions"><span>&#9989; Did actions</span></label>
+                        <label class="df-chip"><input type="checkbox" class="df-workedon-cb" value="used_timer"><span>&#9201; Timer</span></label>
+                        <label class="df-chip"><input type="checkbox" class="df-workedon-cb" value="checked_progress"><span>&#128200; Progress</span></label>
+                        <label class="df-chip"><input type="checkbox" class="df-workedon-cb" value="just_browsed"><span>&#128064; Just browsed</span></label>
+                    </div>
+                </div>
+                <div class="df-question">
+                    <div class="df-question-label">Did the app help you stay on track?</div>
+                    <div class="df-checkbox-grid">
+                        <label class="df-chip df-chip-ok"><input type="radio" name="dfOnTrack" class="df-ontrack-radio" value="yes"><span>&#128170; Yes</span></label>
+                        <label class="df-chip"><input type="radio" name="dfOnTrack" class="df-ontrack-radio" value="somewhat"><span>&#129300; Somewhat</span></label>
+                        <label class="df-chip df-chip-issue"><input type="radio" name="dfOnTrack" class="df-ontrack-radio" value="no"><span>&#128533; Not really</span></label>
+                    </div>
+                </div>
+                <div class="df-question">
+                    <input type="text" class="input-field" id="dfQuickThought" placeholder="Quick thought (optional)..." maxlength="200">
+                </div>
+                <button class="btn-primary btn-large" id="btnSubmitDailyFeedback">Done &#10004;</button>
+                <button class="btn-secondary" style="width:100%;margin-top:6px;text-align:center" onclick="document.getElementById('dailyFeedbackOverlay').classList.add('hidden')">Skip Today</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Trial Welcome Modal -->
+    <div id="trialWelcomeOverlay" class="modal-overlay hidden">
+        <div class="modal trial-welcome-modal">
+            <button class="modal-close" onclick="document.getElementById('trialWelcomeOverlay').classList.add('hidden')">&times;</button>
+            <div style="text-align:center;font-size:2.5rem;margin-bottom:8px">&#128075;</div>
+            <h2 style="text-align:center">All 100 Founding Spots Are Taken!</h2>
+            <p style="text-align:center;color:var(--text-secondary);margin-bottom:16px">But great news &mdash; you get a <strong style="color:var(--accent-yellow)">free 2-week trial</strong> of every feature.</p>
+            <div style="background:rgba(108,92,231,0.08);border-radius:12px;padding:16px;margin-bottom:16px">
+                <p style="font-size:0.9rem;color:var(--text-secondary);margin:0">&#128231; If a founding member spot opens up, we&rsquo;ll email you at <strong id="trialUserEmail"></strong>. Founding members who don&rsquo;t stay active lose their spot &mdash; so keep using the app!</p>
+            </div>
+            <button class="btn-primary btn-large" onclick="document.getElementById('trialWelcomeOverlay').classList.add('hidden')">Start My Free Trial &#128640;</button>
+        </div>
+    </div>
+
+    <!-- Trial Expired Modal -->
+    <div id="trialExpiredOverlay" class="modal-overlay hidden">
+        <div class="modal trial-welcome-modal">
+            <button class="modal-close" onclick="document.getElementById('trialExpiredOverlay').classList.add('hidden')">&times;</button>
+            <div style="text-align:center;font-size:2.5rem;margin-bottom:8px">&#9203;</div>
+            <h2 style="text-align:center">Your Free Trial Has Ended</h2>
+            <p style="text-align:center;color:var(--text-secondary);margin-bottom:16px">Your 2-week trial is over. You&rsquo;re on the waitlist &mdash; if a founding spot opens, we&rsquo;ll email you!</p>
+            <button class="btn-primary btn-large" onclick="document.getElementById('trialExpiredOverlay').classList.add('hidden')">Got It</button>
+        </div>
+    </div>
+
+    <!-- Inactivity Nudge Modal -->
+    <div id="nudgeOverlay" class="modal-overlay hidden">
+        <div class="modal nudge-modal">
+            <button class="modal-close" onclick="document.getElementById('nudgeOverlay').classList.add('hidden')">&times;</button>
+            <div style="text-align:center;font-size:2.5rem;margin-bottom:8px">&#128148;</div>
+            <h2 style="text-align:center">We Miss You!</h2>
+            <p style="text-align:center;color:var(--text-secondary)">It&rsquo;s been <strong id="nudgeDaysCount">7</strong> days since your last action. As a Founding Member, staying active keeps your free access.</p>
+            <p style="text-align:center;color:var(--accent-orange);font-size:0.85rem;margin-top:8px">&#9888; After 14 days inactive, your founding spot opens up for someone on the waitlist.</p>
+            <button class="btn-primary btn-large" onclick="document.getElementById('nudgeOverlay').classList.add('hidden')">I&rsquo;m Back! Let&rsquo;s Go &#128170;</button>
+        </div>
+    </div>
+
+    <!-- Founding Member Revoked Modal -->
+    <div id="revokedOverlay" class="modal-overlay hidden">
+        <div class="modal revoked-modal">
+            <button class="modal-close" onclick="document.getElementById('revokedOverlay').classList.add('hidden')">&times;</button>
+            <div style="text-align:center;font-size:2.5rem;margin-bottom:8px">&#128557;</div>
+            <h2 style="text-align:center">Founding Member Spot Released</h2>
+            <p style="text-align:center;color:var(--text-secondary)">After 14+ days of inactivity, your founding member spot was opened for someone on the waitlist.</p>
+            <p style="text-align:center;color:var(--text-secondary);font-size:0.9rem;margin-top:12px">You still have access to the app. Keep using it &mdash; if another spot opens up, active users get priority!</p>
+            <button class="btn-primary btn-large" onclick="document.getElementById('revokedOverlay').classList.add('hidden')">Got It</button>
+        </div>
+    </div>
+
+    <!-- Feedback Warning Modal (3 days no feedback) -->
+    <div id="feedbackWarningOverlay" class="modal-overlay hidden">
+        <div class="modal feedback-warning-modal">
+            <button class="modal-close" onclick="document.getElementById('feedbackWarningOverlay').classList.add('hidden')">&times;</button>
+            <div style="font-size:3rem;margin-bottom:12px">&#9888;&#65039;</div>
+            <h2>Feedback Needed!</h2>
+            <p>You haven&rsquo;t submitted daily feedback in <strong><span id="feedbackWarningDays">3</span> days</strong>.</p>
+            <p style="margin-top:8px;color:var(--text-secondary);font-size:0.9rem">As a founding member, daily feedback is how you keep your free access. Complete 3+ actions today and submit your feedback to stay active.</p>
+            <button class="btn-primary" onclick="document.getElementById('feedbackWarningOverlay').classList.add('hidden')" style="margin-top:16px">Got It &mdash; I&rsquo;ll Submit Today</button>
+        </div>
+    </div>
+
+    <!-- Feedback Revoked Modal -->
+    <div id="feedbackRevokedOverlay" class="modal-overlay hidden">
+        <div class="modal feedback-revoked-modal">
+            <button class="modal-close" onclick="document.getElementById('feedbackRevokedOverlay').classList.add('hidden')">&times;</button>
+            <div style="font-size:3rem;margin-bottom:12px">&#128532;</div>
+            <h2>Founding Spot Released</h2>
+            <p>Your founding member spot has been released because daily feedback wasn&rsquo;t submitted for multiple days.</p>
+            <p style="margin-top:8px;color:var(--text-secondary);font-size:0.9rem">You now have a <strong>14-day free trial</strong> of all features. After that, choose a plan to continue.</p>
+            <button class="btn-primary" onclick="document.getElementById('feedbackRevokedOverlay').classList.add('hidden')" style="margin-top:16px">Continue with Trial</button>
+        </div>
+    </div>
+
+    <!-- Waitlist Promotion Congrats Modal -->
+    <div id="waitlistCongratsOverlay" class="modal-overlay hidden">
+        <div class="modal waitlist-congrats-modal">
+            <button class="modal-close" onclick="document.getElementById('waitlistCongratsOverlay').classList.add('hidden')">&times;</button>
+            <div style="font-size:3rem;margin-bottom:12px">&#127881;&#127775;</div>
+            <h2>You Got a Founding Spot!</h2>
+            <p>A founding member spot just opened up and <strong>you&rsquo;re in!</strong></p>
+            <p style="margin-top:8px;color:var(--text-secondary);font-size:0.9rem">You now have <strong>6 months free</strong> access to everything. Just keep using the app, give daily feedback, and your spot is secure.</p>
+            <button class="btn-primary" onclick="document.getElementById('waitlistCongratsOverlay').classList.add('hidden')" style="margin-top:16px">Let&rsquo;s Go! &#128170;</button>
+        </div>
+    </div>
+
+    <!-- Referral Modal -->
+    <div id="referralOverlay" class="modal-overlay hidden">
+        <div class="modal referral-modal">
+            <button class="modal-close" onclick="document.getElementById('referralOverlay').classList.add('hidden')">&times;</button>
+            <div style="text-align:center;font-size:2.5rem;margin-bottom:8px">&#128140;</div>
+            <h2 style="text-align:center">Share Habit Magic</h2>
+            <p style="text-align:center;color:var(--text-secondary);margin-bottom:16px">Know someone who struggles with habits or ADHD? Send them Habit Magic &mdash; founding spots are limited!</p>
+            <div class="referral-link-box">
+                <input type="text" class="input-field" id="referralLinkInput" value="https://myhabitmagic.com" readonly>
+                <button class="btn-primary" id="btnCopyReferral" style="white-space:nowrap">&#128203; Copy</button>
+            </div>
+            <p id="referralCopiedMsg" class="referral-copied hidden">&#9989; Link copied!</p>
+            <div class="referral-share-row">
+                <button class="referral-share-btn referral-share-whatsapp" id="btnShareWhatsApp" title="WhatsApp">
+                    <span style="font-size:1.3rem">&#128172;</span> WhatsApp
+                </button>
+                <button class="referral-share-btn referral-share-twitter" id="btnShareTwitter" title="Twitter / X">
+                    <span style="font-size:1.3rem">&#120143;</span> Twitter
+                </button>
+                <button class="referral-share-btn referral-share-email" id="btnShareEmail" title="Email">
+                    <span style="font-size:1.3rem">&#9993;</span> Email
+                </button>
+            </div>
+            <p style="text-align:center;font-size:0.8rem;color:var(--text-secondary);margin-top:14px">Only <strong class="founding-spots-count">100</strong> founding spots available. Help a friend grab one!</p>
+        </div>
+    </div>
+
+    <!-- Body Double Timer Modal -->
+    <div id="bodyDoubleOverlay" class="modal-overlay hidden">
+        <div class="modal body-double-modal">
+            <button class="modal-close" id="closeBodyDouble" onclick="stopBodyDouble()">&times;</button>
+            <div style="text-align:center;font-size:2.5rem;margin-bottom:8px">&#128101;</div>
+            <h2 style="text-align:center">Body Double Session</h2>
+            <p class="subtitle" style="text-align:center">You're not alone. Your virtual study buddy is here.</p>
+            <div class="body-double-timer" id="bodyDoubleTimerDisplay" style="text-align:center;font-size:3rem;font-weight:700;margin:20px 0;font-family:monospace">15:00</div>
+            <div class="body-double-sounds" style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:16px">
+                <button class="bd-sound-btn" data-sound="ocean">&#127754; Waves</button>
+                <button class="bd-sound-btn" data-sound="rain">&#127783; Rain</button>
+                <button class="bd-sound-btn active" data-sound="coffee">&#9749; Coffee Shop</button>
+                <button class="bd-sound-btn" data-sound="lofi">&#127925; Lo-fi</button>
+            </div>
+            <div class="body-double-buddy" style="text-align:center;padding:16px;background:rgba(108,92,231,0.08);border-radius:12px;margin-bottom:16px">
+                <div style="font-size:2rem" id="bdBuddyEmoji">&#129489;&#8205;&#128187;</div>
+                <div style="font-size:0.85rem;color:var(--text-secondary)" id="bdBuddyStatus">Your buddy is working quietly beside you...</div>
+            </div>
+            <div style="display:flex;gap:8px;justify-content:center">
+                <button class="btn-primary" id="btnStartBodyDouble">Start Session &#128640;</button>
+                <button class="btn-secondary hidden" id="btnStopBodyDouble" onclick="stopBodyDouble()">End Session</button>
+                <button class="btn-primary hidden" id="btnRepeatBodyDouble">&#128260; Repeat 15 min</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Thank Yourself Modal -->
+    <div id="thankYourselfOverlay" class="modal-overlay hidden">
+        <div class="modal thank-yourself-modal">
+            <button class="modal-close" id="closeThankYourself">&times;</button>
+            <div style="text-align:center;font-size:2.5rem;margin-bottom:4px">&#128155;</div>
+            <h2 style="text-align:center">Thank Yourself</h2>
+            <p style="text-align:center;color:var(--text-secondary);margin-bottom:4px;font-size:0.95rem">We do a lot but no one ever thanks us.<br>So let's thank ourselves — your future self will be grateful.</p>
+            <p style="text-align:center;color:var(--text-muted);margin-bottom:16px;font-size:0.85rem;font-style:italic">What did you do today or yesterday — for yourself or others — that you'd say thank you for?</p>
+            <div class="thank-yourself-form">
+                <div class="thank-input-row">
+                    <span class="thank-number">1</span>
+                    <input type="text" class="input-field thank-input" id="thankInput1" placeholder="I showed up even when I didn't feel like it...">
+                </div>
+                <div class="thank-input-row">
+                    <span class="thank-number">2</span>
+                    <input type="text" class="input-field thank-input" id="thankInput2" placeholder="I took care of something I'd been avoiding...">
+                </div>
+                <div class="thank-input-row">
+                    <span class="thank-number">3</span>
+                    <input type="text" class="input-field thank-input" id="thankInput3" placeholder="I was kind to myself when things got hard...">
+                </div>
+            </div>
+            <button class="btn-primary btn-large" id="btnSubmitThanks" style="width:100%;margin-top:16px">I See You &#128155;</button>
+            <div id="thankYourselfResult" class="thank-result hidden"></div>
+        </div>
+    </div>
+
+    <!-- PWA Install Banner -->
+    <div id="pwaInstallBanner" class="pwa-install-banner hidden">
+        <span class="pwa-install-text">&#10024; Add Habit Magic to your home screen</span>
+        <button class="btn-primary pwa-install-btn" id="pwaInstallBtn">Install</button>
+        <button class="pwa-dismiss-btn" id="pwaDismissBtn">&times;</button>
+    </div>
+
+    <script src="firebase-config.js"></script>
+    <script src="app.min.js?v=20260214r27"></script>
+
+    <!-- Service Worker Registration -->
+    <script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+            navigator.serviceWorker.register('/sw.js', { updateViaCache: 'none' }).then(function(reg) {
+                console.log('[PWA] Service worker registered, scope:', reg.scope);
+                // Check for updates
+                reg.addEventListener('updatefound', function() {
+                    var newWorker = reg.installing;
+                    newWorker.addEventListener('statechange', function() {
+                        if (newWorker.state === 'activated') {
+                            console.log('[PWA] New version available — refresh for updates');
+                        }
+                    });
+                });
+            }).catch(function(err) {
+                console.warn('[PWA] Service worker registration failed:', err);
+            });
+        });
+    }
+
+    // PWA Install Prompt
+    var deferredPrompt = null;
+    window.addEventListener('beforeinstallprompt', function(e) {
+        e.preventDefault();
+        deferredPrompt = e;
+        // Show install banner if user hasn't dismissed it
+        if (!localStorage.getItem('pwa_install_dismissed')) {
+            var banner = document.getElementById('pwaInstallBanner');
+            if (banner) banner.classList.remove('hidden');
+        }
+    });
+
+    // iOS Safari — no beforeinstallprompt, show manual instructions
+    var isIOS = /iP(hone|ad|od)/.test(navigator.userAgent) && !window.navigator.standalone;
+    if (isIOS && !localStorage.getItem('pwa_install_dismissed')) {
+        document.addEventListener('DOMContentLoaded', function() {
+            var banner = document.getElementById('pwaInstallBanner');
+            var installBtn = document.getElementById('pwaInstallBtn');
+            var textEl = document.querySelector('.pwa-install-text');
+            if (banner && textEl) {
+                textEl.innerHTML = '&#10024; Tap <strong>Share</strong> <span style="font-size:1.2rem;vertical-align:middle">&#x1F4E4;</span> at the top of your screen, then tap <strong>Add to Home Screen</strong>';
+                if (installBtn) installBtn.style.display = 'none';
+                banner.classList.remove('hidden');
+            }
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var installBtn = document.getElementById('pwaInstallBtn');
+        var dismissBtn = document.getElementById('pwaDismissBtn');
+        var banner = document.getElementById('pwaInstallBanner');
+
+        if (installBtn) {
+            installBtn.addEventListener('click', function() {
+                if (deferredPrompt) {
+                    deferredPrompt.prompt();
+                    deferredPrompt.userChoice.then(function(choice) {
+                        if (choice.outcome === 'accepted') {
+                            console.log('[PWA] App installed!');
+                        }
+                        deferredPrompt = null;
+                        if (banner) banner.classList.add('hidden');
+                    });
+                }
+            });
+        }
+
+        if (dismissBtn) {
+            dismissBtn.addEventListener('click', function() {
+                if (banner) banner.classList.add('hidden');
+                localStorage.setItem('pwa_install_dismissed', '1');
+            });
+        }
+    });
+    </script>
+</body>
+</html>
