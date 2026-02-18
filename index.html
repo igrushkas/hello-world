@@ -31,7 +31,7 @@
     <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
 
-    <link rel="stylesheet" href="styles.css?v=20260218r3">
+    <link rel="stylesheet" href="styles.css?v=20260218r4">
 
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
@@ -339,7 +339,7 @@
                 </div>
             </div>
             <div class="topbar-right">
-                <button class="btn-feedback-topbar" id="btnFeedback" title="Tell us what sucks">&#128172; What sucks?</button>
+                <button class="btn-feedback-topbar" id="btnFeedback" title="Report what is not working">&#128027; What is not working?</button>
                 <button class="btn-upgrade" id="btnUpgrade" title="Upgrade to Pro" style="display:none">&#11088; Pro</button>
                 <button class="btn-icon btn-help-topbar" id="btnHelpTopbar" title="How to Use">?</button>
                 <div class="user-menu" id="userMenu" style="display:none">
@@ -1035,27 +1035,73 @@
     </div>
 
     <!-- Feedback Modal -->
-    <div id="feedbackOverlay" class="modal-overlay hidden">
+    <div id="bugReportOverlay" class="modal-overlay hidden">
         <div class="modal feedback-modal">
-            <button class="modal-close" onclick="document.getElementById('feedbackOverlay').classList.add('hidden')">&times;</button>
-            <h2>&#128172; What sucks here?</h2>
-            <p class="subtitle">Help us improve! Tell us what's broken, confusing, or annoying.</p>
-            <div class="outcome-form">
+            <button class="modal-close" onclick="document.getElementById('bugReportOverlay').classList.add('hidden')">&times;</button>
+            <div style="text-align:center;font-size:2.5rem;margin-bottom:4px">&#128027;</div>
+            <h2 style="text-align:center">What is not working?</h2>
+            <p class="subtitle" style="text-align:center">Help us improve each part of the app. Check any section that needs work.</p>
+            <div class="feedback-form" id="bugReportForm">
                 <div class="form-group">
-                    <label class="form-label">What's the problem?</label>
-                    <textarea class="input-field textarea" id="feedbackText" placeholder="Something is broken, confusing, ugly, slow..."></textarea>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Type</label>
-                    <div class="feedback-type-pills">
-                        <button class="pill active" data-feedback-type="bug">Bug</button>
-                        <button class="pill" data-feedback-type="ux">Bad UX</button>
-                        <button class="pill" data-feedback-type="feature">Missing Feature</button>
-                        <button class="pill" data-feedback-type="other">Other</button>
+                    <label class="form-label">&#127919; Task Display (Just Do This One Thing)</label>
+                    <div class="df-checkbox-grid" style="margin-bottom:4px">
+                        <label class="df-chip df-chip-issue"><input type="checkbox" class="bug-section-cb" value="task_not_showing"><span>Task not showing</span></label>
+                        <label class="df-chip df-chip-issue"><input type="checkbox" class="bug-section-cb" value="task_wrong_order"><span>Wrong task picked</span></label>
+                        <label class="df-chip df-chip-issue"><input type="checkbox" class="bug-section-cb" value="task_confusing"><span>Confusing layout</span></label>
                     </div>
+                    <textarea class="input-field textarea" placeholder="What can be improved?" rows="1" data-bug-section="task_display"></textarea>
                 </div>
-                <button class="btn-primary btn-large" id="btnSubmitFeedback">Send Feedback</button>
-                <p class="feedback-thanks hidden" id="feedbackThanks">Thanks! We'll fix it.</p>
+                <div class="form-group">
+                    <label class="form-label">&#127922; Buttons (Done, Pick For Me, Focus Buddy, PANIC)</label>
+                    <div class="df-checkbox-grid" style="margin-bottom:4px">
+                        <label class="df-chip df-chip-issue"><input type="checkbox" class="bug-section-cb" value="btn_not_working"><span>Button not working</span></label>
+                        <label class="df-chip df-chip-issue"><input type="checkbox" class="bug-section-cb" value="btn_hard_to_find"><span>Hard to find</span></label>
+                        <label class="df-chip df-chip-issue"><input type="checkbox" class="bug-section-cb" value="btn_ugly"><span>Looks off</span></label>
+                    </div>
+                    <textarea class="input-field textarea" placeholder="What can be improved?" rows="1" data-bug-section="buttons"></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">&#128200; Stats &amp; Progress (Accomplished, Streak, Wheel)</label>
+                    <div class="df-checkbox-grid" style="margin-bottom:4px">
+                        <label class="df-chip df-chip-issue"><input type="checkbox" class="bug-section-cb" value="stats_wrong"><span>Wrong numbers</span></label>
+                        <label class="df-chip df-chip-issue"><input type="checkbox" class="bug-section-cb" value="stats_confusing"><span>Confusing</span></label>
+                        <label class="df-chip df-chip-issue"><input type="checkbox" class="bug-section-cb" value="stats_missing"><span>Missing info</span></label>
+                    </div>
+                    <textarea class="input-field textarea" placeholder="What can be improved?" rows="1" data-bug-section="stats"></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">&#127775; Goals &amp; Actions (Creating, Editing, Completing)</label>
+                    <div class="df-checkbox-grid" style="margin-bottom:4px">
+                        <label class="df-chip df-chip-issue"><input type="checkbox" class="bug-section-cb" value="goals_hard_create"><span>Hard to create</span></label>
+                        <label class="df-chip df-chip-issue"><input type="checkbox" class="bug-section-cb" value="goals_cant_edit"><span>Can't edit</span></label>
+                        <label class="df-chip df-chip-issue"><input type="checkbox" class="bug-section-cb" value="goals_confusing"><span>Confusing</span></label>
+                    </div>
+                    <textarea class="input-field textarea" placeholder="What can be improved?" rows="1" data-bug-section="goals"></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">&#9889; Motivation (Quotes, Badges, XP, Praise)</label>
+                    <div class="df-checkbox-grid" style="margin-bottom:4px">
+                        <label class="df-chip df-chip-issue"><input type="checkbox" class="bug-section-cb" value="motivation_boring"><span>Not motivating</span></label>
+                        <label class="df-chip df-chip-issue"><input type="checkbox" class="bug-section-cb" value="motivation_annoying"><span>Annoying</span></label>
+                        <label class="df-chip df-chip-issue"><input type="checkbox" class="bug-section-cb" value="motivation_broken"><span>Broken</span></label>
+                    </div>
+                    <textarea class="input-field textarea" placeholder="What can be improved?" rows="1" data-bug-section="motivation"></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">&#128171; Overall Look &amp; Feel</label>
+                    <div class="df-checkbox-grid" style="margin-bottom:4px">
+                        <label class="df-chip df-chip-issue"><input type="checkbox" class="bug-section-cb" value="look_ugly"><span>Looks ugly</span></label>
+                        <label class="df-chip df-chip-issue"><input type="checkbox" class="bug-section-cb" value="look_cluttered"><span>Too cluttered</span></label>
+                        <label class="df-chip df-chip-issue"><input type="checkbox" class="bug-section-cb" value="look_slow"><span>Slow / laggy</span></label>
+                    </div>
+                    <textarea class="input-field textarea" placeholder="What can be improved?" rows="1" data-bug-section="look_feel"></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">&#128161; Anything else?</label>
+                    <textarea class="input-field textarea" id="bugReportOther" placeholder="Any other bugs, ideas, or frustrations..." rows="2"></textarea>
+                </div>
+                <button class="btn-primary btn-large" id="btnSubmitBugReport">&#128027; Send Report</button>
+                <p class="feedback-thanks hidden" id="bugReportThanks">Thanks! We're on it.</p>
             </div>
         </div>
     </div>
@@ -1714,7 +1760,7 @@
     </div>
 
     <script src="firebase-config.js"></script>
-    <script src="app.js?v=20260218r3"></script>
+    <script src="app.js?v=20260218r4"></script>
 
     <!-- Service Worker Registration -->
     <script>
