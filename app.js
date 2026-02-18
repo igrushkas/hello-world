@@ -3520,6 +3520,60 @@
         return candidates[0] || null;
     }
 
+    // Pick from least-used category (different from current task's category)
+    function pickFromLeastUsedCategory() {
+        var today = new Date().toDateString();
+        var activeCats = getActiveCategories();
+
+        // Count today's completions per category
+        var catCounts = {};
+        activeCats.forEach(function(c) { catCounts[c.id] = 0; });
+        var allOutcomes = data.outcomes.concat(data.archived || []);
+        allOutcomes.forEach(function(o) {
+            if (!catCounts.hasOwnProperty(o.category)) return;
+            o.actions.forEach(function(a) {
+                if (a.done && a.completedDate === today) catCounts[o.category]++;
+            });
+        });
+
+        // Get current task's category so we pick from a different one
+        var currentNext = getNextAction();
+        var currentCat = currentNext ? currentNext.category : null;
+
+        // Sort categories by usage (least used first), exclude current
+        var sortedCats = Object.keys(catCounts)
+            .filter(function(cat) { return cat !== currentCat; })
+            .sort(function(a, b) { return catCounts[a] - catCounts[b]; });
+
+        // If all filtered out, include current cat too
+        if (sortedCats.length === 0) {
+            sortedCats = Object.keys(catCounts).sort(function(a, b) { return catCounts[a] - catCounts[b]; });
+        }
+
+        // Find first available action from least-used categories
+        for (var i = 0; i < sortedCats.length; i++) {
+            var cat = sortedCats[i];
+            for (var j = 0; j < data.outcomes.length; j++) {
+                var o = data.outcomes[j];
+                if (o.completed || o.backBurner || !isOutcomeInCurrentMode(o)) continue;
+                if (o.category !== cat) continue;
+                for (var k = 0; k < o.actions.length; k++) {
+                    var a = o.actions[k];
+                    if (a.done) continue;
+                    return {
+                        text: a.text,
+                        outcome: o.result,
+                        outcomeId: o.id,
+                        actionId: a.id,
+                        estMinutes: a.estMinutes,
+                        category: o.category
+                    };
+                }
+            }
+        }
+        return null;
+    }
+
     var pickedTask = null;
 
     function showPickForMe() {
@@ -3730,11 +3784,17 @@
         var progressEl = document.getElementById('nextActionOutcomeProgress');
 
         if (next) {
-            textEl.textContent = next.text;
-            var metaParts = ['Goal: ' + next.outcome];
-            if (next.estMinutes) metaParts.push('~' + next.estMinutes + ' min est.');
-            if (next.leverageScore !== undefined) metaParts.push('Leverage: ' + next.leverageScore + '%');
-            metaEl.textContent = metaParts.join(' | ');
+            textEl.innerHTML = '<span class="na-task-label">Your Small Task:</span> ' + escapeHtml(next.text);
+            // Build meta with "From Goal" in bold and "Your WHY?" with purpose
+            var outcome = data.outcomes.find(function(o) { return o.id === next.outcomeId; });
+            var metaHtml = '<span class="na-from-goal"><strong>From Goal:</strong> ' + escapeHtml(next.outcome) + '</span>';
+            if (outcome && outcome.purpose) {
+                metaHtml += '<span class="na-why"><strong>Your WHY?</strong> ' + escapeHtml(outcome.purpose) + '</span>';
+            }
+            if (next.estMinutes) {
+                metaHtml += '<span class="na-est">~' + next.estMinutes + ' min est.</span>';
+            }
+            metaEl.innerHTML = metaHtml;
             btnComplete.style.display = '';
             if (btnPomo) btnPomo.style.display = '';
             if (btnStartTimer) btnStartTimer.style.display = taskTimerActive ? 'none' : '';
@@ -5866,17 +5926,36 @@
             }
         });
 
-        // Focus Mode — maximize Just This One Thing
-        safeBind('btnFocusMode', 'click', function() {
+        // Maximize button — toggle focus mode directly
+        safeBind('btnMaxFocus', 'click', function() {
             var isFocused = document.body.classList.toggle('focus-mode');
-            this.textContent = isFocused ? '\u2716' : '\u26F6';
-            this.title = isFocused ? 'Exit Focus Mode' : 'Focus Mode — hide everything else';
+            this.textContent = isFocused ? 'Exit' : 'Maximize';
+            this.title = isFocused ? 'Exit Focus Mode' : 'Maximize — focus on this one thing';
         });
 
-        // MAX button — triggers same focus mode
-        safeBind('btnMaxFocus', 'click', function() {
-            var focusBtn = document.getElementById('btnFocusMode');
-            if (focusBtn) focusBtn.click();
+        // PANIC button — randomly triggers Reset or Joy
+        safeBind('btnPanic', 'click', function() {
+            var actions = ['reset', 'joy'];
+            var pick = actions[Math.floor(Math.random() * actions.length)];
+            if (pick === 'reset') {
+                // Trigger the Reset/Stuck flow
+                document.getElementById('stuckOverlay').classList.remove('hidden');
+                var container = document.getElementById('stuckOptionsContainer');
+                if (container) container.style.display = '';
+                var activity = document.getElementById('stuckActivity');
+                if (activity) activity.classList.add('hidden');
+                renderStuckOptions();
+            } else {
+                // Trigger Joy/Dance directly
+                document.getElementById('stuckOverlay').classList.remove('hidden');
+                var container = document.getElementById('stuckOptionsContainer');
+                if (container) container.style.display = 'none';
+                var activity = document.getElementById('stuckActivity');
+                if (activity) activity.classList.remove('hidden');
+                var content = document.getElementById('stuckActivityContent');
+                var joyAct = STUCK_ACTIVITIES.filter(function(a) { return a.id === 'dance'; })[0];
+                if (joyAct && content) joyAct.run(content);
+            }
         });
 
         // Victory Goal dropdown — populate and persist
@@ -6031,12 +6110,40 @@
             populateActionCatDropdowns();
             document.getElementById('newOutcomeOverlay').classList.remove('hidden');
         });
-        // New Outcome (big button below grid)
-        safeBind('btnNewOutcome2', 'click', function() {
-            renderNewOutcomeCategoryPills();
-            populateActionCatDropdowns();
-            document.getElementById('newOutcomeOverlay').classList.remove('hidden');
+        // Hide/Unhide the Rest toggle
+        safeBind('btnToggleRest', 'click', function() {
+            var sections = ['momentumSection', 'badgesSection', 'actionLogSection'];
+            var btn = document.getElementById('btnToggleRest');
+            var isHidden = localStorage.getItem('rest_hidden') === '1';
+            if (isHidden) {
+                // Unhide
+                sections.forEach(function(id) {
+                    var el = document.getElementById(id);
+                    if (el) el.style.display = '';
+                });
+                localStorage.setItem('rest_hidden', '0');
+                btn.innerHTML = '&#128065; Hide the Rest';
+            } else {
+                // Hide
+                sections.forEach(function(id) {
+                    var el = document.getElementById(id);
+                    if (el) el.style.display = 'none';
+                });
+                localStorage.setItem('rest_hidden', '1');
+                btn.innerHTML = '&#128065; Unhide the Rest';
+            }
         });
+        // Apply saved state on load
+        (function() {
+            if (localStorage.getItem('rest_hidden') === '1') {
+                ['momentumSection', 'badgesSection', 'actionLogSection'].forEach(function(id) {
+                    var el = document.getElementById(id);
+                    if (el) el.style.display = 'none';
+                });
+                var btn = document.getElementById('btnToggleRest');
+                if (btn) btn.innerHTML = '&#128065; Unhide the Rest';
+            }
+        })();
         // Create New Outcome from Next Action card (when no tasks left)
         var btnCreateNext = document.getElementById('btnCreateOutcomeNext');
         if (btnCreateNext) btnCreateNext.addEventListener('click', function() {
@@ -6475,10 +6582,23 @@
         safeBind('btnCheckInYes', 'click', handleCheckInYes);
         safeBind('btnCheckInNo', 'click', handleCheckInNo);
 
-        // Pick for Me
+        // Pick for Me — pick first task from least-used category
         safeBind('btnPickForMe', 'click', function() {
             if (!requirePro('pick_for_me')) return;
-            showPickForMe();
+            var picked = pickFromLeastUsedCategory();
+            if (picked) {
+                // Set as current focus by filtering to that category temporarily
+                var cat = picked.category;
+                // Update category filter to show picked category
+                var filterBtns = document.querySelectorAll('.focus-cat-btn');
+                filterBtns.forEach(function(b) { b.classList.remove('active'); });
+                var targetBtn = document.querySelector('.focus-cat-btn[data-focus-cat="' + cat + '"]');
+                if (targetBtn) targetBtn.classList.add('active');
+                currentFilter = cat;
+                render();
+            } else {
+                showPickForMe();
+            }
         });
         safeBind('closePickForMe', 'click', function() {
             document.getElementById('pickForMeOverlay').classList.add('hidden');
@@ -8120,6 +8240,56 @@
                 document.getElementById('helpOverlay').classList.remove('hidden');
             });
         }
+
+        // "What sucks?" feedback button
+        safeBind('btnFeedback', 'click', function() {
+            document.getElementById('feedbackOverlay').classList.remove('hidden');
+            document.getElementById('feedbackText').value = '';
+            var thanks = document.getElementById('feedbackThanks');
+            if (thanks) thanks.classList.add('hidden');
+            // Reset type pills
+            document.querySelectorAll('.feedback-type-pills .pill').forEach(function(p, i) {
+                p.classList.toggle('active', i === 0);
+            });
+        });
+        // Feedback type pill toggle
+        document.querySelectorAll('.feedback-type-pills .pill').forEach(function(pill) {
+            pill.addEventListener('click', function() {
+                document.querySelectorAll('.feedback-type-pills .pill').forEach(function(p) { p.classList.remove('active'); });
+                this.classList.add('active');
+            });
+        });
+        // Submit feedback to Firestore
+        safeBind('btnSubmitFeedback', 'click', function() {
+            var text = document.getElementById('feedbackText').value.trim();
+            if (!text) {
+                document.getElementById('feedbackText').classList.add('input-error');
+                return;
+            }
+            document.getElementById('feedbackText').classList.remove('input-error');
+            var typeEl = document.querySelector('.feedback-type-pills .pill.active');
+            var feedbackType = typeEl ? typeEl.dataset.feedbackType : 'bug';
+            var feedbackData = {
+                text: text,
+                type: feedbackType,
+                userId: currentUser ? currentUser.uid : 'anonymous',
+                userEmail: currentUser ? currentUser.email : null,
+                page: window.location.pathname,
+                userAgent: navigator.userAgent,
+                createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            };
+            db.collection('bugs_and_feedback').add(feedbackData).then(function() {
+                var thanks = document.getElementById('feedbackThanks');
+                if (thanks) thanks.classList.remove('hidden');
+                document.getElementById('feedbackText').value = '';
+                setTimeout(function() {
+                    document.getElementById('feedbackOverlay').classList.add('hidden');
+                }, 1500);
+            }).catch(function(err) {
+                console.error('Feedback save error:', err);
+                alert('Could not save feedback. Please try again.');
+            });
+        });
 
         // Bad Day Mode button (from Welcome Back overlay)
         safeBind('btnBadDayMode', 'click', function() {
