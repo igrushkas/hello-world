@@ -3520,7 +3520,10 @@
         return candidates[0] || null;
     }
 
-    // Pick from least-used category (different from current task's category)
+    // Pick from least-used category — cycles through on repeated clicks
+    var pickForMeCycleIndex = 0;
+    var pickForMeLastSortedCats = null;
+
     function pickFromLeastUsedCategory() {
         var today = new Date().toDateString();
         var activeCats = getActiveCategories();
@@ -3536,39 +3539,56 @@
             });
         });
 
-        // Get current task's category so we pick from a different one
-        var currentNext = getNextAction();
-        var currentCat = currentNext ? currentNext.category : null;
-
-        // Sort categories by usage (least used first), exclude current
+        // Sort categories by usage (least used first)
         var sortedCats = Object.keys(catCounts)
-            .filter(function(cat) { return cat !== currentCat; })
             .sort(function(a, b) { return catCounts[a] - catCounts[b]; });
 
-        // If all filtered out, include current cat too
-        if (sortedCats.length === 0) {
-            sortedCats = Object.keys(catCounts).sort(function(a, b) { return catCounts[a] - catCounts[b]; });
-        }
-
-        // Find first available action from least-used categories
-        for (var i = 0; i < sortedCats.length; i++) {
-            var cat = sortedCats[i];
+        // Only keep categories that have available tasks
+        var catsWithTasks = sortedCats.filter(function(cat) {
             for (var j = 0; j < data.outcomes.length; j++) {
                 var o = data.outcomes[j];
                 if (o.completed || o.backBurner || !isOutcomeInCurrentMode(o)) continue;
                 if (o.category !== cat) continue;
                 for (var k = 0; k < o.actions.length; k++) {
-                    var a = o.actions[k];
-                    if (a.done) continue;
-                    return {
-                        text: a.text,
-                        outcome: o.result,
-                        outcomeId: o.id,
-                        actionId: a.id,
-                        estMinutes: a.estMinutes,
-                        category: o.category
-                    };
+                    if (!o.actions[k].done) return true;
                 }
+            }
+            return false;
+        });
+
+        if (catsWithTasks.length === 0) return null;
+
+        // Reset cycle if categories changed
+        var catsKey = catsWithTasks.join(',');
+        if (pickForMeLastSortedCats !== catsKey) {
+            pickForMeLastSortedCats = catsKey;
+            pickForMeCycleIndex = 0;
+        }
+
+        // Wrap around
+        if (pickForMeCycleIndex >= catsWithTasks.length) {
+            pickForMeCycleIndex = 0;
+        }
+
+        var targetCat = catsWithTasks[pickForMeCycleIndex];
+        pickForMeCycleIndex++;
+
+        // Find first available action in target category
+        for (var j = 0; j < data.outcomes.length; j++) {
+            var o = data.outcomes[j];
+            if (o.completed || o.backBurner || !isOutcomeInCurrentMode(o)) continue;
+            if (o.category !== targetCat) continue;
+            for (var k = 0; k < o.actions.length; k++) {
+                var a = o.actions[k];
+                if (a.done) continue;
+                return {
+                    text: a.text,
+                    outcome: o.result,
+                    outcomeId: o.id,
+                    actionId: a.id,
+                    estMinutes: a.estMinutes,
+                    category: o.category
+                };
             }
         }
         return null;
@@ -4203,7 +4223,7 @@
             }
         }
         document.getElementById('dailyProgressText').innerHTML =
-            'Completed: ' +
+            '<strong>Accomplished:</strong> ' +
             '<span class="pwr-stat pwr-stat-actions">\u2705 ' + current.actions + ' actions</span>' +
             '<span class="pwr-stat pwr-stat-cats">\u{1F308} ' + current.categories + ' categories</span>' +
             '<span class="pwr-stat pwr-stat-streak">\u{1F525} ' + current.streakDays + 'd streak</span>' +
@@ -8241,37 +8261,43 @@
             });
         }
 
-        // "What sucks?" feedback button
+        // "What is not working?" bug report button
         safeBind('btnFeedback', 'click', function() {
-            document.getElementById('feedbackOverlay').classList.remove('hidden');
-            document.getElementById('feedbackText').value = '';
-            var thanks = document.getElementById('feedbackThanks');
+            document.getElementById('bugReportOverlay').classList.remove('hidden');
+            // Reset form
+            document.querySelectorAll('.bug-section-cb').forEach(function(cb) { cb.checked = false; });
+            document.querySelectorAll('#bugReportForm textarea').forEach(function(ta) { ta.value = ''; });
+            var thanks = document.getElementById('bugReportThanks');
             if (thanks) thanks.classList.add('hidden');
-            // Reset type pills
-            document.querySelectorAll('.feedback-type-pills .pill').forEach(function(p, i) {
-                p.classList.toggle('active', i === 0);
-            });
         });
-        // Feedback type pill toggle
-        document.querySelectorAll('.feedback-type-pills .pill').forEach(function(pill) {
-            pill.addEventListener('click', function() {
-                document.querySelectorAll('.feedback-type-pills .pill').forEach(function(p) { p.classList.remove('active'); });
-                this.classList.add('active');
+        // Submit bug report to Firestore
+        safeBind('btnSubmitBugReport', 'click', function() {
+            // Collect checked issues per section
+            var issues = [];
+            document.querySelectorAll('.bug-section-cb:checked').forEach(function(cb) {
+                issues.push(cb.value);
             });
-        });
-        // Submit feedback to Firestore
-        safeBind('btnSubmitFeedback', 'click', function() {
-            var text = document.getElementById('feedbackText').value.trim();
-            if (!text) {
-                document.getElementById('feedbackText').classList.add('input-error');
+            // Collect per-section text
+            var sectionNotes = {};
+            document.querySelectorAll('#bugReportForm textarea[data-bug-section]').forEach(function(ta) {
+                var val = ta.value.trim();
+                if (val) sectionNotes[ta.dataset.bugSection] = val;
+            });
+            var otherText = (document.getElementById('bugReportOther') || {}).value || '';
+            otherText = otherText.trim();
+
+            // Require at least one checkbox or one text entry
+            if (issues.length === 0 && Object.keys(sectionNotes).length === 0 && !otherText) {
+                var firstTA = document.querySelector('#bugReportForm textarea');
+                if (firstTA) firstTA.classList.add('input-error');
                 return;
             }
-            document.getElementById('feedbackText').classList.remove('input-error');
-            var typeEl = document.querySelector('.feedback-type-pills .pill.active');
-            var feedbackType = typeEl ? typeEl.dataset.feedbackType : 'bug';
+
             var feedbackData = {
-                text: text,
-                type: feedbackType,
+                type: 'bug_report',
+                issues: issues,
+                sectionNotes: sectionNotes,
+                other: otherText,
                 userId: currentUser ? currentUser.uid : 'anonymous',
                 userEmail: currentUser ? currentUser.email : null,
                 page: window.location.pathname,
@@ -8279,15 +8305,14 @@
                 createdAt: firebase.firestore.FieldValue.serverTimestamp()
             };
             db.collection('bugs_and_feedback').add(feedbackData).then(function() {
-                var thanks = document.getElementById('feedbackThanks');
+                var thanks = document.getElementById('bugReportThanks');
                 if (thanks) thanks.classList.remove('hidden');
-                document.getElementById('feedbackText').value = '';
                 setTimeout(function() {
-                    document.getElementById('feedbackOverlay').classList.add('hidden');
+                    document.getElementById('bugReportOverlay').classList.add('hidden');
                 }, 1500);
             }).catch(function(err) {
-                console.error('Feedback save error:', err);
-                alert('Could not save feedback. Please try again.');
+                console.error('Bug report save error:', err);
+                alert('Could not save report. Please try again.');
             });
         });
 

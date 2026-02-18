@@ -82,6 +82,7 @@
     --border: #252535;
     --radius: 12px;
     --radius-sm: 8px;
+    --radius-btn: 20px;
     --shadow: 0 4px 20px rgba(0,0,0,0.25);
     --shadow-glow: 0 0 20px rgba(124,111,186,0.08);
     --transition: all 0.2s ease;
@@ -1269,7 +1270,7 @@ body.light-mode .beta-badge {
     background: linear-gradient(135deg, #c4996a, #b08858);
     color: #1a1a2e;
     border: none;
-    border-radius: 12px;
+    border-radius: var(--radius-btn);
     font-size: 1.1rem;
     font-weight: 800;
     cursor: pointer;
@@ -1583,7 +1584,7 @@ body.light-mode .beta-badge {
     color: white;
     border: none;
     padding: 12px 28px;
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-btn);
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
@@ -1600,7 +1601,7 @@ body.light-mode .beta-badge {
     padding: 16px 40px;
     font-size: 1.1rem;
     width: 100%;
-    border-radius: var(--radius);
+    border-radius: var(--radius-btn);
 }
 
 .btn-secondary {
@@ -1608,7 +1609,7 @@ body.light-mode .beta-badge {
     color: var(--text-primary);
     border: 1px solid var(--border);
     padding: 10px 20px;
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-btn);
     font-size: 0.9rem;
     cursor: pointer;
     transition: var(--transition);
@@ -1624,7 +1625,7 @@ body.light-mode .beta-badge {
     color: var(--accent-red);
     border: 1px solid var(--accent-red);
     padding: 12px 28px;
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-btn);
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
@@ -2116,7 +2117,7 @@ body.health-mode .focus-title-category {
     border-radius: var(--radius);
     padding: 16px;
     box-shadow: var(--shadow-glow);
-    margin-bottom: 8px;
+    margin-bottom: 16px;
     position: relative;
     overflow: visible;
 }
@@ -2125,7 +2126,6 @@ body.health-mode .focus-title-category {
 .next-action-buttons .btn-primary,
 .next-action-buttons .btn-secondary,
 .next-action-buttons .btn-timer-start,
-.next-action-buttons .btn-pick-for-me,
 .next-action-buttons .btn-focus-buddy,
 .next-action-buttons .btn-joy,
 .next-action-buttons .btn-thank-yourself,
@@ -2134,6 +2134,17 @@ body.health-mode .focus-title-category {
     font-size: 0.8rem;
     border-radius: 20px;
     font-weight: 600;
+    white-space: nowrap;
+}
+
+/* Pick For Me, Focus Buddy, PANIC — prominent buttons */
+.next-action-buttons .btn-pick-for-me,
+.next-action-buttons .btn-body-double-inline,
+.next-action-buttons .btn-panic {
+    padding: 10px 16px;
+    font-size: 0.85rem;
+    border-radius: var(--radius-btn);
+    font-weight: 700;
     white-space: nowrap;
 }
 
@@ -2264,7 +2275,7 @@ body.health-mode .focus-title-category {
     color: #fff;
     border: none;
     padding: 10px 18px;
-    border-radius: var(--radius);
+    border-radius: var(--radius-btn);
     font-size: 0.9rem;
     font-weight: 600;
     cursor: pointer;
@@ -2316,7 +2327,7 @@ body.health-mode .focus-title-category {
     color: var(--text-primary);
     border: 1px solid var(--border);
     padding: 8px 16px;
-    border-radius: var(--radius);
+    border-radius: var(--radius-btn);
     font-size: 0.85rem;
     cursor: pointer;
     transition: all 0.2s;
@@ -2331,7 +2342,7 @@ body.health-mode .focus-title-category {
     color: #7c6fba;
     border: 1px solid rgba(124, 111, 186, 0.4);
     padding: 8px 16px;
-    border-radius: var(--radius);
+    border-radius: var(--radius-btn);
     font-size: 0.85rem;
     cursor: pointer;
     transition: all 0.2s;
@@ -2430,7 +2441,7 @@ body.health-mode .focus-title-category {
     padding: 12px 20px;
     background: var(--bg-input);
     border: 2px solid var(--border);
-    border-radius: var(--radius);
+    border-radius: var(--radius-btn);
     color: var(--text-primary);
     font-size: 1rem;
     font-weight: 600;
@@ -2511,7 +2522,7 @@ body.health-mode .focus-title-category {
     color: #fff;
     border: none;
     padding: 10px 16px;
-    border-radius: var(--radius);
+    border-radius: var(--radius-btn);
     font-size: 0.85rem;
     font-weight: 600;
     cursor: pointer;
@@ -2529,7 +2540,7 @@ body.health-mode .focus-title-category {
     color: #fff;
     border: none;
     padding: 10px 16px;
-    border-radius: var(--radius);
+    border-radius: var(--radius-btn);
     font-size: 0.85rem;
     font-weight: 600;
     cursor: pointer;
@@ -2547,7 +2558,7 @@ body.health-mode .focus-title-category {
     color: #fff;
     border: none;
     padding: 10px 16px;
-    border-radius: var(--radius);
+    border-radius: var(--radius-btn);
     font-size: 0.85rem;
     font-weight: 800;
     letter-spacing: 1px;
@@ -2676,7 +2687,7 @@ body.health-mode .focus-title-category {
     background: linear-gradient(135deg, #5a9a78, #4a8068);
     color: #fff;
     border: none;
-    border-radius: var(--radius);
+    border-radius: var(--radius-btn);
     font-size: 0.95rem;
     font-weight: 600;
     cursor: pointer;
@@ -3091,6 +3102,7 @@ body.finances-mode.light-mode .praise-banner {
     align-items: center;
     gap: 8px;
     flex-wrap: wrap;
+    margin-bottom: 16px;
 }
 
 .progress-bar {
@@ -3123,7 +3135,7 @@ body.finances-mode.light-mode .praise-banner {
    ========================================== */
 
 .motivation-card {
-    margin-top: 4px;
+    margin-top: 0;
     background: linear-gradient(135deg, #0f1a2a, #1a1040);
     border: 1px solid var(--border);
     border-radius: var(--radius);
@@ -3352,8 +3364,26 @@ body.focus-mode #btnCompleteNext {
     transform: scale(1.05);
 }
 
+body.focus-mode::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 999;
+}
+
 body.focus-mode .btn-max-focus {
-    display: none;
+    background: linear-gradient(135deg, var(--accent-orange), #e17055);
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1002;
+    font-size: 0.85rem;
+    padding: 10px 22px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.4);
 }
 
 /* Wheel category labels — bigger & clickable */
@@ -3518,7 +3548,7 @@ body.focus-mode .btn-max-focus {
     font-size: 1rem;
     padding: 4px;
     transition: var(--transition);
-    border-radius: 4px;
+    border-radius: var(--radius-btn);
 }
 
 .outcome-btn:hover {
@@ -3718,7 +3748,7 @@ body.focus-mode .btn-max-focus {
     padding: 20px;
     background: var(--bg-card);
     border: 2px dashed var(--border);
-    border-radius: var(--radius);
+    border-radius: var(--radius-btn);
     color: var(--text-secondary);
     font-size: 1rem;
     cursor: pointer;
@@ -3745,7 +3775,7 @@ body.focus-mode .btn-max-focus {
     padding: 14px;
     background: var(--bg-card);
     border: 1px solid var(--border);
-    border-radius: var(--radius);
+    border-radius: var(--radius-btn);
     color: var(--text-secondary);
     font-size: 0.9rem;
     font-weight: 600;
@@ -4426,7 +4456,7 @@ body.focus-mode .btn-max-focus {
     gap: 8px;
     padding: 12px 24px;
     border: 2px solid var(--border);
-    border-radius: 10px;
+    border-radius: var(--radius-btn);
     background: transparent;
     color: var(--text-muted);
     font-size: 0.95rem;
@@ -4939,7 +4969,7 @@ body.business-mode .focus-badge {
     cursor: pointer;
     font-size: 0.75rem;
     padding: 4px 12px;
-    border-radius: 12px;
+    border-radius: var(--radius-btn);
     transition: var(--transition);
     margin-top: 8px;
 }
@@ -4957,7 +4987,7 @@ body.business-mode .focus-badge {
     font-size: 0.75rem;
     font-weight: 700;
     padding: 4px 12px;
-    border-radius: 12px;
+    border-radius: var(--radius-btn);
     cursor: pointer;
     transition: var(--transition);
     text-transform: uppercase;
@@ -7042,7 +7072,7 @@ body.business-mode .btn-focus-action:hover {
     cursor: pointer;
     font-size: 1rem;
     padding: 4px 8px;
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-btn);
     transition: var(--transition);
     margin-left: auto;
 }
@@ -7071,10 +7101,13 @@ body.focus-mode .action-log-section {
 
 body.focus-mode .next-action-card {
     position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
     max-width: 700px;
+    max-height: fit-content;
     width: 90%;
     padding: 40px;
     font-size: 1.1rem;
@@ -7594,7 +7627,7 @@ body.light-mode .founder-commitment {
     display: block;
     width: 100%;
     padding: 12px;
-    border-radius: 10px;
+    border-radius: var(--radius-btn);
     font-size: 0.9rem;
     font-weight: 700;
     text-align: center;
@@ -7816,7 +7849,7 @@ body.light-mode .founder-commitment {
     background: rgba(108,92,231,0.12);
     color: var(--text-primary);
     border: 1px solid rgba(108,92,231,0.2);
-    border-radius: 10px;
+    border-radius: var(--radius-btn);
     padding: 8px 12px;
     font-size: 1.2rem;
     cursor: pointer;
