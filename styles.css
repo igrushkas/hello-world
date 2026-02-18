@@ -3141,18 +3141,6 @@ body.finances-mode.light-mode .praise-banner {
     margin-bottom: 4px;
 }
 
-.balance-goal-picker {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.balance-goal-label {
-    font-size: 0.72rem;
-    color: var(--text-secondary);
-    white-space: nowrap;
-}
-
 .balance-goal-select {
     padding: 4px 8px !important;
     min-width: 55px !important;
