@@ -3364,14 +3364,26 @@ body.focus-mode #btnCompleteNext {
     transform: scale(1.05);
 }
 
+body.focus-mode::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 999;
+}
+
 body.focus-mode .btn-max-focus {
     background: linear-gradient(135deg, var(--accent-orange), #e17055);
     position: fixed;
     top: 20px;
     right: 20px;
-    z-index: 1001;
+    z-index: 1002;
     font-size: 0.85rem;
-    padding: 8px 18px;
+    padding: 10px 22px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.4);
 }
 
 /* Wheel category labels — bigger & clickable */
@@ -7089,10 +7101,13 @@ body.focus-mode .action-log-section {
 
 body.focus-mode .next-action-card {
     position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
     max-width: 700px;
+    max-height: fit-content;
     width: 90%;
     padding: 40px;
     font-size: 1.1rem;
