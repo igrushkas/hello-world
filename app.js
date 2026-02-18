@@ -3321,7 +3321,7 @@
                 setOutcomesTitle('\uD83C\uDFAF Financial Goals');
             } else {
                 document.getElementById('focusTitle').textContent = "TODAY'S POWER FOCUS";
-                document.getElementById('wheelTitle').innerHTML = 'Wheel of Life <span class="wheel-period">Last 7 Days</span>';
+                document.getElementById('wheelTitle').innerHTML = '';
                 setOutcomesTitle('\uD83C\uDFAF Your Outcomes');
             }
 
