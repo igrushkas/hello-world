@@ -31,7 +31,7 @@
     <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
 
-    <link rel="stylesheet" href="styles.min.css?v=20260218r1">
+    <link rel="stylesheet" href="styles.css?v=20260218r2">
 
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
@@ -814,11 +814,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="daily-progress">
+                    <div class="daily-progress" style="display:none">
                         <div class="progress-bar">
                             <div class="progress-fill" id="dailyProgressFill" style="width: 0%"></div>
                         </div>
-                        <span class="progress-text" id="dailyProgressText">0 of 0 steps completed today</span>
+                        <span class="progress-text" id="dailyProgressText"></span>
                     </div>
                     <!-- Combo Display -->
                     <div class="combo-display hidden" id="comboDisplay"></div>
@@ -850,10 +850,7 @@
                     <div class="wheel-balance-score" id="balanceScoreCard">
                         <div class="balance-header-row">
                             <div class="balance-level">&#127942; My Victories Today</div>
-                            <div class="balance-goal-picker">
-                                <label for="victoryGoalSelect" class="balance-goal-label">How Many?</label>
-                                <select id="victoryGoalSelect" class="est-select balance-goal-select"></select>
-                            </div>
+                            <select id="victoryGoalSelect" class="est-select balance-goal-select"></select>
                         </div>
                         <div class="balance-count" id="balanceCount">0 of 0</div>
                         <div class="balance-bar-wrap">
@@ -1710,7 +1707,7 @@
     </div>
 
     <script src="firebase-config.js"></script>
-    <script src="app.min.js?v=20260218r1"></script>
+    <script src="app.js?v=20260218r2"></script>
 
     <!-- Service Worker Registration -->
     <script>
