@@ -339,6 +339,7 @@
                 </div>
             </div>
             <div class="topbar-right">
+                <button class="btn-feedback-topbar" id="btnFeedback" title="Tell us what sucks">&#128172; What sucks?</button>
                 <button class="btn-upgrade" id="btnUpgrade" title="Upgrade to Pro" style="display:none">&#11088; Pro</button>
                 <button class="btn-icon btn-help-topbar" id="btnHelpTopbar" title="How to Use">?</button>
                 <div class="user-menu" id="userMenu" style="display:none">
@@ -857,7 +858,7 @@
                 <div class="outcomes-grid" id="outcomesGrid">
                     <!-- Outcome cards rendered by JS -->
                 </div>
-                <button class="btn-add-outcome" id="btnNewOutcome2"><span class="plus">+</span> New Goal</button>
+                <button class="btn-toggle-rest" id="btnToggleRest">&#128065; Hide the Rest</button>
             </section>
 
             <!-- Accountability & Momentum Section (collapsed by default for new users) -->
@@ -1029,6 +1030,32 @@
             <p class="subtitle" id="catGuideSubtitle">Each category covers these areas of your life:</p>
             <div id="catGuideContent">
                 <!-- Populated dynamically by JS based on current mode -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Feedback Modal -->
+    <div id="feedbackOverlay" class="modal-overlay hidden">
+        <div class="modal feedback-modal">
+            <button class="modal-close" onclick="document.getElementById('feedbackOverlay').classList.add('hidden')">&times;</button>
+            <h2>&#128172; What sucks here?</h2>
+            <p class="subtitle">Help us improve! Tell us what's broken, confusing, or annoying.</p>
+            <div class="outcome-form">
+                <div class="form-group">
+                    <label class="form-label">What's the problem?</label>
+                    <textarea class="input-field textarea" id="feedbackText" placeholder="Something is broken, confusing, ugly, slow..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Type</label>
+                    <div class="feedback-type-pills">
+                        <button class="pill active" data-feedback-type="bug">Bug</button>
+                        <button class="pill" data-feedback-type="ux">Bad UX</button>
+                        <button class="pill" data-feedback-type="feature">Missing Feature</button>
+                        <button class="pill" data-feedback-type="other">Other</button>
+                    </div>
+                </div>
+                <button class="btn-primary btn-large" id="btnSubmitFeedback">Send Feedback</button>
+                <p class="feedback-thanks hidden" id="feedbackThanks">Thanks! We'll fix it.</p>
             </div>
         </div>
     </div>

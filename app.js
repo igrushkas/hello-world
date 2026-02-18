@@ -3784,11 +3784,17 @@
         var progressEl = document.getElementById('nextActionOutcomeProgress');
 
         if (next) {
-            textEl.textContent = next.text;
-            var metaParts = ['Goal: ' + next.outcome];
-            if (next.estMinutes) metaParts.push('~' + next.estMinutes + ' min est.');
-            if (next.leverageScore !== undefined) metaParts.push('Leverage: ' + next.leverageScore + '%');
-            metaEl.textContent = metaParts.join(' | ');
+            textEl.innerHTML = '<span class="na-task-label">Your Small Task:</span> ' + escapeHtml(next.text);
+            // Build meta with "From Goal" in bold and "Your WHY?" with purpose
+            var outcome = data.outcomes.find(function(o) { return o.id === next.outcomeId; });
+            var metaHtml = '<span class="na-from-goal"><strong>From Goal:</strong> ' + escapeHtml(next.outcome) + '</span>';
+            if (outcome && outcome.purpose) {
+                metaHtml += '<span class="na-why"><strong>Your WHY?</strong> ' + escapeHtml(outcome.purpose) + '</span>';
+            }
+            if (next.estMinutes) {
+                metaHtml += '<span class="na-est">~' + next.estMinutes + ' min est.</span>';
+            }
+            metaEl.innerHTML = metaHtml;
             btnComplete.style.display = '';
             if (btnPomo) btnPomo.style.display = '';
             if (btnStartTimer) btnStartTimer.style.display = taskTimerActive ? 'none' : '';
@@ -6104,12 +6110,40 @@
             populateActionCatDropdowns();
             document.getElementById('newOutcomeOverlay').classList.remove('hidden');
         });
-        // New Outcome (big button below grid)
-        safeBind('btnNewOutcome2', 'click', function() {
-            renderNewOutcomeCategoryPills();
-            populateActionCatDropdowns();
-            document.getElementById('newOutcomeOverlay').classList.remove('hidden');
+        // Hide/Unhide the Rest toggle
+        safeBind('btnToggleRest', 'click', function() {
+            var sections = ['momentumSection', 'badgesSection', 'actionLogSection'];
+            var btn = document.getElementById('btnToggleRest');
+            var isHidden = localStorage.getItem('rest_hidden') === '1';
+            if (isHidden) {
+                // Unhide
+                sections.forEach(function(id) {
+                    var el = document.getElementById(id);
+                    if (el) el.style.display = '';
+                });
+                localStorage.setItem('rest_hidden', '0');
+                btn.innerHTML = '&#128065; Hide the Rest';
+            } else {
+                // Hide
+                sections.forEach(function(id) {
+                    var el = document.getElementById(id);
+                    if (el) el.style.display = 'none';
+                });
+                localStorage.setItem('rest_hidden', '1');
+                btn.innerHTML = '&#128065; Unhide the Rest';
+            }
         });
+        // Apply saved state on load
+        (function() {
+            if (localStorage.getItem('rest_hidden') === '1') {
+                ['momentumSection', 'badgesSection', 'actionLogSection'].forEach(function(id) {
+                    var el = document.getElementById(id);
+                    if (el) el.style.display = 'none';
+                });
+                var btn = document.getElementById('btnToggleRest');
+                if (btn) btn.innerHTML = '&#128065; Unhide the Rest';
+            }
+        })();
         // Create New Outcome from Next Action card (when no tasks left)
         var btnCreateNext = document.getElementById('btnCreateOutcomeNext');
         if (btnCreateNext) btnCreateNext.addEventListener('click', function() {
@@ -8206,6 +8240,56 @@
                 document.getElementById('helpOverlay').classList.remove('hidden');
             });
         }
+
+        // "What sucks?" feedback button
+        safeBind('btnFeedback', 'click', function() {
+            document.getElementById('feedbackOverlay').classList.remove('hidden');
+            document.getElementById('feedbackText').value = '';
+            var thanks = document.getElementById('feedbackThanks');
+            if (thanks) thanks.classList.add('hidden');
+            // Reset type pills
+            document.querySelectorAll('.feedback-type-pills .pill').forEach(function(p, i) {
+                p.classList.toggle('active', i === 0);
+            });
+        });
+        // Feedback type pill toggle
+        document.querySelectorAll('.feedback-type-pills .pill').forEach(function(pill) {
+            pill.addEventListener('click', function() {
+                document.querySelectorAll('.feedback-type-pills .pill').forEach(function(p) { p.classList.remove('active'); });
+                this.classList.add('active');
+            });
+        });
+        // Submit feedback to Firestore
+        safeBind('btnSubmitFeedback', 'click', function() {
+            var text = document.getElementById('feedbackText').value.trim();
+            if (!text) {
+                document.getElementById('feedbackText').classList.add('input-error');
+                return;
+            }
+            document.getElementById('feedbackText').classList.remove('input-error');
+            var typeEl = document.querySelector('.feedback-type-pills .pill.active');
+            var feedbackType = typeEl ? typeEl.dataset.feedbackType : 'bug';
+            var feedbackData = {
+                text: text,
+                type: feedbackType,
+                userId: currentUser ? currentUser.uid : 'anonymous',
+                userEmail: currentUser ? currentUser.email : null,
+                page: window.location.pathname,
+                userAgent: navigator.userAgent,
+                createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            };
+            db.collection('bugs_and_feedback').add(feedbackData).then(function() {
+                var thanks = document.getElementById('feedbackThanks');
+                if (thanks) thanks.classList.remove('hidden');
+                document.getElementById('feedbackText').value = '';
+                setTimeout(function() {
+                    document.getElementById('feedbackOverlay').classList.add('hidden');
+                }, 1500);
+            }).catch(function(err) {
+                console.error('Feedback save error:', err);
+                alert('Could not save feedback. Please try again.');
+            });
+        });
 
         // Bad Day Mode button (from Welcome Back overlay)
         safeBind('btnBadDayMode', 'click', function() {
