@@ -502,6 +502,10 @@
                         <input type="text" class="input-field input-large" id="editOutcomeResult">
                     </div>
                     <div class="form-group">
+                        <label class="form-label outcome-label purpose-label">WHY DOES IT MATTER?</label>
+                        <textarea class="input-field textarea" id="editOutcomePurpose"></textarea>
+                    </div>
+                    <div class="form-group">
                         <label class="form-label">Life Area</label>
                         <div class="category-pills edit-category-pills">
                             <button class="pill" data-category="fun_environment"><span class="btn-line">Fun</span><span class="btn-line">Environment</span></button>
@@ -512,24 +516,13 @@
                             <button class="pill" data-category="health_energy"><span class="btn-line">Health</span><span class="btn-line">Energy</span></button>
                         </div>
                     </div>
-                    <!-- More Options (hidden by default) -->
-                    <button class="btn-more-options" id="btnEditMoreOptions" type="button">More options &#9660;</button>
-                    <div class="more-options-section hidden" id="editMoreOptionsSection">
-                        <div class="form-group">
-                            <label class="form-label outcome-label purpose-label">WHY THIS MATTERS</label>
-                            <textarea class="input-field textarea" id="editOutcomePurpose"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Deadline</label>
-                            <input type="date" class="input-field" id="editOutcomeDeadline">
-                        </div>
-                        <div class="form-group commitment-box">
-                            <label class="form-label">&#128170; Commitment Level</label>
-                            <input type="range" id="editCommitmentSlider" min="1" max="10" value="7">
-                            <span id="editCommitmentValue">7</span>
-                        </div>
-                    </div>
                     <button class="btn-primary btn-large" id="btnSaveEditOutcome">Save Changes</button>
+                    <!-- Hidden fields preserved for data integrity -->
+                    <div style="display:none">
+                        <input type="date" class="input-field" id="editOutcomeDeadline">
+                        <input type="range" id="editCommitmentSlider" min="1" max="10" value="7">
+                        <span id="editCommitmentValue">7</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -683,6 +676,10 @@
                         <input type="text" class="input-field input-large" id="outcomeResult" placeholder="e.g., Clean my room, Launch my course, Exercise 3x/week">
                     </div>
                     <div class="form-group">
+                        <label class="form-label outcome-label purpose-label">WHY DOES IT MATTER?</label>
+                        <textarea class="input-field textarea" id="outcomePurpose" placeholder="What changes when you achieve this?"></textarea>
+                    </div>
+                    <div class="form-group">
                         <label class="form-label outcome-label action-label">STEPS TO GET THERE</label>
                         <p class="form-hint">Break it into small actions (under 20 min each)</p>
                         <div id="actionsList">
@@ -727,24 +724,13 @@
                             <button class="pill" data-category="health_energy"><span class="btn-line">Health</span><span class="btn-line">Energy</span></button>
                         </div>
                     </div>
-                    <!-- More Options (hidden by default - progressive disclosure) -->
-                    <button class="btn-more-options" id="btnMoreOptions" type="button">More options &#9660;</button>
-                    <div class="more-options-section hidden" id="moreOptionsSection">
-                        <div class="form-group">
-                            <label class="form-label outcome-label purpose-label">WHY THIS MATTERS TO ME</label>
-                            <textarea class="input-field textarea" id="outcomePurpose" placeholder="Optional: Why does this goal matter to you?"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Deadline</label>
-                            <input type="date" class="input-field" id="outcomeDeadline">
-                        </div>
-                        <div class="form-group commitment-box">
-                            <label class="form-label">&#128170; Commitment Level</label>
-                            <input type="range" id="commitmentSlider" min="1" max="10" value="7">
-                            <span id="commitmentValue">7</span>
-                        </div>
-                    </div>
                     <button class="btn-primary btn-large" id="saveOutcome">Create Goal &amp; Start! &#128640;</button>
+                    <!-- Hidden fields preserved for data integrity -->
+                    <div style="display:none">
+                        <input type="date" class="input-field" id="outcomeDeadline">
+                        <input type="range" id="commitmentSlider" min="1" max="10" value="7">
+                        <span id="commitmentValue">7</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -776,6 +762,8 @@
                         <button class="focus-cat-btn" data-focus-cat="career_contribution"><span class="btn-line">Career</span><span class="btn-line">Contribution</span></button>
                         <button class="focus-cat-btn" data-focus-cat="personal_growth"><span class="btn-line">Personal</span><span class="btn-line">Growth</span></button>
                         <button class="focus-cat-btn" data-focus-cat="health_energy"><span class="btn-line">Health</span><span class="btn-line">Energy</span></button>
+                        <span class="wheel-period filter-row-period">Last 7 Days</span>
+                        <button class="btn-cat-guide" id="btnCatGuide" title="Category Guide">&#8505;</button>
                     </div>
                     <div class="next-action-card" id="nextActionCard">
                         <div class="next-action-top-row">
@@ -785,8 +773,8 @@
                         </div>
                         <div class="next-action-text" id="nextActionText">No steps yet. Create a goal to get started!</div>
                         <div class="next-action-meta" id="nextActionMeta"></div>
+                        <button class="btn-max-focus btn-max-corner" id="btnMaxFocus" title="Maximize — focus on this one thing">MAX</button>
                         <div class="next-action-buttons">
-                            <button class="btn-max-focus" id="btnMaxFocus" title="Maximize — focus on this one thing">MAX</button>
                             <button class="btn-primary" id="btnCompleteNext" style="display:none">&#10003; Done!</button>
                             <button class="btn-pick-for-me" id="btnPickForMe" title="Pick a task for you">&#127919; Pick For Me</button>
                             <button class="btn-primary btn-create-outcome-next" id="btnCreateOutcomeNext" style="display:none">+ New Goal</button>
@@ -851,8 +839,6 @@
                         <div class="balance-header-row">
                             <div class="balance-level">&#127942; My Victories Today</div>
                             <select id="victoryGoalSelect" class="est-select balance-goal-select"></select>
-                            <span class="wheel-period">Last 7 Days</span>
-                            <button class="btn-cat-guide" id="btnCatGuide" title="Category Guide">&#8505;</button>
                         </div>
                         <div class="balance-count" id="balanceCount">0 of 0</div>
                         <div class="balance-bar-wrap">
