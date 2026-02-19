@@ -3803,10 +3803,11 @@
         var progressEl = document.getElementById('nextActionOutcomeProgress');
 
         if (next) {
-            textEl.textContent = next.text;
-            // Build meta with "From Goal" in bold and "Your WHY?" with purpose
+            var words = next.text.split(/\s+/);
+            textEl.textContent = words.length > 10 ? words.slice(0, 10).join(' ') + '...' : next.text;
+            // Build meta with "I will gain" with purpose
             var outcome = data.outcomes.find(function(o) { return o.id === next.outcomeId; });
-            var metaHtml = '<span class="na-from-goal"><strong>From Goal:</strong> ' + escapeHtml(next.outcome) + '</span>';
+            var metaHtml = '';
             if (outcome && outcome.purpose) {
                 var firstSentence = outcome.purpose.split(/[.!?]/)[0].trim();
                 metaHtml += '<span class="na-why"><strong>I will gain</strong> ' + escapeHtml(firstSentence) + '</span>';
