@@ -4385,11 +4385,8 @@
             if (savedGoal >= 3 && savedGoal <= 21) dailyGoal = savedGoal;
         } catch(e) {}
         var done = 0;
+        // Always count ALL categories for Victories Today (ignore category filter)
         var activeCatIds = getActiveCategories().map(function(c) { return c.id; });
-        // Apply category filter
-        if (currentFilter !== 'all') {
-            activeCatIds = [currentFilter];
-        }
         // Count from mode-specific outcomes (active + archived)
         var allOutcomes = data.outcomes.concat(data.archived || []);
         allOutcomes.forEach(function(o) {
