@@ -3808,7 +3808,8 @@
             var outcome = data.outcomes.find(function(o) { return o.id === next.outcomeId; });
             var metaHtml = '<span class="na-from-goal"><strong>From Goal:</strong> ' + escapeHtml(next.outcome) + '</span>';
             if (outcome && outcome.purpose) {
-                metaHtml += '<span class="na-why"><strong>Your WHY?</strong> ' + escapeHtml(outcome.purpose) + '</span>';
+                var firstSentence = outcome.purpose.split(/[.!?]/)[0].trim();
+                metaHtml += '<span class="na-why"><strong>I will gain</strong> ' + escapeHtml(firstSentence) + '</span>';
             }
             if (next.estMinutes) {
                 metaHtml += '<span class="na-est">~' + next.estMinutes + ' min est.</span>';
