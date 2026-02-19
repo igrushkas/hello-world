@@ -3377,10 +3377,10 @@ body.focus-mode::after {
 
 body.focus-mode .btn-max-focus {
     background: linear-gradient(135deg, var(--accent-orange), #e17055);
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 1002;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 2;
     font-size: 0.85rem;
     padding: 10px 22px;
     box-shadow: 0 2px 12px rgba(0,0,0,0.4);
