@@ -5660,6 +5660,30 @@ body.business-mode .help-tips li::before {
 /* ==========================================
    CATEGORY GUIDE BUTTON + MODAL
    ========================================== */
+.btn-cat-find {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 1.5px solid var(--accent-primary);
+    background: transparent;
+    color: var(--accent-primary);
+    font-size: 0.75rem;
+    cursor: pointer;
+    margin-left: 4px;
+    vertical-align: middle;
+    transition: var(--transition);
+    line-height: 1;
+}
+
+.btn-cat-find:hover {
+    background: var(--accent-primary);
+    color: #fff;
+    box-shadow: 0 0 10px rgba(124, 111, 186, 0.2);
+}
+
 .btn-cat-guide {
     display: inline-flex;
     align-items: center;
@@ -7209,6 +7233,13 @@ body.focus-mode .btn-focus-mode {
 .df-chip-ok.checked {
     background: rgba(106, 173, 153, 0.15);
     border-color: var(--accent-green);
+}
+
+.df-chip-like:has(input:checked),
+.df-chip-like.checked {
+    background: rgba(106, 173, 153, 0.15);
+    border-color: var(--accent-green);
+    color: var(--accent-green);
 }
 
 .df-emoji-scale {
