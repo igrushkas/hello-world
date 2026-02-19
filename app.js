@@ -4193,11 +4193,8 @@
     function renderDailyProgress() {
         var today = new Date().toDateString();
         var total = 0, done = 0;
+        // Always show ALL categories in Accomplished stats
         var modeOutcomes = data.outcomes.filter(function(o) { return isOutcomeInCurrentMode(o); });
-        // Apply category filter
-        if (currentFilter !== 'all') {
-            modeOutcomes = modeOutcomes.filter(function(o) { return o.category === currentFilter; });
-        }
         modeOutcomes.forEach(function(o) {
             if (o.backBurner) return;
             o.actions.forEach(function(a) {
