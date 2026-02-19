@@ -3810,7 +3810,7 @@
             var metaHtml = '';
             if (outcome && outcome.purpose) {
                 var firstSentence = outcome.purpose.split(/[.!?]/)[0].trim();
-                metaHtml += '<span class="na-why"><strong>I will gain</strong> ' + escapeHtml(firstSentence) + '</span>';
+                metaHtml += '<span class="na-why"><strong>I will gain</strong> ' + escapeHtml(firstSentence) + '...</span>';
             }
             if (next.estMinutes) {
                 metaHtml += '<span class="na-est">~' + next.estMinutes + ' min est.</span>';
