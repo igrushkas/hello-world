@@ -3169,8 +3169,8 @@
         renderOutcomes();
         renderMomentum();
         renderLog();
-        renderDailyProgress();
-        renderWheelOfLife();
+        try { renderDailyProgress(); } catch(e) {}
+        try { renderWheelOfLife(); } catch(e) {}
         renderFocusBadge();
         // Gamification renders
         try { renderLevelBadge(); } catch(e) {}
@@ -4214,7 +4214,7 @@
     // ==========================================
     function renderWheelOfLife() {
         // Always render Victories Today regardless of Pro status
-        renderBalanceScore();
+        try { renderBalanceScore(); } catch(e) {}
 
         var wheelSection = document.querySelector('.wheel-of-life-card');
         if (!isProUser()) {
@@ -4376,6 +4376,7 @@
         // Always count ALL categories across ALL modes for Victories Today
         var allOutcomes = data.outcomes.concat(data.archived || []);
         allOutcomes.forEach(function(o) {
+            if (!o.actions) return;
             o.actions.forEach(function(a) {
                 if (a.done && a.completedDate === today) done++;
             });
