@@ -4190,20 +4190,6 @@
     }
 
     function renderDailyProgress() {
-        var today = new Date().toDateString();
-        var total = 0, done = 0;
-        // Always show ALL categories in Accomplished stats
-        var modeOutcomes = data.outcomes.filter(function(o) { return isOutcomeInCurrentMode(o); });
-        modeOutcomes.forEach(function(o) {
-            if (o.backBurner) return;
-            o.actions.forEach(function(a) {
-                total++;
-                if (a.done && a.completedDate === today) done++;
-            });
-        });
-        var pct = total > 0 ? Math.round((done / total) * 100) : 0;
-        document.getElementById('dailyProgressFill').style.width = pct + '%';
-
         // Stats bar: reuse weekly power score data
         var current = calculateWeeklyPowerScore(0);
         var last = calculateWeeklyPowerScore(1);
@@ -4384,12 +4370,9 @@
             if (savedGoal >= 3 && savedGoal <= 21) dailyGoal = savedGoal;
         } catch(e) {}
         var done = 0;
-        // Always count ALL categories for Victories Today (ignore category filter)
-        var activeCatIds = getActiveCategories().map(function(c) { return c.id; });
-        // Count from mode-specific outcomes (active + archived)
+        // Always count ALL categories across ALL modes for Victories Today
         var allOutcomes = data.outcomes.concat(data.archived || []);
         allOutcomes.forEach(function(o) {
-            if (activeCatIds.indexOf(o.category) === -1) return;
             o.actions.forEach(function(a) {
                 if (a.done && a.completedDate === today) done++;
             });
@@ -4397,7 +4380,7 @@
         // Also count log entries for today in case completedDate is missing
         var logToday = 0;
         data.log.forEach(function(entry) {
-            if (entry.date === today && entry.category && activeCatIds.indexOf(entry.category) !== -1) logToday++;
+            if (entry.date === today) logToday++;
         });
         if (logToday > done) done = logToday;
         var pct = Math.min(100, Math.round((done / dailyGoal) * 100));
