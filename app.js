@@ -4193,11 +4193,8 @@
     function renderDailyProgress() {
         var today = new Date().toDateString();
         var total = 0, done = 0;
+        // Always show ALL categories in Accomplished stats
         var modeOutcomes = data.outcomes.filter(function(o) { return isOutcomeInCurrentMode(o); });
-        // Apply category filter
-        if (currentFilter !== 'all') {
-            modeOutcomes = modeOutcomes.filter(function(o) { return o.category === currentFilter; });
-        }
         modeOutcomes.forEach(function(o) {
             if (o.backBurner) return;
             o.actions.forEach(function(a) {
@@ -5953,6 +5950,8 @@
         // PANIC button — show all reset/stuck strategies
         safeBind('btnPanic', 'click', function() {
             document.getElementById('stuckOverlay').classList.remove('hidden');
+            var header = document.getElementById('stuckHeader');
+            if (header) header.style.display = '';
             var container = document.getElementById('stuckOptionsContainer');
             if (container) container.style.display = '';
             var activity = document.getElementById('stuckActivity');
@@ -6607,6 +6606,13 @@
             if (picked) {
                 // Force this task into the Just Do This One Thing card
                 forcedNextAction = picked;
+                // Update category filter to reflect where the task comes from
+                var cat = picked.category;
+                var filterBtns = document.querySelectorAll('.focus-cat-btn');
+                filterBtns.forEach(function(b) { b.classList.remove('active'); });
+                var targetBtn = document.querySelector('.focus-cat-btn[data-focus-cat="' + cat + '"]');
+                if (targetBtn) targetBtn.classList.add('active');
+                currentFilter = cat;
                 renderNextAction();
                 // Scroll to top to see the task
                 document.getElementById('nextActionCard').scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -7258,6 +7264,8 @@
                     var act = STUCK_ACTIVITIES.filter(function(a) { return a.id === id; })[0];
                     if (!act) return;
                     container.style.display = 'none';
+                    var header = document.getElementById('stuckHeader');
+                    if (header) header.style.display = 'none';
                     var activity = document.getElementById('stuckActivity');
                     activity.classList.remove('hidden');
                     var content = document.getElementById('stuckActivityContent');
@@ -7268,6 +7276,8 @@
 
         safeBind('btnStuck', 'click', function() {
             document.getElementById('stuckOverlay').classList.remove('hidden');
+            var header = document.getElementById('stuckHeader');
+            if (header) header.style.display = '';
             var container = document.getElementById('stuckOptionsContainer');
             if (container) container.style.display = '';
             var activity = document.getElementById('stuckActivity');

@@ -31,7 +31,7 @@
     <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
 
-    <link rel="stylesheet" href="styles.css?v=20260219r3">
+    <link rel="stylesheet" href="styles.css?v=20260219r4">
 
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
@@ -804,8 +804,6 @@
                     </div>
                     <!-- Combo Display -->
                     <div class="combo-display hidden" id="comboDisplay"></div>
-                    <!-- Power Score -->
-                    <div id="weeklyPowerContainer"></div>
                     <!-- Daily Challenges (hidden - tracked internally) -->
                     <div class="daily-challenges-section hidden" id="dailyChallengesSection">
                         <div class="challenges-header">
@@ -1054,6 +1052,16 @@
                     <textarea class="input-field textarea" placeholder="What can be improved?" rows="1" data-bug-section="task_display"></textarea>
                 </div>
                 <div class="form-group">
+                    <label class="form-label">&#129517; My Chaos Compass (Wheel of Life)</label>
+                    <div class="df-checkbox-grid" style="margin-bottom:4px">
+                        <label class="df-chip df-chip-issue"><input type="checkbox" class="bug-section-cb" value="compass_confusing"><span>Confusing</span></label>
+                        <label class="df-chip df-chip-issue"><input type="checkbox" class="bug-section-cb" value="compass_not_useful"><span>Not useful</span></label>
+                        <label class="df-chip df-chip-issue"><input type="checkbox" class="bug-section-cb" value="compass_wrong_data"><span>Wrong data</span></label>
+                        <label class="df-chip df-chip-like"><input type="checkbox" class="bug-section-cb" value="compass_like"><span>&#128077; Like it</span></label>
+                    </div>
+                    <textarea class="input-field textarea" placeholder="What can be improved?" rows="1" data-bug-section="chaos_compass"></textarea>
+                </div>
+                <div class="form-group">
                     <label class="form-label">&#127922; Buttons (Done, Pick For Me, Focus Buddy, PANIC)</label>
                     <div class="df-checkbox-grid" style="margin-bottom:4px">
                         <label class="df-chip df-chip-issue"><input type="checkbox" class="bug-section-cb" value="btn_not_working"><span>Button not working</span></label>
@@ -1106,16 +1114,6 @@
                 <div class="form-group">
                     <label class="form-label">&#128161; Anything else?</label>
                     <textarea class="input-field textarea" id="bugReportOther" placeholder="Any other bugs, ideas, or frustrations..." rows="2"></textarea>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">&#129517; My Chaos Compass (Wheel of Life)</label>
-                    <div class="df-checkbox-grid" style="margin-bottom:4px">
-                        <label class="df-chip df-chip-issue"><input type="checkbox" class="bug-section-cb" value="compass_confusing"><span>Confusing</span></label>
-                        <label class="df-chip df-chip-issue"><input type="checkbox" class="bug-section-cb" value="compass_not_useful"><span>Not useful</span></label>
-                        <label class="df-chip df-chip-issue"><input type="checkbox" class="bug-section-cb" value="compass_wrong_data"><span>Wrong data</span></label>
-                        <label class="df-chip df-chip-like"><input type="checkbox" class="bug-section-cb" value="compass_like"><span>&#128077; Like it</span></label>
-                    </div>
-                    <textarea class="input-field textarea" placeholder="What can be improved?" rows="1" data-bug-section="chaos_compass"></textarea>
                 </div>
                 <button class="btn-primary btn-large" id="btnSubmitBugReport">&#128027; Send Report</button>
                 <p class="feedback-thanks hidden" id="bugReportThanks">Thanks! We're on it.</p>
@@ -1425,9 +1423,11 @@
     <div id="stuckOverlay" class="modal-overlay hidden">
         <div class="modal stuck-modal">
             <button class="modal-close" id="closeStuck">&times;</button>
-            <div style="text-align:center;font-size:3rem;margin-bottom:12px">&#128260;</div>
-            <h2 style="text-align:center">Quick Reset</h2>
-            <p style="text-align:center;color:var(--text-secondary);margin-bottom:20px">Your brain needs a reset. Pick one — takes under 2 minutes!</p>
+            <div id="stuckHeader">
+                <div style="text-align:center;font-size:3rem;margin-bottom:12px">&#128260;</div>
+                <h2 style="text-align:center">Quick Reset</h2>
+                <p style="text-align:center;color:var(--text-secondary);margin-bottom:20px">Your brain needs a reset. Pick one — takes under 2 minutes!</p>
+            </div>
             <div class="stuck-options" id="stuckOptionsContainer">
                 <!-- 3 random activities rendered by JS each time -->
             </div>
@@ -1777,7 +1777,7 @@
     </div>
 
     <script src="firebase-config.js"></script>
-    <script src="app.js?v=20260219r4"></script>
+    <script src="app.js?v=20260219r7"></script>
 
     <!-- Service Worker Registration -->
     <script>
