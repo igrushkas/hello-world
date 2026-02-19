@@ -7157,6 +7157,54 @@
                         '</div>' +
                         '<p style="font-weight:700;color:var(--accent-primary)">Do at least ONE right now \u2014 then come back!</p>';
                 }
+            },
+            {
+                id: 'thankYourself',
+                icon: '\uD83D\uDC9B',
+                label: 'Thank Yourself',
+                desc: 'Gratitude for what you did today',
+                run: function(content) {
+                    var affirmations = [
+                        'You showed up. That matters more than you think.',
+                        'Your future self is already grateful.',
+                        'You did that. Nobody can take it away.',
+                        'Small steps still move you forward.',
+                        'You deserve to hear this: well done.',
+                        'The fact that you\'re here means you care. That\'s huge.'
+                    ];
+                    content.innerHTML = '<h3>\uD83D\uDC9B Thank Yourself</h3>' +
+                        '<p style="color:var(--text-secondary);margin-bottom:12px">Write 1\u20133 things you did today that deserve recognition.</p>' +
+                        '<div style="text-align:left">' +
+                        '<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><span style="font-size:1.3rem">1.</span><input type="text" class="input-field" style="flex:1" id="thankInline1" placeholder="I showed up and\u2026"></div>' +
+                        '<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><span style="font-size:1.3rem">2.</span><input type="text" class="input-field" style="flex:1" id="thankInline2" placeholder="I also\u2026"></div>' +
+                        '<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><span style="font-size:1.3rem">3.</span><input type="text" class="input-field" style="flex:1" id="thankInline3" placeholder="And I\u2026"></div>' +
+                        '</div>' +
+                        '<button class="btn-primary" id="thankInlineSubmit" style="margin-top:8px">\uD83D\uDC9B Say Thanks</button>' +
+                        '<div id="thankInlineResult" style="display:none;margin-top:12px"></div>';
+                    var i1 = document.getElementById('thankInline1');
+                    if (i1) setTimeout(function() { i1.focus(); }, 200);
+                    document.getElementById('thankInlineSubmit').addEventListener('click', function() {
+                        var inputs = [document.getElementById('thankInline1'), document.getElementById('thankInline2'), document.getElementById('thankInline3')];
+                        var items = inputs.map(function(i) { return i ? i.value.trim() : ''; }).filter(function(v) { return v; });
+                        if (items.length === 0) {
+                            if (inputs[0]) { inputs[0].style.borderColor = '#f44336'; setTimeout(function() { inputs[0].style.borderColor = ''; }, 2000); }
+                            return;
+                        }
+                        var affirmation = affirmations[Math.floor(Math.random() * affirmations.length)];
+                        var resultEl = document.getElementById('thankInlineResult');
+                        var html = '';
+                        items.forEach(function(item) { html += '<div style="padding:6px 0;border-bottom:1px solid var(--border)">\u201C' + item + '\u201D</div>'; });
+                        html += '<p style="margin-top:12px;font-style:italic;color:var(--accent-primary)">' + affirmation + '</p>';
+                        resultEl.innerHTML = html;
+                        resultEl.style.display = '';
+                        this.style.display = 'none';
+                        if (typeof addXP === 'function') addXP(15, 'Self-gratitude');
+                        if (typeof data !== 'undefined' && data.actionLog) {
+                            data.actionLog.push({ action: 'Thanked myself: ' + items.join(', '), outcome: 'Self-Care', category: 'personal_growth', date: new Date().toISOString(), xp: 15 });
+                            saveData();
+                        }
+                    });
+                }
             }
         ];
 
