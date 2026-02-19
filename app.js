@@ -8299,7 +8299,7 @@
             });
         }
 
-        // "What is not working?" bug report button
+        // "Not working?" bug report button
         safeBind('btnFeedback', 'click', function() {
             document.getElementById('bugReportOverlay').classList.remove('hidden');
             // Reset form
