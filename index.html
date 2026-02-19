@@ -1423,9 +1423,11 @@
     <div id="stuckOverlay" class="modal-overlay hidden">
         <div class="modal stuck-modal">
             <button class="modal-close" id="closeStuck">&times;</button>
-            <div style="text-align:center;font-size:3rem;margin-bottom:12px">&#128260;</div>
-            <h2 style="text-align:center">Quick Reset</h2>
-            <p style="text-align:center;color:var(--text-secondary);margin-bottom:20px">Your brain needs a reset. Pick one — takes under 2 minutes!</p>
+            <div id="stuckHeader">
+                <div style="text-align:center;font-size:3rem;margin-bottom:12px">&#128260;</div>
+                <h2 style="text-align:center">Quick Reset</h2>
+                <p style="text-align:center;color:var(--text-secondary);margin-bottom:20px">Your brain needs a reset. Pick one — takes under 2 minutes!</p>
+            </div>
             <div class="stuck-options" id="stuckOptionsContainer">
                 <!-- 3 random activities rendered by JS each time -->
             </div>
@@ -1775,7 +1777,7 @@
     </div>
 
     <script src="firebase-config.js"></script>
-    <script src="app.js?v=20260219r5"></script>
+    <script src="app.js?v=20260219r6"></script>
 
     <!-- Service Worker Registration -->
     <script>

@@ -5950,6 +5950,8 @@
         // PANIC button — show all reset/stuck strategies
         safeBind('btnPanic', 'click', function() {
             document.getElementById('stuckOverlay').classList.remove('hidden');
+            var header = document.getElementById('stuckHeader');
+            if (header) header.style.display = '';
             var container = document.getElementById('stuckOptionsContainer');
             if (container) container.style.display = '';
             var activity = document.getElementById('stuckActivity');
@@ -7255,6 +7257,8 @@
                     var act = STUCK_ACTIVITIES.filter(function(a) { return a.id === id; })[0];
                     if (!act) return;
                     container.style.display = 'none';
+                    var header = document.getElementById('stuckHeader');
+                    if (header) header.style.display = 'none';
                     var activity = document.getElementById('stuckActivity');
                     activity.classList.remove('hidden');
                     var content = document.getElementById('stuckActivityContent');
@@ -7265,6 +7269,8 @@
 
         safeBind('btnStuck', 'click', function() {
             document.getElementById('stuckOverlay').classList.remove('hidden');
+            var header = document.getElementById('stuckHeader');
+            if (header) header.style.display = '';
             var container = document.getElementById('stuckOptionsContainer');
             if (container) container.style.display = '';
             var activity = document.getElementById('stuckActivity');
