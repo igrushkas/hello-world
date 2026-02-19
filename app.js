@@ -4213,20 +4213,24 @@
     //  WHEEL OF LIFE
     // ==========================================
     function renderWheelOfLife() {
+        // Always render Victories Today regardless of Pro status
+        renderBalanceScore();
+
         var wheelSection = document.querySelector('.wheel-of-life-card');
         if (!isProUser()) {
             if (wheelSection) {
-                // Add lock overlay without destroying DOM
+                // Add lock overlay on wheel chart only (not Victories)
+                var chartContainer = wheelSection.querySelector('.wheel-chart-container');
                 var lockId = 'wheelProLock';
                 var existing = document.getElementById(lockId);
-                if (!existing) {
+                if (!existing && chartContainer) {
                     var lockDiv = document.createElement('div');
                     lockDiv.id = lockId;
                     lockDiv.style.cssText = 'position:absolute;top:0;left:0;right:0;bottom:0;background:rgba(10,10,30,0.85);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:10;border-radius:inherit;cursor:pointer';
                     lockDiv.innerHTML = '<div style="font-size:2rem;margin-bottom:8px">\u{1F512}</div><p style="font-size:0.85rem;color:var(--text-muted)">Wheel of Life</p><span class="pro-lock-badge">PRO</span><p style="font-size:0.75rem;color:var(--text-muted);margin-top:8px;text-decoration:underline">Upgrade to unlock</p>';
                     lockDiv.onclick = function() { document.getElementById('upgradeOverlay').classList.remove('hidden'); };
-                    wheelSection.style.position = 'relative';
-                    wheelSection.appendChild(lockDiv);
+                    chartContainer.style.position = 'relative';
+                    chartContainer.appendChild(lockDiv);
                 }
             }
             return;
@@ -4253,7 +4257,6 @@
                 });
             });
         }
-        renderBalanceScore();
     }
 
     function calculateWheelScores() {
