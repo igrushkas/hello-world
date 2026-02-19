@@ -6099,6 +6099,22 @@
             try { renderMotivationQuote(); } catch(e) { console.error('quote refresh error:', e); }
         });
 
+        // Find on page — trigger native browser find
+        safeBind('btnPageFind', 'click', function() {
+            try {
+                // Use execCommand for broadest compatibility (including PWA/mobile)
+                window.find ? window.find('') : document.execCommand('find');
+            } catch(e) {
+                // Fallback: simulate Ctrl+F / Cmd+F
+                var isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+                var evt = new KeyboardEvent('keydown', {
+                    key: 'f', code: 'KeyF', keyCode: 70,
+                    ctrlKey: !isMac, metaKey: isMac, bubbles: true
+                });
+                document.dispatchEvent(evt);
+            }
+        });
+
         // Category Guide — use event delegation since button is recreated on mode switch
         document.addEventListener('click', function(e) {
             if (e.target && (e.target.id === 'btnCatGuide' || e.target.closest('#btnCatGuide'))) {
