@@ -3358,10 +3358,20 @@ body.focus-mode #btnCompleteNext {
     z-index: 2;
 }
 
+.btn-max-focus {
+    animation: pulse-max 2s ease-in-out infinite;
+}
+
+@keyframes pulse-max {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(124, 111, 186, 0.5); }
+    50% { box-shadow: 0 0 16px 6px rgba(124, 111, 186, 0.35); }
+}
+
 .btn-max-focus:hover {
     background: linear-gradient(135deg, #5a4bd6, var(--accent-primary));
     box-shadow: 0 0 15px rgba(124, 111, 186, 0.4);
     transform: scale(1.05);
+    animation: none;
 }
 
 body.focus-mode::after {

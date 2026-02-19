@@ -3801,6 +3801,49 @@
         var btnPomo = document.getElementById('btnStartPomodoro');
         var btnStartTimer = document.getElementById('btnStartTaskTimer');
         var progressEl = document.getElementById('nextActionOutcomeProgress');
+        var btnMax = document.getElementById('btnMaxFocus');
+        var btnBodyDouble = document.getElementById('btnBodyDoubleStart');
+        var btnPanic = document.getElementById('btnPanic');
+        var btnPickForMe = document.getElementById('btnPickForMe');
+
+        // First-time experience: show "SMILE!" for brand new users
+        if (!localStorage.getItem('lwp_first_smile_done')) {
+            textEl.textContent = 'SMILE!';
+            metaEl.innerHTML = '';
+            btnComplete.style.display = '';
+            btnComplete.textContent = 'DONE!';
+            btnComplete.dataset.outcomeId = '';
+            btnComplete.dataset.actionId = '';
+            if (btnPomo) btnPomo.style.display = 'none';
+            if (btnStartTimer) btnStartTimer.style.display = 'none';
+            if (btnMax) btnMax.style.display = 'none';
+            if (btnBodyDouble) btnBodyDouble.style.display = 'none';
+            if (btnPanic) btnPanic.style.display = 'none';
+            if (btnPickForMe) btnPickForMe.style.display = 'none';
+            if (progressEl) progressEl.innerHTML = '';
+            var createBtn = document.getElementById('btnCreateOutcomeNext');
+            if (createBtn) createBtn.style.display = 'none';
+            // Auto-maximize for first-time experience
+            if (!document.body.classList.contains('focus-mode')) {
+                document.body.classList.add('focus-mode');
+            }
+            // Override Done button for first-time SMILE
+            btnComplete.onclick = function() {
+                localStorage.setItem('lwp_first_smile_done', '1');
+                btnComplete.onclick = null;
+                btnComplete.textContent = '\u2713 Done!';
+                document.body.classList.remove('focus-mode');
+                if (btnMax) { btnMax.style.display = ''; btnMax.textContent = 'Maximize'; }
+                renderNextAction();
+            };
+            return;
+        }
+
+        // Restore normal button states after first-time experience
+        btnComplete.textContent = '\u2713 Done!';
+        if (btnMax) btnMax.style.display = '';
+        if (btnBodyDouble) btnBodyDouble.style.display = '';
+        if (btnPanic) btnPanic.style.display = '';
 
         if (next) {
             var words = next.text.split(/\s+/);
@@ -3810,7 +3853,7 @@
             var metaHtml = '';
             if (outcome && outcome.purpose) {
                 var firstSentence = outcome.purpose.split(/[.!?]/)[0].trim();
-                metaHtml += '<span class="na-why"><strong>I will gain</strong> ' + escapeHtml(firstSentence) + '</span>';
+                metaHtml += '<span class="na-why"><strong>I will gain</strong> ' + escapeHtml(firstSentence) + '...</span>';
             }
             if (next.estMinutes) {
                 metaHtml += '<span class="na-est">~' + next.estMinutes + ' min est.</span>';
