@@ -31,7 +31,7 @@
     <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
 
-    <link rel="stylesheet" href="styles.css?v=20260219r1">
+    <link rel="stylesheet" href="styles.css?v=20260219r2">
 
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
@@ -1048,6 +1048,7 @@
                         <label class="df-chip df-chip-issue"><input type="checkbox" class="bug-section-cb" value="task_not_showing"><span>Task not showing</span></label>
                         <label class="df-chip df-chip-issue"><input type="checkbox" class="bug-section-cb" value="task_wrong_order"><span>Wrong task picked</span></label>
                         <label class="df-chip df-chip-issue"><input type="checkbox" class="bug-section-cb" value="task_confusing"><span>Confusing layout</span></label>
+                        <label class="df-chip df-chip-like"><input type="checkbox" class="bug-section-cb" value="task_like"><span>&#128077; Like it</span></label>
                     </div>
                     <textarea class="input-field textarea" placeholder="What can be improved?" rows="1" data-bug-section="task_display"></textarea>
                 </div>
@@ -1057,6 +1058,7 @@
                         <label class="df-chip df-chip-issue"><input type="checkbox" class="bug-section-cb" value="btn_not_working"><span>Button not working</span></label>
                         <label class="df-chip df-chip-issue"><input type="checkbox" class="bug-section-cb" value="btn_hard_to_find"><span>Hard to find</span></label>
                         <label class="df-chip df-chip-issue"><input type="checkbox" class="bug-section-cb" value="btn_ugly"><span>Looks off</span></label>
+                        <label class="df-chip df-chip-like"><input type="checkbox" class="bug-section-cb" value="btn_like"><span>&#128077; Like it</span></label>
                     </div>
                     <textarea class="input-field textarea" placeholder="What can be improved?" rows="1" data-bug-section="buttons"></textarea>
                 </div>
@@ -1066,6 +1068,7 @@
                         <label class="df-chip df-chip-issue"><input type="checkbox" class="bug-section-cb" value="stats_wrong"><span>Wrong numbers</span></label>
                         <label class="df-chip df-chip-issue"><input type="checkbox" class="bug-section-cb" value="stats_confusing"><span>Confusing</span></label>
                         <label class="df-chip df-chip-issue"><input type="checkbox" class="bug-section-cb" value="stats_missing"><span>Missing info</span></label>
+                        <label class="df-chip df-chip-like"><input type="checkbox" class="bug-section-cb" value="stats_like"><span>&#128077; Like it</span></label>
                     </div>
                     <textarea class="input-field textarea" placeholder="What can be improved?" rows="1" data-bug-section="stats"></textarea>
                 </div>
@@ -1075,6 +1078,7 @@
                         <label class="df-chip df-chip-issue"><input type="checkbox" class="bug-section-cb" value="goals_hard_create"><span>Hard to create</span></label>
                         <label class="df-chip df-chip-issue"><input type="checkbox" class="bug-section-cb" value="goals_cant_edit"><span>Can't edit</span></label>
                         <label class="df-chip df-chip-issue"><input type="checkbox" class="bug-section-cb" value="goals_confusing"><span>Confusing</span></label>
+                        <label class="df-chip df-chip-like"><input type="checkbox" class="bug-section-cb" value="goals_like"><span>&#128077; Like it</span></label>
                     </div>
                     <textarea class="input-field textarea" placeholder="What can be improved?" rows="1" data-bug-section="goals"></textarea>
                 </div>
@@ -1084,6 +1088,7 @@
                         <label class="df-chip df-chip-issue"><input type="checkbox" class="bug-section-cb" value="motivation_boring"><span>Not motivating</span></label>
                         <label class="df-chip df-chip-issue"><input type="checkbox" class="bug-section-cb" value="motivation_annoying"><span>Annoying</span></label>
                         <label class="df-chip df-chip-issue"><input type="checkbox" class="bug-section-cb" value="motivation_broken"><span>Broken</span></label>
+                        <label class="df-chip df-chip-like"><input type="checkbox" class="bug-section-cb" value="motivation_like"><span>&#128077; Like it</span></label>
                     </div>
                     <textarea class="input-field textarea" placeholder="What can be improved?" rows="1" data-bug-section="motivation"></textarea>
                 </div>
@@ -1093,12 +1098,23 @@
                         <label class="df-chip df-chip-issue"><input type="checkbox" class="bug-section-cb" value="look_ugly"><span>Looks ugly</span></label>
                         <label class="df-chip df-chip-issue"><input type="checkbox" class="bug-section-cb" value="look_cluttered"><span>Too cluttered</span></label>
                         <label class="df-chip df-chip-issue"><input type="checkbox" class="bug-section-cb" value="look_slow"><span>Slow / laggy</span></label>
+                        <label class="df-chip df-chip-like"><input type="checkbox" class="bug-section-cb" value="look_like"><span>&#128077; Like it</span></label>
                     </div>
                     <textarea class="input-field textarea" placeholder="What can be improved?" rows="1" data-bug-section="look_feel"></textarea>
                 </div>
                 <div class="form-group">
                     <label class="form-label">&#128161; Anything else?</label>
                     <textarea class="input-field textarea" id="bugReportOther" placeholder="Any other bugs, ideas, or frustrations..." rows="2"></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">&#129517; My Chaos Compass (Wheel of Life)</label>
+                    <div class="df-checkbox-grid" style="margin-bottom:4px">
+                        <label class="df-chip df-chip-issue"><input type="checkbox" class="bug-section-cb" value="compass_confusing"><span>Confusing</span></label>
+                        <label class="df-chip df-chip-issue"><input type="checkbox" class="bug-section-cb" value="compass_not_useful"><span>Not useful</span></label>
+                        <label class="df-chip df-chip-issue"><input type="checkbox" class="bug-section-cb" value="compass_wrong_data"><span>Wrong data</span></label>
+                        <label class="df-chip df-chip-like"><input type="checkbox" class="bug-section-cb" value="compass_like"><span>&#128077; Like it</span></label>
+                    </div>
+                    <textarea class="input-field textarea" placeholder="What can be improved?" rows="1" data-bug-section="chaos_compass"></textarea>
                 </div>
                 <button class="btn-primary btn-large" id="btnSubmitBugReport">&#128027; Send Report</button>
                 <p class="feedback-thanks hidden" id="bugReportThanks">Thanks! We're on it.</p>
@@ -1760,7 +1776,7 @@
     </div>
 
     <script src="firebase-config.js"></script>
-    <script src="app.js?v=20260219r2"></script>
+    <script src="app.js?v=20260219r3"></script>
 
     <!-- Service Worker Registration -->
     <script>

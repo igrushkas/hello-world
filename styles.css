@@ -7211,6 +7211,13 @@ body.focus-mode .btn-focus-mode {
     border-color: var(--accent-green);
 }
 
+.df-chip-like:has(input:checked),
+.df-chip-like.checked {
+    background: rgba(106, 173, 153, 0.15);
+    border-color: var(--accent-green);
+    color: var(--accent-green);
+}
+
 .df-emoji-scale {
     display: flex;
     gap: 8px;

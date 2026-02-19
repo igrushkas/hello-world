@@ -4054,13 +4054,10 @@
 
     function renderLog() {
         var logEl = document.getElementById('actionLog');
-        var activeCatIds = getActiveCategories().map(function(c) { return c.id; });
-        // Apply category filter
-        if (currentFilter !== 'all') {
-            activeCatIds = [currentFilter];
-        }
+        // Always show ALL categories in action log regardless of filter
+        var allCatIds = getActiveCategories().map(function(c) { return c.id; });
         var modeLog = data.log.filter(function(entry) {
-            return entry.category && activeCatIds.indexOf(entry.category) !== -1;
+            return entry.category && allCatIds.indexOf(entry.category) !== -1;
         });
         if (modeLog.length === 0) {
             logEl.innerHTML = '<p class="empty-state">Your completed actions will appear here. Start by creating an outcome above!</p>';
