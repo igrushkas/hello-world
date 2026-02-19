@@ -3808,7 +3808,8 @@
             var outcome = data.outcomes.find(function(o) { return o.id === next.outcomeId; });
             var metaHtml = '<span class="na-from-goal"><strong>From Goal:</strong> ' + escapeHtml(next.outcome) + '</span>';
             if (outcome && outcome.purpose) {
-                metaHtml += '<span class="na-why"><strong>Your WHY?</strong> ' + escapeHtml(outcome.purpose) + '</span>';
+                var firstSentence = outcome.purpose.split(/[.!?]/)[0].trim();
+                metaHtml += '<span class="na-why"><strong>I will gain</strong> ' + escapeHtml(firstSentence) + '</span>';
             }
             if (next.estMinutes) {
                 metaHtml += '<span class="na-est">~' + next.estMinutes + ' min est.</span>';
@@ -5928,6 +5929,8 @@
             var isFocused = document.body.classList.toggle('focus-mode');
             this.textContent = isFocused ? 'Exit' : 'Maximize';
             this.title = isFocused ? 'Exit Focus Mode' : 'Maximize — focus on this one thing';
+            var pickBtn = document.getElementById('btnPickForMe');
+            if (pickBtn) pickBtn.style.display = isFocused ? 'none' : '';
         });
 
         // PANIC button — show all reset/stuck strategies
@@ -7175,7 +7178,7 @@
                         'The fact that you\'re here means you care. That\'s huge.'
                     ];
                     content.innerHTML = '<h3>\uD83D\uDC9B Thank Yourself</h3>' +
-                        '<p style="color:var(--text-secondary);margin-bottom:12px">Write 1\u20133 things you did today that deserve recognition.</p>' +
+                        '<p style="color:var(--text-secondary);margin-bottom:12px">Write 1\u20133 things you did yesterday/today for yourself or someone else that deserve recognition.</p>' +
                         '<div style="text-align:left">' +
                         '<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><span style="font-size:1.3rem">1.</span><input type="text" class="input-field" style="flex:1" id="thankInline1" placeholder="I showed up and\u2026"></div>' +
                         '<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><span style="font-size:1.3rem">2.</span><input type="text" class="input-field" style="flex:1" id="thankInline2" placeholder="I also\u2026"></div>' +
