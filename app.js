@@ -5929,6 +5929,8 @@
             var isFocused = document.body.classList.toggle('focus-mode');
             this.textContent = isFocused ? 'Exit' : 'Maximize';
             this.title = isFocused ? 'Exit Focus Mode' : 'Maximize — focus on this one thing';
+            var pickBtn = document.getElementById('btnPickForMe');
+            if (pickBtn) pickBtn.style.display = isFocused ? 'none' : '';
         });
 
         // PANIC button — show all reset/stuck strategies
