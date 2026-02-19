@@ -3804,7 +3804,7 @@
         var progressEl = document.getElementById('nextActionOutcomeProgress');
 
         if (next) {
-            textEl.innerHTML = '<span class="na-task-label">Your Small Task:</span> ' + escapeHtml(next.text);
+            textEl.textContent = next.text;
             // Build meta with "From Goal" in bold and "Your WHY?" with purpose
             var outcome = data.outcomes.find(function(o) { return o.id === next.outcomeId; });
             var metaHtml = '<span class="na-from-goal"><strong>From Goal:</strong> ' + escapeHtml(next.outcome) + '</span>';
@@ -5953,29 +5953,14 @@
             this.title = isFocused ? 'Exit Focus Mode' : 'Maximize — focus on this one thing';
         });
 
-        // PANIC button — randomly triggers Reset or Joy
+        // PANIC button — show all reset/stuck strategies
         safeBind('btnPanic', 'click', function() {
-            var actions = ['reset', 'joy'];
-            var pick = actions[Math.floor(Math.random() * actions.length)];
-            if (pick === 'reset') {
-                // Trigger the Reset/Stuck flow
-                document.getElementById('stuckOverlay').classList.remove('hidden');
-                var container = document.getElementById('stuckOptionsContainer');
-                if (container) container.style.display = '';
-                var activity = document.getElementById('stuckActivity');
-                if (activity) activity.classList.add('hidden');
-                renderStuckOptions();
-            } else {
-                // Trigger Joy/Dance directly
-                document.getElementById('stuckOverlay').classList.remove('hidden');
-                var container = document.getElementById('stuckOptionsContainer');
-                if (container) container.style.display = 'none';
-                var activity = document.getElementById('stuckActivity');
-                if (activity) activity.classList.remove('hidden');
-                var content = document.getElementById('stuckActivityContent');
-                var joyAct = STUCK_ACTIVITIES.filter(function(a) { return a.id === 'dance'; })[0];
-                if (joyAct && content) joyAct.run(content);
-            }
+            document.getElementById('stuckOverlay').classList.remove('hidden');
+            var container = document.getElementById('stuckOptionsContainer');
+            if (container) container.style.display = '';
+            var activity = document.getElementById('stuckActivity');
+            if (activity) activity.classList.add('hidden');
+            renderStuckOptions();
         });
 
         // Victory Goal dropdown — populate and persist
@@ -6602,20 +6587,16 @@
         safeBind('btnCheckInYes', 'click', handleCheckInYes);
         safeBind('btnCheckInNo', 'click', handleCheckInNo);
 
-        // Pick for Me — pick first task from least-used category
+        // Pick for Me — pick top task from least-used category, show in Just Do window
         safeBind('btnPickForMe', 'click', function() {
             if (!requirePro('pick_for_me')) return;
             var picked = pickFromLeastUsedCategory();
             if (picked) {
-                // Set as current focus by filtering to that category temporarily
-                var cat = picked.category;
-                // Update category filter to show picked category
-                var filterBtns = document.querySelectorAll('.focus-cat-btn');
-                filterBtns.forEach(function(b) { b.classList.remove('active'); });
-                var targetBtn = document.querySelector('.focus-cat-btn[data-focus-cat="' + cat + '"]');
-                if (targetBtn) targetBtn.classList.add('active');
-                currentFilter = cat;
-                render();
+                // Force this task into the Just Do This One Thing card
+                forcedNextAction = picked;
+                renderNextAction();
+                // Scroll to top to see the task
+                document.getElementById('nextActionCard').scrollIntoView({ behavior: 'smooth', block: 'center' });
             } else {
                 showPickForMe();
             }
