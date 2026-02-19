@@ -6606,6 +6606,13 @@
             if (picked) {
                 // Force this task into the Just Do This One Thing card
                 forcedNextAction = picked;
+                // Update category filter to reflect where the task comes from
+                var cat = picked.category;
+                var filterBtns = document.querySelectorAll('.focus-cat-btn');
+                filterBtns.forEach(function(b) { b.classList.remove('active'); });
+                var targetBtn = document.querySelector('.focus-cat-btn[data-focus-cat="' + cat + '"]');
+                if (targetBtn) targetBtn.classList.add('active');
+                currentFilter = cat;
                 renderNextAction();
                 // Scroll to top to see the task
                 document.getElementById('nextActionCard').scrollIntoView({ behavior: 'smooth', block: 'center' });
