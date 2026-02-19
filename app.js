@@ -819,8 +819,7 @@
         data.log.forEach(function(entry) {
             var entryDate = new Date(entry.date);
             if (entryDate >= startOfWeek && entryDate < endOfWeek) {
-                // Apply category filter if set
-                if (currentFilter !== 'all' && entry.category && entry.category !== currentFilter) return;
+                // Always count ALL categories (no filter applied)
                 actions++;
                 if (entry.category) categories[entry.category] = true;
             }
