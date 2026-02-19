@@ -819,8 +819,7 @@
         data.log.forEach(function(entry) {
             var entryDate = new Date(entry.date);
             if (entryDate >= startOfWeek && entryDate < endOfWeek) {
-                // Apply category filter if set
-                if (currentFilter !== 'all' && entry.category && entry.category !== currentFilter) return;
+                // Always count ALL categories (no filter applied)
                 actions++;
                 if (entry.category) categories[entry.category] = true;
             }
@@ -4385,11 +4384,8 @@
             if (savedGoal >= 3 && savedGoal <= 21) dailyGoal = savedGoal;
         } catch(e) {}
         var done = 0;
+        // Always count ALL categories for Victories Today (ignore category filter)
         var activeCatIds = getActiveCategories().map(function(c) { return c.id; });
-        // Apply category filter
-        if (currentFilter !== 'all') {
-            activeCatIds = [currentFilter];
-        }
         // Count from mode-specific outcomes (active + archived)
         var allOutcomes = data.outcomes.concat(data.archived || []);
         allOutcomes.forEach(function(o) {
