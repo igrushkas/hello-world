@@ -3777,8 +3777,9 @@
         var btnPanic = document.getElementById('btnPanic');
         var btnPickForMe = document.getElementById('btnPickForMe');
 
-        // First-time experience: show "SMILE!" for brand new users
-        if (!localStorage.getItem('lwp_first_smile_done')) {
+        // First-time experience: show "SMILE!" only for brand new users (no log = never completed anything)
+        var isBrandNewUser = data && (!data.log || data.log.length === 0);
+        if (isBrandNewUser && !localStorage.getItem('lwp_first_smile_done')) {
             textEl.textContent = 'SMILE!';
             metaEl.innerHTML = '';
             btnComplete.style.display = '';
