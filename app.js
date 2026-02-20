@@ -872,16 +872,7 @@
 
     function renderCombo() {
         var el = document.getElementById('comboDisplay');
-        if (!el) return;
-        if (comboCount >= 2) {
-            var mult = getComboMultiplier(comboCount);
-            el.innerHTML = '<span class="combo-fire">🔥</span> COMBO x' + comboCount + ' <span class="combo-mult">' + mult + 'x</span>';
-            el.classList.remove('hidden');
-            el.classList.add('combo-pulse');
-            setTimeout(function() { el.classList.remove('combo-pulse'); }, 600);
-        } else {
-            el.classList.add('hidden');
-        }
+        if (el) el.classList.add('hidden');
     }
 
     function renderDailyChallenges() {
@@ -996,11 +987,7 @@
             bars += '<div class="pwr-mini-bar' + act + '" style="height:' + pct + '%" title="' + history[i].score + ' pts"></div>';
         }
 
-        // Best combo today
         var comboStat = '';
-        if (comboCount >= 2) {
-            comboStat = '<span class="pwr-stat pwr-stat-combo">&#128293; x' + comboCount + ' combo</span>';
-        }
 
         // Build Power Score bar HTML (stats only, no POWER header or mini chart)
         var pwrBarHtml = '<div class="pwr-bar pwr-bar-full">' +
@@ -1081,23 +1068,7 @@
 
         var prevLevel = getLevel(data.totalMomentum - 15); // approximate pre-points level
 
-        // 1. Update combo
-        var combo = updateCombo();
-        var multiplier = getComboMultiplier(combo);
-
-        // 2. Apply combo bonus (extra points on top of base)
-        if (multiplier > 1) {
-            var basePoints = 15; // approximate
-            var bonusPoints = Math.round(basePoints * (multiplier - 1));
-            data.totalMomentum += bonusPoints;
-            // Update last log entry with combo info
-            if (data.log.length > 0) {
-                data.log[data.log.length - 1].comboBonus = bonusPoints;
-                data.log[data.log.length - 1].comboLevel = combo;
-            }
-        }
-
-        // 3. Check for level up
+        // Check for level up
         var newLevel = getLevel(data.totalMomentum);
         if (newLevel.index > prevLevel.index) {
             setTimeout(function() { showLevelUpOverlay(newLevel); }, 800);
