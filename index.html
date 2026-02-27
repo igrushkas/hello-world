@@ -741,16 +741,20 @@
             <!-- Daily Focus + Wheel of Life -->
             <section class="daily-focus-row">
                 <div class="daily-focus">
-                    <!-- Mode Toggle (hidden - only Personal mode active) -->
-                    <div class="mode-toggle-container" style="display:none">
+                    <!-- Mode Toggle (Personal / Business) -->
+                    <div class="mode-toggle-container">
                         <button class="mode-toggle-btn active" id="btnPersonalMode" data-mode="personal">
-                            <span class="mode-icon">&#127968;</span> Personal Life
+                            <span class="mode-icon">&#127968;</span> Personal
+                        </button>
+                        <button class="mode-toggle-btn" id="btnBusinessMode" data-mode="business">
+                            <span class="mode-icon">&#128188;</span> Business
                         </button>
                     </div>
                     <div class="focus-header">
                         <h2 id="focusTitle">TODAY'S POWER FOCUS</h2>
-                        <select class="mode-select-mobile" id="modeSelectMobile" style="display:none">
+                        <select class="mode-select-mobile" id="modeSelectMobile">
                             <option value="personal">&#127968; Personal</option>
+                            <option value="business">&#128188; Business</option>
                         </select>
                         <span class="focus-badge" id="focusBadge"></span>
                         <span class="date-display" id="todayDate"></span>
