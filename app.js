@@ -3278,7 +3278,7 @@
 
             // Update titles
             if (mode === 'business') {
-                document.getElementById('focusTitle').textContent = 'Business Focus';
+                document.getElementById('focusTitle').textContent = 'BUSINESS FOCUS';
                 document.getElementById('wheelTitle').innerHTML = 'Business Wheel <span class="wheel-period">Last 7 Days</span> <button class="btn-cat-guide" id="btnCatGuide" title="Category Guide">&#8505;</button>';
                 setOutcomesTitle('\uD83C\uDFAF Business Outcomes');
             } else if (mode === 'health') {
