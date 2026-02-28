@@ -3777,8 +3777,9 @@
         var btnPanic = document.getElementById('btnPanic');
         var btnPickForMe = document.getElementById('btnPickForMe');
 
-        // First-time experience: show "SMILE!" for brand new users
-        if (!localStorage.getItem('lwp_first_smile_done')) {
+        // First-time experience: show "SMILE!" only for brand new users (no log = never completed anything)
+        var isBrandNewUser = data && (!data.log || data.log.length === 0);
+        if (isBrandNewUser && !localStorage.getItem('lwp_first_smile_done')) {
             textEl.textContent = 'SMILE!';
             metaEl.innerHTML = '';
             btnComplete.style.display = '';
@@ -3819,15 +3820,15 @@
         if (next) {
             var words = next.text.split(/\s+/);
             textEl.textContent = words.length > 10 ? words.slice(0, 10).join(' ') + '...' : next.text;
-            // Build meta with "I will gain" with purpose
+            // Build meta with purpose (why)
             var outcome = data.outcomes.find(function(o) { return o.id === next.outcomeId; });
             var metaHtml = '';
             if (outcome && outcome.purpose) {
                 var firstSentence = outcome.purpose.split(/[.!?]/)[0].trim();
-                metaHtml += '<span class="na-why"><strong>I will gain</strong> ' + escapeHtml(firstSentence) + '...</span>';
+                metaHtml += '<span class="na-why">' + escapeHtml(firstSentence) + '</span>';
             }
             if (next.estMinutes) {
-                metaHtml += '<span class="na-est">~' + next.estMinutes + ' min est.</span>';
+                metaHtml += '<span class="na-est">~' + next.estMinutes + ' min</span>';
             }
             metaEl.innerHTML = metaHtml;
             btnComplete.style.display = '';

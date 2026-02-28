@@ -67,8 +67,8 @@
     --bg-card-hover: #1a1a28;
     --bg-input: #1e1e2e;
     --text-primary: #f0f0f5;
-    --text-secondary: #8888a0;
-    --text-muted: #555570;
+    --text-secondary: #9999b0;
+    --text-muted: #707088;
     --accent-primary: #7c6fba;
     --accent-glow: #8a7fc7;
     --accent-red: #c07a73;
@@ -104,8 +104,8 @@ body.light-mode {
     --bg-card-hover: #f0f0f5;
     --bg-input: #eeeef5;
     --text-primary: #1a1a2e;
-    --text-secondary: #555570;
-    --text-muted: #8888a0;
+    --text-secondary: #444460;
+    --text-muted: #666680;
     --accent-primary: #7c6fba;
     --accent-glow: #8a7fc7;
     --border: #d8d8e8;
@@ -498,7 +498,7 @@ body {
     padding: 2px 10px;
     border-radius: 6px;
     font-weight: 800;
-    font-size: 1.15rem;
+    font-size: 1.1rem;
     white-space: nowrap;
 }
 
@@ -508,7 +508,7 @@ body {
 
 .hero-cta {
     padding: 16px 40px !important;
-    font-size: 1.05rem !important;
+    font-size: 1rem !important;
     border-radius: 50px;
 }
 
@@ -575,7 +575,7 @@ body {
 }
 
 .feature-tag {
-    font-size: 0.72rem;
+    font-size: 0.75rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1.5px;
@@ -810,7 +810,7 @@ body.light-mode .landing-footer {
         gap: 8px;
     }
     .feature-summary-item {
-        font-size: 0.72rem;
+        font-size: 0.75rem;
         padding: 8px 6px;
     }
 }
@@ -898,7 +898,7 @@ body.light-mode .landing-footer {
 }
 
 .demo-warning {
-    font-size: 0.72rem;
+    font-size: 0.75rem;
     color: #b8860b;
     margin: 10px 0 0 0;
     line-height: 1.4;
@@ -914,7 +914,7 @@ body.light-mode .landing-footer {
     padding: 10px 16px;
     background: linear-gradient(135deg, #3a2a00, #2a1f00);
     border-bottom: 1px solid rgba(255, 193, 7, 0.3);
-    font-size: 0.78rem;
+    font-size: 0.8rem;
 }
 
 .demo-banner-row {
@@ -1060,7 +1060,7 @@ body.light-mode .landing-footer {
     align-items: center;
     justify-content: center;
     gap: 6px;
-    font-size: 0.82rem;
+    font-size: 0.85rem;
     font-weight: 600;
     color: var(--accent-yellow, #c4996a);
 }
@@ -1285,7 +1285,7 @@ body.light-mode .beta-badge {
 }
 
 .upgrade-guarantee {
-    font-size: 0.72rem;
+    font-size: 0.75rem;
     color: var(--text-muted);
     margin-top: 12px;
     opacity: 0.7;
@@ -1294,7 +1294,7 @@ body.light-mode .beta-badge {
 /* Pro Lock Badge on feature buttons */
 .pro-lock-badge {
     display: inline-block;
-    font-size: 0.6rem;
+    font-size: 0.7rem;
     background: linear-gradient(135deg, #c4996a, #b08858);
     color: #1a1a2e;
     padding: 1px 5px;
@@ -1489,7 +1489,7 @@ body.light-mode .beta-badge {
     color: #e74c3c;
     padding: 4px 12px;
     border-radius: 20px;
-    font-size: 0.72rem;
+    font-size: 0.75rem;
     font-weight: 700;
     cursor: pointer;
     transition: var(--transition);
@@ -1568,7 +1568,7 @@ body.light-mode .beta-badge {
 }
 
 .praise-text {
-    font-size: 1.15rem;
+    font-size: 1.1rem;
     font-weight: 600;
     color: var(--accent-yellow);
     line-height: 1.5;
@@ -2172,10 +2172,11 @@ body.health-mode .focus-title-category {
 }
 
 .na-progress-text {
-    font-size: 0.72rem;
-    color: var(--text-secondary);
+    font-size: 0.8rem;
+    color: var(--text-primary);
     white-space: nowrap;
-    font-weight: 600;
+    font-weight: 700;
+    opacity: 0.8;
 }
 
 .na-progress-bar {
@@ -2212,8 +2213,8 @@ body.health-mode .focus-title-category {
 }
 
 .next-action-meta {
-    color: var(--text-secondary);
-    font-size: 0.9rem;
+    color: var(--text-primary);
+    font-size: 1rem;
     margin-bottom: 12px;
     display: flex;
     flex-direction: column;
@@ -2230,19 +2231,17 @@ body.health-mode .focus-title-category {
 }
 
 .na-why {
-    font-size: 0.88rem;
+    font-size: 1.1rem;
     color: var(--accent-orange);
     font-style: italic;
-}
-
-.na-why strong {
-    color: var(--accent-orange);
-    font-style: normal;
+    font-weight: 600;
 }
 
 .na-est {
-    font-size: 0.8rem;
-    color: var(--text-muted);
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    font-weight: 700;
+    opacity: 0.85;
 }
 
 .next-action-buttons {
@@ -2399,7 +2398,7 @@ body.health-mode .focus-title-category {
 
 .check-in-buttons .btn-primary {
     padding: 14px 24px;
-    font-size: 1.05rem;
+    font-size: 1rem;
 }
 
 .check-in-buttons .btn-secondary {
@@ -3122,7 +3121,7 @@ body.finances-mode.light-mode .praise-banner {
 
 .progress-text {
     color: var(--text-secondary);
-    font-size: 0.78rem;
+    font-size: 0.8rem;
     white-space: normal;
     display: flex;
     flex-wrap: wrap;
@@ -3270,7 +3269,7 @@ body.finances-mode.light-mode .praise-banner {
 .balance-goal-select {
     padding: 4px 8px !important;
     min-width: 55px !important;
-    font-size: 0.78rem !important;
+    font-size: 0.8rem !important;
 }
 
 .balance-level {
@@ -3304,7 +3303,7 @@ body.finances-mode.light-mode .praise-banner {
 }
 
 .balance-message {
-    font-size: 0.78rem;
+    font-size: 0.8rem;
     color: var(--text-secondary);
     line-height: 1.4;
 }
@@ -3606,7 +3605,7 @@ body.focus-mode .btn-max-focus {
 
 .completed-actions-toggle {
     cursor: pointer;
-    font-size: 0.78rem;
+    font-size: 0.8rem;
     font-weight: 600;
     color: var(--text-secondary);
     padding: 6px 4px;
@@ -3872,7 +3871,7 @@ body.focus-mode .btn-max-focus {
 }
 
 .log-day-header {
-    font-size: 0.72rem;
+    font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 2px;
     text-transform: uppercase;
@@ -4618,7 +4617,7 @@ body.business-mode .focus-badge {
     position: absolute;
     top: 8px;
     right: 8px;
-    font-size: 0.6rem;
+    font-size: 0.7rem;
     font-weight: 700;
     letter-spacing: 2px;
     color: var(--accent-orange);
@@ -5169,7 +5168,7 @@ body.business-mode .btn-help:hover {
 }
 
 .help-section h3 {
-    font-size: 1.15rem;
+    font-size: 1.1rem;
     margin-bottom: 10px;
     color: var(--accent-primary);
 }
@@ -5180,7 +5179,7 @@ body.business-mode .help-section h3 {
 
 .help-section > p {
     color: var(--text-secondary);
-    font-size: 0.92rem;
+    font-size: 0.9rem;
     line-height: 1.6;
     margin-bottom: 14px;
 }
@@ -5207,7 +5206,7 @@ body.business-mode .help-section h3 {
 }
 
 .help-nci-card strong {
-    font-size: 0.88rem;
+    font-size: 0.9rem;
     color: var(--text-primary);
 }
 
@@ -5270,7 +5269,7 @@ body.business-mode .help-step-num {
     padding: 2px 8px;
     border-radius: 4px;
     font-weight: 600;
-    font-size: 0.82rem;
+    font-size: 0.85rem;
     white-space: nowrap;
 }
 
@@ -5327,7 +5326,7 @@ body.business-mode .help-btn-ref {
 
 .help-day {
     font-weight: 700;
-    font-size: 0.82rem;
+    font-size: 0.85rem;
     color: var(--accent-primary);
     text-transform: uppercase;
 }
@@ -5337,7 +5336,7 @@ body.business-mode .help-day {
 }
 
 .help-focus {
-    font-size: 0.88rem;
+    font-size: 0.9rem;
     color: var(--text-secondary);
     background: var(--bg-input);
     padding: 4px 10px;
@@ -5346,7 +5345,7 @@ body.business-mode .help-day {
 
 .help-day-note {
     grid-column: 3 / 5;
-    font-size: 0.82rem;
+    font-size: 0.85rem;
     color: var(--accent-green);
     font-style: italic;
 }
@@ -5360,7 +5359,7 @@ body.business-mode .help-day {
 }
 
 .help-tips li {
-    font-size: 0.88rem;
+    font-size: 0.9rem;
     color: var(--text-secondary);
     line-height: 1.5;
     padding-left: 20px;
@@ -5438,14 +5437,14 @@ body.business-mode .help-tips li::before {
 }
 
 .seed-section h3 {
-    font-size: 1.05rem;
+    font-size: 1rem;
     color: var(--accent-green);
     margin-bottom: 8px;
 }
 
 .seed-hint {
     color: var(--text-secondary);
-    font-size: 0.88rem;
+    font-size: 0.9rem;
     margin-bottom: 10px;
 }
 
@@ -5481,7 +5480,7 @@ body.business-mode .help-tips li::before {
 }
 
 .seed-action-list li {
-    font-size: 0.88rem;
+    font-size: 0.9rem;
     color: var(--text-secondary);
     padding: 6px 10px;
     background: rgba(255,255,255,0.03);
@@ -5572,7 +5571,7 @@ body.business-mode .help-tips li::before {
 }
 
 .btn-wind-timer {
-    font-size: 0.82rem;
+    font-size: 0.85rem;
     padding: 6px 14px;
 }
 
@@ -5652,7 +5651,7 @@ body.business-mode .help-tips li::before {
 }
 
 .pill .btn-line {
-    font-size: 0.72rem;
+    font-size: 0.75rem;
 }
 
 .focus-cat-btn,
@@ -5748,7 +5747,7 @@ body.business-mode .btn-cat-guide:hover {
 }
 
 .cat-guide-desc {
-    font-size: 0.82rem;
+    font-size: 0.85rem;
     color: var(--text-secondary);
     line-height: 1.5;
 }
@@ -5763,7 +5762,7 @@ body.business-mode .btn-cat-guide:hover {
 
 .cat-guide-free-day .cat-guide-desc {
     color: var(--text-primary);
-    font-size: 0.82rem;
+    font-size: 0.85rem;
 }
 
 /* Help schedule free day highlight */
@@ -5810,7 +5809,7 @@ body.business-mode .btn-focus-action:hover {
 
 /* Action deadline badge */
 .action-deadline-badge {
-    font-size: 0.6rem;
+    font-size: 0.7rem;
     padding: 1px 5px;
     border-radius: 8px;
     background: rgba(52, 152, 219, 0.15);
@@ -5909,7 +5908,7 @@ body.business-mode .btn-focus-action:hover {
 }
 
 .level-next-info {
-    font-size: 0.6rem;
+    font-size: 0.7rem;
     color: var(--text-muted);
     white-space: nowrap;
     min-width: 100px;
@@ -5922,7 +5921,7 @@ body.business-mode .btn-focus-action:hover {
 }
 
 .level-progress-next {
-    font-size: 0.6rem;
+    font-size: 0.7rem;
     color: var(--text-muted);
     white-space: nowrap;
 }
@@ -6048,13 +6047,13 @@ body.business-mode .btn-focus-action:hover {
 }
 
 .challenge-text {
-    font-size: 0.72rem;
+    font-size: 0.75rem;
     font-weight: 600;
     color: var(--text-primary);
 }
 
 .challenge-xp {
-    font-size: 0.6rem;
+    font-size: 0.7rem;
     color: var(--accent-yellow);
     font-weight: 700;
 }
@@ -6075,7 +6074,7 @@ body.business-mode .btn-focus-action:hover {
 }
 
 .badges-subtitle {
-    font-size: 0.6rem;
+    font-size: 0.7rem;
     color: var(--text-muted);
     margin-bottom: 10px;
     font-weight: 600;
@@ -6116,7 +6115,7 @@ body.business-mode .btn-focus-action:hover {
 }
 
 .badge-name {
-    font-size: 0.55rem;
+    font-size: 0.7rem;
     font-weight: 700;
     color: var(--text-secondary);
     text-transform: uppercase;
@@ -6129,7 +6128,7 @@ body.business-mode .btn-focus-action:hover {
 }
 
 .badge-xp {
-    font-size: 0.5rem;
+    font-size: 0.7rem;
     font-weight: 700;
     color: var(--text-muted);
     margin-top: 2px;
@@ -6151,7 +6150,7 @@ body.business-mode .btn-focus-action:hover {
 }
 
 .badge-type {
-    font-size: 0.4rem;
+    font-size: 0.65rem;
     font-weight: 900;
     letter-spacing: 1px;
     text-transform: uppercase;
@@ -6168,7 +6167,7 @@ body.business-mode .btn-focus-action:hover {
     position: absolute;
     top: 2px;
     left: 4px;
-    font-size: 0.45rem;
+    font-size: 0.65rem;
     font-weight: 900;
     color: var(--accent-yellow);
     background: rgba(196, 153, 106, 0.2);
@@ -6177,7 +6176,7 @@ body.business-mode .btn-focus-action:hover {
 }
 
 .badge-again {
-    font-size: 0.45rem;
+    font-size: 0.65rem;
     font-weight: 700;
     color: var(--accent-blue);
     margin-top: 1px;
@@ -6309,7 +6308,7 @@ body.business-mode .btn-focus-action:hover {
 }
 
 .pwr-xp-label {
-    font-size: 0.6rem;
+    font-size: 0.7rem;
     color: var(--text-muted);
     white-space: nowrap;
 }
@@ -6592,7 +6591,7 @@ body.business-mode .btn-focus-action:hover {
     border-radius: 20px;
     cursor: pointer;
     font-weight: 600;
-    font-size: 0.82rem;
+    font-size: 0.85rem;
     white-space: nowrap;
     transition: var(--transition);
 }
@@ -6922,7 +6921,7 @@ body.business-mode .btn-focus-action:hover {
     padding: 8px 14px;
     border-radius: 20px;
     cursor: pointer;
-    font-size: 0.82rem;
+    font-size: 0.85rem;
     transition: var(--transition);
 }
 
@@ -6950,7 +6949,7 @@ body.business-mode .btn-focus-action:hover {
     background: rgba(196, 153, 106, 0.1);
     border: 1px solid rgba(196, 153, 106, 0.3);
     border-radius: var(--radius-sm);
-    font-size: 0.82rem;
+    font-size: 0.85rem;
     color: var(--text-primary);
     animation: fadeIn 0.3s ease;
     position: relative;
@@ -7217,7 +7216,7 @@ body.focus-mode .btn-focus-mode {
     background: rgba(124, 111, 186, 0.08);
     border: 1px solid rgba(124, 111, 186, 0.15);
     cursor: pointer;
-    font-size: 0.78rem;
+    font-size: 0.8rem;
     color: var(--text-secondary);
     transition: var(--transition);
 }
@@ -7316,7 +7315,7 @@ body.focus-mode .btn-focus-mode {
     display: flex;
     flex-direction: column;
     gap: 8px;
-    font-size: 0.82rem;
+    font-size: 0.85rem;
     color: var(--text-secondary);
 }
 
@@ -7714,7 +7713,7 @@ body.light-mode .founder-commitment {
 }
 .mode-toggle-btn.mode-locked::after {
     content: '\1F512';
-    font-size: 0.6rem;
+    font-size: 0.7rem;
     position: absolute;
     top: 2px;
     right: 4px;
