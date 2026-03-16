@@ -3242,11 +3242,13 @@ body.finances-mode.light-mode .praise-banner {
     width: 100%;
     max-width: 360px;
     margin: 0 auto 10px;
+    min-height: 200px;
 }
 
 .wheel-svg {
     width: 100%;
     height: auto;
+    aspect-ratio: 1;
 }
 
 
@@ -4699,7 +4701,20 @@ body.business-mode .focus-badge {
 
     .modal {
         padding: 20px;
-        margin: 10px;
+        margin: 0;
+    }
+
+    .modal-overlay {
+        padding: 10px;
+    }
+
+    /* Wheel: full width on mobile */
+    .wheel-chart-container {
+        max-width: 100%;
+    }
+
+    .wheel-of-life-card {
+        padding: 16px;
     }
 
     .next-action-text {
@@ -5101,6 +5116,48 @@ body.business-mode .focus-badge {
     .exercise-meta {
         flex-direction: column;
         gap: 4px;
+    }
+
+    /* Phone popups: edge-to-edge, less dead space */
+    .modal-overlay {
+        padding: 6px;
+    }
+
+    .modal {
+        padding: 16px;
+        margin: 0;
+        max-height: 94vh;
+        border-radius: 12px;
+    }
+
+    .check-in-modal,
+    .pick-for-me-modal,
+    .evening-seed-modal,
+    .values-modal,
+    .business-pack-modal {
+        padding: 16px;
+    }
+
+    .help-modal {
+        padding: 14px;
+        max-height: 94vh;
+    }
+
+    .pricing-modal {
+        padding: 12px 10px;
+    }
+
+    /* Wheel: tighter on phone */
+    .wheel-of-life-card {
+        padding: 12px;
+    }
+
+    .wheel-balance-score {
+        padding: 10px 12px;
+    }
+
+    .main-content {
+        padding: 10px;
     }
 }
 
